@@ -1,0 +1,12 @@
+# Premier Draft: tavolo di 8 umani, 1 carta per pick.
+# Struttura verificata sui dati 17Lands TRK (busta 14 -> 13 -> ... -> 1; il pack del pick 0 torna al pick 8).
+name: premier
+display_name: Premier Draft
+seventeenlands_event_type: PremierDraft
+arena_event_prefixes: ["PremierDraft"]
+pod_size: 8
+packs: 3
+pack_size: 14
+picks_per_turn: 1
+pass_directions: [left, right, left]
+best_of: 1

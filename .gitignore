@@ -1,0 +1,10 @@
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.venv/
+.env
+# cache locale (SQLite, download)
+data/
+# log di Arena reali: possono contenere dati personali, committare solo fixture ripulite
+*.log
+!tests/fixtures/**/*.log

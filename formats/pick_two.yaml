@@ -1,0 +1,13 @@
+# Pick Two Draft: tavolo di 4, 2 carte per pick, 7 pick per busta.
+# Struttura verificata sui dati 17Lands TRK (busta 14 -> 12 -> ... -> 2; il pack del pick 0 torna al pick 4 con 6 carte).
+# Direzioni di passaggio: da fonti secondarie, da verificare sui log reali.
+name: pick_two
+display_name: Pick Two Draft
+seventeenlands_event_type: PickTwoDraft
+arena_event_prefixes: ["PickTwoDraft"]
+pod_size: 4
+packs: 3
+pack_size: 14
+picks_per_turn: 2
+pass_directions: [left, right, left]
+best_of: 1
