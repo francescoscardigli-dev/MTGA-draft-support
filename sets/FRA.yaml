@@ -1,0 +1,20 @@
+# Config del set FRA generata da 'draftbot add-set'. Rivedila a mano.
+# Draft data 17Lands disponibili per formato: {'pick_two': True, 'premier': True}
+# Meccaniche, archetipi e tag di sinergia vengono aggiunti nella fase delle sinergie.
+code: FRA
+name: Reality Fracture
+scryfall_sets:
+- fra
+seventeenlands_expansion: FRA
+formats:
+- pick_two
+- premier
+release_date: '2026-10-02'
+arena_id_sources:
+- arena_card_database
+- seventeenlands
+- scryfall
+name_aliases: {}
+mechanics: []
+archetypes: []
+synergy_tags_file: FRA.tags.yaml

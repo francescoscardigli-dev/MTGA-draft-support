@@ -3,10 +3,14 @@
 from __future__ import annotations
 
 import argparse
+import sqlite3
 import sys
+from collections import Counter
+from pathlib import Path
 
-from . import __version__
+from . import __version__, db
 from .config import ConfigError, available_sets, load_format, load_set
+from .net import NetError
 
 
 def _describe_set(code: str) -> str:
@@ -26,8 +30,34 @@ def _describe_set(code: str) -> str:
             f"    - {f.display_name}: tavolo {f.pod_size}, {f.picks_per_turn} carta/e per pick, "
             f"{f.picks_per_pack} pick per busta, pool {f.pool_size} carte, wheel al pick {wheels}"
         )
-    lines.append("  Dati locali: non ancora importati (Fase 1-3)")
+    lines.append(_data_status(cfg.code))
     return "\n".join(lines)
+
+
+def _data_status(code: str) -> str:
+    con = db.connect()
+    n = con.execute("SELECT COUNT(*) FROM cards WHERE set_code=?", (code,)).fetchone()[0]
+    if not n:
+        return f"  Dati locali: nessuna carta importata (esegui: python -m draftbot add-set {code})"
+    ids = con.execute("SELECT COUNT(*) FROM arena_ids WHERE set_code=?", (code,)).fetchone()[0]
+    by_set = Counter(r[0] for r in con.execute("SELECT printed_set FROM cards WHERE set_code=?", (code,)))
+    issues = Counter(r[0] for r in con.execute("SELECT kind FROM issues WHERE set_code=?", (code,)))
+    last = con.execute("SELECT source, kind, MAX(fetched_at) FROM snapshots WHERE set_code=? GROUP BY source, kind",
+                       (code,)).fetchall()
+    out = [f"  Dati locali: {n} carte ({', '.join(f'{k} {v}' for k, v in by_set.most_common())}), {ids} ID Arena"]
+    out.append("  Ultimi download: " + "; ".join(f"{s}/{k} {t[:10]}" for s, k, t in last))
+    out.append("  Problemi: " + (", ".join(f"{k} {v}" for k, v in issues.items()) if issues else "nessuno"))
+    return "\n".join(out)
+
+
+def _print_cards(rows: list[sqlite3.Row], verbose: bool) -> None:
+    for r in rows:
+        pips = "".join(c * (r[f"pip_{c.lower()}"] or 0) for c in "WUBRG")
+        print(f"{r['mv']:>4g}  {r['mana_cost'] or '-':<16} {r['name']:<40} {r['rarity'][:1].upper()} "
+              f"{r['printed_set']:<4} pip:{pips or '-':<5} {r['type_line']}")
+        if verbose:
+            print(f"      {(r['oracle_text'] or '').replace(chr(10), ' | ')}")
+    print(f"({len(rows)} carte)")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -38,9 +68,38 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("sets", help="elenca i set configurati")
     st = sub.add_parser("status", help="mostra config e stato dei dati di un set")
     st.add_argument("code")
-    add = sub.add_parser("add-set", help="crea config e dati per un set nuovo (Fase 1)")
+    add = sub.add_parser("add-set", help="crea la config (se manca) e importa le carte di un set")
     add.add_argument("code")
+    add.add_argument("--arena-db", type=Path, help="percorso di Raw_CardDatabase_*.mtga o della cartella Raw")
+    add.add_argument("--no-arena-db", action="store_true", help="non leggere il database del client Arena")
+    up = sub.add_parser("update-cards", help="riscarica le carte di un set gia' configurato")
+    up.add_argument("code")
+    up.add_argument("--arena-db", type=Path)
+    up.add_argument("--no-arena-db", action="store_true")
+    q = sub.add_parser("cards", help="cerca carte per nome, costo, colore, rarita', tipo o ID Arena")
+    q.add_argument("code")
+    q.add_argument("--name")
+    q.add_argument("--mv", type=float)
+    q.add_argument("--color", help="colori richiesti dal costo, es. W, UB; C = incolore")
+    q.add_argument("--rarity")
+    q.add_argument("--type", dest="card_type")
+    q.add_argument("--arena-id", type=int)
+    q.add_argument("-v", "--verbose", action="store_true")
+    iss = sub.add_parser("issues", help="elenca i problemi dell'ultimo import (es. carte senza ID Arena)")
+    iss.add_argument("code")
     return p
+
+
+def _import(code: str, args: argparse.Namespace) -> int:
+    from .cardbuild import import_set
+    cfg = load_set(code)
+    res = import_set(cfg, arena_db=args.arena_db, use_arena_db=not args.no_arena_db)
+    kinds = Counter(k for k, _ in res.issues)
+    print(f"Importate {len(res.cards)} carte e {len(res.arena_ids)} ID Arena per {cfg.code}.")
+    if kinds:
+        print("Problemi: " + ", ".join(f"{k} {v}" for k, v in kinds.items())
+              + f"  (dettagli: python -m draftbot issues {cfg.code})")
+    return 0
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -50,8 +109,23 @@ def main(argv: list[str] | None = None) -> int:
             print("\n".join(available_sets()))
             return 0
         if args.command == "add-set":
-            print("add-set non ancora implementato (Fase 1).", file=sys.stderr)
-            return 2
+            from .addset import ensure_config
+            ensure_config(args.code)
+            return _import(args.code.upper(), args)
+        if args.command == "update-cards":
+            return _import(args.code.upper(), args)
+        if args.command == "cards":
+            code = load_set(args.code).code
+            rows = db.query_cards(db.connect(), code, name=args.name, mv=args.mv, color=args.color,
+                                  rarity=args.rarity, card_type=args.card_type, grp_id=args.arena_id)
+            _print_cards(rows, args.verbose)
+            return 0
+        if args.command == "issues":
+            code = load_set(args.code).code
+            for kind, detail in db.connect().execute(
+                    "SELECT kind, detail FROM issues WHERE set_code=? ORDER BY kind, detail", (code,)):
+                print(f"{kind:<24} {detail}")
+            return 0
         code = args.code if args.command == "status" else args.set_code
         if not code:
             build_parser().print_help()
@@ -61,3 +135,6 @@ def main(argv: list[str] | None = None) -> int:
     except ConfigError as e:
         print(f"Errore di configurazione: {e}", file=sys.stderr)
         return 1
+    except NetError as e:
+        print(f"Errore di rete: {e}", file=sys.stderr)
+        return 3

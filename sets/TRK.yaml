@@ -10,9 +10,9 @@ release_date: 2026-11-13
 # Mappatura ID Arena: Scryfall non espone ancora arena_id per TRK/SDS (verificato 2026-11-27).
 # Fonti in ordine di priorita'; nessuna euristica sui numeri di collezione nel motore.
 arena_id_sources: [arena_card_database, seventeenlands, scryfall]
-# Differenze di nome note tra fonti (17Lands -> Scryfall), normalizzate in Fase 1.
-name_aliases:
-  "All Good Things . . .": null   # da risolvere in Fase 1 confrontando i testi
+# Differenze di nome tra fonti non risolte dalla normalizzazione automatica (17Lands -> Scryfall).
+# Esempio gia' gestito in automatico: "All Good Things . . ." -> "All Good Things...".
+name_aliases: {}
 # Meccaniche e archetipi: generati da add-set (Fase 1/5) e rivisti a mano. Volutamente vuoti ora.
 mechanics: []
 archetypes: []

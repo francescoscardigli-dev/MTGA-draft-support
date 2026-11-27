@@ -4,15 +4,21 @@ Assistente locale (Python 3.11+) per i draft di MTG Arena, nei formati Premier D
 Draft. Legge `Player.log` in sola lettura, suggerisce i pick spiegando il punteggio e aiuta a
 costruire il mazzo finale.
 
-Stato: **Fase 0 completata** (scheletro e verifiche). Vedi `docs/plan.md` e `docs/phase0_report.md`.
+Stato: **Fase 1 completata** (database carte, mappatura ID Arena, `add-set`). Vedi `docs/plan.md` e i report in `docs/`.
 
 ## Uso
 
 ```bash
 pip install -e .[dev]
-python -m draftbot --set TRK      # mostra config e formati del set
-python -m draftbot sets           # elenca i set configurati
+python -m draftbot add-set TRK                 # crea la config (se manca) e importa le carte
+python -m draftbot status TRK                  # config, formati e stato dei dati
+python -m draftbot cards TRK --mv 2 --color W  # cerca carte per costo, colore, nome, rarita', tipo
+python -m draftbot cards TRK --arena-id 106578 # carta corrispondente a un ID Arena
+python -m draftbot issues TRK                  # carte senza ID Arena, conflitti, nomi non risolti
 python -m pytest
+
+# Sul PC con Arena installato, per usare anche il database del client:
+python -m draftbot update-cards TRK --arena-db "C:\Program Files\Wizards of the Coast\MTGA\MTGA_Data\Downloads\Raw"
 ```
 
 ## Struttura
