@@ -1,0 +1,71 @@
+# Calibrazione FRA premier
+
+## Prior, set escluso dalla stima (leave-one-set-out)
+
+FRA
+stimatore                          RMSE pp    corr  cop80  carte
+media del set                        2.66     nan      -    279
+prior: rarita                        2.90   0.377      -    279
+prior: pick                          1.26   0.902      -    279
+prior: pick+rarita                   1.20   0.899      -    279
+
+HOB
+stimatore                          RMSE pp    corr  cop80  carte
+media del set                        2.70   0.000      -    184
+prior: rarita                        3.07   0.031      -    184
+prior: pick                          1.51   0.820      -    184
+prior: pick+rarita                   1.40   0.845      -    184
+
+MSH
+stimatore                          RMSE pp    corr  cop80  carte
+media del set                        3.00  -0.000      -    285
+prior: rarita                        3.21   0.395      -    285
+prior: pick                          1.56   0.830      -    285
+prior: pick+rarita                   1.53   0.841      -    285
+
+Emivita 7.0 (da priors/premier.yaml), deriva stimata su HOB, MSH: 1.08 punti
+
+## Divisione temporale su FRA (prior stimato su HOB, MSH)
+
+primi 2 giorni (fino al 2026-09-30, 42764 partite)
+stimatore                          RMSE pp    corr  cop80  carte
+dato grezzo                          1.55   0.844      -    279
+media del set                        2.70  -0.000      -    279
+blend verso la media                 1.47   0.866    77%    279
+solo prior (modello)                 1.98   0.774    76%    279
+blend verso il prior (modello)       1.39   0.898    78%    279
+
+primi 4 giorni (fino al 2026-10-02, 88677 partite)
+stimatore                          RMSE pp    corr  cop80  carte
+dato grezzo                          1.38   0.929      -    276
+media del set                        2.74     nan      -    276
+blend verso la media                 1.36   0.929    76%    276
+solo prior (modello)                 1.77   0.825    80%    276
+blend verso il prior (modello)       1.32   0.930    76%    276
+
+primi 7 giorni (fino al 2026-10-06, 111762 partite)
+stimatore                          RMSE pp    corr  cop80  carte
+dato grezzo                          1.20   0.950      -    273
+media del set                        2.70     nan      -    273
+blend verso la media                 1.19   0.948    84%    273
+solo prior (modello)                 1.66   0.839    83%    273
+blend verso il prior (modello)       1.17   0.938    83%    273
+
+primi 14 giorni (fino al 2026-10-13, 134015 partite)
+stimatore                          RMSE pp    corr  cop80  carte
+dato grezzo                          1.03   0.946      -    269
+media del set                        2.60     nan      -    269
+blend verso la media                 1.01   0.951    90%    269
+solo prior (modello)                 1.63   0.841    87%    269
+blend verso il prior (modello)       1.02   0.939    88%    269
+
+## Decadimento temporale
+
+dati fino al 2026-10-20, verifica dal 2026-10-21
+stimatore                          RMSE pp    corr  cop80  carte
+nessun decadimento                   1.19   0.937    54%    258
+emivita 14 giorni                    1.07   0.936    62%    258
+emivita 7 giorni                     0.98   0.931    70%    258
+emivita 3 giorni                     0.96   0.906    79%    258
+
+Dati: 17Lands (https://www.17lands.com), licenza CC BY 4.0

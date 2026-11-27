@@ -7,7 +7,7 @@ delle statistiche: FRA.
 
 Documenti da leggere prima di lavorare: `docs/plan.md` (piano approvato),
 `docs/phase0_report.md` (verifiche), `docs/phase1_report.md` (database carte),
-`docs/phase2_report.md` (parser del log).
+`docs/phase2_report.md` (parser del log), `docs/phase3_report.md` (statistiche).
 
 ## Modalità di lavoro richiesta dall'utente
 
@@ -18,7 +18,7 @@ Documenti da leggere prima di lavorare: `docs/plan.md` (piano approvato),
 - Nessun dato specifico di un set nel codice del motore (c'è un test che lo controlla): tutto
   sta in `sets/<CODICE>.yaml` e `formats/<nome>.yaml`.
 - Branch di lavoro: quello assegnato alla sessione. Fasi 0-1 su `claude/mtg-draft-tool-review-kse14y`,
-  Fase 2 su `claude/blissful-tesla-2atj16` (che contiene anche le fasi precedenti).
+  Fasi 2-3 su `claude/blissful-tesla-2atj16` (che contiene anche le fasi precedenti).
 
 ## Decisioni prese (approvate)
 
@@ -33,14 +33,15 @@ Documenti da leggere prima di lavorare: `docs/plan.md` (piano approvato),
 - Il suggerimento restituisce k carte (in Pick Two si valutano le coppie).
 - I tag LLM di meccaniche e archetipi si fanno nella fase delle sinergie (Fase 5).
 
-## Stato al 2026-11-27 (aggiornato a fine sessione Fase 2)
+## Stato al 2026-11-27 (aggiornato a fine Fase 3)
 
 | Fase | Stato |
 |---|---|
 | 0 Verifiche e scheletro | completata |
 | 1 Database carte, ID Arena, `add-set` | completata (TRK 341 carte, FRA 295, nessun problema di mappatura) |
 | 2 Parser di Player.log | **codice e test su log sintetici fatti; da verificare sui log reali** (almeno un draft Premier e uno Pick Two) |
-| 3-9 | da fare |
+| 3 Statistiche 17Lands | **completata, in attesa di approvazione** (sviluppo e calibrazione su FRA, prior da FRA+HOB+MSH) |
+| 4-9 | da fare |
 
 Cose aperte:
 - **Log di Arena:** l'utente li sta recuperando. Quando arrivano: pulirli con
@@ -50,12 +51,17 @@ Cose aperte:
 - **Lettore del database del client Arena** (`draftbot/sources/arena_db.py`): non verificato su
   un'installazione reale. Chiedere all'utente di provare
   `python -m draftbot update-cards TRK --arena-db "<cartella Raw>"`.
-- **Carte ospiti:** la rarità è quella della stampa originale, non quella SPG. Va gestita nei prior
-  per rarità (Fase 3).
+- **Carte ospiti:** la rarità è quella della stampa originale, non quella SPG. Nel prior la rarità
+  pesa poco (meno di 1 punto) rispetto ad ATA/ALSA, quindi l'effetto è piccolo; non corretto.
+- **Statistiche per archetipo:** con i volumi di FRA la differenza propria di una carta in un
+  archetipo è piccola (tau circa 0,3 punti) e non è ancora verificata con una divisione temporale.
+  Da riprendere in Fase 5 (sinergie).
+- **TRK:** quando 17Lands pubblica i game data, `update-data TRK` e ricontrollare la calibrazione.
 
 Opzioni proposte all'utente per proseguire: (a) Fase 2 sulla struttura documentata, marcata come
 non verificata, più lo script di pulizia; (b) Fase 3 (statistiche su FRA) mentre arrivano i log.
-L'utente ha scelto (a): fatta. Prossimo passo: verifica sui log reali, poi approvazione e Fase 3.
+L'utente ha scelto (a): fatta. Poi ha chiesto la Fase 3: fatta. Prossimo passo: approvazione della Fase 3,
+poi Fase 4 (valutatore di mazzo e motore di pick). La verifica della Fase 2 sui log reali resta aperta.
 
 ## Comandi
 
@@ -64,6 +70,9 @@ pip install -e .[dev]          # dipendenze: PyYAML, pytest
 python -m pytest               # i test usano una cartella dati temporanea
 python -m draftbot add-set TRK # ricrea la cache locale (data/ non è versionata)
 python -m draftbot add-set FRA
+python -m draftbot add-set HOB && python -m draftbot add-set MSH   # set dei prior
+python -m draftbot update-data FRA             # anche HOB, MSH, TRK (circa 10 minuti in totale)
+python -m draftbot stats FRA --format premier
 python -m draftbot status TRK
 python -m draftbot cards TRK --mv 2 --color W
 ```
@@ -72,4 +81,4 @@ python -m draftbot cards TRK --mv 2 --color W
 
 L'ambiente "mtga-draft-support" consente solo `api.scryfall.com`, `data.scryfall.io`,
 `www.17lands.com` e `data.17landscapes.com` (oltre ai gestori di pacchetti). La cartella `data/`
-non è nel repository: in una sessione nuova va rigenerata con `add-set`.
+non è nel repository: in una sessione nuova va rigenerata con `add-set` e `update-data`.

@@ -1,0 +1,20 @@
+# Config del set HOB generata da 'draftbot add-set'. Rivedila a mano.
+# Draft data 17Lands disponibili per formato: {'pick_two': True, 'premier': True}
+# Meccaniche, archetipi e tag di sinergia vengono aggiunti nella fase delle sinergie.
+code: HOB
+name: The Hobbit
+scryfall_sets:
+- hob
+seventeenlands_expansion: HOB
+formats:
+- pick_two
+- premier
+release_date: '2026-08-14'
+arena_id_sources:
+- arena_card_database
+- seventeenlands
+- scryfall
+name_aliases: {}
+mechanics: []
+archetypes: []
+synergy_tags_file: HOB.tags.yaml

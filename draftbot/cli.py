@@ -101,6 +101,8 @@ def build_parser() -> argparse.ArgumentParser:
                     help="testo da cancellare ovunque (es. il tuo nome utente); ripetibile")
     lc.add_argument("--keep-all", action="store_true",
                     help="tiene tutte le righe (ripulite) invece delle sole righe di draft")
+    from .statscli import add_parsers
+    add_parsers(sub)
     return p
 
 
@@ -140,6 +142,9 @@ def main(argv: list[str] | None = None) -> int:
                     "SELECT kind, detail FROM issues WHERE set_code=? ORDER BY kind, detail", (code,)):
                 print(f"{kind:<24} {detail}")
             return 0
+        if args.command in ("update-data", "stats", "fit-prior", "calibrate"):
+            from .statscli import run
+            return run(args)
         if args.command and args.command.startswith("log-"):
             from .logcli import run_log_command
             return run_log_command(args)

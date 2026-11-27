@@ -5,7 +5,8 @@ Draft. Legge `Player.log` in sola lettura, suggerisce i pick spiegando il punteg
 costruire il mazzo finale.
 
 Stato: **Fase 1 completata** (database carte, mappatura ID Arena, `add-set`); **Fase 2 scritta ma
-non ancora verificata su log reali** (parser di `Player.log` e pulizia dei log). Vedi `docs/plan.md` e i report in `docs/`.
+non ancora verificata su log reali** (parser di `Player.log` e pulizia dei log); **Fase 3 completata**
+(statistiche 17Lands calcolate in proprio, blend bayesiano, prior dai set precedenti). Vedi `docs/plan.md` e i report in `docs/`.
 
 ## Uso
 
@@ -24,6 +25,14 @@ python -m draftbot log-drafts                  # draft trovati nel log, con cont
 python -m draftbot log-drafts <file> -d        # pick per pick: busta vista e carte prese
 python -m draftbot log-clean Player.log tests/fixtures/logs/premier_1.log --redact "<tuo nome Arena>"
 
+# Statistiche 17Lands (dataset pubblici)
+python -m draftbot update-data FRA             # scarica e aggrega game data e draft data
+python -m draftbot stats FRA --format premier  # GIH WR bayesiana, OH, GNS, IWD, ATA, ALSA
+python -m draftbot stats FRA --format premier --colors WU --tier high
+python -m draftbot stats TRK --format pick_two # senza game data: stima dal solo prior
+python -m draftbot fit-prior --format premier --sets FRA HOB MSH --half-life 7
+python -m draftbot calibrate FRA --format premier --prior-sets HOB MSH
+
 # Sul PC con Arena installato, per usare anche il database del client:
 python -m draftbot update-cards TRK --arena-db "C:\Program Files\Wizards of the Coast\MTGA\MTGA_Data\Downloads\Raw"
 ```
@@ -33,6 +42,8 @@ python -m draftbot update-cards TRK --arena-db "C:\Program Files\Wizards of the 
 - `draftbot/`: motore, indipendente dal set
 - `sets/<CODICE>.yaml`: config del set (codici Scryfall, espansione 17Lands, fonti degli ID Arena)
 - `draftbot/arenalog/`: parser di Player.log, pulizia dei dati personali, log sintetici per i test
+- `draftbot/stats/`: aggregazione dei dati 17Lands, metriche, blend bayesiano, prior, calibrazione
+- `priors/<formato>.yaml`: coefficienti del prior (generati da `fit-prior`, versionati)
 - `formats/<nome>.yaml`: struttura del formato (tavolo, carte per pick, buste, passaggio)
 - `docs/`: piano e report
 

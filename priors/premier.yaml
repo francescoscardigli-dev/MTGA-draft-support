@@ -1,0 +1,65 @@
+# Prior della GIH WR generato da 'python -m draftbot fit-prior'. Non modificare a mano:
+# rigeneralo. Contiene solo coefficienti, nessun dato di carte.
+format: premier
+feature_set: pick+rarita
+features:
+- ata_norm
+- ata_norm2
+- alsa_norm
+- taken_rate
+- r_uncommon
+- r_rare
+- r_mythic
+intercept: -0.009895517717035429
+coef:
+  ata_norm: -0.040216899052432385
+  ata_norm2: -0.045858455034575245
+  alsa_norm: 0.09098032236889562
+  taken_rate: 0.04770598884038331
+  r_uncommon: -0.005674975182015986
+  r_rare: -0.00958497426762225
+  r_mythic: -0.0076730268004361986
+mean:
+  ata_norm: 0.39981758974222903
+  ata_norm2: 0.2117549822641525
+  alsa_norm: 0.27475000924774723
+  taken_rate: 0.23152841763716075
+  r_uncommon: 0.35427807486631013
+  r_rare: 0.23796791443850268
+  r_mythic: 0.08957219251336898
+std:
+  ata_norm: 0.2279700776040721
+  ata_norm2: 0.19313949041348952
+  alsa_norm: 0.1383156285150488
+  taken_rate: 0.1770453375065361
+  r_uncommon: 0.4786140048897547
+  r_rare: 0.42612432780145154
+  r_mythic: 0.28575896055291805
+fill:
+  ata_norm: 0.39981758974222903
+  ata_norm2: 0.2117549822641525
+  alsa_norm: 0.27475000924774723
+  taken_rate: 0.23152841763716075
+  r_uncommon: 0.35427807486631013
+  r_rare: 0.23796791443850268
+  r_mythic: 0.08957219251336898
+tau2: 0.00030923109139907573
+baseline_gih: 0.568661326607003
+train_sets:
+- FRA
+- HOB
+- MSH
+n_cards: 748
+fitted_at: '2026-11-27'
+ridge: 1.0
+notes:
+- carte con almeno 300 partite GIH
+- 'target: GIH WR - GIH WR media del set'
+- 'FRA primi 7 giorni: deriva 0.96 punti'
+- 'FRA primi 14 giorni: deriva 0.78 punti'
+- 'HOB primi 7 giorni: deriva 0.75 punti'
+- 'HOB primi 14 giorni: deriva 0.45 punti'
+- 'MSH primi 7 giorni: deriva 1.44 punti'
+- 'MSH primi 14 giorni: deriva 1.34 punti'
+half_life: 7.0
+drift_sd: 0.010150276078287583

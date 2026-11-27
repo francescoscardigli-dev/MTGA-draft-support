@@ -10,7 +10,7 @@ from typing import Any, Iterable
 
 from .paths import db_path
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT NOT NULL);
@@ -69,6 +69,25 @@ CREATE TABLE IF NOT EXISTS arena_ids (
     source_expansion TEXT,
     PRIMARY KEY (set_code, grp_id)
 );
+
+-- Statistiche 17Lands aggregate (Fase 3). Ogni import e' uno snapshot datato (tabella snapshots).
+-- Chiavi: colori principali del mazzo (WUBRG), giorno (AAAA-MM-GG), fascia del giocatore.
+CREATE TABLE IF NOT EXISTS stat_games (
+    snapshot_id INTEGER NOT NULL, set_code TEXT NOT NULL, format TEXT NOT NULL,
+    colors TEXT NOT NULL, day TEXT NOT NULL, tier TEXT NOT NULL, card TEXT NOT NULL,
+    n_deck INTEGER, w_deck INTEGER, n_gih INTEGER, w_gih INTEGER, n_oh INTEGER, w_oh INTEGER
+);
+CREATE INDEX IF NOT EXISTS stat_games_k ON stat_games(snapshot_id, card);
+CREATE TABLE IF NOT EXISTS stat_decks (
+    snapshot_id INTEGER NOT NULL, set_code TEXT NOT NULL, format TEXT NOT NULL,
+    colors TEXT NOT NULL, day TEXT NOT NULL, tier TEXT NOT NULL, n INTEGER, w INTEGER
+);
+CREATE TABLE IF NOT EXISTS stat_picks (
+    snapshot_id INTEGER NOT NULL, set_code TEXT NOT NULL, format TEXT NOT NULL,
+    day TEXT NOT NULL, tier TEXT NOT NULL, card TEXT NOT NULL,
+    n_seen INTEGER, n_taken INTEGER, sum_taken_at INTEGER, n_last INTEGER, sum_last_seen INTEGER
+);
+CREATE INDEX IF NOT EXISTS stat_picks_k ON stat_picks(snapshot_id, card);
 
 -- Problemi rilevati durante l'import: carte senza mappatura, conflitti, nomi non risolti.
 CREATE TABLE IF NOT EXISTS issues (
