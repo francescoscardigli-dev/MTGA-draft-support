@@ -87,6 +87,20 @@ def build_parser() -> argparse.ArgumentParser:
     q.add_argument("-v", "--verbose", action="store_true")
     iss = sub.add_parser("issues", help="elenca i problemi dell'ultimo import (es. carte senza ID Arena)")
     iss.add_argument("code")
+    lw = sub.add_parser("log-where", help="mostra dove il tool cerca Player.log")
+    lw.set_defaults(_log=True)
+    ld = sub.add_parser("log-drafts", help="elenca i draft trovati in Player.log e ne controlla la coerenza")
+    ld.add_argument("logs", nargs="*", type=Path, help="file di log (default: Player-prev.log e Player.log)")
+    ld.add_argument("-d", "--detail", action="store_true", help="mostra busta e carte prese pick per pick")
+    ld.add_argument("--draft", help="solo il draft con questo ID (anche solo l'inizio)")
+    ld.add_argument("--json", type=Path, help="esporta i draft letti in un file JSON")
+    lc = sub.add_parser("log-clean", help="crea una copia ripulita del log da salvare come fixture di test")
+    lc.add_argument("src", type=Path)
+    lc.add_argument("dst", type=Path)
+    lc.add_argument("--redact", action="append", default=[], metavar="TESTO",
+                    help="testo da cancellare ovunque (es. il tuo nome utente); ripetibile")
+    lc.add_argument("--keep-all", action="store_true",
+                    help="tiene tutte le righe (ripulite) invece delle sole righe di draft")
     return p
 
 
@@ -126,6 +140,9 @@ def main(argv: list[str] | None = None) -> int:
                     "SELECT kind, detail FROM issues WHERE set_code=? ORDER BY kind, detail", (code,)):
                 print(f"{kind:<24} {detail}")
             return 0
+        if args.command and args.command.startswith("log-"):
+            from .logcli import run_log_command
+            return run_log_command(args)
         code = args.code if args.command == "status" else args.set_code
         if not code:
             build_parser().print_help()

@@ -96,7 +96,8 @@ def connect(path: Path | None = None) -> sqlite3.Connection:
     con = sqlite3.connect(path or db_path())
     con.row_factory = sqlite3.Row
     con.executescript(SCHEMA)
-    con.execute("INSERT OR REPLACE INTO meta VALUES ('schema_version', ?)", (str(SCHEMA_VERSION),))
+    with con:  # commit subito: una transazione aperta bloccherebbe le altre connessioni
+        con.execute("INSERT OR REPLACE INTO meta VALUES ('schema_version', ?)", (str(SCHEMA_VERSION),))
     return con
 
 
@@ -153,3 +154,8 @@ def query_cards(con: sqlite3.Connection, set_code: str, *, name: str | None = No
         sql += " AND c.name IN (SELECT name FROM arena_ids WHERE set_code = ? AND grp_id = ?)"
         args += [set_code, grp_id]
     return list(con.execute(sql + " ORDER BY c.mv, c.name", args))
+
+
+def arena_names(con: sqlite3.Connection, set_code: str) -> dict[int, str]:
+    """grpId -> nome canonico per un set importato."""
+    return {r[0]: r[1] for r in con.execute("SELECT grp_id, name FROM arena_ids WHERE set_code = ?", (set_code,))}

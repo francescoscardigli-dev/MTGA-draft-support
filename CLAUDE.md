@@ -6,7 +6,8 @@ Set di test: TRK (Star Trek, con il foglio bonus SDS). Set per il test di genera
 delle statistiche: FRA.
 
 Documenti da leggere prima di lavorare: `docs/plan.md` (piano approvato),
-`docs/phase0_report.md` (verifiche), `docs/phase1_report.md` (database carte).
+`docs/phase0_report.md` (verifiche), `docs/phase1_report.md` (database carte),
+`docs/phase2_report.md` (parser del log).
 
 ## Modalità di lavoro richiesta dall'utente
 
@@ -16,7 +17,8 @@ Documenti da leggere prima di lavorare: `docs/plan.md` (piano approvato),
 - Se un dato o una fonte non è disponibile, dirlo invece di inventarlo.
 - Nessun dato specifico di un set nel codice del motore (c'è un test che lo controlla): tutto
   sta in `sets/<CODICE>.yaml` e `formats/<nome>.yaml`.
-- Branch di lavoro: `claude/mtg-draft-tool-review-kse14y`.
+- Branch di lavoro: quello assegnato alla sessione. Fasi 0-1 su `claude/mtg-draft-tool-review-kse14y`,
+  Fase 2 su `claude/blissful-tesla-2atj16` (che contiene anche le fasi precedenti).
 
 ## Decisioni prese (approvate)
 
@@ -31,22 +33,20 @@ Documenti da leggere prima di lavorare: `docs/plan.md` (piano approvato),
 - Il suggerimento restituisce k carte (in Pick Two si valutano le coppie).
 - I tag LLM di meccaniche e archetipi si fanno nella fase delle sinergie (Fase 5).
 
-## Stato al 2026-11-27
+## Stato al 2026-11-27 (aggiornato a fine sessione Fase 2)
 
 | Fase | Stato |
 |---|---|
 | 0 Verifiche e scheletro | completata |
 | 1 Database carte, ID Arena, `add-set` | completata (TRK 341 carte, FRA 295, nessun problema di mappatura) |
-| 2 Parser di Player.log | **in attesa dei log dell'utente** (almeno un draft Premier e uno Pick Two) |
+| 2 Parser di Player.log | **codice e test su log sintetici fatti; da verificare sui log reali** (almeno un draft Premier e uno Pick Two) |
 | 3-9 | da fare |
 
 Cose aperte:
-- **Log di Arena:** l'utente li sta recuperando. Il file contiene nome utente, ID account e forse
-  token: non committarlo grezzo. Prima scrivere uno script di pulizia, poi salvare in
-  `tests/fixtures/` solo versioni ripulite. Struttura nota (fonti non ufficiali):
-  - `Draft.Notify` con `draftId`, `SelfPack`, `SelfPick`, `PackCards` (numerazione 1-based);
-  - `EventPlayerDraftMakePick` con `GrpIds` (due ID in Pick Two);
-  - righe duplicate possibili; `Player-prev.log` contiene la sessione precedente.
+- **Log di Arena:** l'utente li sta recuperando. Quando arrivano: pulirli con
+  `python -m draftbot log-clean <log> tests/fixtures/logs/<nome>.log --redact "<nome utente>"`,
+  rileggere a mano l'output, poi `log-drafts <fixture> -d`, e aggiungere test di regressione sui
+  fixture reali. Vedi la checklist in `docs/phase2_report.md`. Mai committare il log grezzo.
 - **Lettore del database del client Arena** (`draftbot/sources/arena_db.py`): non verificato su
   un'installazione reale. Chiedere all'utente di provare
   `python -m draftbot update-cards TRK --arena-db "<cartella Raw>"`.
@@ -55,7 +55,7 @@ Cose aperte:
 
 Opzioni proposte all'utente per proseguire: (a) Fase 2 sulla struttura documentata, marcata come
 non verificata, più lo script di pulizia; (b) Fase 3 (statistiche su FRA) mentre arrivano i log.
-L'utente ha scelto di riprendere quando ha i log: chiedere se intanto vuole procedere con (b).
+L'utente ha scelto (a): fatta. Prossimo passo: verifica sui log reali, poi approvazione e Fase 3.
 
 ## Comandi
 

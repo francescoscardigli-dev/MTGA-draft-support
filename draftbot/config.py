@@ -158,3 +158,7 @@ def load_set(code: str, sets_dir: Path = SETS_DIR, formats_dir: Path = FORMATS_D
 
 def available_sets(sets_dir: Path = SETS_DIR) -> list[str]:
     return sorted(p.stem for p in sets_dir.glob("*.yaml") if not p.stem.endswith(".tags"))
+
+
+def available_formats(formats_dir: Path = FORMATS_DIR) -> list[str]:
+    return sorted(p.stem for p in formats_dir.glob("*.yaml"))
