@@ -8,7 +8,7 @@ Data: 2026-11-27. La numerazione delle fasi segue il piano rivisto in `docs/plan
 | # | Verifica | Esito |
 |---|---|---|
 | 1 | Dati 17Lands TRK/SDS | **Parziale.** Draft data presenti per Premier e Pick Two. **Game data assenti** per TRK. |
-| 2 | Licenza 17Lands | Dataset pubblici CC BY 4.0. Per i dati "curati" (card ratings) 17Lands chiede di attendere 12 giorni. |
+| 2 | Licenza 17Lands | Dataset pubblici CC BY 4.0. I dati delle pagine del sito (card data, color data) sono **riservati a 17Lands.com** secondo la nota inclusa nelle risposte. |
 | 3 | Termini di Arena | **Nessuna dichiarazione esplicita** di Wizards sui tool di supporto al draft. Rischio residuo. |
 | 4 | Tool esistenti | Quattro tool coprono già i rating per carta; mancano segnali calibrati e logica Pick Two. |
 | 5 | Formato di Player.log | Struttura nota da fonti secondarie. **Nessun log di esempio disponibile** (bloccante per la Fase 2, parser). |
@@ -54,19 +54,24 @@ In pratica `seventeenlands_expansion: TRK` copre già entrambi i codici.
 
 In Pick Two la wheel al pick 5 implica un **tavolo da 4 giocatori**. La wheel esiste quindi anche in Pick Two, ma in un punto diverso. Questi valori sono in `formats/*.yaml`, coperti da test.
 
-**Statistiche aggregate** (endpoint usati dalle pagine del sito, non un'API documentata):
+**Statistiche aggregate del sito** (endpoint usati dalle pagine, non un'API documentata; vedi sezione 2 per i limiti d'uso):
 
 - **Color pair**:
   - Premier: 277.639 partite totali (la coppia meno giocata, WU, ne ha 11.379);
   - Pick Two: 61.071 partite totali (la coppia meno giocata, WU, ne ha 2.244).
-- **Card ratings**:
-  - Premier: GIH WR e IWD disponibili solo per **79 carte su 336**; ALSA per 255, ATA per 116.
-  - Pick Two: **GIH WR disponibile per 0 carte**.
+- **Statistiche per carta** (aggiornato su tua segnalazione):
+  - L'endpoint che avevo interrogato all'inizio (`/card_ratings/data`) restituisce dati ridotti: GIH WR per 79 carte su 336 in Premier, per nessuna in Pick Two.
+  - La pagina Card Data del sito usa invece `/api/card_data`, che è **completo**:
 
-  Il sito evidentemente non mostra i valori sotto una soglia di campioni. Il dettaglio dei filtri non è documentato.
+    | Formato | Carte con GIH WR e IWD | Partite GIH per carta (mediana / max) |
+    |---|---|---|
+    | Premier | 300 su 336 | 5.475 / 42.622 |
+    | Pick Two | 260 su 336 | 1.262 / 8.760 |
+
+  - **Però la risposta stessa dell'endpoint dice:** *"This data is only for use on 17Lands.com. The only data permitted for outside use (public or private) is available at 17lands.com/public_datasets."* Quindi questi dati **non sono utilizzabili dal tool, nemmeno per uso privato**: le condizioni le pone 17Lands, che è il titolare. Non li salvo e non li importo.
 
 **Conseguenze sul piano:**
-- La Fase 3 (statistiche: GIH WR, IWD) e la Fase 5 (lift delle sinergie) dipendono dai **game data di TRK, non ancora pubblicati**. Finché mancano, si usano i card ratings parziali più i prior dei set precedenti (vedi la partenza a freddo nella sezione 3 del piano).
+- La Fase 3 (statistiche: GIH WR, IWD) e la Fase 5 (lift delle sinergie) dipendono dai **game data di TRK, non ancora pubblicati**. Finché mancano, si usano i dati dei draft (ALSA, ATA, ordine di pick dei giocatori forti) più i prior dei set precedenti (vedi la partenza a freddo nella sezione 3 del piano).
 - ALSA e ATA si possono calcolare **in proprio** dai draft data, già ora e per entrambi i formati.
 - Set precedenti con game data Pick Two (utili come prior e per il test di generalità): FRA (2026-10-17, anche Premier), HOB e MSH (anche replay), OM1.
 - **Pick Two è utilizzabile**: circa la metà dei draft di Premier, ma con un quarto delle partite. I segnali Pick Two saranno meno affidabili, come previsto.
@@ -76,11 +81,12 @@ In Pick Two la wheel al pick 5 implica un **tavolo da 4 giocatori**. La wheel es
 ## 2. Licenza e condizioni d'uso 17Lands
 
 - I dataset pubblici sono rilasciati di norma con **CC BY 4.0**: si possono usare citando 17Lands [fonte secondaria: testo delle linee guida riportato dai risultati di ricerca; la pagina del sito è generata via JavaScript e non sono riuscito a leggerla direttamente].
-- Per i **dati curati** (pagine Card Data e Color Data, cioè gli endpoint dei rating), le [usage guidelines](https://www.17lands.com/usage_guidelines) **chiedono** ai tool di terzi di non mostrarli prima del **giorno 12 dopo l'uscita** del set su Arena. È una richiesta, non un divieto; le linee guida escludono esplicitamente i dataset pubblici e i dati personali dell'utente.
+- Per i **dati curati** (pagine Card Data e Color Data), le [usage guidelines](https://www.17lands.com/usage_guidelines) chiedono ai tool di terzi di non mostrarli prima del **giorno 12 dopo l'uscita** del set su Arena.
+- Più restrittiva ancora è la nota inclusa nelle risposte di `/api/card_data` [verificato]: *"This data is only for use on 17Lands.com. The only data permitted for outside use (public or private) is available at 17lands.com/public_datasets."* Le due indicazioni non sono del tutto coerenti tra loro; prevale la più restrittiva finché 17Lands non chiarisce.
 
 **Decisione proposta:**
 - Basare il tool **sui dataset pubblici** (CC BY 4.0, con attribuzione nel README e nella UI).
-- Usare gli endpoint dei rating solo come integrazione, rispettando la finestra dei 12 giorni (configurabile per set).
+- **Non usare gli endpoint del sito** (`/api/card_data`, `/card_ratings/data`, `/color_ratings/data`): la loro stessa risposta lo vieta fuori da 17Lands.com. GIH WR, IWD e win rate per color pair si calcolano dai game data pubblici, appena 17Lands li pubblica per TRK.
 - Download non aggressivi, con cache locale.
 
 ## 3. Termini d'uso di Arena
