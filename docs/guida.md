@@ -18,14 +18,14 @@ messaggi del draft non vengono scritti nel log.
 
 ### Su macOS (provato su Monterey)
 
-1. Installa Python 3.12 da python.org, poi apri `/Applicazioni/Python 3.12/` e fai doppio clic su
+1. Installa Python (3.11 o successivo; provato fino al 3.14) da python.org, poi apri `/Applicazioni/Python 3.x/` e fai doppio clic su
    `Install Certificates.command`: senza i certificati i download da 17Lands e Scryfall falliscono.
 2. Scarica il codice dalla pagina GitHub del repository, branch di lavoro, con "Code > Download ZIP",
    e decomprimilo, per esempio in `Documenti/MTGA-draft-support`.
 3. Nel Terminale:
    ```bash
    cd ~/Documents/MTGA-draft-support
-   python3.12 -m venv .venv
+   python3 -m venv .venv
    source .venv/bin/activate
    pip install -e ".[ui]"
    ```
