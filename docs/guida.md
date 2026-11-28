@@ -71,15 +71,19 @@ dell'evento, usa `--set TRK --format premier`.
   atteso delle carte future in quel colore, in proporzione a quanto i dati 17Lands mostrano che il
   flusso continua (stessi vicini nella busta 3).
 - In Pick Two le opzioni sono coppie.
+- **Scelta dei forti**: le opzioni sono ordinate per probabilità che un giocatore forte le scelga (strato di
+  imitazione, Fase 10), che combina il valore del motore con la popolarità della carta e i colori probabili.
+- Le **terre doppie** nei propri colori valgono circa quanto una buona magia giocabile (Fase 10).
 
 ### Limiti da tenere a mente
 
-- Nei primi pick il motore si impegna sui colori un po' troppo presto (Fase 4): se una bomba fuori
-  colore ha un valore poco sotto la prima opzione, vale la pena considerarla.
+- Nei primi pick il motore da solo si impegnava troppo presto sui colori (Fase 4); lo strato di
+  imitazione lo corregge in buona parte (Fase 10).
 - Le sinergie si vedono come temi, ma non sono nel punteggio (Fase 5).
 - Per un set senza game data (TRK al 2026-11-27) la qualità viene dal solo prior: l'ordine tra le
   carte è affidabile, i valori assoluti meno.
-- Lo splash è proposto raramente (Fase 6).
+- Lo splash costa circa 2-3 punti secondo i dati: il costruttore lo propone solo quando le carte lo
+  ripagano (Fase 10).
 
 ## 4. Dopo il draft
 

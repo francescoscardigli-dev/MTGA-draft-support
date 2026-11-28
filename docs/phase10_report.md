@@ -124,3 +124,54 @@ colori sono incerti, una doppia vale poco per il motore.
 Il motore da solo prende poche terre nei primi pick (3% contro 8% in Premier, 3% contro 17% in Pick
 Two). Lo strato di imitazione corregge quasi del tutto: Premier 4% contro 8%, ma 21% contro 24% a metà
 busta. Il conteggio comprende anche le terre non base che non fanno fixing.
+
+## 3. Splash
+
+**Misura sui mazzi 17Lands** (mazzi a 2 colori con uno splash, al netto di qualità, curva, fixing e
+giocatore). Variabili per mazzo: carte splashate, carte con due simboli del colore di splash, fonti
+del colore di splash da terre di fixing e da terre base.
+
+- **Costo base dello splash, a parità di qualità:** da −1,9 a −3,3 punti, stabile su 7 casi su 8
+  (FRA, HOB, MSH ed EOE, in Premier e Pick Two).
+- **Ogni carta in più e ogni carta con due simboli:** in media −0,4 e −0,7 punti, ma variano molto da
+  set a set e cambiano segno. Nel modello stimato su FRA, HOB e MSH insieme valgono +0,03 e −0,59
+  (Premier), +0,01 e −0,67 (Pick Two).
+- **Fonti di splash:** le terre di fixing aiutano in FRA e MSH, non in HOB ed EOE; le basi non
+  cambiano nulla.
+- OM1 è escluso: lì l'etichetta di splash di 17Lands non torna con le carte (0,7 carte splashate per
+  mazzo "con splash").
+
+Conclusione: **lo splash costa davvero circa 2-3 punti** e va fatto solo se le carte lo ripagano. Il
+47% di splash dei giocatori forti non dimostra che lo splash convenga.
+
+**Modifiche al costruttore:**
+- il valutatore ha due variabili in più: carte splashate oltre la prima e carte con due simboli;
+- è tolta la soglia euristica di qualità per le carte di splash (+2 punti): decide il valutatore;
+- sono ammesse carte con due simboli del colore di splash, con 4 fonti invece di 3.
+
+**Verifica** (`build-check`, stima fino al taglio, draft dei giocatori forti dopo):
+
+| | Splash: nostro / reale | 3 colori: nostro / reale | Stessi colori principali | Magie in comune | Test sui risultati: stessi colori / diversi |
+|---|---|---|---|---|---|
+| FRA Premier, prima | 6% / 47% | 21% / 26% | 80% | 85% | −2,15 / −4,84 |
+| FRA Premier, dopo | **16%** / 47% | 14% / 26% | 78% | 85% | −1,76 / **−6,58** |
+| FRA Pick Two, prima | 2% / 44% | 33% / 38% | 66% | 82% | −1,74 / −4,09 |
+| FRA Pick Two, dopo | **25%** / 44% | 15% / 38% | 63% | 82% | −2,01 / −3,85 |
+| EOE Premier, prima | 4% / 28% | 4% / 8% | 87% | 87% | −0,61 / −5,33 |
+| EOE Premier, dopo | **13%** / 28% | 1% / 8% | 87% | 87% | −0,46 / **−6,86** |
+
+- Lo splash è più vicino alla realtà e le magie scelte non cambiano.
+- Una parte dei mazzi a 3 colori diventa "2 colori + splash": con 2-3 carte del terzo colore è una
+  questione di etichetta (17Lands a volte li chiama a 3 colori).
+- Valutatore fuori campione invariato (Premier: correlazione 0,116 → 0,117, pendenza 0,93; Pick Two:
+  0,130, pendenza 0,99).
+
+L'effetto è piccolo e quasi tutto dalle regole del costruttore; i costi per carta restano nel modello
+perché sono a costo zero e non peggiorano nulla.
+
+## Cosa resta aperto dopo la Fase 10
+
+- **Fixing nei primi pick:** il motore da solo prende poche terre all'inizio della busta; lo strato di
+  imitazione corregge in gran parte.
+- **Pick Two** resta il formato più difficile (top-1 40-43% con lo strato).
+- **Log reali di Arena:** ancora da verificare (vedi Fase 2); l'utente li sta recuperando su macOS.

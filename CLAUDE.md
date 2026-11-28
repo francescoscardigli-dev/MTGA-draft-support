@@ -9,7 +9,7 @@ Documenti da leggere prima di lavorare: `docs/plan.md` (piano approvato),
 `docs/phase0_report.md` (verifiche), `docs/phase1_report.md` (database carte),
 `docs/phase2_report.md` (parser del log), `docs/phase3_report.md` (statistiche),
 `docs/phase4_report.md` (motore di pick e backtest), `docs/phase5_report.md` (sinergie),
-`docs/phase6_report.md` (costruzione del mazzo), `docs/phase7_report.md` (wheel, segnali, live), `docs/phase8_report.md` (UI), `docs/phase9_report.md` (generalità, cose aperte).
+`docs/phase6_report.md` (costruzione del mazzo), `docs/phase7_report.md` (wheel, segnali, live), `docs/phase8_report.md` (UI), `docs/phase9_report.md` (generalità, cose aperte), `docs/phase10_report.md` (imitazione, fixing, splash).
 Guida d'uso: `docs/guida.md`.
 
 ## Modalità di lavoro richiesta dall'utente
@@ -50,6 +50,7 @@ Guida d'uso: `docs/guida.md`.
 | 7 Segnali, wheel, live | completata: wheel attivo; flusso dei colori attivo (revisione su indicazione dell'utente); impegno ridotto provato, nessun vantaggio |
 | 8 UI web locale, revisione | completata (verificata su log sintetici) |
 | 9 Generalità, rifinitura | completata (test su OM1 ed EOE da zero; 3 problemi di generalità corretti) |
+| 10 Idee da altri tool | strato di imitazione (+3/+9 top-1), fixing nel valutatore e al pick, splash dai dati: vedi `docs/phase10_report.md` |
 
 Cose aperte:
 - **Log di Arena:** l'utente li sta recuperando. Quando arrivano: pulirli con
