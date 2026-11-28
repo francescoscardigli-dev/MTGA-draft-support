@@ -56,6 +56,9 @@ Cose aperte:
   `python -m draftbot log-clean <log> tests/fixtures/logs/<nome>.log --redact "<nome utente>"`,
   rileggere a mano l'output, poi `log-drafts <fixture> -d`, e aggiungere test di regressione sui
   fixture reali. Vedi la checklist in `docs/phase2_report.md`. Mai committare il log grezzo.
+  Il parser e' stato confrontato (2026-11-28) con draftomen e nemedraft-client (MIT): casi aggiunti
+  (pick rifiutato, DraftCompleteDraft, coda senza EventJoin, draft ripreso, buste fantasma); vedi
+  la sezione "Confronto con altri tool" in `docs/phase2_report.md`.
 - **Pick Two:** vantaggio del motore su ATA piccolo (FRA +2,6) o nullo (OM1 -1,4); Premier +5/+9.
 - **Set con buste diverse:** `format_overrides` in `sets/<CODICE>.yaml` (EOE: Premier 13 carte);
   usare sempre `format_for(formato, set)`, non `load_format`, dove il set e' noto.

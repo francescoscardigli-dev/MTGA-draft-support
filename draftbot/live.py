@@ -145,7 +145,8 @@ class LiveSession:
             self.done.add((d.draft_id, last.pack, last.pick))
             self.emit(self.pick_event(eng, d, last, picks, fmt_cfg))
         total = sum(len(p.picked) for p in picks)
-        if (total >= fmt_cfg.pool_size or d.pool) and d.draft_id not in self.built:
+        full_pool = d.pool is not None and len(d.pool) >= fmt_cfg.pool_size
+        if (total >= fmt_cfg.pool_size or d.completed or full_pool) and d.draft_id not in self.built:
             self.built.add(d.draft_id)
             self.emit(self.build_event(eng, d))
 

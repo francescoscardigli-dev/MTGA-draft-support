@@ -93,3 +93,31 @@ connessione trovava il database bloccato.
 4. `python -m draftbot log-drafts tests/fixtures/logs/premier_1.log -d`: confrontare con il draft
    ricordato; guardare note, errori e "messaggi non interpretati".
 5. Aggiungere test di regressione sui fixture reali e aggiornare questa pagina.
+
+## Confronto con altri tool (2026-11-28)
+
+Prima dei log reali ho confrontato il parser con due progetti open source (licenza MIT) che leggono il
+log nei draft Premier e Pick Two. Nessun codice copiato.
+- **draftomen** (`docs/log-format.md`): il formato è descritto da log veri, ma i log di esempio dei
+  draft Premier e Pick Two sono scritti a mano.
+- **nemedraft-client**: la numerazione di Pick Two è dichiarata verificata su un Player.log reale.
+
+**Confermato:** messaggi `Draft.Notify` (draftId, SelfPack, SelfPick, PackCards separati da virgola),
+`EventPlayerDraftMakePick` (DraftId, Pack, Pick, GrpIds), numerazione da 1, Pick Two con 7 pick logici
+per busta e 2 carte, `Draft.Notify` scritto due volte.
+
+**Mancava e ora è gestito** (con test):
+- **pick rifiutato:** una risposta con `IsPickSuccessful: false` o con `TableInfo` scarta il pick, e
+  conta la richiesta ripresentata. Senza risposta, per lo stesso pick vale l'ultima richiesta;
+- **fine draft:** `IsPickingCompleted: true` e `DraftCompleteDraft`, il cui `CardPool` dà il pool completo;
+- **evento senza EventJoin:** riga `Entering table draft queue: <SET>_<Tipo>_Draft`;
+- **draft ripreso dopo un riavvio di Arena:** il corso in `EventGetCoursesV2` (`CurrentModule:
+  PlayerDraft`, `DraftId`, `InternalEventName`) lega il draft all'evento;
+- **buste fuori dal formato:** a fine draft a volte `SelfPack` va oltre 3; ora queste buste vengono ignorate;
+- **pool del corso:** si tiene solo se contiene tutte le carte prese, altrimenti viene segnalato. La
+  lettura live propone i mazzi solo con il pool completo o a draft finito, non con un pool parziale;
+- **righe dei file `UTC_Log` ruotati**, con il prefisso `[<thread>] `: già lette, ora c'è un test.
+
+Sui log di esempio di draftomen (completi Premier e Pick Two, ripreso, account tardivo) il parser legge
+42/42 e 21/21 pick con evento, set e formato giusti. Resta valida la checklist qui sopra: questi sono
+riscontri indiretti, non log veri.

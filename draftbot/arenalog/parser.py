@@ -8,7 +8,17 @@ Messaggi riconosciuti (struttura da fonti non ufficiali, DA VERIFICARE sui log r
 - pick + busta:  ``LogBusinessEvents`` con ``{"DraftId", "EventId", "PackNumber", "PickNumber",
                  "PickGrpId" | "PickGrpIds", "CardsInPack": [...]}``
 - iscrizione:    ``EventJoin`` / ``Event_Join`` con ``{"EventName"}``
-- pool finale:   un oggetto con ``InternalEventName`` e ``CardPool`` (es. risposta di EventGetCoursesV2)
+- pool finale:   un oggetto con ``InternalEventName`` e ``CardPool`` (es. risposta di EventGetCoursesV2),
+                 oppure la risposta di ``DraftCompleteDraft``
+- pick rifiutato: risposta di EventPlayerDraftMakePick con ``IsPickSuccessful: false`` o con ``TableInfo``;
+                 il pick viene scartato e conta la richiesta ripresentata
+- fine draft:    ``IsPickingCompleted: true`` o ``DraftCompleteDraft``
+- evento senza EventJoin: riga ``Entering table draft queue: <SET>_<Tipo>_Draft``, oppure un corso con
+                 ``DraftId`` e ``InternalEventName`` (draft ripreso dopo un riavvio di Arena)
+
+Confronto (2026-11-28) con la documentazione di draftomen (``docs/log-format.md``, MIT) e con il codice
+di nemedraft-client (MIT), scritti su log veri: stessi campi e numerazione da 1 per Draft.Notify ed
+EventPlayerDraftMakePick, in Pick Two 7 pick logici per busta. Nessun codice copiato.
 
 Il riconoscimento si basa sulle chiavi degli oggetti JSON, non sul nome del metodo, cosi' regge
 a rinomine dei metodi. Le stringhe che contengono JSON (``request``, ``Payload``) vengono decodificate.
@@ -29,6 +39,7 @@ from typing import Any, Iterable, Iterator
 
 from ..config import FormatConfig, available_formats, available_sets, format_for, load_format, load_set
 
+_QUEUE = re.compile(r"Entering table draft queue:\s*([A-Za-z0-9]+)_([A-Za-z]+)_Draft\b")
 _MARKER = re.compile(r"(?:==>|<==)\s*([A-Za-z_][\w.]*)|\b(Draft\.Notify)\b")
 _DECODER = json.JSONDecoder()
 
@@ -94,6 +105,7 @@ class Draft:
     pack_obs: list[PackObs] = field(default_factory=list)
     pick_obs: list[PickObs] = field(default_factory=list)
     parse_warnings: list[str] = field(default_factory=list)
+    completed: bool = False                 # Arena ha segnalato la fine dei pick
 
     # -- formato e set ------------------------------------------------------------------------
     def _with_set(self, f: FormatConfig) -> FormatConfig:
@@ -193,8 +205,14 @@ class Draft:
         notes: list[str] = []
         picks: dict[tuple[int, int], Pick] = {}
 
+        fmt = self.fmt
+
         def get(pack: int, pick: int) -> Pick:
             return picks.setdefault((pack, pick), Pick(pack, pick))
+
+        def outside(key: tuple) -> bool:
+            """Coordinate fuori dal formato (Arena a fine draft scrive a volte buste 'fantasma')."""
+            return fmt is not None and not (key[0] < fmt.packs and key[1] < fmt.picks_per_pack)
 
         for source in sorted({o.source for o in self.pack_obs}):
             scheme, ok = self._pack_scheme(source)
@@ -204,6 +222,9 @@ class Draft:
                 key = (_idx(Scheme(scheme.base, 1), o.rep_pack), scheme.index(o.rep_pick))
                 if None in key:
                     notes.append(f"riga {o.line}: busta {o.rep_pack} pick {o.rep_pick} non interpretabile")
+                    continue
+                if outside(key):
+                    notes.append(f"riga {o.line}: busta {o.rep_pack} pick {o.rep_pick} fuori dal formato, ignorata")
                     continue
                 p = get(*key)  # type: ignore[arg-type]
                 if p.pack_cards is not None and Counter(p.pack_cards) != Counter(o.cards):
@@ -224,7 +245,18 @@ class Draft:
                 if None in key:
                     notes.append(f"riga {o.line}: pick {o.rep_pack}/{o.rep_pick} non interpretabile")
                     continue
+                if outside(key):
+                    notes.append(f"riga {o.line}: pick {o.rep_pack}/{o.rep_pick} fuori dal formato, ignorato")
+                    continue
                 p = get(*key)  # type: ignore[arg-type]
+                if p.picked and Counter(p.picked) != Counter(o.grp_ids) and source == "make_pick" \
+                        and p.lines and p.lines[-1] < o.line:
+                    # richiesta ripresentata per lo stesso pick (il primo invio non e' andato a buon fine)
+                    notes.append(f"riga {o.line}: busta {key[0] + 1} pick {key[1] + 1} ripresentato, "
+                                 f"vale {list(o.grp_ids)} invece di {p.picked}")
+                    p.picked = list(o.grp_ids)
+                    p.lines.append(o.line)
+                    continue
                 if p.picked and Counter(p.picked) != Counter(o.grp_ids):
                     notes.append(f"riga {o.line}: busta {key[0] + 1} pick {key[1] + 1}: carte prese "
                                  f"{list(o.grp_ids)} diverse da {p.picked}")
@@ -345,6 +377,8 @@ class LogParser:
         self.unrecognized: Counter[str] = Counter()   # metodi legati al draft non interpretati
         self._pending_marker: str | None = None
         self._seen: set[tuple] = set()
+        self._last_pick: tuple[Draft, PickObs, tuple] | None = None   # ultimo pick inviato
+        self._draft_events: dict[str, str] = {}                        # draftId -> evento (dai corsi)
 
     # -- API -----------------------------------------------------------------------------------
     def feed_line(self, line: str) -> list[str]:
@@ -352,6 +386,14 @@ class LogParser:
         self.line_no += 1
         m = _MARKER.search(line)
         marker = (m.group(1) or m.group(2)) if m else None
+        q = _QUEUE.search(line)
+        if q:
+            set_tok, kind = q.group(1), q.group(2)
+            prefix = f"{kind}Draft"
+            cur = self.current_event or ""
+            if not (cur.startswith(prefix) and set_tok.upper() in cur.upper().split("_")):
+                self.current_event = f"{prefix}_{set_tok}"
+            return ["event_queue"]
         objs = _json_objects(line)
         if not objs:
             if marker:
@@ -382,7 +424,8 @@ class LogParser:
     def _draft(self, draft_id: str) -> Draft:
         d = self.drafts.get(draft_id)
         if d is None:
-            d = Draft(draft_id, self.line_no, self.formats, self.set_codes, event_name=self.current_event)
+            d = Draft(draft_id, self.line_no, self.formats, self.set_codes,
+                      event_name=self._draft_events.get(draft_id, self.current_event))
             self.drafts[draft_id] = d
         return d
 
@@ -397,6 +440,41 @@ class LogParser:
         mk = (marker or "").lower().replace("_", "")
         draft_id = d.get("draftid")
         draft_id = str(draft_id) if isinstance(draft_id, str) and draft_id else None
+
+        # esito di un pick: rifiutato (si scarta, la richiesta ripresentata lo sostituisce) o fine dei pick
+        if "eventplayerdraftmakepick" in mk and ("ispicksuccessful" in d or "tableinfo" in d):
+            last = self._last_pick
+            if (d.get("ispicksuccessful") is False or "tableinfo" in d) and last is not None:
+                dr, obs, key = last
+                if obs in dr.pick_obs:
+                    dr.pick_obs.remove(obs)
+                    dr.parse_warnings.append(f"riga {obs.line}: pick rifiutato da Arena, scartato")
+                self._seen.discard(key)
+                self._last_pick = None
+            elif d.get("ispickingcompleted") is True and last is not None:
+                last[0].completed = True
+            return "pick_result"
+
+        # fine del draft (richiesta o risposta di DraftCompleteDraft)
+        if "draftcompletedraft" in mk and ("cardpool" in d or "eventname" in d or "internaleventname" in d):
+            ev = d.get("internaleventname") or d.get("eventname")
+            if d.get("isbotdraft") is True:
+                return None
+            dr = self._latest_draft(ev if isinstance(ev, str) else None)
+            if dr is None:
+                return None
+            dr.completed = True
+            pool = _ids(d.get("cardpool")) if "cardpool" in d else None
+            if pool:
+                self._set_pool(dr, pool)
+            return "complete"
+
+        # corso di un draft in corso (es. draft ripreso dopo un riavvio): lega draftId all'evento
+        ev = d.get("internaleventname")
+        if draft_id and isinstance(ev, str) and ev:
+            self._draft_events[draft_id] = ev
+            if draft_id in self.drafts and not self.drafts[draft_id].event_name:
+                self.drafts[draft_id].event_name = ev
 
         # busta + pick dal log degli eventi di business
         if draft_id and "cardsinpack" in d:
@@ -431,8 +509,12 @@ class LogParser:
             ids = _ids(d.get("grpids", d.get("grpid")))
             if pack is None or pick is None or not ids:
                 return None
-            if not self._dedup(("mp", draft_id, pack, pick, ids)):
-                self._draft(draft_id).pick_obs.append(PickObs("make_pick", pack, pick, ids, self.line_no))
+            key = ("mp", draft_id, pack, pick, ids)
+            if not self._dedup(key):
+                dr = self._draft(draft_id)
+                obs = PickObs("make_pick", pack, pick, ids, self.line_no)
+                dr.pick_obs.append(obs)
+                self._last_pick = (dr, obs, key)
             return "pick"
 
         # iscrizione a un evento (solo nel contesto di EventJoin: altre risposte elencano tutti gli eventi)
@@ -447,10 +529,28 @@ class LogParser:
             if pool:
                 for dr in sorted(self.drafts.values(), key=lambda x: x.first_line, reverse=True):
                     if dr.event_name == ev:
-                        dr.pool, dr.pool_line = list(pool), self.line_no
+                        self._set_pool(dr, pool)
                         return "pool"
             return None
         return None
+
+    def _latest_draft(self, event: str | None) -> Draft | None:
+        drafts = sorted(self.drafts.values(), key=lambda x: x.first_line, reverse=True)
+        if event:
+            for dr in drafts:
+                if dr.event_name == event:
+                    return dr
+        return drafts[0] if drafts else None
+
+    def _set_pool(self, dr: Draft, pool: tuple[int, ...]) -> None:
+        """Pool del corso: lo si tiene solo se contiene tutte le carte prese lette nel log."""
+        picked = Counter(dr.picked_cards())
+        if picked - Counter(pool):
+            if dr.pool is None:
+                dr.parse_warnings.append(f"riga {self.line_no}: pool del corso senza alcune carte prese, ignorato")
+            return
+        if dr.pool is None or len(pool) >= len(dr.pool):
+            dr.pool, dr.pool_line = list(pool), self.line_no
 
 
 # --------------------------------------------------------------------------- funzioni comode
