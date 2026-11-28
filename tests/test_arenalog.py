@@ -255,3 +255,21 @@ def test_real_premier_log():
     assert d.completed and Counter(d.pool) == Counter(d.picked_cards())
     rep = validate(d)
     assert rep.ok and rep.complete and not rep.warnings
+
+
+def test_real_pick_two_log():
+    """Draft Pick Two vero (TRK, macOS, Steam, 2026-11-28), ripulito con log-clean."""
+    from pathlib import Path
+    from draftbot.arenalog import parse_files
+    path = Path(__file__).parent / "fixtures" / "logs" / "pick_two_trk_real.log"
+    p = parse_files([path])
+    [d] = p.results()
+    assert d.event_name.startswith("PickTwoDraft_TRK") and d.set_code == "TRK" and d.fmt.name == "pick_two"
+    picks, notes = d.build()
+    assert len(picks) == 21 and not notes and not p.unrecognized
+    # tavolo da 4, 2 carte per pick: buste da 14, 12, ..., 2 carte
+    assert [len(x.pack_cards) for x in picks[:7]] == list(range(14, 0, -2))
+    assert all(len(x.picked) == 2 and set(x.picked) <= set(x.pack_cards) for x in picks)
+    assert d.completed and Counter(d.pool) == Counter(d.picked_cards())
+    rep = validate(d)
+    assert rep.ok and rep.complete and not rep.warnings

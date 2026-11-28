@@ -1,0 +1,134 @@
+
+[UnityCrossThreadLogger]==> EventJoin {"id":"00000000-0000-4000-8000-000000000001","request":"{\"EventName\":\"PickTwoDraft_TRK_20261110\",\"EntryCurrencyType\":\"Gold\",\"EntryCurrencyPaid\":6000,\"CustomTokenId\":null,\"EventChoice\":\"\",\"DebugIgnoreEntryLimits\":false}"}
+
+[UnityCrossThreadLogger]Client.SceneChange {"fromSceneName":"EventLanding","toSceneName":"TableDraftQueue","initiator":"System","context":"Entering table draft queue: TRK_PickTwo_Draft"}
+AK Message: Audio thread resumed, audio restarts.
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":1,"SelfPack":1,"PackCards":"106648,106622,106836,106766,106579,106776,106739,106707,106751,106581,106794,106845,106762,106903"}
+AK Message: Audio thread resumed, audio restarts.
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000003","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106845,106739],\"Pack\":1,\"Pick\":1}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000003)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":2,"SelfPack":1,"PackCards":"106642,106723,106707,106784,106608,106599,106740,106610,106676,106726,106663,106870"}
+AK Message: Audio thread resumed, audio restarts.
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000004","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106599,106740],\"Pack\":1,\"Pick\":2}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000004)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":3,"SelfPack":1,"PackCards":"106603,106749,106775,106660,106579,106738,106625,106623,106842,106897"}
+AK Message: Audio thread resumed, audio restarts.
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000005","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106842,106749],\"Pack\":1,\"Pick\":3}"}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":4,"SelfPack":1,"PackCards":"106769,106660,106723,106880,106708,106663,106800,106871"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000005)
+{"IsPickSuccessful":true}
+AK Message: Audio thread resumed, audio restarts.
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000006","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106723,106871],\"Pack\":1,\"Pick\":4}"}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":5,"SelfPack":1,"PackCards":"106648,106836,106776,106707,106751,106903"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000006)
+{"IsPickSuccessful":true}
+AK Message: Audio thread resumed, audio restarts.
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000007","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106751,106707],\"Pack\":1,\"Pick\":5}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000007)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":6,"SelfPack":1,"PackCards":"106642,106723,106726,106663"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000008","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106726,106723],\"Pack\":1,\"Pick\":6}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000008)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":7,"SelfPack":1,"PackCards":"106625,106897"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000009","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106625,106897],\"Pack\":1,\"Pick\":7}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000009)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":1,"SelfPack":2,"PackCards":"106750,106660,106769,106691,106579,106650,106622,106641,106794,106813,106678,106746,106825,106852"}
+AK Message: Audio thread resumed, audio restarts.
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000010","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106825,106691],\"Pack\":2,\"Pick\":1}"}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":2,"SelfPack":2,"PackCards":"106643,106603,106801,106729,106661,106615,106635,106755,106626,106685,106719,106860"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000010)
+{"IsPickSuccessful":true}
+AK Message: Audio thread resumed, audio restarts.
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000011","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106719,106755],\"Pack\":2,\"Pick\":2}"}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":3,"SelfPack":2,"PackCards":"106741,106700,106648,106596,106632,106800,106664,106731,106681,106858"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000011)
+{"IsPickSuccessful":true}
+AK Message: Audio thread resumed, audio restarts.
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000012","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106731,106741],\"Pack\":2,\"Pick\":3}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000012)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":4,"SelfPack":2,"PackCards":"106729,106658,106615,106766,106831,106843,106582,106899"}
+AK Message: Audio thread resumed, audio restarts.
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000013","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106729,106843],\"Pack\":2,\"Pick\":4}"}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":5,"SelfPack":2,"PackCards":"106750,106660,106650,106641,106746,106852"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000013)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000014","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106746,106750],\"Pack\":2,\"Pick\":5}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000014)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":6,"SelfPack":2,"PackCards":"106643,106603,106729,106661"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000015","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106729,106603],\"Pack\":2,\"Pick\":6}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000015)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":7,"SelfPack":2,"PackCards":"106648,106858"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000016","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106648,106858],\"Pack\":2,\"Pick\":7}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000016)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":1,"SelfPack":3,"PackCards":"106682,106847,106796,106880,106636,106718,106790,106603,106873,106606,106727,106702,106675,106870"}
+AK Message: Audio thread resumed, audio restarts.
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000017","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106702,106718],\"Pack\":3,\"Pick\":1}"}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":2,"SelfPack":3,"PackCards":"106729,106847,106612,106669,106796,106660,106616,106720,106791,106634,106694,106901"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000017)
+{"IsPickSuccessful":true}
+AK Message: Audio thread resumed, audio restarts.
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000018","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106720,106694],\"Pack\":3,\"Pick\":2}"}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":3,"SelfPack":3,"PackCards":"106661,106751,106658,106780,106708,106836,106617,106706,106736,106895"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000018)
+{"IsPickSuccessful":true}
+AK Message: Audio thread resumed, audio restarts.
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000019","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106706,106751],\"Pack\":3,\"Pick\":3}"}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":4,"SelfPack":3,"PackCards":"106761,106776,106749,106658,106752,106664,106711,106871"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000019)
+{"IsPickSuccessful":true}
+AK Message: Audio thread resumed, audio restarts.
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000020","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106711,106752],\"Pack\":3,\"Pick\":4}"}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":5,"SelfPack":3,"PackCards":"106847,106796,106636,106603,106873,106727"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000020)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000021","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106727,106873],\"Pack\":3,\"Pick\":5}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000021)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":6,"SelfPack":3,"PackCards":"106847,106660,106634,106901"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000022","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106634,106660],\"Pack\":3,\"Pick\":6}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000022)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":7,"SelfPack":3,"PackCards":"106661,106658"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000023","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106658,106661],\"Pack\":3,\"Pick\":7}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000023)
+{"IsPickingCompleted":true,"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]==> DraftCompleteDraft {"id":"00000000-0000-4000-8000-000000000024","request":"{\"EventName\":\"PickTwoDraft_TRK_20261110\",\"IsBotDraft\":false}"}
+<== DraftCompleteDraft(00000000-0000-4000-8000-000000000024)
+{"CourseId":"00000000-0000-4000-8000-000000000025","InternalEventName":"PickTwoDraft_TRK_20261110","CurrentModule":"DeckSelect","ModulePayload":"{}","CourseDeckSummary":{"Attributes":[],"PreferredCosmetics":{"Avatar":"","Sleeve":"","Pet":"","Title":"","Emotes":[]}},"CardPool":[106845,106739,106599,106740,106842,106749,106723,106871,106751,106707,106726,106723,106625,106897,106825,106691,106719,106755,106731,106741,106729,106843,106746,106750,106729,106603,106648,106858,106702,106718,106720,106694,106706,106751,106711,106752,106727,106873,106634,106660,106658,106661]}

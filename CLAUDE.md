@@ -42,7 +42,7 @@ Guida d'uso: `docs/guida.md`.
 |---|---|
 | 0 Verifiche e scheletro | completata |
 | 1 Database carte, ID Arena, `add-set` | completata (TRK 341 carte, FRA 295, nessun problema di mappatura) |
-| 2 Parser di Player.log | **verificato su un log reale Premier TRK** (macOS, Steam; fixture `tests/fixtures/logs/premier_trk_real.log`); **manca un draft Pick Two reale** |
+| 2 Parser di Player.log | **verificato su log reali Premier e Pick Two TRK** (macOS, Steam; fixture in `tests/fixtures/logs/`) |
 | 3 Statistiche 17Lands | completata (sviluppo e calibrazione su FRA, prior da FRA+HOB+MSH) |
 | 4 Valutatore di mazzo, pick, backtest | completata |
 | 5 Sinergie | completata: misurate, ma fuori dal punteggio di default (peggiorano il backtest) |
@@ -52,14 +52,19 @@ Guida d'uso: `docs/guida.md`.
 | 9 Generalità, rifinitura | completata (test su OM1 ed EOE da zero; 3 problemi di generalità corretti) |
 | 10 Idee da altri tool | strato di imitazione (+3/+9 top-1), fixing nel valutatore e al pick, splash dai dati: vedi `docs/phase10_report.md` |
 
-Cose aperte (aggiornato 2026-11-28, fine sessione), in ordine:
-1. **Log Pick Two reale:** manca. Il Premier TRK reale e' verificato (`tests/fixtures/logs/premier_trk_real.log`,
-   `test_real_premier_log`). Quando arriva un log Pick Two: `log-clean <log> tests/fixtures/logs/<nome>.log
-   --redact "<nome utente>"` (il nome si estrae dal log senza stamparlo), rileggere a mano, `log-drafts -d`,
-   test di regressione. Mai committare il log grezzo.
-2. **UI e Player-prev.log:** la UI (`ui`, `live`) legge solo `Player.log`; i comandi `build --log`, `review`,
-   `log-drafts` leggono anche `Player-prev.log`. Dopo un riavvio di Arena la UI non trova il draft
-   precedente: farle leggere prima `Player-prev.log` (in `create_app`/`LogTailer`), con un test.
+Cose aperte (aggiornato 2026-11-28, sessione del Pick Two), in ordine:
+1. **Log reali: verificati entrambi i formati.** Premier TRK (`tests/fixtures/logs/premier_trk_real.log`,
+   `test_real_premier_log`) e Pick Two TRK (`pick_two_trk_real.log`, `test_real_pick_two_log`): il parser
+   legge 21/21 pick senza note. Per nuovi log: `log-clean <log> tests/fixtures/logs/<nome>.log` (il nome
+   utente non compare nei log di macOS/Steam visti finora), controllo a mano, test. Mai committare il log grezzo.
+2. **UI dal vivo, primo draft Pick Two dell'utente (2026-11-28): la pagina restava vuota.** Riprodotto qui:
+   parser e motore funzionano riga per riga; la causa piu' probabile e' il primo caricamento del motore per
+   un formato nuovo (cache di `signal_baseline`: 17-19 s qui, di piu' sul MacBook 2015), fatto solo alla prima
+   busta e senza alcun messaggio, con il timer di Arena sotto il minuto. Corretto: con `--set/--format` il
+   motore si carica all'avvio (`LiveSession.preload`); messaggi di stato nel Terminale e nella pagina
+   (caricamento, motore pronto, log seguito o non trovato, draft trovato); senza `--log` la UI legge prima
+   `Player-prev.log`. **Da confermare sul Mac dell'utente al prossimo draft** (se resta vuota: chiedere le
+   righe stampate nel Terminale). Durante il draft l'utente ha usato i consigli via screenshot in chat.
 3. **Installazione dell'utente:** macOS Monterey, MacBook Pro 2015 Intel, Python 3.14 da python.org, Arena
    da Steam; codice scaricato come ZIP del branch in `~/Documents/MTGA-draft-support`, venv `.venv`.
    Funzionano `add-set`, `update-data`, `status`, `ui` (dopo `pip install websockets`, ora nelle dipendenze

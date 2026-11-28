@@ -241,9 +241,15 @@ def run(args: argparse.Namespace) -> int:
         except ImportError:
             print("Servono le dipendenze della UI: pip install -e .[ui]")
             return 1
+        from .arenalog import default_log_paths
         from .live import default_log
         path = args.log or default_log()
-        return serve(path, args.live_set, args.fmt, args.port, from_start=not args.new_only)
+        # senza --log si legge prima Player-prev.log: dopo un riavvio di Arena il draft appena fatto e' li'
+        before = [] if args.log else [p for p in default_log_paths() if p != path]
+        if path is None:
+            print("Percorso di Player.log sconosciuto su questo sistema: usa --log")
+            return 1
+        return serve(path, args.live_set, args.fmt, args.port, from_start=not args.new_only, before=before)
 
     if args.command == "review":
         from .arenalog import parse_files

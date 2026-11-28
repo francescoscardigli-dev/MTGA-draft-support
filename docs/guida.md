@@ -62,6 +62,14 @@ repository e valgono per tutti i set.
 python -m draftbot ui                   # poi apri http://127.0.0.1:8765
 ```
 
+Indica sempre set e formato (`--set TRK --format pick_two` o `--format premier`): così il motore si
+carica **subito**, prima del draft. Al primo uso di un formato può volerci qualche minuto su un computer
+lento, e Arena in Pick Two dà meno di un minuto per pick. Avvia quindi la UI qualche minuto prima di
+entrare nel draft e aspetta nel Terminale la riga `motore pronto`. Il Terminale e la pagina dicono anche
+quale log stanno seguendo (`seguo il log: ...`), se non lo trovano (`log non trovato: ...`) e quando
+trovano il draft (`draft trovato: ...`). Senza `--log` la UI legge prima `Player-prev.log`: dopo un
+riavvio di Arena trova anche il draft appena fatto.
+
 oppure, senza browser:
 
 ```bash

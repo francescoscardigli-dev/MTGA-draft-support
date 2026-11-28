@@ -44,6 +44,8 @@ def test_api_state_drafts_review_and_websocket():
         with client.websocket_connect("/ws") as ws:
             sess.feed(lines[:12])          # alcune buste: arrivano eventi "pick"
             ev = ws.receive_json()
+            while ev["type"] == "status":       # prima i messaggi di stato ("draft trovato")
+                ev = ws.receive_json()
             assert ev["type"] == "pick" and ev["pack"] == 1
         st = client.get("/api/state").json()
         assert st["pick"]["type"] == "pick"
@@ -54,3 +56,28 @@ def test_api_state_drafts_review_and_websocket():
         assert rv["summary"]["n_picks"] == 42
         assert client.get("/api/review/sconosciuto").status_code == 404
         assert client.get("/api/state").json()["build"]["type"] == "build"
+
+
+def test_tail_reports_missing_log_reads_prev_and_preloads(tmp_path, monkeypatch):
+    import time as _time
+    sess, sd, lines = _session_with_draft()
+    loaded = []
+    monkeypatch.setattr(LiveSession, "preload", lambda self: loaded.append(True))
+    prev = tmp_path / "Player-prev.log"
+    prev.write_text("\n".join(lines), encoding="utf-8")
+    cur = tmp_path / "Player.log"                       # non esiste ancora: Arena non e' partito
+    app = create_app(cur, session=sess, poll=0.05, before=[prev])
+    with TestClient(app) as client:
+        deadline = _time.time() + 5
+        while _time.time() < deadline and not client.get("/api/state").json()["build"]:
+            _time.sleep(0.05)
+        st = client.get("/api/state").json()
+        assert loaded == [True]
+        assert st["build"]["type"] == "build"           # il draft del log precedente e' stato letto
+        assert any("log non trovato" in m for m in st["messages"])
+        assert any("draft trovato" in m for m in st["messages"])
+        cur.write_text("", encoding="utf-8")
+        deadline = _time.time() + 5
+        while _time.time() < deadline and not any("seguo il log" in m for m in client.get("/api/state").json()["messages"]):
+            _time.sleep(0.05)
+        assert any("seguo il log" in m for m in client.get("/api/state").json()["messages"])

@@ -99,6 +99,7 @@ class LiveSession:
         self.callbacks: list[Callable[[dict], None]] = []
         self.done: set[tuple[str, int, int]] = set()
         self.built: set[str] = set()
+        self.seen: set[str] = set()
         self.last_event: dict | None = None
 
     def on_event(self, cb: Callable[[dict], None]) -> None:
@@ -112,13 +113,27 @@ class LiveSession:
     def engine(self, set_code: str, fmt: str) -> Engine | None:
         key = (set_code, fmt)
         if key not in self.engines:
+            import time
+            # al primo uso di un formato il motore prepara delle cache: su un computer lento puo' volerci
+            # piu' di un minuto, e senza un messaggio la pagina sembra bloccata
+            self.emit({"type": "status", "message": f"carico il motore per {set_code} {fmt}: al primo avvio "
+                                                    f"puo' volerci qualche minuto..."})
+            t0 = time.time()
             try:
                 # connessione nuova: la sessione puo' girare in un thread diverso da chi l'ha creata (UI)
                 self.engines[key] = load_engine(db.connect(), set_code, fmt)
             except Exception as e:  # dati del set mancanti: lo si dice invece di fermarsi
                 self.emit({"type": "error", "message": f"motore non disponibile per {set_code} {fmt}: {e}"})
                 return None
+            self.emit({"type": "status", "message": f"motore pronto per {set_code} {fmt} "
+                                                    f"({time.time() - t0:.0f} s)"})
         return self.engines[key]
+
+    def preload(self) -> None:
+        """Carica subito il motore se set e formato sono stati indicati (prima che inizi il draft)."""
+        set_code, fmt = self.forced
+        if set_code and fmt:
+            self.engine(load_set(set_code).code, fmt)
 
     def feed(self, lines: list[str]) -> None:
         changed = False
@@ -134,6 +149,9 @@ class LiveSession:
         if not drafts:
             return
         d = drafts[-1]
+        if d.draft_id not in self.seen:
+            self.seen.add(d.draft_id)
+            self.emit({"type": "status", "message": f"draft trovato: {d.event_name or d.draft_id}"})
         set_code = self.forced[0] or d.set_code
         fmt = self.forced[1] or (d.fmt.name if d.fmt else None)
         if not set_code or not fmt:

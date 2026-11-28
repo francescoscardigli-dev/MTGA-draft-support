@@ -29,7 +29,8 @@ STATIC = Path(__file__).resolve().parent / "static"
 class Hub:
     """Collega il thread del log ai client WebSocket (asyncio)."""
 
-    def __init__(self) -> None:
+    def __init__(self, echo: bool = False) -> None:
+        self.echo = echo
         self.loop: asyncio.AbstractEventLoop | None = None
         self.queues: set[asyncio.Queue] = set()
         self.last: dict[str, dict] = {}
@@ -43,6 +44,8 @@ class Hub:
                 self.last.pop("build", None) if ev.get("pack") == 1 and ev.get("pick") == 1 else None
         else:
             self.messages = (self.messages + [ev.get("message", "")])[-20:]
+            if self.echo:
+                print(time.strftime("%H:%M:%S"), ev.get("message", ""), flush=True)
         if self.loop is None:
             return
         for q in list(self.queues):
@@ -50,16 +53,40 @@ class Hub:
 
 
 def create_app(log_path: Path | None, set_code: str | None = None, fmt: str | None = None,
-               poll: float = 0.5, from_start: bool = True, session: LiveSession | None = None) -> FastAPI:
-    hub = Hub()
+               poll: float = 0.5, from_start: bool = True, session: LiveSession | None = None,
+               before: list[Path] | None = None, echo: bool = False) -> FastAPI:
+    """``before``: log letti una volta prima di seguire ``log_path`` (``Player-prev.log``: dopo un riavvio di
+    Arena il draft appena fatto e' li'). ``echo``: stampa nel terminale i messaggi di stato."""
+    hub = Hub(echo=echo)
     sess = session or LiveSession(set_code, fmt)
     sess.on_event(hub.publish)
     lock = threading.Lock()
     stop = threading.Event()
 
     def tail_loop() -> None:
+        try:
+            sess.preload()
+        except Exception as e:
+            hub.publish({"type": "error", "message": f"errore caricando il motore: {e}"})
+        if from_start:
+            for p in before or []:
+                if p.is_file() and p != log_path:
+                    hub.publish({"type": "status", "message": f"leggo il log precedente: {p}"})
+                    try:
+                        with lock:
+                            sess.feed(p.read_text(encoding="utf-8", errors="replace").split("\n"))
+                    except Exception as e:
+                        hub.publish({"type": "error", "message": f"errore leggendo {p}: {e}"})
         tail = LogTailer(log_path, from_start=from_start)
+        found = None
         while not stop.is_set():
+            exists = log_path.is_file()
+            if exists != found:
+                found = exists
+                hub.publish({"type": "status" if exists else "error",
+                             "message": (f"seguo il log: {log_path}" if exists else
+                                         f"log non trovato: {log_path} (in Arena: Opzioni > Account > "
+                                         f"Detailed Logs; oppure usa --log)")})
             try:
                 lines = tail.read_new()
                 if lines:
@@ -139,9 +166,9 @@ def create_app(log_path: Path | None, set_code: str | None = None, fmt: str | No
 
 
 def serve(log_path: Path | None, set_code: str | None, fmt: str | None, port: int = 8765,
-          from_start: bool = True) -> int:
+          from_start: bool = True, before: list[Path] | None = None) -> int:
     import uvicorn
-    app = create_app(log_path, set_code, fmt, from_start=from_start)
+    app = create_app(log_path, set_code, fmt, from_start=from_start, before=before, echo=True)
     print(f"UI su http://127.0.0.1:{port}  (log: {log_path or 'nessuno'}; Ctrl+C per uscire)")
     uvicorn.run(app, host="127.0.0.1", port=port, log_level="warning")
     return 0
