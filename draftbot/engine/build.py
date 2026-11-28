@@ -1,8 +1,9 @@
 """Costruzione del mazzo dal pool (Fase 6): 2-3 build alternative con terre e splash.
 
 Per ogni coppia di colori principali, senza splash e con ogni possibile colore di splash:
-1. candidate: le carte non base giocabili nei colori (le carte di splash solo se richiedono un solo
-   simbolo del colore di splash, al massimo ``MAX_SPLASH`` carte);
+1. candidate: le carte non base giocabili nei colori (le carte di splash con al massimo due simboli
+   del colore di splash, al massimo ``MAX_SPLASH`` carte; il costo dello splash, per carta e per
+   simbolo, e' nel valutatore di mazzo: Fase 10);
 2. scelta delle magie: si parte dalle migliori per qualita' e si migliora con scambi uno-a-uno
    finche' il punteggio del valutatore di mazzo (Fase 4: qualita', top 3, curva, terre, splash) piu'
    le sinergie (Fase 5) cresce;
@@ -24,8 +25,9 @@ from .book import COLORS, PAIRS, Card, CardBook
 from .deckmodel import DeckModel, deck_features
 
 MAX_SPLASH = 3
-SPLASH_MIN_Q = 0.02      # uno splash si propone solo per carte forti (euristica: +2 punti di qualita')
-SPLASH_SOURCES = 3
+SPLASH_MIN_Q = 0.0       # nessuna soglia: il costo dello splash e' nel valutatore (Fase 10)
+SPLASH_SOURCES = 3       # fonti per il colore di splash; 4 se una carta ha due simboli del colore
+SPLASH_MAX_PIPS = 2
 MIN_MAIN_CARDS = 4       # con tre colori principali: almeno 4 carte per colore (altrimenti e' uno splash)
 MIN_MAIN_SOURCES = 3     # fonti minime per ogni colore principale
 BASIC_NAMES = {"W": "Plains", "U": "Island", "B": "Swamp", "R": "Mountain", "G": "Forest"}
@@ -82,7 +84,7 @@ def _allowed(c: Card, main: str, splash: str) -> bool:
         return True
     if not splash or not c.castable_in(main + splash):
         return False
-    return c.pips.count(splash) <= 1
+    return c.pips.count(splash) <= SPLASH_MAX_PIPS
 
 
 def _land_ok(c: Card, colors: str) -> bool:
@@ -116,7 +118,8 @@ class Builder:
         sources = Counter(p for l in lands for p in (l.produces or "") if p in main + splash)
         out: Counter = Counter()
         if splash:
-            need = max(0, SPLASH_SOURCES - sources[splash])
+            two = any(c.pips.count(splash) >= 2 for c in spells)
+            need = max(0, SPLASH_SOURCES + two - sources[splash])
             out[splash] = min(need, n_basic)
             n_basic -= out[splash]
         # prima il minimo di fonti per colore principale, poi il resto in proporzione ai simboli

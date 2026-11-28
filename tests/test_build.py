@@ -34,15 +34,16 @@ def test_two_color_build_with_17_lands_and_proportional_basics():
     assert b.basics["Plains"] > b.basics["Island"]        # piu' simboli bianchi
 
 
-def test_splash_only_single_pip_cards_and_enough_sources():
+def test_splash_cards_and_enough_sources():
     pool = [card(f"W{i}", 0.01, "W", mv=3) for i in range(12)] + [card(f"U{i}", 0.01, "U", mv=3) for i in range(11)] + \
            [card("Bomb", 0.12, "R", mv=4, pips="R"), card("Heavy", 0.12, "R", mv=4, pips="RR")]
     builds = Builder(book(pool), model()).best_builds(pool, k=3)
     sp = [b for b in builds if b.splash == "R"]
     assert sp, "la build con splash della bomba deve comparire"
     names = {c.name for c in sp[0].spells}
-    assert "Bomb" in names and "Heavy" not in names
-    assert sp[0].basics.get("Mountain", 0) >= 3
+    assert "Bomb" in names
+    # le carte con due simboli sono ammesse (il costo e' nel valutatore) ma vogliono 4 fonti
+    assert sp[0].basics.get("Mountain", 0) >= (4 if "Heavy" in names else 3)
 
 
 def test_land_count_rule():

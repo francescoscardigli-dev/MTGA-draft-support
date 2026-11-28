@@ -9,6 +9,9 @@ Regressione lineare pesata (pesi = partite) della win rate del mazzo su:
   fix_2c, fix_splash, fix_3c   terre di fixing (non base, producono almeno 2 colori del mazzo, fino a 4)
            nei mazzi a 2 colori, con splash, a 3 colori (Fase 10: su 8 set e formati valgono +0,1/+1 punti
            l'una, soprattutto nei mazzi a 3 colori)
+  splash_cards     carte splashate oltre la prima;  splash_two_pips  carte con 2+ simboli del colore di
+           splash (Fase 10: costo base dello splash da -2 a -3 punti, poi circa -0,4 per carta in piu' e -0,7
+           per carta con due simboli)
   player   win rate del giocatore (solo variabile di controllo: non entra nel punteggio del mazzo)
 
 Il controllo sul giocatore separa l'effetto del mazzo da quello di chi lo gioca. Il modello e' per
@@ -37,7 +40,7 @@ from ..stats.prior import PRIORS_DIR
 from .book import CardBook
 
 FEATURES = ["mean_q", "top3", "arch", "n_le2", "n_ge5", "lands", "splash", "extra_colors",
-            "fix_2c", "fix_splash", "fix_3c"]
+            "fix_2c", "fix_splash", "fix_3c", "splash_cards", "splash_two_pips"]
 FIX_CAP = 4
 CONTROL = "player"
 DECK_SLOTS = 23
@@ -105,6 +108,7 @@ class CardArrays:
     spell: np.ndarray
     mv: np.ndarray
     produces: list[str] = field(default_factory=list)
+    pips: list[str] = field(default_factory=list)
 
     @classmethod
     def from_book(cls, names: list[str], book: CardBook) -> "CardArrays":
@@ -114,7 +118,8 @@ class CardArrays:
                    np.array([bool(c) and not c.is_basic for c in cs]),
                    np.array([bool(c) and not c.is_land for c in cs]),
                    np.array([c.mv if c else 0.0 for c in cs]),
-                   [(c.produces if c and c.is_land and not c.is_basic else "") for c in cs])
+                   [(c.produces if c and c.is_land and not c.is_basic else "") for c in cs],
+                   [(c.pips if c and not c.is_land else "") for c in cs])
 
 
 def _topk_mean(D: np.ndarray, q: np.ndarray, mask: np.ndarray, k: int) -> np.ndarray:
@@ -148,6 +153,18 @@ def deck_matrix_features(D: np.ndarray, ca: CardArrays, main_colors: pd.Series, 
     f["fix_2c"] = np.where(~three & ~spl, fix, 0.0)
     f["fix_splash"] = np.where(~three & spl, fix, 0.0)
     f["fix_3c"] = np.where(three, fix, 0.0)
+    n_spl, two = np.zeros(len(D)), np.zeros(len(D))
+    if ca.pips:
+        for s in "WUBRG":
+            rows = np.where(spc == s)[0]
+            if not len(rows):
+                continue
+            has = np.array([s in p for p in ca.pips]) & ca.spell
+            dbl = np.array([p.count(s) >= 2 for p in ca.pips]) & ca.spell
+            n_spl[rows] = D[np.ix_(rows, np.where(has)[0])].sum(1) if has.any() else 0
+            two[rows] = D[np.ix_(rows, np.where(dbl)[0])].sum(1) if dbl.any() else 0
+    f["splash_cards"] = np.maximum(n_spl - 1, 0)
+    f["splash_two_pips"] = two
     return f
 
 
