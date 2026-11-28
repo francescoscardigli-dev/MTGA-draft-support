@@ -9,7 +9,7 @@ non ancora verificata su log reali** (parser di `Player.log` e pulizia dei log);
 (statistiche 17Lands calcolate in proprio, blend bayesiano, prior dai set precedenti); **Fase 4 completata**
 (valutatore di mazzo, motore di pick a k carte e coppie in Pick Two, backtest); **Fasi 5 e 6 completate**
 (sinergie misurate, costruzione del mazzo con 2-3 build); **Fase 7 completata** (wheel, segnali
-provati e disattivati, lettura live di Player.log). Vedi `docs/plan.md` e i report in `docs/`.
+provati e disattivati, lettura live di Player.log); **Fase 8 completata** (UI web locale, revisione post-draft). Vedi `docs/plan.md` e i report in `docs/`.
 
 ## Uso
 
@@ -54,6 +54,11 @@ python -m draftbot fit-extras FRA --format premier   # modello di wheel (e segna
 python -m draftbot live                              # segue Player.log e suggerisce i pick
 python -m draftbot check-extras FRA --format premier --cutoff 2026-10-13 --prior-sets HOB MSH
 
+# Interfaccia web e revisione
+pip install -e .[ui]
+python -m draftbot ui                                # http://127.0.0.1:8765
+python -m draftbot review                            # revisione dell'ultimo draft di Player.log
+
 # Sul PC con Arena installato, per usare anche il database del client:
 python -m draftbot update-cards TRK --arena-db "C:\Program Files\Wizards of the Coast\MTGA\MTGA_Data\Downloads\Raw"
 ```
@@ -67,6 +72,7 @@ python -m draftbot update-cards TRK --arena-db "C:\Program Files\Wizards of the 
 - `draftbot/engine/`: valutatore di mazzo, proiezione del mazzo finale, archetipi, pick, backtest
 - `draftbot/synergy/`: tag dei temi, misura delle sinergie
 - `tags/themes.yaml`: regole generiche dei temi; `sets/<CODICE>.tags.yaml`: tag del set (rivisti a mano)
+- `draftbot/ui/`: server FastAPI + WebSocket e pagina web; `draftbot/live.py`: lettura live del log
 - `priors/<formato>.yaml`: coefficienti del prior (generati da `fit-prior`, versionati)
 - `formats/<nome>.yaml`: struttura del formato (tavolo, carte per pick, buste, passaggio)
 - `docs/`: piano e report

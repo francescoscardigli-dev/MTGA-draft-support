@@ -69,6 +69,19 @@ def add_parsers(sub: argparse._SubParsersAction) -> None:
     p7.add_argument("--drafts", type=int, default=150)
     p7.add_argument("--out", type=Path)
 
+    ui = sub.add_parser("ui", help="interfaccia web locale (http://127.0.0.1:8765)")
+    ui.add_argument("--log", type=Path, help="percorso di Player.log (default: quello standard)")
+    ui.add_argument("--set", dest="live_set")
+    ui.add_argument("--format", dest="fmt")
+    ui.add_argument("--port", type=int, default=8765)
+    ui.add_argument("--new-only", action="store_true", help="ignora quanto gia' scritto nel log")
+
+    rv = sub.add_parser("review", help="revisione post-draft di un draft letto da Player.log")
+    rv.add_argument("--log", type=Path)
+    rv.add_argument("--draft", help="ID del draft (anche solo l'inizio); default: l'ultimo")
+    rv.add_argument("--set", dest="live_set")
+    rv.add_argument("--format", dest="fmt")
+
     bt = sub.add_parser("backtest", help="accordo con i giocatori forti e verifica del valutatore di mazzo")
     bt.add_argument("code")
     bt.add_argument("--format", dest="fmt", default="premier")
@@ -184,6 +197,45 @@ def run(args: argparse.Namespace) -> int:
         print(f"Wheel: coefficienti {', '.join(f'{x:+.2f}' for x in ex.wheel.coef)}")
         print(f"Segnali: g_same {ex.signal.g_same:.0f}, g_other {ex.signal.g_other:.0f}")
         print(f"Scritto: {path}")
+        return 0
+
+    if args.command == "ui":
+        try:
+            from .ui.server import serve
+        except ImportError:
+            print("Servono le dipendenze della UI: pip install -e .[ui]")
+            return 1
+        from .live import default_log
+        path = args.log or default_log()
+        return serve(path, args.live_set, args.fmt, args.port, from_start=not args.new_only)
+
+    if args.command == "review":
+        from .arenalog import parse_files
+        from .engine.review import format_review, review_draft
+        from .live import LiveSession, default_log
+        path = args.log or default_log()
+        if path is None or not Path(path).is_file():
+            print("Player.log non trovato: usa --log")
+            return 1
+        drafts = parse_files([Path(path)]).results()
+        if args.draft:
+            drafts = [d for d in drafts if d.draft_id.startswith(args.draft)]
+        if not drafts:
+            print("Nessun draft trovato nel log.")
+            return 1
+        d = drafts[-1]
+        sess = LiveSession(args.live_set, args.fmt)
+        set_code = args.live_set or d.set_code
+        fmt_name = args.fmt or (d.fmt.name if d.fmt else None)
+        if not set_code or not fmt_name:
+            print("Set o formato non riconosciuti: usa --set e --format")
+            return 1
+        eng = sess.engine(load_set(set_code).code, fmt_name)
+        if eng is None:
+            print("Motore non disponibile per questo set (dati mancanti: add-set, update-data)")
+            return 1
+        print(format_review(review_draft(eng, d)))
+        print(ATTRIBUTION)
         return 0
 
     if args.command == "live":

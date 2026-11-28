@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>draftbot</title>
+<style>
+  :root {
+    --bg: #14161a; --panel: #1d2026; --line: #2c3038; --text: #e6e8eb; --muted: #9aa1ab;
+    --accent: #6cb4ff; --good: #5fd08a; --bad: #ef6f6c;
+    --W: #f3eccf; --U: #6aa8e8; --B: #a58fb5; --R: #e8765d; --G: #6cbf7a; --C: #b9b9b9;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); }
+  header { display: flex; align-items: center; gap: 16px; padding: 10px 18px; border-bottom: 1px solid var(--line); }
+  header h1 { font-size: 16px; margin: 0; font-weight: 600; }
+  header .where { font-size: 20px; font-weight: 600; }
+  header .muted { color: var(--muted); font-size: 12px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--bad); display: inline-block; margin-right: 6px; }
+  .dot.on { background: var(--good); }
+  nav button { background: none; border: 1px solid var(--line); color: var(--muted); padding: 5px 12px; border-radius: 6px; cursor: pointer; }
+  nav button.active { color: var(--text); border-color: var(--accent); }
+  main { display: grid; grid-template-columns: 1.1fr 1.3fr 0.8fr; gap: 14px; padding: 14px 18px; }
+  section { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; min-width: 0; }
+  section h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 10px; font-weight: 600; }
+  .opt { border: 1px solid var(--line); border-radius: 8px; padding: 10px; margin-bottom: 8px; }
+  .opt.first { border-color: var(--accent); }
+  .opt .names { font-weight: 600; font-size: 15px; }
+  .opt .val { float: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+  .opt .why { color: var(--muted); font-size: 12px; margin-top: 4px; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  th { text-align: left; color: var(--muted); font-weight: 500; font-size: 12px; padding: 4px 6px; border-bottom: 1px solid var(--line); }
+  td { padding: 4px 6px; border-bottom: 1px solid #23262d; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 260px; }
+  td.num { text-align: right; }
+  tr.reco td:first-child { color: var(--accent); font-weight: 600; }
+  .pip { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 2px; vertical-align: -1px; border: 1px solid #0006; }
+  .bar { height: 8px; border-radius: 4px; background: var(--accent); display: inline-block; vertical-align: middle; }
+  .qbar { display: inline-block; width: 70px; height: 8px; background: #2a2e36; border-radius: 4px; position: relative; vertical-align: middle; }
+  .qbar i { position: absolute; top: 0; bottom: 0; border-radius: 4px; }
+  .arch { display: grid; grid-template-columns: 62px 1fr 42px; gap: 6px; align-items: center; margin-bottom: 5px; }
+  .pool span { display: inline-block; margin: 0 6px 4px 0; font-size: 12px; color: var(--muted); }
+  .empty { color: var(--muted); padding: 20px 0; text-align: center; }
+  #builds, #review { grid-column: 1 / -1; }
+  .build { display: inline-block; vertical-align: top; width: 32%; margin-right: 1%; border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+  .build h3 { margin: 0 0 6px; font-size: 15px; }
+  .small { font-size: 12px; color: var(--muted); }
+  .loss { color: var(--bad); }
+  footer { padding: 8px 18px 16px; color: var(--muted); font-size: 11px; }
+  .hidden { display: none; }
+  @media (max-width: 1000px) { main { grid-template-columns: 1fr; } .build { width: 100%; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>draftbot</h1>
+  <span><span id="conn" class="dot"></span><span id="connText" class="muted">non connesso</span></span>
+  <span class="where" id="where">in attesa del draft</span>
+  <span class="muted" id="ctx"></span>
+  <span style="flex:1"></span>
+  <nav><button id="tabLive" class="active">Draft</button> <button id="tabReview">Revisione</button></nav>
+</header>
+
+<main id="live">
+  <section>
+    <h2>Consigli</h2>
+    <div id="options"><div class="empty">Apri un draft in Arena: i consigli compaiono qui.</div></div>
+  </section>
+  <section>
+    <h2>Busta</h2>
+    <div id="pack"></div>
+  </section>
+  <section>
+    <h2>Archetipi probabili</h2>
+    <div id="arch"></div>
+    <h2 style="margin-top:16px">Pool <span id="poolN"></span></h2>
+    <div id="pool" class="pool"></div>
+    <div id="messages" class="small" style="margin-top:12px"></div>
+  </section>
+  <section id="builds" class="hidden">
+    <h2>Mazzi proposti</h2>
+    <div id="buildList"></div>
+  </section>
+</main>
+
+<main id="reviewPane" class="hidden">
+  <section id="review">
+    <h2>Revisione post-draft</h2>
+    <div id="draftList" class="small"></div>
+    <div id="reviewBody"></div>
+  </section>
+</main>
+
+<footer id="attr">Dati: 17Lands (https://www.17lands.com), licenza CC BY 4.0 · Scryfall</footer>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const pct = (x, d = 0) => x == null ? "–" : (x * 100).toFixed(d) + "%";
+const pts = (x) => x == null ? "–" : (x >= 0 ? "+" : "") + (x * 100).toFixed(2);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const pips = (cols) => (cols || "").split("").map((c) => `<span class="pip" style="background:var(--${c})"></span>`).join("")
+  || `<span class="pip" style="background:var(--C)"></span>`;
+
+function qbar(q) {
+  // qualita' in punti: lo zero al 33% della barra, +12 punti a destra, -6 punti a sinistra
+  const x = Math.max(-0.06, Math.min(0.12, q));
+  const w = x >= 0 ? x / 0.12 * 67 : -x / 0.06 * 33;
+  const left = x >= 0 ? 33 : 33 - w;
+  return `<span class="qbar"><i style="left:${left}%;width:${w}%;background:${x >= 0 ? "var(--good)" : "var(--bad)"}"></i></span>`;
+}
+
+function renderPick(ev) {
+  $("where").textContent = `P${ev.pack} p${ev.pick}`;
+  $("ctx").textContent = `${ev.set} · ${ev.format === "pick_two" ? "Pick Two" : "Premier"} · draft ${ev.draft_id.slice(0, 8)}`;
+  const best = ev.options.length ? ev.options[0].value : 0;
+  $("options").innerHTML = ev.options.map((o, i) => {
+    const themes = Object.entries(o.themes || {}).filter(([, t]) => t.length)
+      .map(([n, t]) => `${esc(n)}: ${esc(t.join(", "))}`).join("; ");
+    const wheel = o.wheel_bonus ? ` · ritorno atteso ${pts(o.wheel_bonus)}` : "";
+    return `<div class="opt ${i === 0 ? "first" : ""}">
+      <span class="val">${pts(o.value)}</span>
+      <div class="names">${i + 1}. ${o.cards.map(esc).join(" + ")}</div>
+      <div class="why">mazzo ${pts(o.deck_gain)}${wheel}${i ? ` · ${pts(o.value - best)} dalla prima` : ""}</div>
+      ${themes ? `<div class="why">temi: ${themes}</div>` : ""}
+    </div>`;
+  }).join("") || '<div class="empty">Nessuna opzione</div>';
+  const reco = new Set(ev.options.length ? ev.options[0].cards : []);
+  const showWheel = ev.wheel_possible && ev.pack_cards.some((c) => c.wheel != null);
+  $("pack").innerHTML = `<table><tr><th>Carta</th><th></th><th class="num">Qualità</th><th></th><th class="num">Costo</th>
+    ${showWheel ? '<th class="num">Torna</th>' : ""}</tr>` + ev.pack_cards.map((c) => `<tr class="${reco.has(c.name) ? "reco" : ""}">
+      <td title="${esc(c.name)}">${esc(c.name)}</td><td>${pips(c.colors)}</td>
+      <td class="num">${pts(c.q)}</td><td>${qbar(c.q)}</td><td class="num">${c.mv}</td>
+      ${showWheel ? `<td class="num">${pct(c.wheel)}</td>` : ""}</tr>`).join("") + "</table>" +
+    (ev.unknown_ids && ev.unknown_ids.length ? `<div class="small loss">ID senza corrispondenza: ${ev.unknown_ids.join(", ")}</div>` : "");
+  $("arch").innerHTML = Object.entries(ev.archetypes).slice(0, 6).map(([a, p]) => `<div class="arch">
+      <span>${pips(a)} <span class="small">${a}</span></span><span><span class="bar" style="width:${Math.max(2, p * 100)}%"></span></span>
+      <span class="small" style="text-align:right">${pct(p)}</span></div>`).join("");
+  $("poolN").textContent = `(${ev.pool.length})`;
+  const counts = {};
+  ev.pool.forEach((n) => counts[n] = (counts[n] || 0) + 1);
+  $("pool").innerHTML = Object.entries(counts).map(([n, k]) => `<span>${esc(n)}${k > 1 ? " ×" + k : ""}</span>`).join("");
+}
+
+function renderBuilds(ev) {
+  $("builds").classList.remove("hidden");
+  $("buildList").innerHTML = ev.builds.map((b, i) => {
+    const curve = Object.entries(b.curve).map(([k, v]) => `${k}${k === "6" ? "+" : ""}: ${v}`).join(" · ");
+    const basics = Object.entries(b.basics).map(([n, k]) => `${k} ${esc(n)}`).join(", ");
+    return `<div class="build"><h3>${i + 1}. ${esc(b.label)} <span class="small">${pct(b.expected_wr, 1)}</span></h3>
+      <div class="small">terre ${b.lands}: ${basics}${b.nonbasic_lands.length ? ", " + b.nonbasic_lands.map(esc).join(", ") : ""}</div>
+      <div class="small">curva ${curve}</div>${b.notes.map((n) => `<div class="small">${esc(n)}</div>`).join("")}
+      <div style="margin-top:6px">${b.spells.map((c) => `<div class="small">${c.mv} · ${esc(c.name)} <span style="float:right">${pts(c.q)}</span></div>`).join("")}</div>
+    </div>`;
+  }).join("") || '<div class="empty">Nessuna build possibile con questo pool</div>';
+}
+
+function handle(ev) {
+  if (ev.type === "pick") renderPick(ev);
+  else if (ev.type === "build") renderBuilds(ev);
+  else if (ev.type === "status" || ev.type === "error") {
+    $("messages").innerHTML = `<div class="${ev.type === "error" ? "loss" : ""}">${esc(ev.message)}</div>`;
+  }
+}
+
+function connect() {
+  const ws = new WebSocket(`ws://${location.host}/ws`);
+  ws.onopen = () => { $("conn").classList.add("on"); $("connText").textContent = "connesso"; };
+  ws.onclose = () => { $("conn").classList.remove("on"); $("connText").textContent = "riconnessione..."; setTimeout(connect, 1500); };
+  ws.onmessage = (m) => handle(JSON.parse(m.data));
+}
+
+async function loadState() {
+  const s = await (await fetch("/api/state")).json();
+  if (s.pick) renderPick(s.pick);
+  if (s.build) renderBuilds(s.build);
+  if (s.messages && s.messages.length) $("messages").textContent = s.messages[s.messages.length - 1];
+  if (s.attribution) $("attr").textContent = s.attribution + " · Scryfall";
+}
+
+async function loadDrafts() {
+  const ds = await (await fetch("/api/drafts")).json();
+  $("draftList").innerHTML = ds.length ? "Draft nel log: " + ds.map((d) =>
+    `<button data-id="${esc(d.draft_id)}" class="rv">${esc(d.event || d.draft_id.slice(0, 8))} (${d.picks} pick)</button>`).join(" ")
+    : "Nessun draft nel log.";
+  document.querySelectorAll(".rv").forEach((b) => b.onclick = () => loadReview(b.dataset.id));
+}
+
+async function loadReview(id) {
+  $("reviewBody").innerHTML = '<div class="empty">Calcolo in corso...</div>';
+  const r = await fetch(`/api/review/${encodeURIComponent(id)}`);
+  if (!r.ok) { $("reviewBody").innerHTML = `<div class="loss">${esc((await r.json()).detail)}</div>`; return; }
+  const rv = await r.json(), s = rv.summary;
+  $("reviewBody").innerHTML = `<p>Pick valutati: ${s.n_picks}. Uguali alla prima scelta del motore: <b>${pct(s.top1)}</b>,
+    tra le prime 3: <b>${pct(s.top3)}</b>. Valore perso stimato: <b class="loss">${pts(s.total_loss)}</b> punti di win rate attesa.</p>
+    <table><tr><th>Pick</th><th>Preso</th><th>Prima scelta del motore</th><th class="num">Posizione</th><th class="num">Valore perso</th></tr>
+    ${rv.picks.map((p) => `<tr><td>P${p.pack}p${p.pick}</td><td>${p.taken.map(esc).join(" + ")}</td>
+      <td>${p.rank === 1 ? '<span class="small">uguale</span>' : p.best.map(esc).join(" + ")}</td>
+      <td class="num">${p.rank ?? "–"} / ${p.n_options}</td>
+      <td class="num ${p.loss > 0.002 ? "loss" : ""}">${p.loss == null ? "–" : pts(p.loss)}</td></tr>`).join("")}</table>
+    <p class="small">Il valore è quello stimato dal modello (Fase 4), con i suoi limiti: va letto come indicazione, non come verdetto.</p>`;
+}
+
+$("tabLive").onclick = () => { $("live").classList.remove("hidden"); $("reviewPane").classList.add("hidden");
+  $("tabLive").classList.add("active"); $("tabReview").classList.remove("active"); };
+$("tabReview").onclick = () => { $("live").classList.add("hidden"); $("reviewPane").classList.remove("hidden");
+  $("tabReview").classList.add("active"); $("tabLive").classList.remove("active"); loadDrafts(); };
+
+loadState();
+connect();
+</script>
+</body>
+</html>

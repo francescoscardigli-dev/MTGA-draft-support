@@ -85,7 +85,6 @@ def load_engine(con, set_code: str, fmt: str) -> Engine:
 class LiveSession:
     def __init__(self, set_code: str | None = None, fmt: str | None = None, k: int = 3):
         self.parser = LogParser()
-        self.con = db.connect()
         self.k = k
         self.forced = (set_code, fmt)
         self.engines: dict[tuple[str, str], Engine] = {}
@@ -106,7 +105,8 @@ class LiveSession:
         key = (set_code, fmt)
         if key not in self.engines:
             try:
-                self.engines[key] = load_engine(self.con, set_code, fmt)
+                # connessione nuova: la sessione puo' girare in un thread diverso da chi l'ha creata (UI)
+                self.engines[key] = load_engine(db.connect(), set_code, fmt)
             except Exception as e:  # dati del set mancanti: lo si dice invece di fermarsi
                 self.emit({"type": "error", "message": f"motore non disponibile per {set_code} {fmt}: {e}"})
                 return None
