@@ -1,0 +1,264 @@
+
+[UnityCrossThreadLogger]==> EventJoin {"id":"00000000-0000-4000-8000-000000000001","request":"{\"EventName\":\"PremierDraft_TRK_20261110\",\"EntryCurrencyType\":\"DraftToken\",\"EntryCurrencyPaid\":1,\"CustomTokenId\":null,\"EventChoice\":\"\",\"DebugIgnoreEntryLimits\":false}"}
+
+[UnityCrossThreadLogger]Client.SceneChange {"fromSceneName":"EventLanding","toSceneName":"TableDraftQueue","initiator":"System","context":"Entering table draft queue: TRK_Premier_Draft"}
+AK Message: Audio thread resumed, audio restarts.
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":1,"SelfPack":1,"PackCards":"106771,106700,106708,106632,106612,106801,106751,106599,106835,106616,106744,106623,106841,106903"}
+Attempting to get IEmoteDataProvider through static instance of WrapperController. Consider injecting dependency rather than doing this.
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000003","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106841],\"Pack\":1,\"Pick\":1}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000003)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":2,"SelfPack":1,"PackCards":"106691,106632,106740,106611,106688,106749,106847,106772,106715,106829,106809,106663,106871"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000004","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106663],\"Pack\":1,\"Pick\":2}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000004)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":3,"SelfPack":1,"PackCards":"106802,106611,106739,106703,106632,106766,106938,106732,106655,106816,106621,106901"}
+AK Message: Audio thread resumed, audio restarts.
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000005","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106816],\"Pack\":1,\"Pick\":3}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000005)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":4,"SelfPack":1,"PackCards":"106796,106613,106767,106697,106710,106667,106782,106711,106813,106647,106895"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000006","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106647],\"Pack\":1,\"Pick\":4}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000006)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":5,"SelfPack":1,"PackCards":"106851,106776,106596,106701,106802,106625,106759,106586,106810,106860"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000007","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106586],\"Pack\":1,\"Pick\":5}"}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":6,"SelfPack":1,"PackCards":"106846,106748,106594,106769,106674,106813,106711,106619,106882"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000007)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000008","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106882],\"Pack\":1,\"Pick\":6}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000008)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":7,"SelfPack":1,"PackCards":"106710,106851,106585,106780,106616,106791,106730,106854"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000009","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106585],\"Pack\":1,\"Pick\":7}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000009)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":8,"SelfPack":1,"PackCards":"106672,106653,106775,106697,106637,106851,106858"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000010","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106637],\"Pack\":1,\"Pick\":8}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000010)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":9,"SelfPack":1,"PackCards":"106771,106700,106632,106744,106623,106903"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000011","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106632],\"Pack\":1,\"Pick\":9}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000011)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":10,"SelfPack":1,"PackCards":"106632,106611,106688,106772,106809"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000012","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106611],\"Pack\":1,\"Pick\":10}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000012)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":11,"SelfPack":1,"PackCards":"106802,106632,106655,106901"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000013","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106632],\"Pack\":1,\"Pick\":11}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000013)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":12,"SelfPack":1,"PackCards":"106697,106710,106895"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000014","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106697],\"Pack\":1,\"Pick\":12}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000014)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":13,"SelfPack":1,"PackCards":"106776,106810"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000015","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106810],\"Pack\":1,\"Pick\":13}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000015)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":14,"SelfPack":1,"PackCards":"106769"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000016","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106769],\"Pack\":1,\"Pick\":14}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000016)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":1,"SelfPack":2,"PackCards":"106579,106749,106627,106776,106672,106839,106772,106625,106755,106832,106713,106597,106774,106897"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000017","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106627],\"Pack\":2,\"Pick\":1}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000017)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":2,"SelfPack":2,"PackCards":"106741,106775,106643,106801,106615,106700,106723,106625,106759,106861,106629,106863,106852"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000018","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106629],\"Pack\":2,\"Pick\":2}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000018)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":3,"SelfPack":2,"PackCards":"106669,106729,106784,106636,106780,106740,106650,106835,106768,106610,106656,106868"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000019","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106656],\"Pack\":2,\"Pick\":3}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000019)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":4,"SelfPack":2,"PackCards":"106710,106750,106653,106836,106787,106824,106811,106673,106631,106821,106871"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000020","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106836],\"Pack\":2,\"Pick\":4}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000020)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":5,"SelfPack":2,"PackCards":"106632,106708,106579,106748,106784,106581,106713,106698,106813,106857"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000021","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106581],\"Pack\":2,\"Pick\":5}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000021)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":6,"SelfPack":2,"PackCards":"106594,106775,106649,106674,106771,106748,106692,106752,106860"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000022","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106860],\"Pack\":2,\"Pick\":6}"}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":7,"SelfPack":2,"PackCards":"106847,106703,106650,106594,106780,106766,106729,106768"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000022)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000023","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106594],\"Pack\":2,\"Pick\":7}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000023)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":8,"SelfPack":2,"PackCards":"106700,106776,106627,106672,106726,106676,106855"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000024","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106627],\"Pack\":2,\"Pick\":8}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000024)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":9,"SelfPack":2,"PackCards":"106579,106776,106672,106839,106713,106897"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000025","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106579],\"Pack\":2,\"Pick\":9}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000025)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":10,"SelfPack":2,"PackCards":"106775,106643,106700,106625,106861"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000026","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106861],\"Pack\":2,\"Pick\":10}"}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":11,"SelfPack":2,"PackCards":"106669,106780,106650,106868"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000026)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000027","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106650],\"Pack\":2,\"Pick\":11}"}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":12,"SelfPack":2,"PackCards":"106710,106750,106631"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000027)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000028","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106750],\"Pack\":2,\"Pick\":12}"}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":13,"SelfPack":2,"PackCards":"106579,106698"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000028)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000029","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106579],\"Pack\":2,\"Pick\":13}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000029)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":14,"SelfPack":2,"PackCards":"106752"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000030","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106752],\"Pack\":2,\"Pick\":14}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000030)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":1,"SelfPack":3,"PackCards":"106787,106594,106776,106751,106649,106708,106611,106660,106616,106795,106848,106714,106863,106858"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000031","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106660],\"Pack\":3,\"Pick\":1}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000031)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":2,"SelfPack":3,"PackCards":"106622,106700,106632,106723,106660,106802,106780,106807,106824,106797,106778,106724,106865"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000032","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106660],\"Pack\":3,\"Pick\":2}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000032)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":3,"SelfPack":3,"PackCards":"106670,106615,106767,106636,106721,106836,106776,106822,106655,106581,106810,106852"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000033","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106581],\"Pack\":3,\"Pick\":3}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000033)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":4,"SelfPack":3,"PackCards":"106769,106605,106839,106611,106670,106877,106665,106785,106597,106783,106903"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000034","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106611],\"Pack\":3,\"Pick\":4}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000034)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":5,"SelfPack":3,"PackCards":"106594,106603,106771,106729,106847,106674,106664,106733,106805,106899"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000035","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106805],\"Pack\":3,\"Pick\":5}"}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":6,"SelfPack":3,"PackCards":"106710,106603,106672,106761,106750,106793,106732,106640,106899"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000035)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000036","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106640],\"Pack\":3,\"Pick\":6}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000036)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":7,"SelfPack":3,"PackCards":"106592,106796,106750,106632,106835,106711,106604,106854"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000037","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106604],\"Pack\":3,\"Pick\":7}"}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":8,"SelfPack":3,"PackCards":"106625,106627,106787,106670,106685,106717,106868"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000037)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000038","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106625],\"Pack\":3,\"Pick\":8}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000038)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":9,"SelfPack":3,"PackCards":"106787,106594,106776,106649,106848,106863"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000039","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106863],\"Pack\":3,\"Pick\":9}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000039)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":10,"SelfPack":3,"PackCards":"106632,106802,106780,106824,106865"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000040","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106824],\"Pack\":3,\"Pick\":10}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000040)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":11,"SelfPack":3,"PackCards":"106670,106776,106655,106810"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000041","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106810],\"Pack\":3,\"Pick\":11}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000041)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":12,"SelfPack":3,"PackCards":"106769,106877,106903"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000042","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106877],\"Pack\":3,\"Pick\":12}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000042)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":13,"SelfPack":3,"PackCards":"106771,106899"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000043","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106771],\"Pack\":3,\"Pick\":13}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000043)
+{"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]Draft.Notify {"draftId":"00000000-0000-4000-8000-000000000002","SelfPick":14,"SelfPack":3,"PackCards":"106899"}
+
+[UnityCrossThreadLogger]==> EventPlayerDraftMakePick {"id":"00000000-0000-4000-8000-000000000044","request":"{\"DraftId\":\"00000000-0000-4000-8000-000000000002\",\"GrpIds\":[106899],\"Pack\":3,\"Pick\":14}"}
+<== EventPlayerDraftMakePick(00000000-0000-4000-8000-000000000044)
+{"IsPickingCompleted":true,"IsPickSuccessful":true}
+
+[UnityCrossThreadLogger]==> DraftCompleteDraft {"id":"00000000-0000-4000-8000-000000000045","request":"{\"EventName\":\"PremierDraft_TRK_20261110\",\"IsBotDraft\":false}"}
+<== DraftCompleteDraft(00000000-0000-4000-8000-000000000045)
+{"CourseId":"00000000-0000-4000-8000-000000000046","InternalEventName":"PremierDraft_TRK_20261110","CurrentModule":"DeckSelect","ModulePayload":"{}","CourseDeckSummary":{"Attributes":[],"PreferredCosmetics":{"Avatar":"","Sleeve":"","Pet":"","Title":"","Emotes":[]}},"CardPool":[106841,106663,106816,106647,106586,106882,106585,106637,106632,106611,106632,106697,106810,106769,106627,106629,106656,106836,106581,106860,106594,106627,106579,106861,106650,106750,106579,106752,106660,106660,106581,106611,106805,106640,106604,106625,106863,106824,106810,106877,106771,106899]}
+<== EventSetDeckV3(00000000-0000-4000-8000-000000000047)
+{"CourseId":"00000000-0000-4000-8000-000000000046","InternalEventName":"PremierDraft_TRK_20261110","CurrentModule":"CreateMatch","ModulePayload":"","CourseDeckSummary":{"DeckId":"00000000-0000-4000-8000-000000000048","Name":"Draft Deck","Attributes":[{"name":"Version","value":"11"},{"name":"TileID","value":"0"},{"name":"LastPlayed","value":"\"0001-01-01T00:00:00\""},{"name":"LastUpdated","value":"\"2026-11-28T10:59:14.88153+01:00\""},{"name":"IsFavorite","value":"false"},{"name":"Format","value":"Draft"}],"DeckTileId":0,"DeckArtId":455344,"PreferredCosmetics":{"Avatar":"","Sleeve":"CardBack_FIN_448739","Pet":"","Title":"","Emotes":[]}},"CourseDeck":{"MainDeck":[{"cardId":106841,"quantity":1},{"cardId":106663,"quantity":1},{"cardId":106816,"quantity":1},{"cardId":106647,"quantity":1},{"cardId":106882,"quantity":1},{"cardId":106585,"quantity":1},{"cardId":106637,"quantity":1},{"cardId":106632,"quantity":2},{"cardId":106611,"quantity":2},{"cardId":106627,"quantity":2},{"cardId":106629,"quantity":1},{"cardId":106656,"quantity":1},{"cardId":106836,"quantity":1},{"cardId":106581,"quantity":2},{"cardId":106594,"quantity":1},{"cardId":106861,"quantity":1},{"cardId":106660,"quantity":2},{"cardId":106805,"quantity":1},{"cardId":106640,"quantity":1},{"cardId":106625,"quantity":1},{"cardId":106863,"quantity":1},{"cardId":106877,"quantity":1},{"cardId":106899,"quantity":2},{"cardId":106897,"quantity":6},{"cardId":106895,"quantity":5}],"Sideboard":[{"cardId":106586,"quantity":1},{"cardId":106697,"quantity":1},{"cardId":106810,"quantity":2},{"cardId":106769,"quantity":1},{"cardId":106860,"quantity":1},{"cardId":106579,"quantity":2},{"cardId":106650,"quantity":1},{"cardId":106750,"quantity":1},{"cardId":106752,"quantity":1},{"cardId":106604,"quantity":1},{"cardId":106824,"quantity":1},{"cardId":106771,"quantity":1}],"CommandZone":[],"Companions":[],"CardSkins":[]},"CardPool":[106841,106663,106816,106647,106586,106882,106585,106637,106632,106611,106632,106697,106810,106769,106627,106629,106656,106836,106581,106860,106594,106627,106579,106861,106650,106750,106579,106752,106660,106660,106581,106611,106805,106640,106604,106625,106863,106824,106810,106877,106771,106899],"CardStyles":[]}
+<== EventGetCoursesV2(00000000-0000-4000-8000-000000000049)
+{"Courses":[{"CourseId":"00000000-0000-4000-8000-000000000050","InternalEventName":"Constructed_BestOf3","CurrentModule":"Complete","ModulePayload":"","CourseDeckSummary":{"DeckId":"00000000-0000-4000-8000-000000000051","Name":"White","Attributes":[{"name":"Version","value":"11"},{"name":"TileID","value":"77130"},{"name":"LastPlayed","value":"\"2021-10-11T00:29:47.369617+02:00\""},{"name":"LastUpdated","value":"\"2021-10-10T10:27:35.010849+02:00\""},{"name":"IsFavorite","value":"false"},{"name":"Format","value":"Standard"}],"DeckTileId":77130,"DeckArtId":0,"PreferredCosmetics":{"Avatar":"","Sleeve":"","Pet":"","Title":"","Emotes":[]}},"CourseDeck":{"MainDeck":[{"cardId":77130,"quantity":4},{"cardId":77358,"quantity":2},{"cardId":75042,"quantity":4},{"cardId":78338,"quantity":2},{"cardId":75072,"quantity":4},{"cardId":73208,"quantity":4},{"cardId":78352,"quantity":3},{"cardId":75041,"quantity":4},{"cardId":76410,"quantity":4},{"cardId":73226,"quantity":4},{"cardId":78322,"quantity":2},{"cardId":73202,"quantity":1},{"cardId":75305,"quantity":1},{"cardId":78345,"quantity":1},{"cardId":75327,"quantity":18},{"cardId":75074,"quantity":1},{"cardId":77134,"quantity":1}],"Sideboard":[],"CommandZone":[],"Companions":[],"CardSkins":[]},"CurrentWins":1,"CardPool":[],"CardPoolByCollation":[],"CardStyles":[]},{"CourseId":"00000000-0000-4000-8000-000000000052","InternalEventName":"SparkyStarterDeckDuel","CurrentModule":"CreateMatch","ModulePayload":"","CourseDeckSummary":{"DeckId":"00000000-0000-4000-8000-000000000053","Name":"?=?Loc/Decks/Precon/Precon_EPP2024_BW","Attributes":[{"name":"Format","value":"Alchemy"}],"Description":"Decks/Precon/Precon_EPP2024_BW","DeckTileId":84285,"DeckArtId":0,"PreferredCosmetics":{"Avatar":"","Sleeve":"","Pet":"","Title":"","Emotes":[]}},"CourseDeck":{"MainDeck":[{"cardId":82579,"quantity":1},{"cardId":85107,"quantity":1},{"cardId":84285,"quantity":1},{"cardId":83804,"quantity":1},{"cardId":84361,"quantity":1},{"cardId":84377,"quantity":1},{"cardId":84560,"quantity":2},{"cardId":86468,"quantity":2},{"cardId":82079,"quantity":2},{"cardId":83726,"quantity":2},{"cardId":84282,"quantity":2},{"cardId":84283,"quantity":2},{"cardId":85109,"quantity":2},{"cardId":84250,"quantity":3},{"cardId":84267,"quantity":3},{"cardId":82060,"quantity":3},{"cardId":84379,"quantity":2},{"cardId":84367,"quantity":3},{"cardId":82296,"quantity":1},{"cardId":82309,"quantity":4},{"cardId":84395,"quantity":1},{"cardId":79714,"quantity":4},{"cardId":86341,"quantity":9},{"cardId":84596,"quantity":7}],"Sideboard":[],"CommandZone":[],"Companions":[],"CardSkins":[]},"CurrentWins":3,"CardPool":[],"CardPoolByCollation":[],"CardStyles":[],"MadeChoice":"00000000-0000-4000-8000-000000000053"},{"CourseId":"00000000-0000-4000-8000-000000000054","InternalEventName":"DualColorPrecons","CurrentModule":"CreateMatch","ModulePayload":"","CourseDeckSummary":{"DeckId":"00000000-0000-4000-8000-000000000055","Name":"?=?Loc/Decks/Precon/Precon_EPP2024_UW","Attributes":[{"name":"Format","value":"Alchemy"}],"Description":"Decks/Precon/Precon_EPP2024_UW","DeckTileId":82487,"DeckArtId":0,"PreferredCosmetics":{"Avatar":"","Sleeve":"","Pet":"","Title":"","Emotes":[]}},"CourseDeck":{"MainDeck":[{"cardId":82502,"quantity":1},{"cardId":82763,"quantity":6},{"cardId":82090,"quantity":1},{"cardId":84168,"quantity":1},{"cardId":82509,"quantity":1},{"cardId":82755,"quantity":1},{"cardId":82697,"quantity":1},{"cardId":82760,"quantity":10},{"cardId":82546,"quantity":1},{"cardId":82507,"quantity":2},{"cardId":82495,"quantity":2},{"cardId":84196,"quantity":2},{"cardId":82499,"quantity":1},{"cardId":82558,"quantity":2},{"cardId":82713,"quantity":2},{"cardId":84582,"quantity":4},{"cardId":84261,"quantity":2},{"cardId":82081,"quantity":2},{"cardId":82487,"quantity":3},{"cardId":82512,"quantity":3},{"cardId":82505,"quantity":3},{"cardId":82521,"quantity":2},{"cardId":82485,"quantity":2},{"cardId":82749,"quantity":1},{"cardId":82301,"quantity":4}],"Sideboard":[],"CommandZone":[],"Companions":[],"CardSkins":[]},"CurrentWins":4,"CurrentLosses":7,"CardPool":[],"CardPoolByCollation":[],"CardStyles":[],"MadeChoice":"00000000-0000-4000-8000-000000000055"},{"CourseId":"00000000-0000-4000-8000-000000000056","InternalEventName":"Play_Brawl","CurrentModule":"CreateMatch","ModulePayload":"","CourseDeckSummary":{"DeckId":"00000000-0000-4000-8000-000000000057","Name":"Mono black brawl","Attributes":[{"name":"Version","value":"11"},{"name":"TileID","value":"79665"},{"name":"LastPlayed","value":"\"2023-10-30T08:10:01.61572+01:00\""},{"name":"LastUpdated","value":"\"2023-10-29T23:40:19.882689+01:00\""},{"name":"IsFavorite","value":"false"},{"name":"Format","value":"Brawl"}],"DeckTileId":79665,"DeckArtId":422366,"PreferredCosmetics":{"Avatar":"","Sleeve":"","Pet":"","Title":"","Emotes":[]}},"CourseDeck":{"MainDeck":[{"cardId":87582,"quantity":11},{"cardId":82568,"quantity":1},{"cardId":86934,"quantity":1},{"cardId":83783,"quantity":1},{"cardId":78452,"quantity":1},{"cardId":87580,"quantity":11},{"cardId":82575,"quantity":1},{"cardId":86809,"quantity":1},{"cardId":86794,"quantity":1},{"cardId":86804,"quantity":1},{"cardId":78907,"quantity":1},{"cardId":83781,"quantity":1},{"cardId":84395,"quantity":1},{"cardId":86776,"quantity":1},{"cardId":83744,"quantity":1},{"cardId":80248,"quantity":1},{"cardId":83814,"quantity":1},{"cardId":82579,"quantity":1},{"cardId":78446,"quantity":1},{"cardId":86793,"quantity":1},{"cardId":78937,"quantity":1},{"cardId":79513,"quantity":1},{"cardId":84361,"quantity":1},{"cardId":78468,"quantity":1},{"cardId":84377,"quantity":1},{"cardId":78441,"quantity":1},{"cardId":78451,"quantity":1},{"cardId":84362,"quantity":1},{"cardId":78637,"quantity":1},{"cardId":83950,"quantity":1},{"cardId":79505,"quantity":1},{"cardId":71116,"quantity":1},{"cardId":82106,"quantity":1},{"cardId":82545,"quantity":1},{"cardId":82104,"quantity":1},{"cardId":78407,"quantity":1},{"cardId":80214,"quantity":1},{"cardId":78392,"quantity":1},{"cardId":86745,"quantity":1}],"Sideboard":[],"CommandZone":[{"cardId":79665,"quantity":1}],"Companions":[],"CardSkins":[]},"CardPool":[],"CardPoolByCollation":[],"CardStyles":[]},{"CourseId":"00000000-0000-4000-8000-000000000058","InternalEventName":"Traditional_Alchemy_Play","CurrentModule":"Complete","ModulePayload":"","CourseDeckSummary":{"DeckId":"00000000-0000-4000-8000-000000000059","Name":"Selesnya 3BM Alchemy","Attributes":[{"name":"Version","value":"11"},{"name":"TileID","value":"70413"},{"name":"LastPlayed","value":"\"2023-12-10T08:17:17.622624+01:00\""},{"name":"LastUpdated","value":"\"2023-12-10T08:14:24.811232+01:00\""},{"name":"IsFavorite","value":"false"},{"name":"Format","value":"Alchemy"}],"Description":"","DeckTileId":70413,"DeckArtId":0,"PreferredCosmetics":{"Avatar":"","Sleeve":"","Pet":"","Title":"","Emotes":[]}},"CourseDeck":{"MainDeck":[{"cardId":70413,"quantity":6},{"cardId":70397,"quantity":9},{"cardId":83957,"quantity":4},{"cardId":90133,"quantity":2},{"cardId":86719,"quantity":4},{"cardId":86874,"quantity":2},{"cardId":83726,"quantity":3},{"cardId":84253,"quantity":1},{"cardId":83711,"quantity":3},{"cardId":82746,"quantity":4},{"cardId":84850,"quantity":3},{"cardId":87435,"quantity":1},{"cardId":90116,"quantity":4},{"cardId":84288,"quantity":1},{"cardId":87145,"quantity":2},{"cardId":83733,"quantity":2},{"cardId":84880,"quantity":1},{"cardId":87447,"quantity":2},{"cardId":82222,"quantity":1},{"cardId":86697,"quantity":1},{"cardId":84511,"quantity":2},{"cardId":86717,"quantity":1},{"cardId":86702,"quantity":1}],"Sideboard":[],"CommandZone":[],"Companions":[],"CardSkins":[]},"CurrentLosses":1,"CardPool":[],"CardPoolByCollation":[],"CardStyles":[]},{"CourseId":"00000000-0000-4000-8000-000000000060","InternalEventName":"Traditional_Alchemy_Ladder","CurrentModule":"Complete","ModulePayload":"","CourseDeckSummary":{"DeckId":"00000000-0000-4000-8000-000000000059","Name":"Selesnya 3BM Alchemy","Attributes":[{"name":"Version","value":"11"},{"name":"TileID","value":"70413"},{"name":"LastPlayed","value":"\"2023-12-20T14:45:33.807513+01:00\""},{"name":"LastUpdated","value":"\"2023-12-20T08:00:15.938309+01:00\""},{"name":"IsFavorite","value":"false"},{"name":"Format","value":"Alchemy"}],"Description":"","DeckTileId":70413,"DeckArtId":0,"PreferredCosmetics":{"Avatar":"","Sleeve":"","Pet":"","Title":"","Emotes":[]}},"CourseDeck":{"MainDeck":[{"cardId":70413,"quantity":6},{"cardId":70397,"quantity":9},{"cardId":83957,"quantity":4},{"cardId":90133,"quantity":2},{"cardId":86719,"quantity":4},{"cardId":86874,"quantity":2},{"cardId":83726,"quantity":3},{"cardId":86988,"quantity":1},{"cardId":83711,"quantity":2},{"cardId":82746,"quantity":4},{"cardId":84850,"quantity":2},{"cardId":87435,"quantity":1},{"cardId":90116,"quantity":4},{"cardId":84288,"quantity":1},{"cardId":87145,"quantity":2},{"cardId":84853,"quantity":1},{"cardId":84880,"quantity":1},{"cardId":87447,"quantity":2},{"cardId":82084,"quantity":1},{"cardId":90247,"quantity":1},{"cardId":84511,"quantity":2},{"cardId":86717,"quantity":1},{"cardId":86722,"quantity":3},{"cardId":82681,"quantity":1}],"Sideboard":[],"CommandZone":[],"Companions":[],"CardSkins":[]},"CurrentWins":1,"CardPool":[],"CardPoolByCollation":[],"CardStyles":[]},{"CourseId":"00000000-0000-4000-8000-000000000061","InternalEventName":"Alchemy_Play","CurrentModule":"Complete","ModulePayload":"","CourseDeckSummary":{"DeckId":"00000000-0000-4000-8000-000000000062","Name":"Mono Red Burn Alchemy","Attributes":[{"name":"Version","value":"11"},{"name":"TileID","value":"58449"},{"name":"LastPlayed","value":"\"2024-10-18T23:08:39.918306+02:00\""},{"name":"LastUpdated","value":"\"2024-10-18T22:47:43.207071+02:00\""},{"name":"IsFavorite","value":"false"},{"name":"Format","value":"Alchemy"}],"DeckTileId":58449,"DeckArtId":0,"PreferredCosmetics":{"Avatar":"","Sleeve":"","Pet":"","Title":"","Emotes":[]}},"CourseDeck":{"MainDeck":[{"cardId":58449,"quantity":20},{"cardId":91679,"quantity":3},{"cardId":92212,"quantity":4},{"cardId":95346,"quantity":1},{"cardId":89042,"quantity":2},{"cardId":86843,"quantity":4},{"cardId":86932,"quantity":4},{"cardId":92248,"quantity":4},{"cardId":91674,"quantity":4},{"cardId":91668,"quantity":2},{"cardId":92227,"quantity":4},{"cardId":91680,"quantity":4},{"cardId":90492,"quantity":4}],"Sideboard":[],"CommandZone":[],"Companions":[],"CardSkins":[]},"CurrentLosses":1,"CardPool":[],"CardPoolByCollation":[],"CardStyles":[]},{"CourseId":"00000000-0000-4000-8000-000000000063","InternalEventName":"Timeless_Play","CurrentModule":"DeckSelect","ModulePayload":"","CourseDeckSummary":{"DeckId":"00000000-0000-4000-8000-000000000064","Name":"Boros Energy","Attributes":[{"name":"Version","value":"11"},{"name":"TileID","value":"79090"},{"name":"LastPlayed","value":"\"2025-01-04T10:34:00.141163+01:00\""},{"name":"LastUpdated","value":"\"2025-01-04T09:58:01.793618+01:00\""},{"name":"IsFavorite","value":"false"},{"name":"Format","value":"Timeless"}],"DeckTileId":79090,"DeckArtId":421373,"PreferredCosmetics":{"Avatar":"","Sleeve":"","Pet":"","Title":"","Emotes":[]}},"CourseDeck":{"MainDeck":[{"cardId":90878,"quantity":4},{"cardId":90616,"quantity":4},{"cardId":90887,"quantity":3},{"cardId":90963,"quantity":4},{"cardId":82744,"quantity":2},{"cardId":90972,"quantity":4},{"cardId":90800,"quantity":4},{"cardId":87081,"quantity":4},{"cardId":91048,"quantity":4},{"cardId":84938,"quantity":2},{"cardId":90893,"quantity":4},{"cardId":90949,"quantity":4},{"cardId":90992,"quantity":2},{"cardId":68735,"quantity":4},{"cardId":55477,"quantity":4},{"cardId":69396,"quantity":1},{"cardId":90615,"quantity":2},{"cardId":82296,"quantity":1},{"cardId":69393,"quantity":3}],"Sideboard":[],"CommandZone":[],"Companions":[],"CardSkins":[]},"CurrentLosses":1,"CardPool":[],"CardPoolByCollation":[],"CardStyles":[]},{"CourseId":"00000000-0000-4000-8000-000000000065","InternalEventName":"Traditional_Historic_Play","CurrentModule":"Complete","ModulePayload":"","CourseDeckSummary":{"DeckId":"00000000-0000-4000-8000-000000000066","Name":"4C cascade","Attributes":[{"name":"Version","value":"11"},{"name":"TileID","value":"89190"},{"name":"LastPlayed","value":"\"2025-02-22T22:38:53.554871+01:00\""},{"name":"LastUpdated","value":"\"2025-02-22T22:38:29.084591+01:00\""},{"name":"IsFavorite","value":"false"},{"name":"Format","value":"Historic"}],"Description":"","DeckTileId":89190,"DeckArtId":439132,"IsCompanionValid":true,"PreferredCosmetics":{"Avatar":"","Sleeve":"","Pet":"","Title":"","Emotes":[]}},"CourseDeck":{"MainDeck":[{"cardId":91514,"quantity":2},{"cardId":90893,"quantity":4},{"cardId":95161,"quantity":4},{"cardId":90963,"quantity":4},{"cardId":90800,"quantity":4},{"cardId":75964,"quantity":2},{"cardId":90894,"quantity":3},{"cardId":87081,"quantity":4},{"cardId":90616,"quantity":4},{"cardId":55477,"quantity":4},{"cardId":90615,"quantity":3},{"cardId":83948,"quantity":1},{"cardId":68735,"quantity":4},{"cardId":69396,"quantity":2},{"cardId":69393,"quantity":2},{"cardId":53447,"quantity":2},{"cardId":90949,"quantity":4},{"cardId":95159,"quantity":3},{"cardId":90979,"quantity":1},{"cardId":71081,"quantity":3}],"Sideboard":[{"cardId":85569,"quantity":1},{"cardId":75662,"quantity":4},{"cardId":90717,"quantity":2},{"cardId":90718,"quantity":2},{"cardId":95162,"quantity":2},{"cardId":91063,"quantity":2},{"cardId":90932,"quantity":1},{"cardId":71908,"quantity":1}],"CommandZone":[],"Companions":[{"cardId":85569,"quantity":1}],"CardSkins":[]},"CurrentWins":1,"CardPool":[],"CardPoolByCollation":[],"CardStyles":[]},{"CourseId":"00000000-0000-4000-8000-000000000067","InternalEventName":"Explorer_Play","CurrentModule":"Complete","ModulePayload":"","CourseDeckSummary":{"DeckId":"00000000-0000-4000-8000-000000000068","Name":"Mono Red Explorer","Attributes":[{"name":"Version","value":"11"},{"name":"TileID","value":"94132"},{"name":"LastPlayed","value":"\"2025-08-15T10:04:33.142971+02:00\""},{"name":"LastUpdated","value":"\"2025-06-13T23:05:23.556194+02:00\""},{"name":"IsFavorite","value":"false"},{"name":"Format","value":"Explorer"}],"Description":"","DeckTileId":94132,"DeckArtId":409809,"PreferredCosmetics":{"Avatar":"","Sleeve":"CardBack_FindYourChampion","Pet":"LCI_Mastery.Level2","Title":"","Emotes":[]}},"CourseDeck":{"MainDeck":[{"cardId":89040,"quantity":3},{"cardId":90630,"quantity":4},{"cardId":83824,"quantity":4},{"cardId":58173,"quantity":1},{"cardId":82628,"quantity":3},{"cardId":86843,"quantity":4},{"cardId":91674,"quantity":4},{"cardId":90492,"quantity":4},{"cardId":77359,"quantity":1},{"cardId":79716,"quantity":1},{"cardId":92248,"quantity":4},{"cardId":74148,"quantity":3},{"cardId":92227,"quantity":4},{"cardId":75300,"quantity":3},{"cardId":95623,"quantity":4},{"cardId":69393,"quantity":4},{"cardId":83948,"quantity":3},{"cardId":86932,"quantity":2},{"cardId":96012,"quantity":4}],"Sideboard":[{"cardId":83792,"quantity":4},{"cardId":87068,"quantity":3}],"CommandZone":[],"Companions":[],"CardSkins":[]},"CurrentWins":1,"CardPool":[],"CardPoolByCollation":[],"CardStyles":[]},{"CourseId":"00000000-0000-4000-8000-000000000069","InternalEventName":"Historic_Play","CurrentModule":"Complete","ModulePayload":"","CourseDeckSummary":{"DeckId":"00000000-0000-4000-8000-000000000070","Name":"Val Combo","Attributes":[{"name":"Version","value":"11"},{"name":"TileID","value":"89181"},{"name":"LastPlayed","value":"\"2025-12-12T07:30:43.749468+01:00\""},{"name":"LastUpdated","value":"\"2025-12-12T02:36:26.574362+01:00\""},{"name":"IsFavorite","value":"false"},{"name":"Format","value":"Historic"}],"DeckTileId":89181,"DeckArtId":439130,"PreferredCosmetics":{"Avatar":"","Sleeve":"","Pet":"","Title":"","Emotes":[]}},"CourseDeck":{"MainDeck":[{"cardId":98820,"quantity":4},{"cardId":55477,"quantity":4},{"cardId":96172,"quantity":3},{"cardId":77341,"quantity":4},{"cardId":90616,"quantity":2},{"cardId":95161,"quantity":4},{"cardId":92404,"quantity":4},{"cardId":90996,"quantity":4},{"cardId":57743,"quantity":2},{"cardId":96864,"quantity":4},{"cardId":77305,"quantity":2},{"cardId":87179,"quantity":2},{"cardId":84850,"quantity":3},{"cardId":95162,"quantity":2},{"cardId":68735,"quantity":4},{"cardId":83957,"quantity":4},{"cardId":82746,"quantity":3},{"cardId":93940,"quantity":4},{"cardId":97563,"quantity":1}],"Sideboard":[],"CommandZone":[],"Companions":[],"CardSkins":[]},"CurrentWins":1,"CardPool":[],"CardPoolByCollation":[],"CardStyles":[]},{"CourseId":"00000000-0000-4000-8000-000000000071","InternalEventName":"Alchemy_Ladder","CurrentModule":"Complete","ModulePayload":"","CourseDeckSummary":{"DeckId":"00000000-0000-4000-8000-000000000072","Name":"Simic Ouroboroid (2)","Attributes":[{"name":"Version","value":"11"},{"name":"TileID","value":"58453"},{"name":"LastPlayed","value":"\"2026-04-02T07:03:53.387257+02:00\""},{"name":"LastUpdated","value":"\"2026-03-24T22:08:49.62521+01:00\""},{"name":"IsFavorite","value":"false"},{"name":"Format","value":"Alchemy"}],"Description":"","DeckTileId":58453,"DeckArtId":0,"PreferredCosmetics":{"Avatar":"","Sleeve":"","Pet":"","Title":"","Emotes":[]}},"CourseDeck":{"MainDeck":[{"cardId":58453,"quantity":9},{"cardId":92939,"quantity":4},{"cardId":95568,"quantity":1},{"cardId":96825,"quantity":4},{"cardId":95660,"quantity":1},{"cardId":91597,"quantity":4},{"cardId":95072,"quantity":4},{"cardId":95672,"quantity":4},{"cardId":98574,"quantity":2},{"cardId":96646,"quantity":4},{"cardId":96760,"quantity":4},{"cardId":96775,"quantity":4},{"cardId":97444,"quantity":4},{"cardId":97998,"quantity":2},{"cardId":97966,"quantity":4},{"cardId":95585,"quantity":1},{"cardId":97547,"quantity":1},{"cardId":91717,"quantity":1},{"cardId":96827,"quantity":1},{"cardId":100574,"quantity":1}],"Sideboard":[],"CommandZone":[],"Companions":[],"CardSkins":[]},"CurrentLosses":1,"CardPool":[],"CardPoolByCollation":[],"CardStyles":[]},{"CourseId":"00000000-0000-4000-8000-000000000073","InternalEventName":"Explorer_Ladder","CurrentModule":"Complete","ModulePayload":"","CourseDeckSummary":{"DeckId":"00000000-0000-4000-8000-000000000074","Name":"Imported Deck","Attributes":[{"name":"Version","value":"11"},{"name":"TileID","value":"96168"},{"name":"LastPlayed","value":"\"2026-09-28T18:33:48.907865+02:00\""},{"name":"LastUpdated","value":"\"2026-09-28T07:55:01.356788+02:00\""},{"name":"IsFavorite","value":"false"},{"name":"Format","value":"TraditionalExplorer"}],"Description":"","DeckTileId":96168,"DeckArtId":444128,"PreferredCosmetics":{"Avatar":"","Sleeve":"","Pet":"","Title":"","Emotes":[]}},"CourseDeck":{"MainDeck":[{"cardId":73955,"quantity":3},{"cardId":58173,"quantity":1},{"cardId":82628,"quantity":3},{"cardId":86932,"quantity":4},{"cardId":83824,"quantity":4},{"cardId":102797,"quantity":4},{"cardId":102565,"quantity":4},{"cardId":97320,"quantity":3},{"cardId":95653,"quantity":2},{"cardId":91611,"quantity":4},{"cardId":95062,"quantity":4},{"cardId":58449,"quantity":4},{"cardId":90617,"quantity":4},{"cardId":68738,"quantity":4},{"cardId":97998,"quantity":2},{"cardId":77359,"quantity":1},{"cardId":92227,"quantity":4},{"cardId":90492,"quantity":4},{"cardId":105043,"quantity":1}],"Sideboard":[{"cardId":78940,"quantity":2},{"cardId":97320,"quantity":1},{"cardId":76434,"quantity":2},{"cardId":97414,"quantity":1},{"cardId":97417,"quantity":1},{"cardId":97341,"quantity":1},{"cardId":92235,"quantity":2},{"cardId":90491,"quantity":2},{"cardId":79505,"quantity":2},{"cardId":97318,"quantity":1}],"CommandZone":[],"Companions":[],"CardSkins":[{"GrpId":92235,"CCV":"DA"}]},"CurrentLosses":1,"CardPool":[],"CardPoolByCollation":[],"CardStyles":[]},{"CourseId":"00000000-0000-4000-8000-000000000075","InternalEventName":"Play","CurrentModule":"Complete","ModulePayload":"","CourseDeckSummary":{"DeckId":"00000000-0000-4000-8000-000000000076","Name":"1 mana black","Attributes":[{"name":"Version","value":"11"},{"name":"TileID","value":"82568"},{"name":"LastPlayed","value":"\"2026-10-31T17:59:51.22612+01:00\""},{"name":"LastUpdated","value":"\"2026-10-30T14:14:40.187021+01:00\""},{"name":"IsFavorite","value":"false"},{"name":"Format","value":"Standard"}],"Description":"","DeckTileId":82568,"DeckArtId":430089,"PreferredCosmetics":{"Avatar":"","Sleeve":"","Pet":"","Title":"","Emotes":[]}},"CourseDeck":{"MainDeck":[{"cardId":106281,"quantity":4},{"cardId":95953,"quantity":2},{"cardId":89000,"quantity":2},{"cardId":90794,"quantity":20},{"cardId":90434,"quantity":3},{"cardId":87237,"quantity":1},{"cardId":90437,"quantity":4},{"cardId":87254,"quantity":3},{"cardId":90454,"quantity":4},{"cardId":90442,"quantity":2},{"cardId":95949,"quantity":3},{"cardId":89020,"quantity":4},{"cardId":86804,"quantity":1},{"cardId":87267,"quantity":3},{"cardId":91635,"quantity":4}],"Sideboard":[],"CommandZone":[],"Companions":[],"CardSkins":[]},"CurrentLosses":1,"CardPool":[],"CardPoolByCollation":[],"CardStyles":[]},{"CourseId":"00000000-0000-4000-8000-000000000077","InternalEventName":"Ladder","CurrentModule":"Complete","ModulePayload":"","CourseDeckSummary":{"DeckId":"00000000-0000-4000-8000-000000000078","Name":"Imported Deck (6)","Attributes":[{"name":"Version","value":"11"},{"name":"TileID","value":"58453"},{"name":"LastPlayed","value":"\"2026-11-24T20:19:11.367641+01:00\""},{"name":"LastUpdated","value":"\"2026-11-24T01:11:53.631539+01:00\""},{"name":"IsFavorite","value":"false"},{"name":"Format","value":"Standard"}],"Description":"","DeckTileId":58453,"DeckArtId":0,"PreferredCosmetics":{"Avatar":"","Sleeve":"","Pet":"","Title":"","Emotes":[]}},"CourseDeck":{"MainDeck":[{"cardId":58453,"quantity":3},{"cardId":58449,"quantity":5},{"cardId":82668,"quantity":2},{"cardId":93936,"quantity":2},{"cardId":69407,"quantity":3},{"cardId":96832,"quantity":1},{"cardId":86932,"quantity":4},{"cardId":90498,"quantity":4},{"cardId":91723,"quantity":3},{"cardId":92248,"quantity":4},{"cardId":105171,"quantity":4},{"cardId":95653,"quantity":4},{"cardId":96043,"quantity":4},{"cardId":96172,"quantity":4},{"cardId":96764,"quantity":4},{"cardId":95642,"quantity":1},{"cardId":106736,"quantity":4},{"cardId":90492,"quantity":4}],"Sideboard":[],"CommandZone":[],"Companions":[],"CardSkins":[]},"CurrentLosses":1,"CardPool":[],"CardPoolByCollation":[],"CardStyles":[]},{"CourseId":"00000000-0000-4000-8000-000000000079","InternalEventName":"Historic_Ladder","CurrentModule":"Complete","ModulePayload":"","CourseDeckSummary":{"DeckId":"00000000-0000-4000-8000-000000000080","Name":"Ruby storm","Attributes":[{"name":"Version","value":"11"},{"name":"TileID","value":"78822"},{"name":"LastPlayed","value":"\"2026-11-27T18:17:24.835226+01:00\""},{"name":"LastUpdated","value":"\"2026-10-13T07:41:51.732907+02:00\""},{"name":"IsFavorite","value":"false"},{"name":"Format","value":"TraditionalHistoric"}],"Description":"","DeckTileId":78822,"DeckArtId":421135,"PreferredCosmetics":{"Avatar":"","Sleeve":"","Pet":"","Title":"","Emotes":[]}},"CourseDeck":{"MainDeck":[{"cardId":90820,"quantity":4},{"cardId":91121,"quantity":4},{"cardId":102574,"quantity":1},{"cardId":78196,"quantity":4},{"cardId":102798,"quantity":4},{"cardId":73379,"quantity":2},{"cardId":77518,"quantity":1},{"cardId":78980,"quantity":4},{"cardId":84457,"quantity":4},{"cardId":105028,"quantity":3},{"cardId":102796,"quantity":4},{"cardId":77271,"quantity":1},{"cardId":98271,"quantity":3},{"cardId":58449,"quantity":6},{"cardId":68735,"quantity":4},{"cardId":97115,"quantity":1},{"cardId":90616,"quantity":4},{"cardId":90661,"quantity":3},{"cardId":76099,"quantity":2},{"cardId":102568,"quantity":1}],"Sideboard":[{"cardId":96001,"quantity":1},{"cardId":91091,"quantity":1},{"cardId":91170,"quantity":2},{"cardId":77518,"quantity":1},{"cardId":82612,"quantity":1},{"cardId":94698,"quantity":2},{"cardId":102795,"quantity":1}],"CommandZone":[],"Companions":[],"CardSkins":[]},"CurrentWins":1,"CardPool":[],"CardPoolByCollation":[],"CardStyles":[]},{"CourseId":"00000000-0000-4000-8000-000000000046","InternalEventName":"PremierDraft_TRK_20261110","CurrentModule":"CreateMatch","ModulePayload":"","CourseDeckSummary":{"DeckId":"00000000-0000-4000-8000-000000000048","Name":"Draft Deck","Attributes":[{"name":"Version","value":"11"},{"name":"TileID","value":"0"},{"name":"LastPlayed","value":"\"0001-01-01T00:00:00\""},{"name":"LastUpdated","value":"\"2026-11-28T10:59:14.88153+01:00\""},{"name":"IsFavorite","value":"false"},{"name":"Format","value":"Draft"}],"DeckTileId":0,"DeckArtId":455344,"PreferredCosmetics":{"Avatar":"","Sleeve":"CardBack_FIN_448739","Pet":"","Title":"","Emotes":[]}},"CourseDeck":{"MainDeck":[{"cardId":106841,"quantity":1},{"cardId":106663,"quantity":1},{"cardId":106816,"quantity":1},{"cardId":106647,"quantity":1},{"cardId":106882,"quantity":1},{"cardId":106585,"quantity":1},{"cardId":106637,"quantity":1},{"cardId":106632,"quantity":2},{"cardId":106611,"quantity":2},{"cardId":106627,"quantity":2},{"cardId":106629,"quantity":1},{"cardId":106656,"quantity":1},{"cardId":106836,"quantity":1},{"cardId":106581,"quantity":2},{"cardId":106594,"quantity":1},{"cardId":106861,"quantity":1},{"cardId":106660,"quantity":2},{"cardId":106805,"quantity":1},{"cardId":106640,"quantity":1},{"cardId":106625,"quantity":1},{"cardId":106863,"quantity":1},{"cardId":106877,"quantity":1},{"cardId":106899,"quantity":2},{"cardId":106897,"quantity":6},{"cardId":106895,"quantity":5}],"Sideboard":[{"cardId":106586,"quantity":1},{"cardId":106697,"quantity":1},{"cardId":106810,"quantity":2},{"cardId":106769,"quantity":1},{"cardId":106860,"quantity":1},{"cardId":106579,"quantity":2},{"cardId":106650,"quantity":1},{"cardId":106750,"quantity":1},{"cardId":106752,"quantity":1},{"cardId":106604,"quantity":1},{"cardId":106824,"quantity":1},{"cardId":106771,"quantity":1}],"CommandZone":[],"Companions":[],"CardSkins":[]},"CardPool":[106841,106663,106816,106647,106586,106882,106585,106637,106632,106611,106632,106697,106810,106769,106627,106629,106656,106836,106581,106860,106594,106627,106579,106861,106650,106750,106579,106752,106660,106660,106581,106611,106805,106640,106604,106625,106863,106824,106810,106877,106771,106899],"CardStyles":[]}]}

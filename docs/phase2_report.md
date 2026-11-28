@@ -121,3 +121,27 @@ per busta e 2 carte, `Draft.Notify` scritto due volte.
 Sui log di esempio di draftomen (completi Premier e Pick Two, ripreso, account tardivo) il parser legge
 42/42 e 21/21 pick con evento, set e formato giusti. Resta valida la checklist qui sopra: questi sono
 riscontri indiretti, non log veri.
+
+## Verifica su un log reale (2026-11-28): Premier TRK
+
+Primo `Player.log` vero, da macOS con Arena installato tramite Steam e i log dettagliati attivi: un
+draft Premier di TRK completo.
+- **Pulizia:** `log-clean` con il nome utente da cancellare. 212 UUID sostituiti; nel controllo finale
+  nessun dato sospetto. Riletto a mano: restano solo le righe del draft e l'elenco dei corsi (mazzi
+  precostruiti, oggetti estetici, formati), senza nome, ID dell'account, email, percorsi o token. La
+  copia pulita è `tests/fixtures/logs/premier_trk_real.log`; il log grezzo non è nel repository.
+- **Lettura:**
+  - 42 pick su 42, buste da 14 a 1 carta, ogni carta presa presente nella busta;
+  - evento `PremierDraft_TRK_...` riconosciuto con set e formato;
+  - pool del corso di 42 carte uguale ai pick, fine del draft segnalata (`IsPickingCompleted`);
+  - nessuna nota né messaggio di draft non riconosciuto.
+- **Messaggi presenti nel log vero:**
+  - `Draft.Notify` (42) e `EventPlayerDraftMakePick` (42 richieste e 42 risposte);
+  - `EventJoin`, la riga `Entering table draft queue: TRK_Premier_Draft`, `DraftCompleteDraft`,
+    `EventGetCoursesV2`;
+  - nessun `LogBusinessEvents`.
+
+  La struttura coincide con quella documentata.
+- **Revisione e mazzi** sul draft vero: funzionano (`review --log`, `build --log`).
+
+Test di regressione: `test_real_premier_log`. **Resta da verificare un draft Pick Two vero.**

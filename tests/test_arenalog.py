@@ -237,3 +237,21 @@ def test_phantom_pack_and_thread_prefix(fmt):
     [d] = parse_text("\n".join(lines)).results()
     _check_exact(sd, d)
     assert any("fuori dal formato" in n for n in d.build()[1])
+
+
+# --- log reale (Premier TRK, ripulito con log-clean e riletto a mano) ----------------------------------
+
+def test_real_premier_log():
+    from pathlib import Path
+    from draftbot.arenalog import parse_files
+    path = Path(__file__).parent / "fixtures" / "logs" / "premier_trk_real.log"
+    p = parse_files([path])
+    [d] = p.results()
+    assert d.event_name.startswith("PremierDraft_TRK") and d.set_code == "TRK" and d.fmt.name == "premier"
+    picks, notes = d.build()
+    assert len(picks) == 42 and not notes and not p.unrecognized
+    assert [len(x.pack_cards) for x in picks[:14]] == list(range(14, 0, -1))
+    assert all(len(x.picked) == 1 and x.picked[0] in x.pack_cards for x in picks)
+    assert d.completed and Counter(d.pool) == Counter(d.picked_cards())
+    rep = validate(d)
+    assert rep.ok and rep.complete and not rep.warnings

@@ -42,7 +42,7 @@ Guida d'uso: `docs/guida.md`.
 |---|---|
 | 0 Verifiche e scheletro | completata |
 | 1 Database carte, ID Arena, `add-set` | completata (TRK 341 carte, FRA 295, nessun problema di mappatura) |
-| 2 Parser di Player.log | **codice e test su log sintetici fatti; da verificare sui log reali** (almeno un draft Premier e uno Pick Two) |
+| 2 Parser di Player.log | **verificato su un log reale Premier TRK** (macOS, Steam; fixture `tests/fixtures/logs/premier_trk_real.log`); **manca un draft Pick Two reale** |
 | 3 Statistiche 17Lands | completata (sviluppo e calibrazione su FRA, prior da FRA+HOB+MSH) |
 | 4 Valutatore di mazzo, pick, backtest | completata |
 | 5 Sinergie | completata: misurate, ma fuori dal punteggio di default (peggiorano il backtest) |
