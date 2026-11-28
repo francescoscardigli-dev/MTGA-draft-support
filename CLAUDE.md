@@ -52,32 +52,38 @@ Guida d'uso: `docs/guida.md`.
 | 9 Generalità, rifinitura | completata (test su OM1 ed EOE da zero; 3 problemi di generalità corretti) |
 | 10 Idee da altri tool | strato di imitazione (+3/+9 top-1), fixing nel valutatore e al pick, splash dai dati: vedi `docs/phase10_report.md` |
 
-Cose aperte:
-- **Log di Arena:** l'utente li sta recuperando. Quando arrivano: pulirli con
-  `python -m draftbot log-clean <log> tests/fixtures/logs/<nome>.log --redact "<nome utente>"`,
-  rileggere a mano l'output, poi `log-drafts <fixture> -d`, e aggiungere test di regressione sui
-  fixture reali. Vedi la checklist in `docs/phase2_report.md`. Mai committare il log grezzo.
-  Il parser e' stato confrontato (2026-11-28) con draftomen e nemedraft-client (MIT): casi aggiunti
-  (pick rifiutato, DraftCompleteDraft, coda senza EventJoin, draft ripreso, buste fantasma); vedi
-  la sezione "Confronto con altri tool" in `docs/phase2_report.md`.
-- **Pick Two:** vantaggio del motore su ATA piccolo (FRA +2,6) o nullo (OM1 -1,4); Premier +5/+9.
-- **Set con buste diverse:** `format_overrides` in `sets/<CODICE>.yaml` (EOE: Premier 13 carte);
-  usare sempre `format_for(formato, set)`, non `load_format`, dove il set e' noto.
-- **Lettore del database del client Arena** (`draftbot/sources/arena_db.py`): non verificato su
-  un'installazione reale. Chiedere all'utente di provare
-  `python -m draftbot update-cards TRK --arena-db "<cartella Raw>"`.
-- **Carte ospiti:** la rarità è quella della stampa originale, non quella SPG. Nel prior la rarità
-  pesa poco (meno di 1 punto) rispetto ad ATA/ALSA, quindi l'effetto è piccolo; non corretto.
-- **Statistiche per archetipo:** differenza propria di una carta per archetipo piccola (tau circa 0,3);
-  la qualità resta unica per carta (vedi Fase 5).
-- **Tag dei temi** (`sets/*.tags.yaml`): generati con regole, `reviewed: false`. Da rivedere a mano.
-- **Splash:** il costruttore lo fa nel 7-11% dei mazzi, i giocatori forti nel 44-47%; il valutatore
-  stima -3 punti per lo splash a parità di qualità, forse in parte effetto di selezione.
-- **Segnali** (Fase 7, revisione): il flusso dei colori nella busta 1 prevede l'offerta della busta 3
-  (corr +0,20/+0,17) ed e' nel modello come spostamento delle carte future (delta in
-  `priors/<formato>_extras.yaml`); effetto sull'accordo piccolo (+0,1/+0,3 punti). L'impegno ridotto
-  nella busta 1 (early_temp) non aiuta: resta a 1.
-- **TRK:** quando 17Lands pubblica i game data, `update-data TRK` e ricontrollare la calibrazione.
+Cose aperte (aggiornato 2026-11-28, fine sessione), in ordine:
+1. **Log Pick Two reale:** manca. Il Premier TRK reale e' verificato (`tests/fixtures/logs/premier_trk_real.log`,
+   `test_real_premier_log`). Quando arriva un log Pick Two: `log-clean <log> tests/fixtures/logs/<nome>.log
+   --redact "<nome utente>"` (il nome si estrae dal log senza stamparlo), rileggere a mano, `log-drafts -d`,
+   test di regressione. Mai committare il log grezzo.
+2. **UI e Player-prev.log:** la UI (`ui`, `live`) legge solo `Player.log`; i comandi `build --log`, `review`,
+   `log-drafts` leggono anche `Player-prev.log`. Dopo un riavvio di Arena la UI non trova il draft
+   precedente: farle leggere prima `Player-prev.log` (in `create_app`/`LogTailer`), con un test.
+3. **Installazione dell'utente:** macOS Monterey, MacBook Pro 2015 Intel, Python 3.14 da python.org, Arena
+   da Steam; codice scaricato come ZIP del branch in `~/Documents/MTGA-draft-support`, venv `.venv`.
+   Funzionano `add-set`, `update-data`, `status`, `ui` (dopo `pip install websockets`, ora nelle dipendenze
+   `[ui]`). Ancora da provare dall'utente: `build --log` sul suo draft. Ricordargli: Control+C (non Cmd+C)
+   per fermare il server; la pagina non si apre da sola. Per avere le correzioni deve riscaricare lo ZIP.
+4. **Database del client Arena** (`update-cards --arena-db`): non verificato; con Arena da Steam su macOS la
+   cartella `Raw` non e' quella standard ("Database del client Arena non trovato"). Da cercare con l'utente.
+5. **Pick Two:** il formato piu' difficile (top-1 40-43% con lo strato di imitazione, Premier 56-64%).
+6. **Fixing nei primi pick:** il motore da solo prende poche terre a inizio busta; lo strato di imitazione
+   corregge in gran parte (Fase 10).
+7. **Splash:** ora 13-25% dei mazzi proposti (reale 28-47%); i dati dicono che costa 2-3 punti a parita' di
+   qualita' (Fase 10). Le build "2 colori + splash" hanno sostituito parte di quelle a 3 colori.
+8. **TRK:** qualita' dal solo prior finche' 17Lands non pubblica i game data; allora `update-data TRK`,
+   ricontrollare calibrazione e, se serve, ristimare i modelli (`fit-deck-model`, `fit-imitation`).
+9. **Tag dei temi** (`sets/*.tags.yaml`): generati con regole, `reviewed: false`, da rivedere a mano.
+10. Minori: rarita' delle carte ospiti (stampa originale, effetto piccolo); statistiche per archetipo non
+    usate (tau circa 0,3).
+
+Note tecniche da ricordare:
+- Set con buste diverse: `format_overrides` in `sets/<CODICE>.yaml` (EOE: Premier 13 carte); usare sempre
+  `format_for(formato, set)`, non `load_format`, dove il set e' noto.
+- Modelli generici in `priors/`: prior, mazzo (con fixing e splash), extras (wheel, flusso), imitazione.
+  Rigenerazione: vedi `docs/guida.md` sezione 7 e `docs/phase10_report.md`.
+- Le cache delle verifiche dello strato di imitazione stanno in `data/imitation/` (non versionate).
 
 Opzioni proposte all'utente per proseguire: (a) Fase 2 sulla struttura documentata, marcata come
 non verificata, più lo script di pulizia; (b) Fase 3 (statistiche su FRA) mentre arrivano i log.

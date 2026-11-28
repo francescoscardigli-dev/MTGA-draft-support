@@ -174,4 +174,6 @@ perché sono a costo zero e non peggiorano nulla.
 - **Fixing nei primi pick:** il motore da solo prende poche terre all'inizio della busta; lo strato di
   imitazione corregge in gran parte.
 - **Pick Two** resta il formato più difficile (top-1 40-43% con lo strato).
-- **Log reali di Arena:** ancora da verificare (vedi Fase 2); l'utente li sta recuperando su macOS.
+- **Log reali di Arena:** Premier TRK verificato su un log vero (Fase 2); manca un Pick Two.
+- **UI dopo un riavvio di Arena:** la UI legge solo `Player.log`, non `Player-prev.log`.
+- Elenco completo e aggiornato in `CLAUDE.md`, "Cose aperte".
