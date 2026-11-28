@@ -1,0 +1,700 @@
+# Tag dei temi di sinergia, generati da 'python -m draftbot tag-set' con regole sul testo.
+# RIVEDERE A MANO: togliere i falsi positivi, aggiungere quelli mancanti, poi reviewed: true.
+# Questo file non viene mai sovrascritto da add-set o tag-set.
+set_code: TRK
+generated: '2026-11-28'
+reviewed: false
+notes:
+- generato con regole sul testo Oracle (tags/themes.yaml) e temi automatici del set
+themes:
+  artifacts:
+    enablers:
+    - Adversary by Algorithm
+    - Andromedan Automatons
+    - Antagonist Incorporator
+    - Assault Drone
+    - Assembly Specialist
+    - Automated Warfare System
+    - Bat'leth
+    - Borg Cube
+    - Class-F Shuttlecraft
+    - Collation Trimatrix
+    - Collective Drone
+    - Combadge
+    - Command Subadjunct
+    - Conquest Mission
+    - Crystalline Entity
+    - Cybernetic Specialist
+    - D-7 Battle Cruiser
+    - DOT-7 Repair Squad
+    - Data, New Life
+    - Deep Space 9
+    - Emergency Holographic Crew
+    - Emergency Medical Hologram
+    - Engineered Explosives
+    - Enterprise NX-01
+    - Federation Probe
+    - Free Borg Revolutionaries
+    - Genesis Device
+    - Grand Nagus Zek
+    - Gwyndala, the Progeny
+    - H.M.S. Bounty, Unlikely Timeship
+    - Hive Mind Coprocessor
+    - Holo-Engineer
+    - Hologram Janeway
+    - Hologram Stalker
+    - Interstellar Effigy
+    - Isolinear Processor
+    - Lieutenant Commander Data
+    - Locutus, the One Who Speaks
+    - Lore, Positronic Provocateur
+    - Malfunctioning Holodeck
+    - Neelix, Moral Support
+    - Oberth-Class Starship
+    - Organic Avulsion Unit
+    - Overflow Submatrix
+    - Primary Unimatrix Adjunct
+    - Prosper, Tome-Bound
+    - Quark, Humble Proprietor
+    - Relentless Drednok
+    - Replicator
+    - Rogue Artificial Intelligence
+    - Romulan Bird-of-Prey
+    - Sarcophagus, Ship of the Dead
+    - Savvy Profiteer
+    - Sen Triplets
+    - Seven of Nine
+    - Seven of Nine, Unassimilated
+    - Sickbay
+    - Suurok-Class Science Vessel
+    - Tea, Earl Grey, Hot
+    - Temporal Conqueror
+    - Tenacious Drone
+    - The Doctor, EMH
+    - The Holodeck
+    - The Inner Light
+    - Tricorder
+    - Type-2 Phaser
+    - U.S.S. Cerritos, Following Up
+    - U.S.S. Discovery, at Black Alert
+    - U.S.S. Enterprise-A, Free Spirit
+    - U.S.S. Enterprise-D, Galaxy-Class
+    - U.S.S. Excelsior, Cutting Edge
+    - U.S.S. Reliant, From Hell's Heart
+    - U.S.S. Voyager, Lone Wanderer
+    - V'Ger, the Intruder
+    - Vexing Drone
+    - Warp Core
+    - Zero, Incorporeal Sensate
+    payoffs:
+    - Conquest Mission
+    - Isolinear Processor
+    - Lt. Cmdr. Geordi La Forge
+    - Miles O'Brien, Transporter Ops
+    - Zefram Cochrane, Warp Pioneer
+  counters:
+    enablers:
+    - Battle-Scarred Survivalist
+    - Bristly Bill, Spine Sower
+    - Captain Michael Burnham
+    - Cetacean Ops
+    - Cold-Blooded Crew
+    - Culber and Stamets, Star-Crossed
+    - Data, New Life
+    - Dominion Supervisor
+    - Dr. Beverly Crusher
+    - Dr. McCoy, Surly Surgeon
+    - Emergency Medical Hologram
+    - Excalbian Gamemaster
+    - Federation Field Medic
+    - General Chang, Cold Warrior
+    - Gowron, Eager for Battle
+    - Hologram Janeway
+    - I'm a Doctor, Not a . . .
+    - Jadzia Dax, Living Legacy
+    - Jett Reno, Problem Solver
+    - Kenrith, the Returned King
+    - Lieutenant Commander Data
+    - Melkotian Adjudicator
+    - Mikaeus, the Lunarch
+    - Neelix, Moral Support
+    - Riku of Many Paths
+    - Rishkar, Peema Renegade
+    - Rutherford, Upgraded Ensign
+    - Sarek, Federation Ambassador
+    - Shields Up!
+    - Sickbay
+    - Support Mission
+    - Sylvia Tilly, Joy of Discovery
+    - Syndicate Liquidators
+    - Tactical Officer
+    - Test of Conviction
+    - The Doctor, EMH
+    - The Naked Time
+    - Worf, Honor-Bound Warrior
+    - Xindi Surveyors
+    payoffs:
+    - Anthropological Mission
+    - Bristly Bill, Spine Sower
+    - Captain Jean-Luc Picard
+    - Conquest Mission
+    - Consider the Prime Directive
+    - Constable Odo
+    - Deanna Troi, Psychic Counsel
+    - Dominion Saboteur
+    - Dominion Supervisor
+    - Dr. Joseph M'Benga
+    - Dr. Leonard "Bones" McCoy
+    - Dr. McCoy, Surly Surgeon
+    - Enterprise NX-01
+    - Exploratory Mission
+    - Federation Field Medic
+    - Mikaeus, the Lunarch
+    - Overflow Submatrix
+    - Peace in Our Time
+    - Phlox, Unorthodox Doctor
+    - Rishkar, Peema Renegade
+    - Romulan Bird-of-Prey
+    - Sarcophagus, Ship of the Dead
+    - Sarek, Federation Ambassador
+    - Set Phasers to . . .
+    - Shields Up!
+    - Storied Veteran
+    - Subcommander T'Pol
+    - Support Mission
+    - Test of Conviction
+    - The Doctor, EMH
+    - The Naked Time
+    - Type-2 Phaser
+    - U.S.S. Reliant, From Hell's Heart
+    - Zefram Cochrane, Warp Pioneer
+  enchantments:
+    enablers:
+    - All Good Things...
+    - Amok Time
+    - Anthropological Mission
+    - Captain's Tutelage
+    - Conquest Mission
+    - De-evolve
+    - Death Is Irrelevant
+    - Exploratory Mission
+    - Hit It!
+    - In the Pale Moonlight
+    - Kobayashi Maru Scenario
+    - Marooned
+    - Mogis, God of Slaughter
+    - Peace in Our Time
+    - Stable Wormhole
+    - Support Mission
+    - Tell Me What You See
+    - The City on the Edge of Forever
+    - The Inner Light
+    - The Measure of a Man
+    - The Naked Time
+    - The Wrath of Khan
+    - Those Old Scientists
+    - Vengeance Mission
+    - Warp Speed
+    - Year of Hell
+    payoffs:
+    - Dathon, His Heart Open
+  graveyard:
+    enablers:
+    - Anthropological Mission
+    - Bruvac the Grandiloquent
+    - Captain James T. Kirk
+    - Cloak and Phaser
+    - Cloistered Telepath
+    - Cybernetic Specialist
+    - D'Vana Tendi, Optimistic Ensign
+    - Dominion Assault Force
+    - Emergency Holographic Crew
+    - Federation Outpost
+    - Federation Probe
+    - First Contact
+    - He's Dead, Jim
+    - Hemmer, Fixing What Is Broken
+    - Hit It!
+    - Isolinear Processor
+    - Jett Reno, Problem Solver
+    - L'Rell, Fierce Visionary
+    - Lore, Positronic Provocateur
+    - Ni'Var Science Academy
+    - Nog, Ambitious Cadet
+    - Pattern Buffer Preservation
+    - Plasma Cascade
+    - Q Continuum
+    - Quark's Bar
+    - Rogue Artificial Intelligence
+    - Seven of Nine, Unassimilated
+    - Sylvia Tilly, Joy of Discovery
+    - Tal Shiar Operative
+    - Tell Me What You See
+    - Temporal Anomaly
+    - Temporal Conqueror
+    - Test of Identity
+    - Test of Priorities
+    - The Unicomplex
+    - Those Old Scientists
+    - Tricorder
+    - Vash, Freelance Archaeologist
+    payoffs:
+    - Amok Time
+    - Blastoneuron
+    - Cybernetic Specialist
+    - Daniels, Temporal Agent
+    - De-evolve
+    - Dr. Leonard "Bones" McCoy
+    - Drivnod, Carnage Dominus
+    - Emergency Holographic Crew
+    - Gabriel Lorca, Mirror Menace
+    - Hologram Stalker
+    - Infinite Diversity
+    - Nog, Ambitious Cadet
+    - Overflow Submatrix
+    - Photosynthetic Physician
+    - Ravenous Cosmozoan
+    - Relentless Drednok
+    - Resistance Is Futile
+    - Scotty, Miracle Worker
+    - Storied Veteran
+    - Stray from History
+    - Sylvia Tilly, Joy of Discovery
+    - Tasha Yar, Out of Time
+    - Temporal Conqueror
+    - Test of Loyalty
+    - The Holodeck
+    - The Inner Light
+    - The Unicomplex
+    - Those Old Scientists
+    - U.S.S. Reliant, From Hell's Heart
+  kw:Beam me up:
+    enablers:
+    - Adversary by Algorithm
+    - Boarding Action
+    - Energize
+    - Federation Resupply
+    - Final Frontier
+    - Open Communications
+    - Pattern Buffer Preservation
+    - Pure Energy
+    - There's Coffee in that Nebula
+    - Transporter Malfunction
+    payoffs:
+    - Scotty, Miracle Worker
+  kw:Face a dilemma:
+    enablers:
+    - Captain Benjamin Sisko
+    - Elim Garak, Simple Tailor
+    - Gabriel Lorca, Mirror Menace
+    - Jett Reno, Problem Solver
+    - Melkotian Adjudicator
+    - Obsidian Order Operative
+    - Seven of Nine
+    - Tell Me What You See
+    - The Caretaker
+    payoffs: []
+  kw:Federation:
+    enablers:
+    - Captain Jonathan Archer
+    - Hoshi Sato, Exolinguist
+    - Infinite Diversity
+    - Saavik, Stoic Student
+    - Sarek, Federation Ambassador
+    - Starfleet Academy
+    payoffs: []
+  kw:Station:
+    enablers:
+    - Borg Cube
+    - Class-F Shuttlecraft
+    - D-7 Battle Cruiser
+    - Deep Space 9
+    - Enterprise NX-01
+    - H.M.S. Bounty, Unlikely Timeship
+    - Oberth-Class Starship
+    - Romulan Bird-of-Prey
+    - Sarcophagus, Ship of the Dead
+    - Suurok-Class Science Vessel
+    - U.S.S. Cerritos, Following Up
+    - U.S.S. Discovery, at Black Alert
+    - U.S.S. Enterprise-A, Free Spirit
+    - U.S.S. Enterprise-D, Galaxy-Class
+    - U.S.S. Excelsior, Cutting Edge
+    - U.S.S. Reliant, From Hell's Heart
+    - U.S.S. Voyager, Lone Wanderer
+    payoffs:
+    - Test of Conviction
+  kw:Strange new worlds:
+    enablers:
+    - Astute Terraformer
+    - Branching Timeline
+    - Captain Pike, Fullness of Time
+    - Cloak and Phaser
+    - Deep Space Scan
+    - Ensign Pavel Chekov
+    - Excalbian Gamemaster
+    - Pah-Wraith
+    - Species 8472
+    - Suus Mahna Practitioner
+    - The Destruction of Praxis
+    - The Traveler
+    - Warp Speed
+    payoffs: []
+  lands:
+    enablers:
+    - Captain Kathryn Janeway
+    - Cold-Blooded Crew
+    - Erica Ortegas, Plucky Pilot
+    - Final Frontier
+    - Free Borg Revolutionaries
+    - Genesis Device
+    - Hit It!
+    - Horta
+    - Humpback Whales
+    - Loot, Exuberant Explorer
+    - Nog, Ambitious Cadet
+    - Rogue Artificial Intelligence
+    - Unexplored Territory
+    - Warp Core
+    - Warp Speed
+    payoffs:
+    - Bristly Bill, Spine Sower
+    - Captain Michael Burnham
+    - Cleveland Booker, Empath
+    - Dal R'El, Augment Orphan
+    - Exploratory Mission
+    - Jake Sisko, War Correspondent
+    - Planetary Patrol
+    - Saurian Explorer
+    - Syndicate Liquidators
+    - Tatyova, Benthic Druid
+    - Xindi Surveyors
+  lifegain:
+    enablers:
+    - All Good Things...
+    - Amok Time
+    - Andoria
+    - Artificial Anomaly
+    - Bajor
+    - Blastoneuron
+    - Brad Boimler, Eager Ensign
+    - Cardassia Prime
+    - Commander Raffi Musiker
+    - Daniels, Temporal Agent
+    - Earth, Sector 001
+    - Elim Garak, Simple Tailor
+    - Emergency Medical Hologram
+    - Federation Outpost
+    - Ferenginar
+    - First Contact
+    - Jake Sisko, War Correspondent
+    - Locutus, the One Who Speaks
+    - Obsidian Order Operative
+    - Orion
+    - Qo'noS
+    - Relentless Drednok
+    - Risa
+    - Rogue Artificial Intelligence
+    - Romulus
+    - Salt Vampire
+    - Sheoldred, the Apocalypse
+    - Shuttle Ace
+    - Sickbay
+    - Tatyova, Benthic Druid
+    - Tea, Earl Grey, Hot
+    - Test of Courage
+    - The City on the Edge of Forever
+    - The Measure of a Man
+    - U.S.S. Enterprise-A, Free Spirit
+    - Vulcan
+    - Zero, Incorporeal Sensate
+    payoffs:
+    - Dr. Beverly Crusher
+    - Neelix, Moral Support
+    - Sickbay
+  sacrifice:
+    enablers:
+    - A Good Day to Die
+    - Academy Instructor
+    - Adversary by Algorithm
+    - Antagonist Incorporator
+    - Artificial Anomaly
+    - Assembly Specialist
+    - Blastoneuron
+    - Boarding Action
+    - Captain Benjamin Sisko
+    - Captain James T. Kirk
+    - Captain Jean-Luc Picard
+    - Captain Jonathan Archer
+    - Cha'DIch Investigator
+    - Cleveland Booker, Empath
+    - Cloak and Phaser
+    - Conquest Mission
+    - D-7 Battle Cruiser
+    - David and Carol Marcus, Creators
+    - Dominion Infiltration
+    - Dr. Leonard "Bones" McCoy
+    - Excalbian Gamemaster
+    - Gaseous Anomaly
+    - Genesis Effect
+    - Georgiou, Terran Emperor
+    - Grand Nagus Zek
+    - Gray and Adira, Forever Joined
+    - Gwyndala, the Progeny
+    - Holo-Engineer
+    - Hologram Stalker
+    - Impossible Choice
+    - In the Pale Moonlight
+    - Kobayashi Maru Scenario
+    - L'Rell, Fierce Visionary
+    - MACO Strike Team
+    - Make It So
+    - Mirror Universe Intrusion
+    - Munitions Enthusiast
+    - Neelix, Moral Support
+    - Photosynthetic Physician
+    - Prosper, Tome-Bound
+    - Quark, Humble Proprietor
+    - Replicator
+    - Riku of Many Paths
+    - Rok-Tahk, Budding Scientist
+    - Saurian Explorer
+    - Savvy Profiteer
+    - Sela, Tal Shiar Paradox
+    - Spatial Anomaly
+    - Stable Wormhole
+    - Starfleet Security
+    - Subspace Anomaly
+    - Tasha Yar, Out of Time
+    - Temporal Anomaly
+    - Temporal Conqueror
+    - Tenacious Drone
+    - The City on the Edge of Forever
+    - The Destruction of Praxis
+    - The Duras Sisters
+    - The Inner Light
+    - Troubling Tribbles
+    - U.S.S. Cerritos, Following Up
+    - U.S.S. Enterprise-A, Free Spirit
+    payoffs:
+    - Automated Warfare System
+    - Battle-Scarred Survivalist
+    - Eject the Warp Core
+    - General Chang, Cold Warrior
+    - Gowron, Eager for Battle
+    - Grand Nagus Zek
+    - In the Pale Moonlight
+    - Khan, Vengeful Heart
+    - L'Rell, Fierce Visionary
+    - Mogis, God of Slaughter
+    - Phyrexian Tower
+    - Sarcophagus, Ship of the Dead
+    - The City on the Edge of Forever
+    - The Needs of the Many
+    - Vengeance Mission
+  spells:
+    enablers:
+    - 70,000 Light-Years from Home
+    - A Good Day to Die
+    - Adversary by Algorithm
+    - Boarding Action
+    - Branching Timeline
+    - Brazen Bluff
+    - Cloak and Phaser
+    - Command Decision
+    - Common Goal
+    - Consider the Prime Directive
+    - Dathon and Picard at El-Adrel
+    - Decree of Pain
+    - Deep Space Scan
+    - Dominion Infiltration
+    - Eject the Warp Core
+    - Encounter the Unknown
+    - Energize
+    - Federation Resupply
+    - Final Frontier
+    - First Contact
+    - Flare of Fortitude
+    - Genesis Effect
+    - Guidance Failure
+    - He's Dead, Jim
+    - Highly Illogical
+    - Hull Breach
+    - I'm a Doctor, Not a . . .
+    - Impossible Choice
+    - Infinite Diversity
+    - Khaaaaaaaaaaaannn!
+    - Live Long and Prosper
+    - Make It So
+    - Mirror Universe Intrusion
+    - Open Communications
+    - Pattern Buffer Preservation
+    - Perils of the Past
+    - Planetary Bombardment
+    - Plasma Cascade
+    - Pure Energy
+    - Reckless Impulse
+    - Red Alert!
+    - Resistance Is Futile
+    - Rules of Acquisition
+    - Set Phasers to . . .
+    - Shields Up!
+    - Stray from History
+    - Test of Conviction
+    - Test of Courage
+    - Test of Identity
+    - Test of Loyalty
+    - Test of Priorities
+    - The Destruction of Praxis
+    - The Needs of the Many
+    - There's Coffee in that Nebula
+    - Transporter Malfunction
+    - Vulcan Mind-Meld
+    payoffs:
+    - Academy Instructor
+    - Anthropological Mission
+    - Cetacean Ops
+    - Infinite Diversity
+    - Romulan Bird-of-Prey
+    - Stella Lee, Wild Card
+    - Tal Shiar Analyst
+  tokens:
+    enablers:
+    - Academy Instructor
+    - Adversary by Algorithm
+    - Antagonist Incorporator
+    - Artificial Anomaly
+    - Assembly Specialist
+    - Blastoneuron
+    - Boarding Action
+    - Captain Benjamin Sisko
+    - Captain James T. Kirk
+    - Captain Jean-Luc Picard
+    - Captain Jonathan Archer
+    - Cha'DIch Investigator
+    - Cleveland Booker, Empath
+    - Cloak and Phaser
+    - Conquest Mission
+    - D-7 Battle Cruiser
+    - David and Carol Marcus, Creators
+    - Dominion Infiltration
+    - Excalbian Gamemaster
+    - Gaseous Anomaly
+    - Genesis Effect
+    - Georgiou, Terran Emperor
+    - Grand Nagus Zek
+    - Gray and Adira, Forever Joined
+    - Gwyndala, the Progeny
+    - Holo-Engineer
+    - Hologram Stalker
+    - Impossible Choice
+    - In the Pale Moonlight
+    - Kobayashi Maru Scenario
+    - L'Rell, Fierce Visionary
+    - MACO Strike Team
+    - Make It So
+    - Mirror Universe Intrusion
+    - Neelix, Moral Support
+    - Photosynthetic Physician
+    - Prosper, Tome-Bound
+    - Quark, Humble Proprietor
+    - Replicator
+    - Riku of Many Paths
+    - Rok-Tahk, Budding Scientist
+    - Saurian Explorer
+    - Savvy Profiteer
+    - Sela, Tal Shiar Paradox
+    - Spatial Anomaly
+    - Stable Wormhole
+    - Subspace Anomaly
+    - Tasha Yar, Out of Time
+    - Temporal Anomaly
+    - Temporal Conqueror
+    - Tenacious Drone
+    - The City on the Edge of Forever
+    - The Destruction of Praxis
+    - The Duras Sisters
+    - The Inner Light
+    - Troubling Tribbles
+    - U.S.S. Cerritos, Following Up
+    - U.S.S. Enterprise-A, Free Spirit
+    payoffs:
+    - Academy Instructor
+    - Assault Drone
+    - Captain James T. Kirk
+    - Captain Jean-Luc Picard
+    - Cleveland Booker, Empath
+    - Deep Space 9
+    - Free Borg Revolutionaries
+    - Gwyndala, the Progeny
+    - Kira Nerys, Firebrand
+    - Locutus, the One Who Speaks
+    - Pah-Wraith
+    - Red Alert!
+    - Replicator
+    - Sarcophagus, Ship of the Dead
+    - Sickbay
+    - Support Mission
+    - The Naked Time
+  type:Officer:
+    enablers:
+    - Academy Instructor
+    - Beckett Mariner, Impetuous Ensign
+    - Brad Boimler, Eager Ensign
+    - Cantankerous Captain
+    - Captain Benjamin Sisko
+    - Captain James T. Kirk
+    - Captain Jean-Luc Picard
+    - Captain Jonathan Archer
+    - Captain Kathryn Janeway
+    - Captain Michael Burnham
+    - Captain Pike, Fullness of Time
+    - Cetacean Ops
+    - Commander Raffi Musiker
+    - Dathon, His Heart Open
+    - Emergency Holographic Crew
+    - Gabriel Lorca, Mirror Menace
+    - General Chang, Cold Warrior
+    - Gray and Adira, Forever Joined
+    - Hologram Janeway
+    - Kirk, Commanding Officer
+    - Nyota Uhura, Communications
+    - Obsidian Order Operative
+    - Picard, Leading by Example
+    - Saru, Unthreatened
+    - Seven of Nine, Unassimilated
+    - Starfleet Security
+    - Suus Mahna Practitioner
+    - Tactical Officer
+    - Tal Shiar Operative
+    - Tasha Yar, Out of Time
+    - Una Chin-Riley, Number One
+    - Wesley Crusher, Starfleet Cadet
+    - Will Riker, First in the Field
+    - Worf, Honor-Bound Warrior
+    payoffs:
+    - Academy Instructor
+    - Captain Benjamin Sisko
+    - Captain Jean-Luc Picard
+  type:Spacecraft:
+    enablers:
+    - Borg Cube
+    - Class-F Shuttlecraft
+    - D-7 Battle Cruiser
+    - Deep Space 9
+    - Enterprise NX-01
+    - H.M.S. Bounty, Unlikely Timeship
+    - Oberth-Class Starship
+    - Romulan Bird-of-Prey
+    - Sarcophagus, Ship of the Dead
+    - Suurok-Class Science Vessel
+    - U.S.S. Cerritos, Following Up
+    - U.S.S. Discovery, at Black Alert
+    - U.S.S. Enterprise-A, Free Spirit
+    - U.S.S. Enterprise-D, Galaxy-Class
+    - U.S.S. Excelsior, Cutting Edge
+    - U.S.S. Reliant, From Hell's Heart
+    - U.S.S. Voyager, Lone Wanderer
+    payoffs:
+    - Hemmer, Fixing What Is Broken
+    - Zefram Cochrane, Warp Pioneer

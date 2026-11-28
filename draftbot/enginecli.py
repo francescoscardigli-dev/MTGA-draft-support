@@ -30,6 +30,24 @@ def add_parsers(sub: argparse._SubParsersAction) -> None:
     rc.add_argument("--pool", default="", help="carte gia' prese separate da ';'")
     rc.add_argument("--log", type=Path, nargs="?", const=Path(), help="usa l'ultimo pick di Player.log")
     rc.add_argument("-k", type=int, default=3)
+    rc.add_argument("--synergy", action="store_true",
+                    help="usa le sinergie nel punteggio (sperimentale: nel backtest peggiorano l'accordo)")
+
+    bd = sub.add_parser("build", help="costruisce 2-3 mazzi dal pool (da elenco o da Player.log)")
+    bd.add_argument("code")
+    bd.add_argument("--format", dest="fmt", default="premier")
+    bd.add_argument("--pool", default="", help="carte del pool separate da ';'")
+    bd.add_argument("--log", type=Path, nargs="?", const=Path(), help="pool dell'ultimo draft di Player.log")
+    bd.add_argument("-k", type=int, default=3)
+    bd.add_argument("--synergy", action="store_true", help="usa le sinergie nel punteggio (sperimentale)")
+
+    bc = sub.add_parser("build-check", help="verifica il costruttore di mazzi sui mazzi reali 17Lands")
+    bc.add_argument("code")
+    bc.add_argument("--format", dest="fmt", default="premier")
+    bc.add_argument("--cutoff", required=True)
+    bc.add_argument("--prior-sets", nargs="+", required=True)
+    bc.add_argument("--drafts", type=int, default=300)
+    bc.add_argument("--out", type=Path)
 
     bt = sub.add_parser("backtest", help="accordo con i giocatori forti e verifica del valutatore di mazzo")
     bt.add_argument("code")
@@ -41,14 +59,24 @@ def add_parsers(sub: argparse._SubParsersAction) -> None:
     bt.add_argument("--out", type=Path, help="scrive il report anche in questo file")
 
 
-def _projector(con, code: str, fmt: str) -> Projector:
+def _projector(con, code: str, fmt: str, synergy: bool = False) -> Projector:
     prior = load_prior(fmt)
     model = load_deck_model(fmt)
     if model is None:
         raise SystemExit(f"Modello del mazzo assente: esegui python -m draftbot fit-deck-model --format {fmt} --sets ...")
     book = load_book(con, code, fmt, prior=prior, half_life=prior.half_life if prior else None)
     arch = ArchetypeModel(model.lambdas, mix=model.arch_mix, tiebreak=model.tiebreak) if model.lambdas else None
-    return Projector(book, model, load_format(fmt), arch)
+    proj = Projector(book, model, load_format(fmt), arch)
+    # sinergie: solo se misurate sui game data di questo set (i temi cambiano da set a set)
+    from .synergy.measure import load_synergy
+    from .synergy.runtime import SynergyRuntime
+    from .synergy.tags import load_tags
+    sm, tags = load_synergy(code, fmt), load_tags(code)
+    proj.synergy_info = SynergyRuntime.build(sm, tags, book) if sm is not None and tags is not None else None
+    # nel punteggio solo su richiesta: nel backtest su FRA le sinergie peggiorano l'accordo (Fase 5)
+    if synergy:
+        proj.synergy = proj.synergy_info
+    return proj
 
 
 def _resolve(book, names: list[str]) -> list[Card]:
@@ -63,7 +91,7 @@ def _resolve(book, names: list[str]) -> list[Card]:
     return out
 
 
-def _from_log(con, code: str, path: Path, book) -> tuple[list[Card], list[Card], str] | None:
+def _from_log(con, code: str, path: Path, book, final: bool = False) -> tuple[list[Card], list[Card], str] | None:
     from .arenalog import find_logs, parse_files
     logs = [path] if path and str(path) not in ("", ".") else find_logs()
     if not logs:
@@ -79,6 +107,10 @@ def _from_log(con, code: str, path: Path, book) -> tuple[list[Card], list[Card],
     last = next((p for p in reversed(picks) if p.pack_cards is not None), None)
     if last is None:
         return None
+    if final:  # pool completo: tutte le carte prese (o il pool del corso, se c'e')
+        ids = d.pool if d.pool else [g for p in picks for g in p.picked]
+        to_cards = lambda ids: [book.cards[names[g]] for g in ids if g in names and names[g] in book.cards]
+        return to_cards(ids), [], d.draft_id
     pool_ids = [g for p in picks if (p.pack, p.pick) < (last.pack, last.pick) for g in p.picked]
     to_cards = lambda ids: [book.cards[names[g]] for g in ids if g in names and names[g] in book.cards]
     return to_cards(pool_ids), to_cards(last.pack_cards), f"P{last.pack + 1}p{last.pick + 1} del draft {d.draft_id}"
@@ -125,9 +157,55 @@ def run(args: argparse.Namespace) -> int:
         print(ATTRIBUTION)
         return 0
 
+    if args.command == "build-check":
+        from .engine import buildcheck as bc
+        code = load_set(args.code).code
+        c = bc.run(con, code, args.fmt, args.cutoff, [load_set(x).code for x in args.prior_sets], args.drafts)
+        text = bc.format_check(code, args.fmt, args.cutoff, c)
+        print(text)
+        if args.out:
+            args.out.write_text(text + "\n\n" + ATTRIBUTION + "\n", encoding="utf-8")
+        return 0
+
+    if args.command == "build":
+        from .engine.build import Builder
+        code = load_set(args.code).code
+        proj = _projector(con, code, args.fmt, synergy=args.synergy)
+        if args.log is not None:
+            got = _from_log(con, code, args.log, proj.book, final=True)
+            if got is None:
+                return 1
+            pool, _, where = got
+            print(f"Dal log: pool del draft {where}")
+        else:
+            pool = _resolve(proj.book, [x.strip() for x in args.pool.split(";") if x.strip()])
+        builds = Builder(proj.book, proj.model, proj.synergy).best_builds(pool, k=args.k)
+        if not builds:
+            print("Nessuna build possibile: servono almeno 22 carte giocabili in 2-3 colori.")
+            return 1
+        best = builds[0].score
+        for i, b in enumerate(builds, 1):
+            print(f"\n{i}. {b.label}: win rate attesa {b.expected_wr:.1%} (giocatore medio)"
+                  + ("" if i == 1 else f", {(b.score - best) * 100:+.2f} punti rispetto alla 1"))
+            print(f"   terre: {b.n_lands} = " + ", ".join(f"{k} {n}" for n, k in b.basics.items())
+                  + (", " + ", ".join(l.name for l in b.lands) if b.lands else ""))
+            print(f"   curva (costo: carte): " + ", ".join(f"{k}{'+' if k == 6 else ''}: {v}" for k, v in b.curve().items())
+                  + f"; creature {sum(c.is_creature for c in b.spells)}")
+            if b.synergy:
+                print(f"   sinergie: {b.synergy * 100:+.2f} punti")
+            for n in b.notes:
+                print(f"   {n}")
+            by_mv: dict[int, list[str]] = {}
+            for c in b.spells:
+                by_mv.setdefault(min(int(c.mv), 6), []).append(f"{c.name} ({c.q * 100:+.1f})")
+            for mv, names in sorted(by_mv.items()):
+                print(f"   costo {mv}{'+' if mv == 6 else ''}: " + "; ".join(sorted(names)))
+        print(ATTRIBUTION)
+        return 0
+
     # recommend
     code = load_set(args.code).code
-    proj = _projector(con, code, args.fmt)
+    proj = _projector(con, code, args.fmt, synergy=args.synergy)
     if args.log is not None:
         got = _from_log(con, code, args.log, proj.book)
         if got is None:
@@ -144,8 +222,18 @@ def run(args: argparse.Namespace) -> int:
     top = sorted(probs.items(), key=lambda kv: kv[1], reverse=True)[:4]
     print(f"Pool: {len(pool)} carte. Archetipi piu' probabili: "
           + ", ".join(f"{a} {p:.0%}" for a, p in top))
+    info = proj.synergy_info
+    if info is None:
+        print("Sinergie: non misurate per questo set (servono i game data: python -m draftbot synergy)")
+    elif proj.synergy is None:
+        print("Sinergie: mostrate come informazione, non nel punteggio (usa --synergy per includerle)")
     for i, o in enumerate(opts, 1):
         print(f"{i}. {' + '.join(o.names)}  ->  {o.value * 100:+.2f} punti di win rate attesa")
         print(f"   {o.explain()}")
+        if info is not None:
+            roles = {n: info.roles(n) for n in o.names}
+            roles = {n: r for n, r in roles.items() if r}
+            if roles:
+                print("   temi: " + "; ".join(f"{n}: {', '.join(r)}" for n, r in roles.items()))
     print(ATTRIBUTION)
     return 0

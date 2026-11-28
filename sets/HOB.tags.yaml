@@ -1,0 +1,420 @@
+# Tag dei temi di sinergia, generati da 'python -m draftbot tag-set' con regole sul testo.
+# RIVEDERE A MANO: togliere i falsi positivi, aggiungere quelli mancanti, poi reviewed: true.
+# Questo file non viene mai sovrascritto da add-set o tag-set.
+set_code: HOB
+generated: '2026-11-28'
+reviewed: false
+notes:
+- generato con regole sul testo Oracle (tags/themes.yaml) e temi automatici del set
+themes:
+  artifacts:
+    enablers:
+    - Bejeweled Warg
+    - Crude Bent Blade
+    - Dori, Bearer of Friends
+    - Dwarven Mattock
+    - Dwarven Shortsword
+    - Dáin Ironfoot
+    - Getaway Barrel
+    - Giant's Boulder
+    - Glamdring, Foe-hammer // Gleam of Death
+    - Gleaming Splendor
+    - Goblin Plate Mail
+    - Great Gilded Boat
+    - Iron Hills Blacksmith
+    - Key to the Side-Door
+    - Long-Bodied Grey Dog
+    - My Precious // Allure of Power
+    - Orcrist, Goblin-cleaver
+    - Ragged Short Spear
+    - Smaug the Magnificent
+    - Smaug, Wicked Worm
+    - Sting, Bilbo's Sword
+    - Stone-Giant of High Pass
+    - The Arkenstone // Seek the Heart
+    - The Black Arrow
+    - The Misty Mountains Cold
+    - The Sackville-Bagginses
+    - Thrór's Map
+    - Well-Worn Spatula
+    - Wizard's Staff
+    payoffs:
+    - Fateful Discovery
+  counters:
+    enablers:
+    - Bard the Bowman
+    - Bejeweled Warg
+    - Belladonna Took
+    - Beorn's Hospitality
+    - Bifur, Melodic Rider
+    - Dancing from Dark to Dawn
+    - Duskwatch Hunter
+    - Elvenking's Halls
+    - Goblin-town
+    - Gollum, Riddle Master
+    - Gollum, Silent Slinker // Meager Meal
+    - Guardian of the Halls
+    - Iron Hills
+    - Lake-town
+    - Lakeshore Apothecary
+    - Little Bear
+    - Mirkwood
+    - Mirkwood Nurturer
+    - Moment of Glory
+    - Nasty Little Rabbit
+    - Ravenhill Flock
+    - Rhovanion Rampager
+    - The Mountain-king's Return
+    - Thranduil's Company
+    - Troll Negotiations
+    - Warg Tactics
+    - Wilderland Scrounger
+    payoffs:
+    - Belladonna Took
+    - Great Ugly-Looking Goblin // Clap! Snap!
+    - Last Light of Durin's Day
+    - Little Bear
+    - Wilderland Scrounger
+  graveyard:
+    enablers:
+    - Balin, Loremaster
+    - Bilbo, Luckwearer // Burglar's Plot
+    - Cantankerous Keepers
+    - Confusticate and Bebother
+    - Glamdring, Foe-hammer // Gleam of Death
+    - Key to the Side-Door
+    - Most Decrepit Old Bird // Speak Secrets
+    - Ragged Short Spear
+    - Riddles in the Dark
+    - Silvan Reveler
+    - Thranduil, Sindarin Liege // Silvan Rally
+    - Thranduil, the Elvenking
+    - Thrór's Map
+    - Tom, Bert, and William
+    - Uncover the Moon-Letters
+    - Óin the Brave
+    payoffs:
+    - Along the Crooked Way
+    - Bilbo, Thief in the Night
+    - Eagle's Rescue
+    - Gathering of Darkness
+    - Gollum the Abandoned
+    - Moment of Glory
+    - Most Decrepit Old Bird // Speak Secrets
+    - Plunder the Trollshaws
+    - Silvan Reveler
+    - The Mountain-king's Return
+    - Thranduil, the Elvenking
+    - Tidings of War
+  kw:Amass:
+    enablers:
+    - Along the Crooked Way
+    - Azog, Moria's Ruin
+    - Bolg of the North
+    - Bothersome Noisemaker
+    - Down, Down to Goblin-town
+    - Fearsome Goblin Pair
+    - Gathering of Darkness
+    - Goblin Plate Mail
+    - Goblin-town Flunkies
+    - Great Ugly-Looking Goblin // Clap! Snap!
+    - Misty Mountains Raider
+    - Rage into the Valley
+    - Rhovanion Rampager
+    - Tidings of War
+    payoffs: []
+  kw:Ferocious:
+    enablers:
+    - Nasty Little Rabbit
+    - Nighthowl Pursuer
+    - Ravening Warg
+    - The Chief Warg
+    - Wargling
+    - Wilderland Scrounger
+    payoffs: []
+  kw:Recruit:
+    enablers:
+    - Bard's Company
+    - Celebrate the Mountain-king
+    - Esgaroth Garrison
+    - Great Gilded Boat
+    - Lake-town Lookout
+    - Long Lake Nuisance
+    - Patient Instructor
+    - Sound the Trumpets
+    - The Mountain-king's Return
+    - The Queen of Dale
+    payoffs: []
+  kw:Storied:
+    enablers:
+    - Balin, Loremaster
+    - Bifur, Melodic Rider
+    - Bombur, Gentle Dreamer
+    - Dáin, Lord of the Iron Hills
+    - Fíli the Pathfinder
+    - Kíli the Resourceful
+    - Ori, Keeper of Songs
+    - Thorin Oakenshield
+    - Óin the Brave
+    payoffs: []
+  lands:
+    enablers:
+    - Beorn, Reluctant Host // Till and Tend
+    - Down in the Valley
+    - Elven Passage
+    - Hobbit Hole
+    - Old Thrush
+    - Thranduil's Company
+    - Thrór's Map
+    - Troop of Ponies
+    payoffs:
+    - Attercop
+    - Beorn's Hospitality
+    - Boughside Wanderers
+    - Dancing from Dark to Dawn
+    - Down in the Valley
+    - Elven Raft-Steerer
+    - Mirkwood Meditator
+    - Silvan Reveler
+    - Thranduil's Company
+    - Thranduil, Sindarin Liege // Silvan Rally
+  sacrifice:
+    enablers:
+    - An Unexpected Party // At the Door
+    - Bard, King of Dale
+    - Bejeweled Warg
+    - Chief Warg's Company
+    - Dancing from Dark to Dawn
+    - Dori, Bearer of Friends
+    - Down in the Valley
+    - Dwarven Shortsword
+    - Dáin Ironfoot
+    - Fearsome Goblin Pair
+    - Front Porch Sentries
+    - Fíli the Pathfinder
+    - Gleaming Splendor
+    - Head of the Hunt
+    - Iron Hills Blacksmith
+    - Lake-town Lookout
+    - Long-Bodied Grey Dog
+    - Orcrist, Goblin-cleaver
+    - Rhovanion Rampager
+    - Smaug the Magnificent
+    - Smaug, Wicked Worm
+    - Stone-Giant of High Pass
+    - The Eagles Are Coming!
+    - The Lonely Mountain
+    - The Master of Lake-town
+    - The Misty Mountains Cold
+    - The Notary Hobbits
+    - The Sackville-Bagginses
+    - Thranduil, Sindarin Liege // Silvan Rally
+    payoffs:
+    - Bolg of the North
+    - Gollum the Abandoned
+    - My Precious // Allure of Power
+    - Rhovanion Rampager
+    - Snowslope Hunter
+    - Stir Up Trouble
+    - Stone-Giant of High Pass
+    - The Sackville-Bagginses
+    - Tom, Bert, and William
+  spells:
+    enablers:
+    - An Unexpected Party // At the Door
+    - Beorn, Reluctant Host // Till and Tend
+    - Bilbo Baggins, Burglar // Take a Glance
+    - Bilbo's Deadly Slice
+    - Bilbo's Gambit
+    - Bilbo, Luckwearer // Burglar's Plot
+    - Bofur, Reliable Guardian // Concerted Care
+    - Confusticate and Bebother
+    - Desolation of Smaug
+    - Gandalf, Goblins' Bane // Flameshape
+    - Gathering of Darkness
+    - Glamdring, Foe-hammer // Gleam of Death
+    - Glóin the Mighty // Easy Pickings
+    - Gnashing of Teeth
+    - Gollum, Silent Slinker // Meager Meal
+    - Great Ugly-Looking Goblin // Clap! Snap!
+    - Inside Information
+    - Lake-town Mariners // Gone Fishing
+    - Magnificent End
+    - Moment of Glory
+    - Most Decrepit Old Bird // Speak Secrets
+    - My Precious // Allure of Power
+    - Pinecone Strike
+    - Plunder the Trollshaws
+    - Quarrel
+    - Rage into the Valley
+    - Reverent Howl
+    - Riddles in the Dark
+    - Settle the Wreckage
+    - Smaug's Fury
+    - Smaug, the Great Calamity // Spew Flame
+    - Sound the Trumpets
+    - Stir Up Trouble
+    - Stone by Sunlight
+    - Supper for Spiders
+    - The Arkenstone // Seek the Heart
+    - The Eagles Are Coming!
+    - Thorin's Last Stand
+    - Thranduil's Decree
+    - Thranduil, Sindarin Liege // Silvan Rally
+    - Through the Forest Gate
+    - Tidings of War
+    - Troll Negotiations
+    - Uneasy Partings
+    - Velvetwing Butterflies // Gaze in Wonder
+    - Vow to Erebor
+    - Warg Tactics
+    payoffs:
+    - Bilbo, Thief in the Night
+    - Bothersome Noisemaker
+    - Gandalf, Goblins' Bane // Flameshape
+    - Glamdring, Foe-hammer // Gleam of Death
+    - Most Decrepit Old Bird // Speak Secrets
+    - Uncover the Moon-Letters
+    - Wizard's Staff
+  tokens:
+    enablers:
+    - An Unexpected Party // At the Door
+    - Bard, King of Dale
+    - Bejeweled Warg
+    - Chief Warg's Company
+    - Dancing from Dark to Dawn
+    - Dori, Bearer of Friends
+    - Down in the Valley
+    - Dwarven Shortsword
+    - Dáin Ironfoot
+    - Fíli the Pathfinder
+    - Gleaming Splendor
+    - Head of the Hunt
+    - Iron Hills Blacksmith
+    - Long-Bodied Grey Dog
+    - Orcrist, Goblin-cleaver
+    - Smaug the Magnificent
+    - Smaug, Wicked Worm
+    - Stone-Giant of High Pass
+    - The Eagles Are Coming!
+    - The Lonely Mountain
+    - The Misty Mountains Cold
+    - The Notary Hobbits
+    - The Sackville-Bagginses
+    - Thranduil, Sindarin Liege // Silvan Rally
+    payoffs:
+    - Bard's Company
+    - Belladonna Took
+    - Dwarven Provisioner
+    - Fíli the Pathfinder
+    - Orcrist, Goblin-cleaver
+    - Part in Friendship
+    - The Arkenstone // Seek the Heart
+    - Thorin's Last Stand
+  type:Dwarf:
+    enablers:
+    - Balin, Loremaster
+    - Bifur, Melodic Rider
+    - Bofur, Reliable Guardian // Concerted Care
+    - Bombur, Gentle Dreamer
+    - Dori, Bearer of Friends
+    - Dwalin, Weaponmaster
+    - Dwarven Mauler
+    - Dwarven Provisioner
+    - Dáin Ironfoot
+    - Dáin's Company
+    - Dáin, Lord of the Iron Hills
+    - Fíli the Pathfinder
+    - Glóin the Mighty // Easy Pickings
+    - Iron Hills Blacksmith
+    - Iron Hills Stalwart
+    - Kíli the Resourceful
+    - Nori, Teller of Tales
+    - Ori, Keeper of Songs
+    - Thorin Oakenshield
+    - Thorin, Mountain-king
+    - Óin the Brave
+    payoffs:
+    - Balin, Loremaster
+    - Bifur, Melodic Rider
+    - Dwarven Mattock
+    - Fíli the Pathfinder
+    - Iron Hills
+    - Kíli the Resourceful
+  type:Elf:
+    enablers:
+    - Boughside Wanderers
+    - Cantankerous Keepers
+    - Elrond, Moon-Reader
+    - Elven Raft-Steerer
+    - Elvenking's Harper
+    - Galion, Elvenking's Butler
+    - Guardian of the Halls
+    - Mirkwood Meditator
+    - Mirkwood Nurturer
+    - Mirkwood Pathmaker
+    - Silvan Reveler
+    - Thranduil's Company
+    - Thranduil, Sindarin Liege // Silvan Rally
+    - Thranduil, the Elvenking
+    - Wood Elves
+    - Woodland Weavemaster
+    payoffs:
+    - Elvenking's Halls
+    - Thranduil, the Elvenking
+    - Woodland Weavemaster
+  type:Equipment:
+    enablers:
+    - Crude Bent Blade
+    - Dwarven Mattock
+    - Dwarven Shortsword
+    - Glamdring, Foe-hammer // Gleam of Death
+    - Goblin Plate Mail
+    - My Precious // Allure of Power
+    - Orcrist, Goblin-cleaver
+    - Ragged Short Spear
+    - Sting, Bilbo's Sword
+    - The Black Arrow
+    - Well-Worn Spatula
+    - Wizard's Staff
+    payoffs:
+    - Dwalin, Weaponmaster
+    - Iron Hills Stalwart
+    - Kíli the Resourceful
+    - The Lonely Mountain
+    - Thorin, Mountain-king
+    - Vow to Erebor
+  type:Human:
+    enablers:
+    - Bard the Bowman
+    - Bard's Company
+    - Bard, King of Dale
+    - Beorn, Reluctant Host // Till and Tend
+    - Esgaroth Garrison
+    - Lake-town Lookout
+    - Lake-town Mariners // Gone Fishing
+    - Lake-town Toymaker
+    - Lakeshore Apothecary
+    - Master's Councillors
+    - Patient Instructor
+    - The Master of Lake-town
+    - The Queen of Dale
+    payoffs:
+    - Bard's Company
+    - Lake-town
+  type:Wolf:
+    enablers:
+    - Bejeweled Warg
+    - Chief Warg's Company
+    - Desolation Prowler
+    - Duskwatch Hunter
+    - Head of the Hunt
+    - Nighthowl Pursuer
+    - Ravening Warg
+    - Rhovanion Rampager
+    - The Chief Warg
+    - Wargling
+    - Wilderland Scrounger
+    payoffs:
+    - Bejeweled Warg
+    - Mirkwood

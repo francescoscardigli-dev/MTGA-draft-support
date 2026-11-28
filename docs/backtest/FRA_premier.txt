@@ -7,6 +7,8 @@ metodo       pick   top-1   top-3  carte in comune
 motore      12600   50.8%   81.2%                 
 qualita'    12600   40.0%   78.4%                 
 ATA         12600   46.0%   80.7%                 
+Sinergie (Fase 5): temi tenuti: kw:Empower Jace +0.88, lifegain +1.21, spells +1.02; pendenza fuori campione 0.44 +- 0.03
+motore + sinergie: top-1 47.2%, top-3 78.6%
 Differenza di top-1 del motore (intervallo al 95%, bootstrap sui draft): contro qualita': +10.9 punti [+9.9, +11.9]; contro ATA: +4.9 punti [+3.7, +6.1]
 
 Per fase della busta (top-1 / top-3):

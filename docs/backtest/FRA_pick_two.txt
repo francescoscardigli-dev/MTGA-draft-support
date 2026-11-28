@@ -7,6 +7,8 @@ metodo       pick   top-1   top-3  carte in comune
 motore       6300   36.4%   57.4%            61.5%
 qualita'     6300   30.5%   50.5%            56.0%
 ATA          6300   33.8%   56.5%            59.1%
+Sinergie (Fase 5): temi tenuti: lifegain +2.75; pendenza fuori campione 0.44 +- 0.06
+motore + sinergie: top-1 35.3%, top-3 55.4%, carte in comune 60.8%
 Differenza di top-1 del motore (intervallo al 95%, bootstrap sui draft): contro qualita': +5.9 punti [+4.7, +7.1]; contro ATA: +2.6 punti [+1.2, +4.0]
 
 Per fase della busta (top-1 / top-3):

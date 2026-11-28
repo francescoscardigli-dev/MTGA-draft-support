@@ -105,6 +105,8 @@ def build_parser() -> argparse.ArgumentParser:
     add_parsers(sub)
     from .enginecli import add_parsers as add_engine
     add_engine(sub)
+    from .synergycli import add_parsers as add_synergy
+    add_synergy(sub)
     return p
 
 
@@ -144,7 +146,10 @@ def main(argv: list[str] | None = None) -> int:
                     "SELECT kind, detail FROM issues WHERE set_code=? ORDER BY kind, detail", (code,)):
                 print(f"{kind:<24} {detail}")
             return 0
-        if args.command in ("fit-deck-model", "recommend", "backtest"):
+        if args.command in ("tag-set", "synergy"):
+            from .synergycli import run as run_synergy
+            return run_synergy(args)
+        if args.command in ("fit-deck-model", "recommend", "backtest", "build", "build-check"):
             from .enginecli import run as run_engine
             return run_engine(args)
         if args.command in ("update-data", "stats", "fit-prior", "calibrate"):

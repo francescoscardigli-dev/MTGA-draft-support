@@ -1,0 +1,723 @@
+# Tag dei temi di sinergia, generati da 'python -m draftbot tag-set' con regole sul testo.
+# RIVEDERE A MANO: togliere i falsi positivi, aggiungere quelli mancanti, poi reviewed: true.
+# Questo file non viene mai sovrascritto da add-set o tag-set.
+set_code: MSH
+generated: '2026-11-28'
+reviewed: false
+notes:
+- generato con regole sul testo Oracle (tags/themes.yaml) e temi automatici del set
+themes:
+  artifacts:
+    enablers:
+    - A.I.M. Synthoids
+    - Aerial Doombot
+    - Ant-Man's Army
+    - Arc Reactor
+    - Arnim Zola, Bio-Fanatic
+    - 'Avengers: Under Siege'
+    - Captain America's Shield
+    - Castle Doom
+    - Cosmic Cube
+    - Crimson Operative
+    - Cyberdrive Awakener
+    - Deadly Dispute
+    - Death to Our Enemies
+    - Dependable Quinjet
+    - Doctor Doom
+    - Falcon's Wing Harness
+    - Futurist Forge
+    - H.E.R.B.I.E. Scout Unit
+    - HYDRA Assault Robot
+    - Hawkeye's Bow
+    - Heroic Feast
+    - Horn of Greed
+    - Hydraulic Helper
+    - Iron Lad, Diverging Destiny
+    - Iron Man Armor
+    - Iron Man, Master of Machines
+    - Iron Man, Titan of Innovation
+    - Ironheart, Clever Champion
+    - Kree Sentinel
+    - M.O.D.O.K.
+    - Machinesmith Automaton
+    - Mjölnir, Hammer of Thor
+    - Project Deathlok Soldier
+    - Roaming Throne
+    - Robot Domination
+    - S.H.I.E.L.D. Deployment Drone
+    - S.H.I.E.L.D. Flying Car
+    - S.H.I.E.L.D. Helicarrier
+    - S.H.I.E.L.D. Spy Kit
+    - Simulacrum Synthesizer
+    - Stark Industries Executive
+    - Stolen Stark Tech
+    - Super Suit
+    - Super-Adaptoid
+    - Sword of Fire and Ice
+    - The Mind Stone
+    - The Ten Rings
+    - The Vision
+    - Tony Stark // The Invincible Iron Man
+    - U.S.Agent, John Walker
+    - Ultron Drone
+    - Ultron, Artificial Malevolence
+    - Vibranium Energy Daggers
+    - Viv Vision, Teen Synthezoid
+    - Wakandan Drone Flock
+    - War Machine, Legacy of Iron
+    payoffs:
+    - Armor Wars
+    - Castle Doom
+    - Cyberdrive Awakener
+    - HYDRA Assault Robot
+    - Hydraulic Helper
+    - Iron Man Armor
+    - Iron Man, Master of Machines
+    - Machinesmith Automaton
+    - Mechanized Production
+    - Moon Girl and Devil Dinosaur
+    - Shuri, Wakandan Inventor
+    - Simulacrum Synthesizer
+    - Ultron, Artificial Malevolence
+  counters:
+    enablers:
+    - Abomination, Terrifying Titan
+    - Aerial Doombot
+    - Agent Maria Hill
+    - Agent Phil Coulson
+    - Alien Invasion
+    - Ant-Man, Colony Commander
+    - Archangel of Thune
+    - Atlantean Cavalry
+    - Beast, Erudite Aerialist
+    - Black Panther, Wakandan King
+    - Black Widow, Super Spy
+    - Bold Biochemist
+    - Brave Brawler
+    - Bruce Banner // The Incredible Hulk
+    - Captain Marvel, Earth's Protector
+    - Claim the Kingdom
+    - Colleen Wing, Street Samurai
+    - Crossbones, Malicious Mercenary
+    - Fin Fang Foom
+    - Go Nuts!
+    - Hercules, Prince of Power
+    - Heroic Feast
+    - Hulkling, Burgeoning Bruiser
+    - Human Torch, Johnny Storm
+    - Invisible Woman, Sue Storm
+    - Justice, Vance Astrovik
+    - Ka-Zar of the Savage Land
+    - Kang the Conqueror
+    - Kid Loki
+    - Knight of Wundagore
+    - Light of Promise
+    - Loki Laufeyson
+    - Machinesmith Automaton
+    - Mister Hyde, Monster Within
+    - Mockingbird, Ace Agent
+    - Monica Rambeau // Photon, Living Light
+    - Nick Fury, Agent of S.H.I.E.L.D.
+    - Ninja of the Hand
+    - Origin of the Avengers
+    - Pet Avengers
+    - Political Triumph
+    - Quicksilver, Brash Blur
+    - Red Hulk
+    - Restorative Technique
+    - Roxxon Brutes
+    - Serpent Specialist
+    - She-Hulk, Jade Defender
+    - Stature, Size Shifter
+    - Take Up the Shield
+    - Thanos, the Mad Titan
+    - The Astonishing Ant-Man
+    - The Ruinous Wrecking Crew
+    - The Thing, Ben Grimm
+    - Tigra, Feline Fury
+    - Training Regimen
+    - Ultron Drone
+    - Unliving Legionnaire
+    - Viv Vision, Teen Synthezoid
+    - Volcanic Villain
+    - Wakandan Royal Guard
+    - White Tiger, Ava Ayala
+    - White Widow, Free Agent
+    - Wolverine, Best There Is
+    - Wonder Man, Hollywood Hero
+    - World War Hulk
+    payoffs:
+    - Alien Invasion
+    - Archangel of Thune
+    - Dauthi Voidwalker
+    - Grim Reaper, Lethal Legionnaire
+    - Hellcat, Undying Vigilante
+    - Origin of the Avengers
+    - Political Triumph
+    - The Ruinous Wrecking Crew
+    - Thunderbolts Conspiracy
+    - Training Regimen
+    - Vision Quest
+    - Wakandan Royal Guard
+  graveyard:
+    enablers:
+    - A.I.M. Synthoids
+    - Bullseye, Death Dealer
+    - Earth's Mightiest Heroes
+    - Falcon, Winged Wonder
+    - HYDRA Troopers
+    - Hawkeye, Master Marksman
+    - Hour of Defeat
+    - K'un-Lun Warrior
+    - Misty Knight, Hero for Hire
+    - Mole Man, Moloid Master
+    - Moonstone, Harsh Mistress
+    - Rapid Rescue
+    - Rewrite History
+    - Rick Jones, Destined Sidekick
+    - Surveillance Room
+    - The Ruinous Wrecking Crew
+    - Thirst for Knowledge
+    - Three Steps Ahead
+    - Titania, Rugged Rumbler
+    - Vision of Love
+    payoffs:
+    - Arnim Zola, Bio-Fanatic
+    - Baron Helmut Zemo
+    - Call Damage Control
+    - Decoy Ploy
+    - Grim Reaper, Lethal Legionnaire
+    - HYDRA Troopers
+    - Killmonger, Scourge of Wakanda
+    - Klaw, Sonic Subjugator
+    - Mole Man, Moloid Master
+    - Moonstone, Harsh Mistress
+    - Night Nurse, Healer of Heroes
+    - Project Deathlok Soldier
+    - Punishing Punch
+    - Return to the Ranks
+    - Rewrite History
+    - Seize the Day
+    - Thor, God of Thunder
+    - Too Evil to Stay Dead
+    - Undercover Skrull
+    - Unliving Legionnaire
+    - White Widow, Free Agent
+    - Winter Soldier, Icy Assassin
+  kw:Connive:
+    enablers:
+    - A.I.M. Scientists
+    - Baron Helmut Zemo
+    - Baron Strucker, HYDRA Overlord
+    - Kang, Temporal Tyrant
+    - Leader, Super-Genius
+    - M.O.D.O.K.
+    - Madame Masque
+    - Red Room Recruit
+    - Swordsman, Sharp Scoundrel
+    - Trickster's Stratagem
+    - Villainous Hideout
+    payoffs: []
+  kw:Power-up:
+    enablers:
+    - Abomination, Terrifying Titan
+    - Aerial Doombot
+    - Bold Biochemist
+    - Brave Brawler
+    - Captain Marvel, Earth's Protector
+    - Hercules, Prince of Power
+    - Hulk, Gamma Goliath
+    - Human Torch, Johnny Storm
+    - Kang the Conqueror
+    - Loki Laufeyson
+    - Nick Fury, Agent of S.H.I.E.L.D.
+    - Ninja of the Hand
+    - Pet Avengers
+    - Quicksilver, Brash Blur
+    - Serpent Specialist
+    - She-Hulk, Jade Defender
+    - Stature, Size Shifter
+    - Thanos, the Mad Titan
+    - Ultron Drone
+    - Unliving Legionnaire
+    - Viv Vision, Teen Synthezoid
+    - Volcanic Villain
+    - White Tiger, Ava Ayala
+    - Wonder Man, Hollywood Hero
+    payoffs: []
+  kw:Teamwork:
+    enablers:
+    - Atlantis Attacks
+    - Cruel Alliance
+    - Earth's Mightiest Heroes
+    - Go Nuts!
+    - HULK SMASH!
+    - Helicarrier Strike
+    - Murdock's Crusade
+    - Repulsor Blast
+    - Team Tactics
+    - Too Evil to Stay Dead
+    - We Say Thee Nay!
+    - Widow's Bite
+    payoffs:
+    - Agent Maria Hill
+  lands:
+    enablers:
+    - A.I.M. Scientists
+    - Borough Backup
+    - Escape to the Wilds
+    - H.E.R.B.I.E. Scout Unit
+    - Kree Sentinel
+    - Roxxon Brutes
+    - Savage Land Dinosaur
+    payoffs:
+    - Claim the Kingdom
+    - Ka-Zar of the Savage Land
+    - Mole Man, Moloid Master
+  lifegain:
+    enablers:
+    - A.I.M. Labs
+    - Archangel of Thune
+    - Asgardian Citadel
+    - Avengers Hangar
+    - Birnin Zana Plaza
+    - Brave Brawler
+    - Captain Marvel, Earth's Protector
+    - Cloak and Dagger, Entwined
+    - Crowd of True Believers
+    - Cruel Alliance
+    - Doom Reigns Supreme
+    - Fisk Tower
+    - HYDRA Infiltration
+    - Hell's Kitchen
+    - Hero in Training
+    - Invisible Woman, Sue Storm
+    - Kang, Temporal Tyrant
+    - Kingpin's Enforcers
+    - Los Diablos Missile Base
+    - M.O.D.O.K.
+    - Night Nurse, Healer of Heroes
+    - Pym Technologies
+    - Rapid Rescue
+    - Righteous Fury
+    - Stark Industries
+    - Subterranean Cavern
+    - Super-Adaptoid
+    - Take Up the Shield
+    - Thanos, the Mad Titan
+    - Yellowjacket, Heartless Marauder
+    payoffs:
+    - Archangel of Thune
+    - Heroic Feast
+    - Light of Promise
+    - Tigra, Feline Fury
+  sacrifice:
+    enablers:
+    - Agents of HYDRA
+    - Alien Invasion
+    - Ant-Man's Army
+    - Ant-Man, Colony Commander
+    - Arnim Zola, Bio-Fanatic
+    - Atlantis Attacks
+    - 'Avengers: Under Siege'
+    - Beast Within
+    - Black Panther, Vanguard
+    - Borough Backup
+    - Castle Doom
+    - Construct a Cosmic Cube
+    - Deadly Dispute
+    - Death to Our Enemies
+    - Doctor Doom
+    - Falcon, Winged Wonder
+    - HYDRA Troopers
+    - Hellcat, Undying Vigilante
+    - Heroic Feast
+    - Hire a Crew
+    - Invisible Woman, Sue Storm
+    - Iron Man, Titan of Innovation
+    - Ka-Zar of the Savage Land
+    - Madame Hydra
+    - Madame Masque
+    - Mechanized Production
+    - Mole Man, Moloid Master
+    - Monstrous Rage
+    - Multiversal Incursion
+    - Namor the Sub-Mariner
+    - Okoye, Dora Milaje Leader
+    - Pet Avengers
+    - Primal Vigor
+    - Robot Domination
+    - S.H.I.E.L.D. Deployment Drone
+    - S.H.I.E.L.D. Helicarrier
+    - Simulacrum Synthesizer
+    - Stark Industries Executive
+    - Super-Skrull
+    - The Astonishing Ant-Man
+    - The Coming of Galactus
+    - The Sentry, Golden Guardian
+    - The Unbeatable Squirrel Girl
+    - Three Steps Ahead
+    - U.S.Agent, John Walker
+    - Ultron Drone
+    - Ultron, Artificial Malevolence
+    - White Tiger, Ava Ayala
+    payoffs:
+    - Bullseye, Death Dealer
+    - Castle Doom
+    - Deadly Dispute
+    - K'un-Lun Warrior
+    - Killmonger, Scourge of Wakanda
+    - Kingpin's Enforcers
+    - Massacre Girl
+    - Vision of Love
+  spells:
+    enablers:
+    - Atlantis Attacks
+    - Avengers Disassembled
+    - Beast Within
+    - Blazing Crescendo
+    - Borough Backup
+    - Call Damage Control
+    - Chaos Warp
+    - Counterspell
+    - Cruel Alliance
+    - Dark Deed
+    - Deadly Dispute
+    - Decoy Ploy
+    - Depower
+    - Dig Through Time
+    - Don't Move
+    - Earth's Mightiest Heroes
+    - Ephemerate
+    - Epic Fight
+    - Escape to the Wilds
+    - Evil's Thrall
+    - Extinction Event
+    - Fight to the Death
+    - Final Act
+    - Final Showdown
+    - Force of Vigor
+    - Fury of the Horde
+    - Giant Growth
+    - Go Nuts!
+    - HULK SMASH!
+    - Helicarrier Strike
+    - Heroic Intervention
+    - Hex Magic
+    - Hire a Crew
+    - Hour of Defeat
+    - I Am Iron Man
+    - Lightning Strike
+    - Monstrous Rage
+    - Multiversal Incursion
+    - Murdock's Crusade
+    - Narset's Reversal
+    - Panther Pounce
+    - Path to Exile
+    - Photon Blast Barrage
+    - Punishing Punch
+    - Pym Particles
+    - Rapid Rescue
+    - Repulsor Blast
+    - Restorative Technique
+    - Return to the Ranks
+    - Righteous Fury
+    - Seize the Day
+    - Show and Tell
+    - Steelshaper's Gift
+    - Sundering Growth
+    - Take Up the Shield
+    - Team Tactics
+    - Teferi's Protection
+    - Thirst for Knowledge
+    - Three Steps Ahead
+    - Too Evil to Stay Dead
+    - Trickster's Stratagem
+    - Truck Toss
+    - Vision Quest
+    - Vision of Love
+    - Visions of Villainy
+    - We Say Thee Nay!
+    - Widow's Bite
+    - Worlds Within Worlds
+    payoffs:
+    - Agent of Atlas
+    - Crimson Operative
+    - Death to Our Enemies
+    - Fin Fang Foom
+    - Kree Commandos
+    - Loki Laufeyson
+    - Monica Rambeau // Photon, Living Light
+    - Namor the Sub-Mariner
+    - Narset's Reversal
+    - Quake, Agent of S.H.I.E.L.D.
+    - Speed, Young Avenger
+    - Storm, Force of Nature
+    - The Scarlet Witch
+    - The Vision
+    - Thor Odinson
+    - Thor, God of Thunder
+    - Wiccan, Rising Magician
+  tokens:
+    enablers:
+    - Agents of HYDRA
+    - Alien Invasion
+    - Ant-Man's Army
+    - Ant-Man, Colony Commander
+    - Arnim Zola, Bio-Fanatic
+    - Atlantis Attacks
+    - 'Avengers: Under Siege'
+    - Beast Within
+    - Black Panther, Vanguard
+    - Borough Backup
+    - Castle Doom
+    - Construct a Cosmic Cube
+    - Deadly Dispute
+    - Death to Our Enemies
+    - Doctor Doom
+    - Falcon, Winged Wonder
+    - HYDRA Troopers
+    - Heroic Feast
+    - Hire a Crew
+    - Invisible Woman, Sue Storm
+    - Iron Man, Titan of Innovation
+    - Ka-Zar of the Savage Land
+    - Madame Hydra
+    - Madame Masque
+    - Mechanized Production
+    - Mole Man, Moloid Master
+    - Monstrous Rage
+    - Multiversal Incursion
+    - Namor the Sub-Mariner
+    - Okoye, Dora Milaje Leader
+    - Pet Avengers
+    - Primal Vigor
+    - Robot Domination
+    - S.H.I.E.L.D. Deployment Drone
+    - S.H.I.E.L.D. Helicarrier
+    - Simulacrum Synthesizer
+    - Stark Industries Executive
+    - Super-Skrull
+    - The Astonishing Ant-Man
+    - The Coming of Galactus
+    - The Sentry, Golden Guardian
+    - The Unbeatable Squirrel Girl
+    - Three Steps Ahead
+    - U.S.Agent, John Walker
+    - Ultron Drone
+    - Ultron, Artificial Malevolence
+    - White Tiger, Ava Ayala
+    payoffs:
+    - Anthem of Champions
+    - Black Panther, Vanguard
+    - Hire a Crew
+    - Hulkling, Burgeoning Bruiser
+    - Mister Fantastic, Reed Richards
+    - Okoye, Dora Milaje Leader
+    - Political Triumph
+    - The Super Hero Civil War
+    - Warleader's Call
+  type:Equipment:
+    enablers:
+    - Captain America's Shield
+    - Falcon's Wing Harness
+    - Hawkeye's Bow
+    - Iron Man Armor
+    - Mjölnir, Hammer of Thor
+    - S.H.I.E.L.D. Spy Kit
+    - Stolen Stark Tech
+    - Super Suit
+    - Sword of Fire and Ice
+    - Vibranium Energy Daggers
+    payoffs:
+    - Captain America, First Avenger
+    - Super-Soldier Serum
+    - Swordsman, Sharp Scoundrel
+    - The Mighty Thor, Jane Foster
+    - Winter Soldier, Icy Assassin
+  type:Hero:
+    enablers:
+    - Agent 13, Sharon Carter
+    - Agent Maria Hill
+    - Agent Phil Coulson
+    - Agent of Atlas
+    - Agents of S.H.I.E.L.D.
+    - Ant-Man, Colony Commander
+    - Beast, Erudite Aerialist
+    - Black Panther, Vanguard
+    - Black Panther, Wakandan King
+    - Black Widow, Double Agent
+    - Black Widow, Super Spy
+    - Brave Brawler
+    - Bruce Banner // The Incredible Hulk
+    - Captain America, First Avenger
+    - Captain America, Living Legend
+    - Captain America, Super-Soldier
+    - Captain America, Wings of Freedom
+    - Captain Mar-Vell, Space-Born
+    - Captain Marvel, Earth's Protector
+    - Cloak and Dagger, Entwined
+    - Colleen Wing, Street Samurai
+    - Daredevil, Man Without Fear
+    - Doc Samson, Super Psychiatrist
+    - Echo, Perceptive Prodigy
+    - Falcon, Winged Wonder
+    - Guerrilla Gorilla
+    - Hawkeye, Master Marksman
+    - Hawkeye, Young Avenger
+    - Hellcat, Undying Vigilante
+    - Hercules, Prince of Power
+    - Hero in Training
+    - Hulk, Gamma Goliath
+    - Hulkling, Burgeoning Bruiser
+    - Human Torch, Johnny Storm
+    - Invisible Woman, Sue Storm
+    - Iron Fist, Living Weapon
+    - Iron Lad, Diverging Destiny
+    - Iron Man, Master of Machines
+    - Iron Man, Titan of Innovation
+    - Ironheart, Clever Champion
+    - Jennifer Walters // The Sensational She-Hulk
+    - Jessica Jones, Private Eye
+    - Justice, Vance Astrovik
+    - K'un-Lun Warrior
+    - Ka-Zar of the Savage Land
+    - Kid Loki
+    - King T'Challa // Black Panther, Hope Enduring
+    - Luke Cage, Power Man
+    - Mister Fantastic, Reed Richards
+    - Misty Knight, Hero for Hire
+    - Mockingbird, Ace Agent
+    - Monica Rambeau // Photon, Living Light
+    - Moon Girl and Devil Dinosaur
+    - Ms. Marvel, Kamala Khan
+    - Nick Fury, Agent of S.H.I.E.L.D.
+    - Night Nurse, Healer of Heroes
+    - Okoye, Dora Milaje Leader
+    - Patriot, Shield Wielder
+    - Pet Avengers
+    - Quake, Agent of S.H.I.E.L.D.
+    - Quicksilver, Brash Blur
+    - Reptil, Dinomorpher
+    - Ronin, Shadow Stalker
+    - Shang-Chi, Master of Kung Fu
+    - She-Hulk, Jade Defender
+    - Shuri, Wakandan Inventor
+    - Speed, Young Avenger
+    - Speedball, New Warrior
+    - Spider-Man, To the Rescue
+    - Spider-Woman, Secret Agent
+    - Stature, Size Shifter
+    - Storm, Force of Nature
+    - Storm, Windrider
+    - Swordsman, Sharp Scoundrel
+    - The Astonishing Ant-Man
+    - The Mighty Thor, Jane Foster
+    - The Scarlet Witch
+    - The Sentry, Golden Guardian
+    - The Thing, Ben Grimm
+    - The Unbeatable Squirrel Girl
+    - The Vision
+    - The Wondrous Wasp
+    - Thor Odinson
+    - Thor, God of Thunder
+    - Tigra, Feline Fury
+    - Tony Stark // The Invincible Iron Man
+    - U.S.Agent, John Walker
+    - Viv Vision, Teen Synthezoid
+    - Wakandan Royal Guard
+    - War Machine, Legacy of Iron
+    - White Tiger, Ava Ayala
+    - White Widow, Free Agent
+    - Wiccan, Rising Magician
+    - Wolverine, Best There Is
+    - Wolverine, Fierce Fighter
+    - Wonder Man, Hollywood Hero
+    payoffs:
+    - Agent Phil Coulson
+    - Black Panther, Vanguard
+    - Captain America, Wings of Freedom
+  type:Villain:
+    enablers:
+    - A.I.M. Scientists
+    - A.I.M. Synthoids
+    - Abomination, Terrifying Titan
+    - Absorbing Man
+    - Aerial Doombot
+    - Agents of HYDRA
+    - Ares, God of War
+    - Arnim Zola, Bio-Fanatic
+    - Attuma, Atlantean Warlord
+    - Baron Helmut Zemo
+    - Baron Strucker, HYDRA Overlord
+    - Black Widow, Double Agent
+    - Bullseye, Death Dealer
+    - Crimson Operative
+    - Crossbones, Malicious Mercenary
+    - Doctor Doom
+    - Elektra, Daughter of the Hand
+    - Fin Fang Foom
+    - Ghost, Spectral Saboteur
+    - Grim Reaper, Lethal Legionnaire
+    - HYDRA Assault Robot
+    - HYDRA Troopers
+    - Kang the Conqueror
+    - Kang, Temporal Tyrant
+    - Kid Loki
+    - Killmonger, Scourge of Wakanda
+    - Kingpin's Enforcers
+    - Klaw, Sonic Subjugator
+    - Knight of Wundagore
+    - Kree Commandos
+    - Kree Sentinel
+    - Leader, Super-Genius
+    - Loki Laufeyson
+    - Loki, God of Mischief
+    - M.O.D.O.K.
+    - Machinesmith Automaton
+    - Madame Hydra
+    - Madame Masque
+    - Mister Hyde, Monster Within
+    - Mole Man, Moloid Master
+    - Moonstone, Harsh Mistress
+    - Namor the Sub-Mariner
+    - Ninja of the Hand
+    - Powerful Broker
+    - Red Guardian, Super-Soldier
+    - Red Hulk
+    - Red Room Recruit
+    - Roxxon Brutes
+    - Scientist Supreme of A.I.M.
+    - Serpent Specialist
+    - Super-Adaptoid
+    - Super-Skrull
+    - Swordsman, Sharp Scoundrel
+    - Taskmaster, Mercenary Mimic
+    - Thanos, the Mad Titan
+    - The Kingpin of Crime
+    - The Masters of Evil
+    - The Ruinous Wrecking Crew
+    - The Serpent Society
+    - Titania, Rugged Rumbler
+    - Ultron Drone
+    - Ultron, Artificial Malevolence
+    - Undercover Skrull
+    - Unliving Legionnaire
+    - Volcanic Villain
+    - Whiplash, Vengeful Engineer
+    - White Widow, Free Agent
+    - Winter Soldier, Icy Assassin
+    - Yellowjacket, Heartless Marauder
+    payoffs:
+    - 'Avengers: Under Siege'
+    - Baron Strucker, HYDRA Overlord
+    - Crossbones, Malicious Mercenary
+    - Doom Reigns Supreme
+    - Evil's Thrall
+    - HYDRA Assault Robot
+    - Swordsman, Sharp Scoundrel
+    - The Masters of Evil
+    - Thunderbolts Conspiracy
+    - Villainous Hideout
+    - Visions of Villainy
+    - Yellowjacket, Heartless Marauder

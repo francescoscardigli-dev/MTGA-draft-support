@@ -1,0 +1,580 @@
+# Tag dei temi di sinergia, generati da 'python -m draftbot tag-set' con regole sul testo.
+# RIVEDERE A MANO: togliere i falsi positivi, aggiungere quelli mancanti, poi reviewed: true.
+# Questo file non viene mai sovrascritto da add-set o tag-set.
+set_code: FRA
+generated: '2026-11-28'
+reviewed: false
+notes:
+- generato con regole sul testo Oracle (tags/themes.yaml) e temi automatici del set
+themes:
+  artifacts:
+    enablers:
+    - Afterthought Sentry
+    - Archive Arbiter
+    - Codie, Ravenous Codex
+    - Craftwork Crusher
+    - Craterclaw Colossus
+    - Eye of Jace
+    - Gideon's Memorial
+    - Hungering Puppetbeast
+    - Hunter's Axe
+    - Karn, Argent Defender
+    - Karn, Gilded Guardian
+    - Keeper of the Quiet Hour
+    - Kwia Vigorbloom
+    - Lich's Relic
+    - Living Library
+    - Medic's Kitesail
+    - Murmuring Volume
+    - Pia, Determined Rebuilder
+    - Saheeli, Consul of Oversight
+    - Saheeli, Jewel of Avishkar
+    - Solitary Cell
+    - The Echoverse Fulcrum
+    - Traxos, Academy Guardian
+    - Traxos, Scourge Eternal
+    - Vraska, Soul of Stone
+    - Vraska, the Cutting Glare
+    - Warrior's Blades
+    - Wrecking Gecko
+    payoffs:
+    - Aerid Konstrari
+    - Craterclaw Colossus
+    - Karn, Gilded Guardian
+    - Pia, Determined Rebuilder
+    - Tenured Tethermage
+  counters:
+    enablers:
+    - Ajani Resolute
+    - Avatar of Burgeoning Echoes
+    - Awaken the Inferno
+    - Blossom-Blessed Angel // Seed Suture
+    - Chandra's Emberling
+    - Charge the Sanctum
+    - Command the Stage
+    - Danitha, Spear of Agony
+    - Denzilore Fatehold
+    - Desperate Futurescribe
+    - Edgar, Ancient Bloodlord
+    - Edgar, Moonlit Sovereign
+    - Emergency Phytomedic // Seed Suture
+    - Fateshaper Aspirant
+    - Gallia, the Merrymaker
+    - Graft Surgeon
+    - Guiding Hydra
+    - Hungering Puppetbeast
+    - Inspired Tethermage
+    - Jiang Yanggu, Alone
+    - Konstrari Charm
+    - Koth of the Homestead
+    - Liliana the Repentant
+    - Lyra, Archangel of Dawn
+    - Mabel, Valley Hero
+    - Massacre Girl, Most Wanted
+    - Predictive Preparations
+    - Proft, Consulting Detective
+    - Recursive Recruitment
+    - Room of Refuge
+    - Tam's Resistance
+    - Tenured Tethermage
+    - Teyo, Diamondblade Mage
+    - Teyo, Lightshield Expert
+    - The Theorist, Jace Beleren
+    - Titanbones, Towering Heart
+    - Twisted Fates
+    - Unflinching Hortimancer
+    - Vigorbloom Charm
+    - Vigorbloom Vanguard // Seed Suture
+    - Vinelasher Adept
+    - Yoshimaru, Beloved Companion
+    - Yoshimaru, Scrappy Stray
+    payoffs:
+    - Chandra, Chill of Compliance
+    - Charge the Sanctum
+    - Cryotheory Adept
+    - Denzilore Fatehold
+    - Edgar, Moonlit Sovereign
+    - Gallia, Tragic Host
+    - Gallia, the Merrymaker
+    - Generous Revival
+    - Graft Surgeon
+    - Grim Repriser
+    - Guiding Hydra
+    - Proctor of Potential
+    - Teyo, Diamondblade Mage
+    - Teyo, Lightshield Expert
+    - The Theorist, Jace Beleren
+    - Tomik, Orzhov Lawmage
+    - Twisted Fates
+    - Vigorbloom Vanguard // Seed Suture
+    - Warrior's Blades
+  graveyard:
+    enablers:
+    - Ajani Unrelenting
+    - Arni, Humble Scribe
+    - Carnivorous Cultivator // Enroot
+    - Chandra, Chill of Compliance
+    - Consider
+    - Curse-Marred Demon
+    - Dark Matter Manipulator
+    - Denzilore Fatehold
+    - Diviner of Victory // Unwind History
+    - Divining Duelist
+    - Enlightened Confidant
+    - Eye of Jace
+    - Fatehold Chronologist // Peer Review
+    - Garruk, Veiled Butcher
+    - Gideon the Oathless
+    - Hallway Heckler // Vicious Verse
+    - Jiang Yanggu, Alone
+    - Liliana the Faultless
+    - Liliana the Repentant
+    - Murmuring Volume
+    - Paradox Shaper // Omit Variables
+    - Pia, Aether Ascetic
+    - Pompous Battlemage // Improvised Act
+    - Primal Witchstalker
+    - Proctor of Potential
+    - Proft, Consulting Detective
+    - Prudent Fateseer // Peer Review
+    - Refute Destiny
+    - Saheeli, Consul of Oversight
+    - Seasoned Cryomancer
+    - Semester Foreseer // Peer Review
+    - Solitary Cell
+    - Something Worth Saving
+    - Sphinx of False Conclusions
+    - Stinging Vitriol
+    - Surveillance Phantasm
+    - Tether Technician
+    - The Echoverse Fulcrum
+    - Theorix Charm
+    - Theorix Metamage // Omit Variables
+    - Twinned Vision
+    - Void Extrapolator // Omit Variables
+    - Way of the Healer
+    - Your Fate Ends Here
+    - Yuriko, Hope from the Shadows
+    payoffs:
+    - Bestial Incursion
+    - Blessed Ghoul
+    - Campus Crier
+    - Carnivorous Cultivator // Enroot
+    - Command the Stage
+    - Cryotheory Adept
+    - Dark Matter Manipulator
+    - Darklight Phoenix
+    - Eye of Jace
+    - Fateshaper Aspirant
+    - Gallia, Tragic Host
+    - Generous Revival
+    - Grim Repriser
+    - Hapatra, the Desert Fang
+    - Liliana the Repentant
+    - Loot, the Anomaly
+    - Marwyn, the Preserver
+    - Null Summoner
+    - Paradox Shaper // Omit Variables
+    - Predictive Preparations
+    - Primal Witchstalker
+    - Proctor of Potential
+    - Proft, Sinister Mastermind
+    - Puppet Crafting
+    - Recursive Recruitment
+    - Restore with Empathy
+    - Return to the Light Realms
+    - Rewrite Regrets
+    - Seasoned Cryomancer
+    - Sphinx's Approach
+    - Stingcaster Mage
+    - Theoretical Necromancer
+    - Theorix Metamage // Omit Variables
+    - Twinned Vision
+    - Uldaros Theorix
+    - Void Extrapolator // Omit Variables
+    - Winter, Tormented Loner
+    - Yuriko, Hope from the Shadows
+  kw:Empower Jace:
+    enablers:
+    - Academic Ascent
+    - Arcane Amphisbaena
+    - Avatar of Burgeoning Echoes
+    - Campus Crier
+    - Countersculpt
+    - Fatehold Charm
+    - Hexhaven Battalion
+    - Inspired Tethermage
+    - Jace's Machinations
+    - Jace, Reality Sculptor
+    - Keeper of the Quiet Hour
+    - Mindseeker Oculus
+    - No Admittance
+    - Overwrite the Multiverse
+    - Plan for All Outcomes
+    - Protege's Awakening
+    - Repurposed Enforcer
+    - Rewrite Regrets
+    - Sanctum Lurker
+    - Solve for Disappointment
+    - Tam's Resistance
+    - Theorist's Proxy
+    - Theorist's Sanctum
+    - Violent Echoes
+    - Vraska's Final Mercy
+    - Way of the Cryomancer
+    - Way of the Deathbringer
+    - Way of the Healer
+    - Way of the Mentor
+    - Way of the Mind Sculptor
+    - Way of the Necromancer
+    - Way of the Paradox
+    - Way of the Pyromancer
+    - Way of the Warlord
+    - Way of the Wildspeaker
+    payoffs: []
+  kw:Prepared:
+    enablers:
+    - Bloodline Recollector // Ancestral Craving
+    - Blossom-Blessed Angel // Seed Suture
+    - Carnivorous Cultivator // Enroot
+    - Codie, Ravenous Codex
+    - Diviner of Victory // Unwind History
+    - Emergency Phytomedic // Seed Suture
+    - Fatehold Chronologist // Peer Review
+    - Hallway Heckler // Vicious Verse
+    - Heartwood Crafter // Soul Tether
+    - Hexhaven Dueling Arena
+    - Infinite Coursework
+    - Konstrari Improviser // Soul Tether
+    - Paradox Shaper // Omit Variables
+    - Pompous Battlemage // Improvised Act
+    - Prudent Fateseer // Peer Review
+    - Pyre Rhymer // Molten Tide
+    - Semester Foreseer // Peer Review
+    - Stingerquill Voxmancer // Vicious Verse
+    - Theorix Metamage // Omit Variables
+    - Variable Chaser // Arc of Fortune
+    - Vigorbloom Vanguard // Seed Suture
+    - Void Extrapolator // Omit Variables
+    - Whiplash Wordsmith // Vicious Verse
+    - Woodwork Prodigy // Soul Tether
+    payoffs: []
+  lands:
+    enablers:
+    - Apex Witchstalker
+    - Awaken the Inferno
+    - Carnivorous Cultivator // Enroot
+    - Fblthp, Knows the Way
+    - Hexhaven Battalion
+    - Hexhaven Invigorator
+    - Simulacrum Shaper
+    - Undulating Witness
+    - Vinelasher Adept
+    - Way of the Paradox
+    payoffs:
+    - Avatar of Burgeoning Echoes
+    - Koth of the Homestead
+    - Koth, the Geomancer
+  lifegain:
+    enablers:
+    - Ajani Resolute
+    - Apex Witchstalker
+    - Archive Arbiter
+    - Blessed Ghoul
+    - Bloombrute
+    - Blossom-Blessed Angel // Seed Suture
+    - Break Under Pressure
+    - Edgar, Ancient Bloodlord
+    - Emergency Phytomedic // Seed Suture
+    - Enlightened Confidant
+    - Extended Absence
+    - Eye of Jace
+    - Greenhouse Propagator
+    - Koth of the Homestead
+    - Kwia Vigorbloom
+    - Liliana the Faultless
+    - Massacre Girl, Most Wanted
+    - Medic's Kitesail
+    - Restore with Empathy
+    - Sanctum Lurker
+    - Screeching Soulbreaker
+    - Solarium Sentry
+    - Something Worth Saving
+    - Surgical Precision
+    - Terminal Criticism
+    - Thalia, the Survivor
+    - Titanbones, Towering Heart
+    - Vigorbloom Charm
+    - Vigorbloom Vanguard // Seed Suture
+    - Warrior's Blades
+    - Way of the Paradox
+    payoffs:
+    - Ajani Resolute
+    - Bloombrute
+    - Enlightened Confidant
+    - Germinate Recruits
+    - Kwia Vigorbloom
+    - Lyra, Archangel of Dawn
+    - Titanbones, Towering Heart
+    - Unflinching Hortimancer
+    - Way of the Mentor
+  sacrifice:
+    enablers:
+    - Aerid Konstrari
+    - Ajani Resolute
+    - Ajani Unrelenting
+    - Apex Witchstalker
+    - Bestial Incursion
+    - Command the Stage
+    - Craftwork Crusher
+    - Draconic Visitor
+    - Face Yourself
+    - Fatehold Chronologist // Peer Review
+    - Ferocity of the Hunt
+    - Garruk, Curse Breaker
+    - Garruk, Veiled Butcher
+    - Germinate Recruits
+    - Graft Surgeon
+    - Heartstring Puller
+    - Heartwood Crafter // Soul Tether
+    - Hexhaven Battalion
+    - Hungering Puppetbeast
+    - Ingris Stingerquill
+    - Jiang Yanggu, Never Alone
+    - Kiora of Fire and Ashes
+    - Kiora of Salt and Sand
+    - Konstrari Improviser // Soul Tether
+    - Kwia Vigorbloom
+    - Lyra, Tolarian Archangel
+    - Pia, Determined Rebuilder
+    - Prudent Fateseer // Peer Review
+    - Recursive Recruitment
+    - Saheeli, Consul of Oversight
+    - Saheeli, Jewel of Avishkar
+    - Semester Foreseer // Peer Review
+    - Simulacrum Shaper
+    - Sphinx of False Conclusions
+    - Splinter Twin
+    - Stingerquill Charm
+    - Sublime Epiphany
+    - Tenured Tethermage
+    - The Theorist, Jace Beleren
+    - Verdant Kraken
+    - Vraska, Soul of Stone
+    - Vraska, the Cutting Glare
+    - Way of the Deathbringer
+    - Way of the Healer
+    - Way of the Wildspeaker
+    - Woodwork Prodigy // Soul Tether
+    payoffs:
+    - Edgar, Ancient Bloodlord
+    - Gardenize
+    - Hungering Puppetbeast
+    - Loot, the Anomaly
+    - Marwyn, the Clearcutter
+    - Silence the Echo
+    - Way of the Deathbringer
+    - Way of the Necromancer
+    - Winter, Tormented Loner
+  spells:
+    enablers:
+    - Academic Ascent
+    - Artifist Acumen
+    - Austere Command
+    - Awaken the Inferno
+    - Bestial Incursion
+    - Blazing Crescendo
+    - Bloodline Recollector // Ancestral Craving
+    - Blossom-Blessed Angel // Seed Suture
+    - Break Under Pressure
+    - Carnivorous Cultivator // Enroot
+    - Cast Away Doubt
+    - Charge the Sanctum
+    - Clash of Elements
+    - Command the Stage
+    - Compel Brutality
+    - Consider
+    - Consign to Memory
+    - Countersculpt
+    - Cruel Calculations
+    - Diviner of Victory // Unwind History
+    - Emergency Phytomedic // Seed Suture
+    - Entrust the Spark
+    - Essence Burn
+    - Extended Absence
+    - Extrapolate the Impossible
+    - Face Yourself
+    - Fatehold Charm
+    - Fatehold Chronologist // Peer Review
+    - Flourishing Grapple
+    - Fulminous Forte
+    - Generous Revival
+    - Germinate Recruits
+    - Hallway Heckler // Vicious Verse
+    - Heartwood Crafter // Soul Tether
+    - Hexhaven Battalion
+    - Icy Reception
+    - Jace's Machinations
+    - Kindred Judgment
+    - Konstrari Charm
+    - Konstrari Improviser // Soul Tether
+    - Last Gasp
+    - Loyal Tutor
+    - Mind Twist
+    - Multiply by Zero
+    - No Admittance
+    - Overwrite the Multiverse
+    - Paradox Shaper // Omit Variables
+    - Perfected Theory
+    - Pompous Battlemage // Improvised Act
+    - Precise Redaction
+    - Predictive Preparations
+    - Prophesied End
+    - Protege's Awakening
+    - Prudent Fateseer // Peer Review
+    - Pyre Rhymer // Molten Tide
+    - Recursive Recruitment
+    - Refute Destiny
+    - Restore with Empathy
+    - Return to the Light Realms
+    - Rewrite Regrets
+    - Rise of the Deathbringer
+    - Semester Foreseer // Peer Review
+    - Silence the Echo
+    - Solve for Disappointment
+    - Something Worth Saving
+    - Sphinx's Approach
+    - Stingerquill Charm
+    - Stingerquill Voxmancer // Vicious Verse
+    - Stinging Vitriol
+    - Sublime Epiphany
+    - Surgical Precision
+    - Tam's Resistance
+    - Terminal Criticism
+    - Tethermage's Advantage
+    - Theorix Charm
+    - Theorix Metamage // Omit Variables
+    - Twinned Vision
+    - Twisted Fates
+    - Unsummon
+    - Variable Chaser // Arc of Fortune
+    - Vigorbloom Charm
+    - Vigorbloom Vanguard // Seed Suture
+    - Vindictive Triumph
+    - Violent Echoes
+    - Void Extrapolator // Omit Variables
+    - Vraska's Final Mercy
+    - Whiplash Wordsmith // Vicious Verse
+    - Woodwork Prodigy // Soul Tether
+    - Wrath of the Bloodmane
+    - Your Fate Ends Here
+    payoffs:
+    - Chandra's Emberling
+    - Cryotheory Adept
+    - Grim Repriser
+    - Pompous Battlemage // Improvised Act
+    - Pyre Rhymer // Molten Tide
+    - Ruric Thar, Biomagus
+    - Saheeli, Jewel of Avishkar
+    - Samut, Tyrant of Naktamun
+    - Stingcaster Mage
+    - Tetsuko Umezawa, Pursuer
+    - Tomik, Izzet Sparkmage
+    - Traxos, Academy Guardian
+    - Variable Chaser // Arc of Fortune
+    - Vraska, Soul of Stone
+    - Way of the Cryomancer
+    - Winter, Team Player
+  tokens:
+    enablers:
+    - Aerid Konstrari
+    - Ajani Resolute
+    - Ajani Unrelenting
+    - Bestial Incursion
+    - Command the Stage
+    - Craftwork Crusher
+    - Draconic Visitor
+    - Face Yourself
+    - Fatehold Chronologist // Peer Review
+    - Garruk, Curse Breaker
+    - Garruk, Veiled Butcher
+    - Germinate Recruits
+    - Heartstring Puller
+    - Heartwood Crafter // Soul Tether
+    - Hexhaven Battalion
+    - Hungering Puppetbeast
+    - Ingris Stingerquill
+    - Jiang Yanggu, Never Alone
+    - Kiora of Fire and Ashes
+    - Kiora of Salt and Sand
+    - Konstrari Improviser // Soul Tether
+    - Kwia Vigorbloom
+    - Lyra, Tolarian Archangel
+    - Pia, Determined Rebuilder
+    - Prudent Fateseer // Peer Review
+    - Recursive Recruitment
+    - Saheeli, Consul of Oversight
+    - Saheeli, Jewel of Avishkar
+    - Semester Foreseer // Peer Review
+    - Sphinx of False Conclusions
+    - Splinter Twin
+    - Stingerquill Charm
+    - Sublime Epiphany
+    - Tenured Tethermage
+    - The Theorist, Jace Beleren
+    - Verdant Kraken
+    - Vraska, Soul of Stone
+    - Vraska, the Cutting Glare
+    - Way of the Deathbringer
+    - Way of the Healer
+    - Way of the Wildspeaker
+    - Woodwork Prodigy // Soul Tether
+    payoffs:
+    - Ajani Resolute
+    - Ajani Unrelenting
+    - Arni, Humble Scribe
+    - Arni, Renowned Champion
+    - Charge the Sanctum
+    - Command the Stage
+    - Fatehold Charm
+    - Gardenize
+    - Gideon's Memorial
+    - Greenhouse Propagator
+    - Jiang Yanggu, Never Alone
+    - Master of Barbs
+    - Prudent Fateseer // Peer Review
+    - Shatterwing Pegasus
+    - Way of the Necromancer
+    - Winter, Team Player
+  type:Planeswalker:
+    enablers:
+    - Ajani Resolute
+    - Ajani Unrelenting
+    - Chandra, Chill of Compliance
+    - Chandra, Torch of Defiance
+    - Garruk, Curse Breaker
+    - Garruk, Veiled Butcher
+    - Jace, Reality Sculptor
+    - The Theorist, Jace Beleren
+    payoffs:
+    - Avatar of Burgeoning Echoes
+    - Compel Brutality
+    - Edgar, Ancient Bloodlord
+    - Identity Echo
+    - Jace's Machinations
+    - Jace, Reality Sculptor
+    - Kiora of Salt and Sand
+    - Liliana the Faultless
+    - Liliana the Repentant
+    - Massacre Girl, Most Wanted
+    - Sanctum Lurker
+    - Tam, the Possibility
+    - Tomik, Orzhov Lawmage
+    - Way of the Cryomancer
+    - Way of the Deathbringer
+    - Way of the Healer
+    - Way of the Mentor
+    - Way of the Necromancer
+    - Way of the Pyromancer
+    - Way of the Warlord
+    - Way of the Wildspeaker

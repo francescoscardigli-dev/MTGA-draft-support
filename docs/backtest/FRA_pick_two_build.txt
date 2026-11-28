@@ -1,0 +1,13 @@
+# Verifica del costruttore di mazzi FRA pick_two (taglio 2026-10-13)
+
+draft: 300 (giocatori fascia high, pool finale + prima build giocata)
+stessi colori principali: 64%; stessa scelta di splash: 56%; magie della nostra build nel mazzo reale: 82%; stesse terre: 78%
+splash: nostro 2%, reale 44%; tre colori principali: nostro 33%, reale 38%
+punteggio nostra build - mazzo reale: +1.49 punti (a favore della nostra per costruzione)
+
+Test sui risultati: win rate reale (al netto del giocatore) - win rate prevista per la nostra build
+  stessi colori della nostra build: -2.32 +- 1.94 punti (n 193)
+  colori diversi:                    -2.86 +- 2.62 punti (n 107)
+  (se il costruttore sceglie bene, il secondo valore e' piu' basso del primo)
+
+Dati: 17Lands (https://www.17lands.com), licenza CC BY 4.0

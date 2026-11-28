@@ -342,10 +342,12 @@ class BacktestResult:
     lambdas: list[float]
     tiebreak: float = 0.0
     mix: list[float] | None = None
+    agreement_syn: list[Agreement] | None = None
+    synergy_summary: str = ""
 
 
 def run(con: sqlite3.Connection, set_code: str, fmt: str, cutoff: str, prior_sets: list[str], *,
-        n_drafts: int = 300, n_fit_drafts: int = 1500, log=print) -> BacktestResult:
+        n_drafts: int = 300, n_fit_drafts: int = 1500, synergy: bool = True, log=print) -> BacktestResult:
     from datetime import date, timedelta
 
     from ..stats.calibrate import estimate_drift
@@ -380,8 +382,24 @@ def run(con: sqlite3.Connection, set_code: str, fmt: str, cutoff: str, prior_set
     ata = t.cards.set_index("card")["ata"].to_dict()
     agreement = pick_agreement(projector, test, ata)
     deck = deck_checks(model, book, set_code, fmt, since, test, projector)
+    agreement_syn, syn_summary = None, ""
+    if synergy:
+        from ..synergy.measure import measure
+        from ..synergy.runtime import SynergyRuntime
+        from ..synergy.tags import generate, load_tags
+        tags = load_tags(set_code) or generate(con, set_code)
+        sm = measure(model, book, tags, set_code, fmt, cutoff)
+        rt = SynergyRuntime.build(sm, tags, book)
+        syn_summary = (f"temi tenuti: {', '.join(f'{t} {c * 100:+.2f}' for t, c in sm.effects.items()) or 'nessuno'}; "
+                       f"pendenza fuori campione {sm.oos_slope:.2f} +- {sm.oos_slope_se:.2f}")
+        log("sinergie: " + syn_summary)
+        if rt is not None:
+            projector.synergy = rt
+            agreement_syn = pick_agreement(projector, test, ata)
+            projector.synergy = None
     return BacktestResult(set_code, fmt, cutoff, prior_sets, len(fit_drafts), agreement, deck, model,
-                          projector.arch.lambdas, projector.arch.tiebreak, projector.arch.mix)
+                          projector.arch.lambdas, projector.arch.tiebreak, projector.arch.mix, agreement_syn,
+                          syn_summary)
 
 
 def format_result(r: BacktestResult) -> str:
@@ -393,6 +411,12 @@ def format_result(r: BacktestResult) -> str:
     for a in r.agreement:
         ov = f"{a.overlap:16.1%}" if a.overlap is not None else " " * 16
         out.append(f"{a.label:<10} {a.n:>6} {a.top1:7.1%} {a.top3:7.1%} {ov}")
+    if r.synergy_summary:
+        out.append(f"Sinergie (Fase 5): {r.synergy_summary}")
+    if r.agreement_syn:
+        a = next(x for x in r.agreement_syn if x.label == "motore")
+        ov = f", carte in comune {a.overlap:.1%}" if a.overlap is not None else ""
+        out.append(f"motore + sinergie: top-1 {a.top1:.1%}, top-3 {a.top3:.1%}{ov}")
     eng = next((a for a in r.agreement if a.label == "motore"), None)
     if eng and eng.diff_ci:
         out.append("Differenza di top-1 del motore (intervallo al 95%, bootstrap sui draft): " + "; ".join(

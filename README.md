@@ -7,7 +7,8 @@ costruire il mazzo finale.
 Stato: **Fase 1 completata** (database carte, mappatura ID Arena, `add-set`); **Fase 2 scritta ma
 non ancora verificata su log reali** (parser di `Player.log` e pulizia dei log); **Fase 3 completata**
 (statistiche 17Lands calcolate in proprio, blend bayesiano, prior dai set precedenti); **Fase 4 completata**
-(valutatore di mazzo, motore di pick a k carte e coppie in Pick Two, backtest). Vedi `docs/plan.md` e i report in `docs/`.
+(valutatore di mazzo, motore di pick a k carte e coppie in Pick Two, backtest); **Fasi 5 e 6 completate**
+(sinergie misurate, costruzione del mazzo con 2-3 build). Vedi `docs/plan.md` e i report in `docs/`.
 
 ## Uso
 
@@ -40,6 +41,13 @@ python -m draftbot recommend TRK --format premier --pack "Carta A;Carta B;Carta 
 python -m draftbot recommend TRK --format pick_two --log      # ultimo pick letto da Player.log
 python -m draftbot backtest FRA --format premier --cutoff 2026-10-13 --prior-sets HOB MSH
 
+# Sinergie e costruzione del mazzo
+python -m draftbot tag-set FRA                 # tag dei temi (sets/FRA.tags.yaml, da rivedere a mano)
+python -m draftbot synergy FRA --format premier
+python -m draftbot build FRA --format premier --pool "carta;carta;..."
+python -m draftbot build TRK --format pick_two --log  # pool dell'ultimo draft di Player.log
+python -m draftbot build-check FRA --format premier --cutoff 2026-10-13 --prior-sets HOB MSH
+
 # Sul PC con Arena installato, per usare anche il database del client:
 python -m draftbot update-cards TRK --arena-db "C:\Program Files\Wizards of the Coast\MTGA\MTGA_Data\Downloads\Raw"
 ```
@@ -51,6 +59,8 @@ python -m draftbot update-cards TRK --arena-db "C:\Program Files\Wizards of the 
 - `draftbot/arenalog/`: parser di Player.log, pulizia dei dati personali, log sintetici per i test
 - `draftbot/stats/`: aggregazione dei dati 17Lands, metriche, blend bayesiano, prior, calibrazione
 - `draftbot/engine/`: valutatore di mazzo, proiezione del mazzo finale, archetipi, pick, backtest
+- `draftbot/synergy/`: tag dei temi, misura delle sinergie
+- `tags/themes.yaml`: regole generiche dei temi; `sets/<CODICE>.tags.yaml`: tag del set (rivisti a mano)
 - `priors/<formato>.yaml`: coefficienti del prior (generati da `fit-prior`, versionati)
 - `formats/<nome>.yaml`: struttura del formato (tavolo, carte per pick, buste, passaggio)
 - `docs/`: piano e report

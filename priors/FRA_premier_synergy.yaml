@@ -1,0 +1,85 @@
+# Effetti di sinergia misurati da 'python -m draftbot synergy'. Non modificare a mano.
+set_code: FRA
+format: premier
+effects:
+  kw:Empower Jace: 0.009226802030826438
+  lifegain: 0.013374046198595516
+  spells: 0.0129184455065729
+details:
+- theme: artifacts
+  kind: interazione
+  coef: 0.01474768532703198
+  se: 0.008962550535679651
+  coef_late: 0.035111049038496295
+  n_decks_with: 82488
+- theme: lifegain
+  kind: interazione
+  coef: 0.013374046198595516
+  se: 0.002582931906431074
+  coef_late: 0.016282362264263012
+  n_decks_with: 87818
+- theme: spells
+  kind: interazione
+  coef: 0.0129184455065729
+  se: 0.0024164865737666
+  coef_late: 0.017805803752516836
+  n_decks_with: 101252
+- theme: kw:Empower Jace
+  kind: densita'
+  coef: 0.009226802030826438
+  se: 0.002061423717276069
+  coef_late: 0.00890531249979773
+  n_decks_with: 98441
+- theme: sacrifice
+  kind: interazione
+  coef: 0.0013766659153941641
+  se: 0.004738547097168589
+  coef_late: 0.0037505121036489567
+  n_decks_with: 99376
+- theme: counters
+  kind: interazione
+  coef: 0.0008766491145608907
+  se: 0.0020775967959626883
+  coef_late: 0.004646906101307811
+  n_decks_with: 97061
+- theme: graveyard
+  kind: interazione
+  coef: 0.0007312197103825201
+  se: 0.0012275201157173293
+  coef_late: 0.00223823753496233
+  n_decks_with: 95915
+- theme: tokens
+  kind: interazione
+  coef: -0.001427370920842823
+  se: 0.0035150773567206714
+  coef_late: 0.00806296659156641
+  n_decks_with: 97232
+- theme: kw:Prepared
+  kind: densita'
+  coef: -0.009328712428032635
+  se: 0.003933880658554134
+  coef_late: -0.011164718056658696
+  n_decks_with: 92628
+- theme: lands
+  kind: interazione
+  coef: -0.017893664329579395
+  se: 0.016007847904512193
+  coef_late: -0.04701727453733527
+  n_decks_with: 83438
+- theme: type:Planeswalker
+  kind: interazione
+  coef: -0.022657252189697445
+  se: 0.013992193044290552
+  coef_late: -0.008716560656584613
+  n_decks_with: 19610
+cutoff: '2026-10-19'
+oos_gain: -0.002436470191012452
+oos_gain_se: 0.0012225013467057622
+fitted_at: '2026-11-28'
+oos_slope: 0.3616407084439194
+oos_slope_se: 0.0337126339104264
+oos_effect_sd: 0.02179071889919159
+notes:
+- ridge lambda 50.0
+- 'tenuti: interazione > 2 SE nel periodo di stima e > 0 dopo'
+- 'mazzi: 77212 prima del taglio, 24044 dopo'

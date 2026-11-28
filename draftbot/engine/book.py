@@ -31,6 +31,8 @@ class Card:
     is_basic: bool
     is_creature: bool
     rarity: str
+    pips: str = ""           # simboli colorati del costo, es. "WWU" (per terre e splash)
+    produces: str = ""       # per le terre non base: colori di mana prodotti (dall'identita' di colore)
 
     def castable_in(self, pair: str) -> bool:
         return all(c in pair for c in self.colors)
@@ -81,8 +83,8 @@ def load_book(con: sqlite3.Connection, set_code: str, fmt: str, *, prior: PriorM
     f = Filters(as_of=as_of, half_life=half_life)
     t = ratings(con, set_code, fmt, f, prior=prior)
     meta = pd.read_sql_query(
-        "SELECT name AS card, cost_colors, color_identity, mv, is_land, is_creature, type_line, rarity "
-        "FROM cards WHERE set_code=?", con, params=[set_code]).set_index("card")
+        "SELECT name AS card, cost_colors, color_identity, mv, is_land, is_creature, type_line, rarity, "
+        "pip_w, pip_u, pip_b, pip_r, pip_g FROM cards WHERE set_code=?", con, params=[set_code]).set_index("card")
     q = (t.cards.set_index("card")["gih_bayes"] - t.baseline_gih).to_dict()
     sd = t.cards.set_index("card")["gih_sd"].to_dict()
     cards = {}
@@ -91,8 +93,10 @@ def load_book(con: sqlite3.Connection, set_code: str, fmt: str, *, prior: PriorM
         land = bool(m["is_land"])
         cols = (m["color_identity"] if land else m["cost_colors"]) or ""
         qq = q.get(name, np.nan)
+        pips = "".join(c * int(m[f"pip_{c.lower()}"] or 0) for c in COLORS)
         cards[name] = Card(name, 0.0 if basic or qq != qq else float(qq),
                            0.0 if basic else float(sd.get(name, 0.0) or 0.0), "" if basic else cols,
-                           float(m["mv"] or 0), land, basic, bool(m["is_creature"]), m["rarity"] or "")
+                           float(m["mv"] or 0), land, basic, bool(m["is_creature"]), m["rarity"] or "",
+                           pips, (m["color_identity"] or "") if land else "")
     delta, share = _arch_stats(con, set_code, fmt, f)
     return CardBook(set_code, fmt, cards, t.baseline_gih or 0.0, delta, share, as_of)

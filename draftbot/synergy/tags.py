@@ -122,6 +122,16 @@ def generate(con: sqlite3.Connection, set_code: str, rules: dict | None = None) 
             en = {name for name, tl, _, _, _ in cards if typ in _types(tl)}
             themes[f"type:{typ}"] = {"enablers": en, "payoffs": pay}
 
+    # temi automatici quasi uguali a un tema generico (stessi payoff): la regressione li stimerebbe uno
+    # contro l'altro (su FRA: +8,9 e -5,4 per due temi di artefatti). Si tiene quello generico.
+    generic = [t for t in themes if ":" not in t]
+    for t in [t for t in themes if ":" in t]:
+        pt = set(themes[t]["payoffs"])
+        for g in generic:
+            pg = set(themes[g]["payoffs"])
+            if pt and pg and len(pt & pg) / len(pt | pg) >= 0.5:
+                del themes[t]
+                break
     # i temi generici e di tipo servono payoff espliciti; le keyword del set valgono anche come temi di
     # densita' (le carte con la keyword rendono di piu' insieme), quindi bastano gli enabler
     themes = {t: d for t, d in themes.items()

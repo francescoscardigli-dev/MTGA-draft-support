@@ -57,6 +57,8 @@ class Projector:
         self.c_mean = model.coef["mean_q"]
         self.c_top = model.coef["top3"]
         self.c_arch = model.coef["arch"]
+        self.synergy = None      # SynergyRuntime opzionale (Fase 5): entra nel punteggio
+        self.synergy_info = None  # SynergyRuntime solo per spiegare (temi delle carte)
 
     # -- valore del mazzo proiettato -----------------------------------------------------------
     def future_values(self, n_pool: int) -> np.ndarray:
@@ -92,6 +94,10 @@ class Projector:
         for a in PAIRS:
             vals = np.concatenate([self.pool_values(pool, a), self.pool_values(extra, a), fut])
             out[a] = self.deck_value(vals, a)
+            if self.synergy is not None:
+                cs = [c for c in list(pool) + list(extra) if not c.is_basic and c.castable_in(a)]
+                total = len(cs) + len(fut)
+                out[a] += self.synergy.value(cs, len(fut), min(1.0, DECK_SLOTS / total) if total else 1.0)
         return out
 
     # -- archetipi -----------------------------------------------------------------------------
