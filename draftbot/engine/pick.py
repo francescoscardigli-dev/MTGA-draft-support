@@ -45,13 +45,24 @@ class Option:
 
 def recommend(projector: Projector, pool: Sequence[Card], pack: Sequence[Card], k: int = 3,
               picks_per_turn: int | None = None, extra_logits: dict[str, float] | None = None,
-              wheel=None) -> tuple[list[Option], dict[str, float]]:
+              wheel=None, shift: dict[str, float] | None = None) -> tuple[list[Option], dict[str, float]]:
     """Le k opzioni migliori e le probabilita' degli archetipi dato il pool.
+
+    ``shift``: spostamento delle carte future per archetipo dai segnali (signals.future_shift).
 
     ``extra_logits``: segnali dei vicini per archetipo (signals.py).
     ``wheel``: funzione (carte rimaste) -> probabilita' di ritorno; se data, al valore di un'opzione
     si aggiunge il valore atteso della carta migliore che tornera' (vedi wheel_bonus).
     """
+    old_shift = projector.shift
+    projector.shift = shift or {}
+    try:
+        return _recommend(projector, pool, pack, k, picks_per_turn, extra_logits, wheel)
+    finally:
+        projector.shift = old_shift
+
+
+def _recommend(projector, pool, pack, k, picks_per_turn, extra_logits, wheel):
     n = picks_per_turn or projector.fmt.picks_per_turn
     probs = projector.probs(pool, extra_logits=extra_logits)
     # base con gli stessi pick futuri del dopo-pick: il valore e' il guadagno rispetto a una carta

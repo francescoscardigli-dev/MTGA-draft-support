@@ -72,6 +72,11 @@
   <section>
     <h2>Archetipi probabili</h2>
     <div id="arch"></div>
+    <div id="sigBox" class="hidden">
+      <h2 style="margin-top:16px">Colori aperti</h2>
+      <div id="signals"></div>
+      <div class="small">offerta di carte giocabili in più (verde) o in meno (rosso) del previsto, per pick</div>
+    </div>
     <h2 style="margin-top:16px">Pool <span id="poolN"></span></h2>
     <div id="pool" class="pool"></div>
     <div id="messages" class="small" style="margin-top:12px"></div>
@@ -134,6 +139,14 @@ function renderPick(ev) {
   $("arch").innerHTML = Object.entries(ev.archetypes).slice(0, 6).map(([a, p]) => `<div class="arch">
       <span>${pips(a)} <span class="small">${a}</span></span><span><span class="bar" style="width:${Math.max(2, p * 100)}%"></span></span>
       <span class="small" style="text-align:right">${pct(p)}</span></div>`).join("");
+  if (ev.signals) {
+    $("sigBox").classList.remove("hidden");
+    const mx = Math.max(0.005, ...Object.values(ev.signals).map(Math.abs));
+    $("signals").innerHTML = Object.entries(ev.signals).map(([c, v]) => `<div class="arch">
+      <span>${pips(c)} <span class="small">${c}</span></span>
+      <span><span class="bar" style="width:${Math.max(2, Math.abs(v) / mx * 100)}%;background:${v >= 0 ? "var(--good)" : "var(--bad)"}"></span></span>
+      <span class="small" style="text-align:right">${pts(v)}</span></div>`).join("");
+  }
   $("poolN").textContent = `(${ev.pool.length})`;
   const counts = {};
   ev.pool.forEach((n) => counts[n] = (counts[n] || 0) + 1);

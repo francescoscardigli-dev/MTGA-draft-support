@@ -76,9 +76,11 @@ def load_engine(con, set_code: str, fmt: str) -> Engine:
         from .engine.phase7check import popularity
         eng.wheel = ex.wheel
         eng.pop = popularity(con, set_code, fmt, None)
-        if ex.signal is not None and (ex.signal.g_same or ex.signal.g_other):
-            eng.signal_model = ex.signal
-            eng.signal_base = signal_baseline(con, set_code, fmt, proj.book)
+        if ex.signal is not None:
+            proj.arch.early_temp = ex.signal.early_temp
+            if ex.signal.g_same or ex.signal.g_other or ex.signal.future_shift:
+                eng.signal_model = ex.signal
+                eng.signal_base = signal_baseline(con, set_code, fmt, proj.book)
     return eng
 
 
@@ -160,19 +162,20 @@ class LiveSession:
 
     def pick_event(self, eng: Engine, d, last, picks, fmt_cfg) -> dict:
         from .engine.pick import recommend
-        from .engine.signals import SignalState, extra_logits
+        from .engine.signals import SignalState, extra_logits, future_shift
         pool, _ = self._cards(eng, [g for p in picks if (p.pack, p.pick) < (last.pack, last.pick) for g in p.picked])
         pack, missing = self._cards(eng, last.pack_cards)
-        xl, sig_summary = None, None
+        xl, sig_summary, shift = None, None, None
         if eng.signal_model is not None:
             st = SignalState()
             for p in picks:
                 if p.pack_cards is not None and (p.pack, p.pick) <= (last.pack, last.pick):
                     st.observe(p.pack, p.pick, self._cards(eng, p.pack_cards)[0], fmt_cfg, eng.signal_base)
             xl = extra_logits(eng.signal_model, st, fmt_cfg.pass_directions[last.pack])
+            shift = future_shift(st, fmt_cfg, last.pack, last.pick, eng.signal_model.future_shift)
             sig_summary = st.colors_summary()
         wheel_fn = (lambda rem: eng.wheel.survival(rem, fmt_cfg, eng.pop)) if eng.wheel is not None else None
-        opts, probs = recommend(eng.projector, pool, pack, k=self.k, extra_logits=xl, wheel=wheel_fn)
+        opts, probs = recommend(eng.projector, pool, pack, k=self.k, extra_logits=xl, wheel=wheel_fn, shift=shift)
         wheel_probs = {}
         if eng.wheel is not None and pack:
             for c, w in zip(pack, eng.wheel.survival(pack, fmt_cfg, eng.pop)):
@@ -239,7 +242,7 @@ def print_event(ev: dict) -> None:
         if ev["wheel_possible"] and wh:
             print("  probabilita' di ritorno: " + ", ".join(wh[:6]))
         if ev.get("signals"):
-            print("  segnali (qualita' in piu' del previsto, punti): " +
+            print("  colori aperti (offerta in piu' del previsto per pick, punti): " +
                   ", ".join(f"{c} {v * 100:+.1f}" for c, v in ev["signals"].items()))
     elif t == "build":
         print(f"\nDraft finito: build proposte")

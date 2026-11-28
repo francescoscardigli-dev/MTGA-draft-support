@@ -47,7 +47,7 @@ Guida d'uso: `docs/guida.md`.
 | 4 Valutatore di mazzo, pick, backtest | completata |
 | 5 Sinergie | completata: misurate, ma fuori dal punteggio di default (peggiorano il backtest) |
 | 6 Costruzione del mazzo | completata |
-| 7 Segnali, wheel, live | completata: wheel attivo; segnali provati, peggiorano, disattivati |
+| 7 Segnali, wheel, live | completata: wheel attivo; flusso dei colori attivo (revisione su indicazione dell'utente); impegno ridotto provato, nessun vantaggio |
 | 8 UI web locale, revisione | completata (verificata su log sintetici) |
 | 9 Generalità, rifinitura | completata (test su OM1 ed EOE da zero; 3 problemi di generalità corretti) |
 
@@ -69,8 +69,10 @@ Cose aperte:
 - **Tag dei temi** (`sets/*.tags.yaml`): generati con regole, `reviewed: false`. Da rivedere a mano.
 - **Splash:** il costruttore lo fa nel 7-11% dei mazzi, i giocatori forti nel 44-47%; il valutatore
   stima -3 punti per lo splash a parità di qualità, forse in parte effetto di selezione.
-- **Segnali** (Fase 7): la definizione "qualità disponibile per colore" non aiuta; da provare segnali
-  dalle carte mancanti nella busta di ritorno.
+- **Segnali** (Fase 7, revisione): il flusso dei colori nella busta 1 prevede l'offerta della busta 3
+  (corr +0,20/+0,17) ed e' nel modello come spostamento delle carte future (delta in
+  `priors/<formato>_extras.yaml`); effetto sull'accordo piccolo (+0,1/+0,3 punti). L'impegno ridotto
+  nella busta 1 (early_temp) non aiuta: resta a 1.
 - **TRK:** quando 17Lands pubblica i game data, `update-data TRK` e ricontrollare la calibrazione.
 
 Opzioni proposte all'utente per proseguire: (a) Fase 2 sulla struttura documentata, marcata come

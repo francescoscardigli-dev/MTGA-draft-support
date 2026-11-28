@@ -35,13 +35,15 @@ class ArchetypeModel:
     lambdas: list[float]                      # per decimo di avanzamento del draft
     mix: list[float] | None = None            # quota "cambio di strada" per decimo (miscela con le quote)
     tiebreak: float = 0.0                     # peso del termine secondario (vedi Projector.secondary)
+    early_temp: float = 1.0                   # moltiplicatore di lambda nella prima busta (impegno sui colori)
+    early_until: float = 1 / 3                # fino a che frazione del draft vale early_temp
     log_likelihood: float | None = None
     n_samples: int = 0
     notes: list[str] = field(default_factory=list)
 
     def lam(self, progress: float) -> float:
         i = min(int(progress * N_BUCKETS), N_BUCKETS - 1)
-        return self.lambdas[i]
+        return self.lambdas[i] * (self.early_temp if progress < self.early_until else 1.0)
 
     def eps(self, progress: float) -> float:
         if not self.mix:
@@ -59,6 +61,7 @@ class Projector:
         self.c_arch = model.coef["arch"]
         self.synergy = None      # SynergyRuntime opzionale (Fase 5): entra nel punteggio
         self.synergy_info = None  # SynergyRuntime solo per spiegare (temi delle carte)
+        self.shift: dict[str, float] = {}   # spostamento delle carte future per archetipo (segnali, signals.py)
 
     # -- valore del mazzo proiettato -----------------------------------------------------------
     def future_values(self, n_pool: int) -> np.ndarray:
@@ -92,7 +95,8 @@ class Projector:
         fut = self.future_values(n)
         out = {}
         for a in PAIRS:
-            vals = np.concatenate([self.pool_values(pool, a), self.pool_values(extra, a), fut])
+            f = fut + self.shift.get(a, 0.0) if self.shift else fut
+            vals = np.concatenate([self.pool_values(pool, a), self.pool_values(extra, a), f])
             out[a] = self.deck_value(vals, a)
             if self.synergy is not None:
                 cs = [c for c in list(pool) + list(extra) if not c.is_basic and c.castable_in(a)]

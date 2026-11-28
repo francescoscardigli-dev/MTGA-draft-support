@@ -116,3 +116,77 @@ Subcommander T'Pol, Temporal Conqueror ha il 35% di tornare. Per TRK la qualità
 - il tailer gestisce righe incomplete e rotazione;
 - su un log sintetico, letto riga per riga, la sessione live produce un evento per ognuno dei
   42 pick e una build finale.
+
+## Revisione (2026-11-28): segnali come flusso dei colori e impegno nei primi pick
+
+Su indicazione dell'utente ho riesaminato due idee:
+1. se le carte di un colore smettono di arrivare, i vicini lo stanno draftando; se ne arrivano tante,
+   il colore è aperto e conviene andarci, anche cambiando a metà della busta 1;
+2. nei primi pick conviene impegnarsi su un colore solo e tenere aperto il secondo, salvo carte
+   eccezionali.
+
+### 1. Il flusso dei colori esiste e dipende dalla direzione
+
+Nuova definizione dell'offerta di un colore in una busta: somma, sulle carte non terra di quel colore,
+della qualità sopra la soglia di carta giocabile (−2 punti). Il segnale è lo scarto medio dall'atteso,
+per direzione di passaggio. Su 1.500 draft FRA per formato:
+
+| Lo scarto nei pick 2-8 della busta 1 prevede l'offerta… | Premier | Pick Two |
+|---|---|---|
+| …nella busta 3 (stessi vicini) | **corr +0,20** [+0,17, +0,22] | **+0,17** [+0,14, +0,19] |
+| …nella busta 2 (altra direzione: controllo) | +0,03 | +0,05 |
+| …alla fine della busta 1 (buste di ritorno) | +0,38 | +0,29 |
+
+La busta 2 che non risponde dimostra che è un effetto dei vicini e non statistico.
+
+Perché la prova della Fase 7 era negativa: lì il segnale entrava solo nelle probabilità dei colori
+**del giocatore**, cioè serviva a imitarlo. Il valore dei colori aperti sta invece nelle **carte future**.
+
+**Nel modello:** le carte future attese di un archetipo si spostano di δ × segnale della direzione da
+cui arriveranno le buste rimanenti (`signals.future_shift`). δ è stimato sui draft: di quanto il
+segnale sposta la qualità del mazzo finale realmente ottenuto rispetto alla proiezione.
+- verifica, stima fino al 13/10: Premier +0,151 ± 0,035, Pick Two +0,187 ± 0,034;
+- modelli salvati, tutti i dati: Premier +0,167, Pick Two +0,138.
+
+**Effetto sull'accordo con i giocatori forti** (300 draft dopo il taglio, wheel attivo in tutte le
+varianti, intervallo appaiato sugli stessi draft):
+
+| | Premier top-1 | Pick Two top-1 | Pick Two top-3 |
+|---|---|---|---|
+| base | 51,7% | 37,2% | 57,7% |
+| + flusso | 51,9% (+0,1 [−0,2, +0,4]) | 37,4% (+0,3 [−0,2, +0,8]) | **58,7%** |
+
+L'effetto è piccolo: lo spostamento tipico vale circa 0,15 punti per carta futura, molto meno delle
+differenze di qualità tra le carte di una busta. Va però sempre nella direzione giusta, è tarato sui
+dati e non costa nulla, quindi è **attivo di default**. La UI mostra i colori aperti.
+
+Osservazione sui risultati (non sull'accordo): in Pick Two chi finisce nei colori più aperti vince di
+più (53,0% → 55,2% → 57,8% per terzili, aperti − chiusi +4,8 ± 2,3); in Premier non si vede una
+differenza (53,0 / 52,1 / 53,7 ± 1,2). Sono dati osservazionali, quindi indicativi.
+
+### 2. Impegno nei primi pick: nessun vantaggio misurabile nel modello
+
+Variante: λ (quanto le probabilità degli archetipi si concentrano) moltiplicato per un fattore < 1 nella
+busta 1, scelto sui draft prima del taglio.
+- La griglia è piatta: Pick Two 35,2–35,4%, Premier ×0,6 di poco sopra ×1.
+- Fuori campione: −0,2 punti (Premier [−0,4, −0,1], Pick Two [−0,4, +0,1]).
+
+Il motore si impegna già quanto i giocatori forti; impegnarsi di meno non lo avvicina alle loro scelte.
+Resta disponibile (`fit-extras --early-temp`), ma è spento.
+
+Dati sui risultati (osservazionali, al netto del livello del giocatore e della qualità dei primi pick),
+Premier / Pick Two:
+- chi ha preso nei primi pick meno di metà carte dei colori finali, cioè **ha cambiato tardi**, vince
+  4,4 ± 2,2 / 3,0 ± 2,2 punti in meno;
+- chi nei primi pick tocca **3 colori** fa un po' meglio sia di chi resta su 1-2 sia di chi si disperde
+  su 4-5 (+0,8 contro −0,6/−0,7; +2,2 contro −1,0/−2,0). Gli intervalli sono larghi.
+
+È coerente con l'idea "un colore più opzioni aperte", ma non abbastanza forte, né abbastanza separato
+dalla qualità delle carte, per cambiare il modello senza una prova più diretta.
+
+### Altro
+
+- La vecchia variante dei segnali nelle probabilità dei colori resta spenta. Due verifiche danno
+  ±0,007 di log-verosimiglianza con segno opposto: è rumore. La soglia per attivarla ora è 0,01.
+- Test nuovi: offerta per colore, spostamento per direzione delle buste rimanenti, raccomandazione che
+  cambia con il colore aperto, impegno ridotto nella busta 1.

@@ -1,26 +1,40 @@
 # Verifica Fase 7 FRA pick_two (taglio 2026-10-13)
 
-draft di verifica: 150 (giocatori fascia high)
+draft di verifica: 300 (giocatori fascia high)
 
 ## Segnali
-pesi: stessa direzione 0, altra direzione -10
-log-verosimiglianza media dei colori finali, con segnali - senza: -0.0074 (positivo = i segnali migliorano la previsione)
+pesi: stessa direzione 0, altra direzione -2
+log-verosimiglianza media dei colori finali, con segnali - senza: -0.0069 (positivo = i segnali migliorano la previsione)
+
+flusso dei colori: delta +0.187 +- 0.034 (spostamento delle carte future per unita' di segnale)
+impegno nella busta 1: lambda x0.35
 
 ## Wheel
-coefficienti: -1.94, +0.79, -0.35, -1.61, +3.31 (intercetta, posizione relativa, posizione^2, popolarita', dimensione busta)
-Brier 0.2015 contro 0.2400 di una probabilita' costante (40% delle carte torna; 13500 carte)
+coefficienti: -1.95, +0.85, -0.34, -1.43, +3.24 (intercetta, posizione relativa, posizione^2, popolarita', dimensione busta)
+Brier 0.2021 contro 0.2400 di una probabilita' costante (40% delle carte torna; 27000 carte)
 prevista -> frequenza reale:
-  0.0-0.1: 0.09 -> 0.05 (n 273)
-  0.1-0.3: 0.21 -> 0.22 (n 4665)
-  0.3-0.5: 0.40 -> 0.38 (n 4528)
-  0.5-0.7: 0.59 -> 0.63 (n 3353)
-  0.7-0.9: 0.73 -> 0.81 (n 681)
+  0.0-0.1: 0.09 -> 0.05 (n 463)
+  0.1-0.3: 0.21 -> 0.22 (n 9319)
+  0.3-0.5: 0.40 -> 0.38 (n 9060)
+  0.5-0.7: 0.59 -> 0.62 (n 6716)
+  0.7-0.9: 0.73 -> 0.81 (n 1442)
 
 ## Accordo con i giocatori forti
 variante           top-1   top-3  carte in comune
-base               36.4%   57.0%            61.3%
-segnali            36.2%   56.7%            61.2%
-wheel              37.0%   57.5%            61.8%
-segnali + wheel    36.9%   57.2%            61.8%
+base (wheel)       37.2%   57.7%            62.3%
++ flusso           37.4%   58.7%            62.5%
++ impegno x0.35    37.0%   57.8%            62.2%
++ flusso + impegno x0.35   37.4%   58.7%            62.6%
+
+Differenza di top-1 rispetto a 'base' (stessi draft, intervallo al 95%, bootstrap sui draft):
+  + flusso: +0.3 punti [-0.2, +0.8]
+  + impegno x0.35: -0.2 punti [-0.4, +0.1]
+  + flusso + impegno x0.35: +0.3 punti [-0.2, +0.8]
+
+Per fase della busta (top-1):
+  base (wheel): fine busta 68%; inizio busta 24%; meta' busta 25%
+  + flusso: fine busta 68%; inizio busta 25%; meta' busta 25%
+  + impegno x0.35: fine busta 68%; inizio busta 24%; meta' busta 25%
+  + flusso + impegno x0.35: fine busta 68%; inizio busta 25%; meta' busta 25%
 
 Dati: 17Lands (https://www.17lands.com), licenza CC BY 4.0

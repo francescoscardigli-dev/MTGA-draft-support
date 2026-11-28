@@ -66,6 +66,10 @@ dell'evento, usa `--set TRK --format premier`.
   sugli archetipi con la loro probabilità. Una carta che non entrerebbe nelle 23 finali vale circa 0.
 - **Ritorno atteso**: valore atteso della carta migliore che tornerà dopo un giro del tavolo.
 - **Archetipi probabili**: probabilità di finire in ogni coppia di colori, dato il pool.
+- **Colori aperti**: per ogni colore, quanta offerta di carte giocabili arriva in più (verde) o in
+  meno (rosso) del previsto, per pick. Il motore ne tiene conto: un colore aperto alza il valore
+  atteso delle carte future in quel colore, in proporzione a quanto i dati 17Lands mostrano che il
+  flusso continua (stessi vicini nella busta 3).
 - In Pick Two le opzioni sono coppie.
 
 ### Limiti da tenere a mente

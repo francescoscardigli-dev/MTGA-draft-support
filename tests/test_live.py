@@ -49,13 +49,49 @@ def test_signals_accumulate_by_direction():
     st = SignalState()
     st.observe(0, 0, [card("X", 0.05, "W")], fmt, base)          # primo pick: ignorato
     assert st.n["left"] == 0
-    st.observe(0, 1, [card("A", 0.05, "W"), card("B", -0.02, "U")], fmt, base)
+    st.observe(0, 1, [card("A", 0.05, "W"), card("B", -0.03, "U")], fmt, base)
     st.observe(1, 1, [card("C", 0.04, "R")], fmt, base)
-    assert st.by_dir["left"]["W"] == 0.05 and st.by_dir["left"]["U"] == 0.0
-    assert st.by_dir["right"]["R"] == 0.04
+    # offerta = qualita' sopra la soglia di giocabilita' (-2 punti); la carta blu e' sotto soglia
+    assert abs(st.by_dir["left"]["W"] - 0.07) < 1e-9 and st.by_dir["left"]["U"] == 0.0
+    assert abs(st.by_dir["right"]["R"] - 0.06) < 1e-9
     same, other = st.pair_signal("left")
-    assert same["WU"] == 0.05 and other["BR"] == 0.04
-    assert availability([card("A", 0.05, "W"), card("B", 0.03, "W"), card("C", 0.02, "W")])["W"] == 0.08
+    assert abs(same["WU"] - 0.07) < 1e-9 and abs(other["BR"] - 0.06) < 1e-9
+    av = availability([card("A", 0.05, "W"), card("B", 0.03, "W"), card("G", 0.0, "WG")])
+    assert abs(av["W"] - (0.07 + 0.05 + 0.02)) < 1e-9 and abs(av["G"] - 0.02) < 1e-9
+
+
+def test_future_shift_uses_direction_of_remaining_packs():
+    from draftbot.engine.signals import future_shift
+    fmt = load_format("premier")       # direzioni: sinistra, destra, sinistra
+    st = SignalState()
+    st.by_dir["left"]["W"], st.n["left"] = 0.10, 2      # bianco aperto da destra (buste 1 e 3)
+    sh = future_shift(st, fmt, 0, 5, 1.0)
+    # pick rimasti: 8 della busta 1 (sinistra), 14 della busta 2 (destra, nessun segnale), 14 della 3
+    expected = 0.05 * (8 + 14) / (8 + 14 + 14)
+    assert abs(sh["WU"] - expected) < 1e-9 and sh["UB"] == 0.0
+    assert future_shift(st, fmt, 0, 5, 0.0) == {}
+
+
+def test_open_color_shift_changes_recommendation():
+    # due carte uguali di colori diversi: con il bianco aperto il motore preferisce la bianca
+    w, u = card("W1", 0.03, "W"), card("U1", 0.03, "U")
+    from draftbot.engine.pick import recommend
+    from test_engine import projector
+    p = projector([w, u])
+    shift = {a: (0.01 if "W" in a else 0.0) for a in PAIRS}
+    opts, _ = recommend(p, [], [u, w], k=2, shift=shift)
+    assert opts[0].names == ("W1",)
+    opts, _ = recommend(p, [], [w, u], k=2, shift={a: (0.01 if "U" in a else 0.0) for a in PAIRS})
+    assert opts[0].names == ("U1",)
+
+
+def test_early_temp_flattens_archetypes_in_first_pack():
+    from test_engine import projector
+    pool = [card(f"W{i}", 0.05, "W") for i in range(3)] + [card("U0", 0.05, "U")]
+    p = projector(pool, lambdas=[400.0] * 10)
+    sharp = max(p.probs(pool).values())
+    p.arch.early_temp = 0.3
+    assert max(p.probs(pool).values()) < sharp
 
 
 def test_tailer_handles_partial_lines_and_rotation(tmp_path):

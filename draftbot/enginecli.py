@@ -53,6 +53,9 @@ def add_parsers(sub: argparse._SubParsersAction) -> None:
     fx.add_argument("code")
     fx.add_argument("--format", dest="fmt", default="premier")
     fx.add_argument("--drafts", type=int, default=600)
+    fx.add_argument("--early-temp", type=float, default=1.0,
+                    help="moltiplicatore di lambda nella prima busta (impegno sui colori; da check-extras)")
+    fx.add_argument("--no-flow", action="store_true", help="non usare il flusso dei colori")
 
     lv = sub.add_parser("live", help="segue Player.log e suggerisce i pick in tempo reale")
     lv.add_argument("--log", type=Path, help="percorso di Player.log (default: quello standard)")
@@ -192,10 +195,12 @@ def run(args: argparse.Namespace) -> int:
 
     if args.command == "fit-extras":
         from .engine.extras import fit_extras
-        ex = fit_extras(con, load_set(args.code).code, args.fmt, args.drafts)
+        ex = fit_extras(con, load_set(args.code).code, args.fmt, args.drafts, early_temp=args.early_temp,
+                        flow=not args.no_flow)
         path = ex.save()
         print(f"Wheel: coefficienti {', '.join(f'{x:+.2f}' for x in ex.wheel.coef)}")
-        print(f"Segnali: g_same {ex.signal.g_same:.0f}, g_other {ex.signal.g_other:.0f}")
+        print(f"Segnali: g_same {ex.signal.g_same:.0f}, g_other {ex.signal.g_other:.0f}; flusso delta "
+              f"{ex.signal.future_shift:+.3f}; impegno busta 1 x{ex.signal.early_temp}")
         print(f"Scritto: {path}")
         return 0
 

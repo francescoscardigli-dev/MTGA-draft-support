@@ -12,12 +12,17 @@ wheel:
 signal:
   g_same: 0.0
   g_other: 0.0
-  ll_gain: 0.0003262956580860621
+  ll_gain: 0.0067791001590313815
   notes:
   - stimato su 2761 pool, verificato su 2268
   - 'll_gain: log-verosimiglianza media dei colori finali, con segnali - senza'
+  future_shift: 0.13831344293235845
+  future_shift_se: 0.03609511033129563
+  early_temp: 1.0
 fitted_on: FRA
 fitted_at: '2026-11-28'
 notes:
-- 'segnali verificati dopo il 2026-10-16: guadagno di log-verosimiglianza +0.0003'
-- 'segnali disattivati: guadagno fuori campione sotto la soglia 0.005'
+- 'segnali verificati dopo il 2026-10-16: guadagno di log-verosimiglianza +0.0068'
+- 'segnali disattivati: guadagno fuori campione sotto la soglia 0.01'
+- 'flusso dei colori: delta +0.138 +- 0.036 su 718 campioni'
+- 'impegno nella busta 1: lambda x1.0'

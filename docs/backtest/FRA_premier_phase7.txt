@@ -1,26 +1,40 @@
 # Verifica Fase 7 FRA premier (taglio 2026-10-13)
 
-draft di verifica: 150 (giocatori fascia high)
+draft di verifica: 300 (giocatori fascia high)
 
 ## Segnali
-pesi: stessa direzione -4, altra direzione -8
-log-verosimiglianza media dei colori finali, con segnali - senza: -0.0407 (positivo = i segnali migliorano la previsione)
+pesi: stessa direzione 0, altra direzione -4
+log-verosimiglianza media dei colori finali, con segnali - senza: -0.0238 (positivo = i segnali migliorano la previsione)
+
+flusso dei colori: delta +0.151 +- 0.035 (spostamento delle carte future per unita' di segnale)
+impegno nella busta 1: lambda x0.6
 
 ## Wheel
-coefficienti: -2.58, +1.28, -0.22, -1.84, +3.88 (intercetta, posizione relativa, posizione^2, popolarita', dimensione busta)
-Brier 0.1739 contro 0.2222 di una probabilita' costante (33% delle carte torna; 28350 carte)
+coefficienti: -2.58, +1.28, -0.18, -1.89, +3.91 (intercetta, posizione relativa, posizione^2, popolarita', dimensione busta)
+Brier 0.1734 contro 0.2222 di una probabilita' costante (33% delle carte torna; 56700 carte)
 prevista -> frequenza reale:
-  0.0-0.1: 0.07 -> 0.08 (n 3446)
-  0.1-0.3: 0.19 -> 0.18 (n 11133)
-  0.3-0.5: 0.39 -> 0.39 (n 7032)
-  0.5-0.7: 0.59 -> 0.60 (n 4786)
-  0.7-0.9: 0.76 -> 0.80 (n 1953)
+  0.0-0.1: 0.07 -> 0.08 (n 6778)
+  0.1-0.3: 0.19 -> 0.18 (n 22479)
+  0.3-0.5: 0.39 -> 0.39 (n 14021)
+  0.5-0.7: 0.59 -> 0.60 (n 9501)
+  0.7-0.9: 0.76 -> 0.81 (n 3921)
 
 ## Accordo con i giocatori forti
 variante           top-1   top-3  carte in comune
-base               50.6%   81.2% 
-segnali            50.4%   81.2% 
-wheel              51.5%   81.0% 
-segnali + wheel    51.3%   80.9% 
+base (wheel)       51.7%   81.2% 
++ flusso           51.9%   81.1% 
++ impegno x0.6     51.5%   81.2% 
++ flusso + impegno x0.6   51.9%   81.3% 
+
+Differenza di top-1 rispetto a 'base' (stessi draft, intervallo al 95%, bootstrap sui draft):
+  + flusso: +0.1 punti [-0.2, +0.4]
+  + impegno x0.6: -0.2 punti [-0.4, -0.1]
+  + flusso + impegno x0.6: +0.2 punti [-0.1, +0.5]
+
+Per fase della busta (top-1):
+  base (wheel): fine busta 67%; inizio busta 47%; meta' busta 45%
+  + flusso: fine busta 67%; inizio busta 47%; meta' busta 45%
+  + impegno x0.6: fine busta 67%; inizio busta 47%; meta' busta 44%
+  + flusso + impegno x0.6: fine busta 67%; inizio busta 47%; meta' busta 45%
 
 Dati: 17Lands (https://www.17lands.com), licenza CC BY 4.0

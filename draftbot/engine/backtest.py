@@ -157,6 +157,7 @@ class Agreement:
     by_phase: dict[str, tuple[int, float, float]]
     overlap: float | None = None    # Pick Two: quota delle carte scelte presenti nella prima coppia
     diff_ci: dict[str, tuple[float, float, float]] = field(default_factory=dict)  # top-1 motore - altro
+    per_draft: list[list[int]] = field(default_factory=list)   # per draft: [pick valutati, top-1 giusti]
 
 
 def _phase(pick_number: int, picks_per_pack: int) -> str:
@@ -181,7 +182,7 @@ def pick_agreement(projector: Projector, drafts: list[DraftRec], ata: dict[str, 
                 for o in (itertools.combinations(pack, n_turn) if n_turn > 1 else ((c,) for c in pack))}
         return [k for k, _ in sorted(opts.items(), key=lambda kv: kv[1], reverse=True)]
 
-    from .signals import SignalState, extra_logits
+    from .signals import SignalState, extra_logits, future_shift
     wheel_fn = None
     if wheel is not None:
         wm, pop = wheel
@@ -192,15 +193,16 @@ def pick_agreement(projector: Projector, drafts: list[DraftRec], ata: dict[str, 
         st = SignalState()
         for p in sorted(d.picks, key=lambda p: (p.pack_number, p.pick_number)):
             pack = _cards(book, p.pack)
-            xl = None
+            xl, sh = None, None
             if signals is not None:
                 st.observe(p.pack_number, p.pick_number, pack, fmt, signals[0])
                 xl = extra_logits(signals[1], st, fmt.pass_directions[p.pack_number])
+                sh = future_shift(st, fmt, p.pack_number, p.pick_number, signals[1].future_shift)
             if len(pack) < len(p.pack) or len(p.picked) != n_turn or len(pack) < n_turn:
                 continue
             human = tuple(sorted(p.picked))
             pool = _cards(book, p.pool)
-            opts, _ = recommend(projector, pool, pack, k=3, extra_logits=xl, wheel=wheel_fn)
+            opts, _ = recommend(projector, pool, pack, k=3, extra_logits=xl, wheel=wheel_fn, shift=sh)
             ranked = {"motore": [tuple(sorted(o.names)) for o in opts],
                       "qualita'": rank_simple(pack, lambda c: c.q)[:3],
                       "ATA": rank_simple(pack, lambda c: -ata.get(c.name, 99.0))[:3]}
@@ -232,7 +234,7 @@ def pick_agreement(projector: Projector, drafts: list[DraftRec], ata: dict[str, 
             continue
         phases = {ph: (v[0], v[1] / v[0], v[2] / v[0]) for ph, v in st.items() if ph != "tutti" and v[0]}
         out.append(Agreement(k, a[0], a[1] / a[0], a[2] / a[0], phases, a[3] / a[0] if n_turn > 1 else None,
-                             cis if k == "motore" else {}))
+                             cis if k == "motore" else {}, per_draft[k]))
     return out
 
 

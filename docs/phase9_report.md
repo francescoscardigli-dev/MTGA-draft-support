@@ -78,8 +78,11 @@ In ordine di importanza:
    verificati solo su log sintetici costruiti sulla struttura documentata da fonti non ufficiali.
    Checklist in `docs/phase2_report.md`: `log-clean`, poi `log-drafts -d`, poi i test sui fixture reali.
 2. **Database del client Arena** (`update-cards --arena-db`): non provato su un'installazione reale.
-3. **Impegno sui colori troppo precoce nei primi pick** (Fase 4). I segnali, come costruiti in Fase 7,
-   non l'hanno risolto. Strada da provare: segnali dalle carte mancanti nella busta di ritorno.
+3. **Impegno sui colori nei primi pick** (Fase 4). Riesaminato con l'utente (Fase 7, "Revisione"):
+   - il flusso dei colori ora è nel modello: i colori aperti alzano il valore delle carte future;
+   - impegnarsi meno nella busta 1 non migliora l'accordo con i giocatori forti;
+   - i dati osservazionali suggeriscono che cambiare colori tardi costi (−3/−4 punti) e che 3 colori
+     nei primi pick rendano un po' di più, ma senza una prova diretta.
 4. **Pick Two**: il vantaggio sul riferimento ATA è piccolo (FRA) o nullo (OM1).
 5. **Tag dei temi** (`sets/*.tags.yaml`): generati da regole, da rivedere a mano.
 6. **Splash** molto più raro che nei mazzi dei giocatori forti (Fase 6).

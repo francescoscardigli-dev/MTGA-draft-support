@@ -22,7 +22,7 @@ from .signals import SignalBaseline, SignalModel
 from .wheel import LogitWheel
 
 
-MIN_SIGNAL_GAIN = 0.005   # guadagno minimo di log-verosimiglianza media per attivare i segnali
+MIN_SIGNAL_GAIN = 0.01    # guadagno minimo di log-verosimiglianza media (su FRA due verifiche danno +-0,007: rumore)
 
 
 @dataclass
@@ -63,7 +63,8 @@ def signal_baseline(con, set_code: str, fmt: str, book, n_drafts: int = 400) -> 
     return base
 
 
-def fit_extras(con, set_code: str, fmt: str, n_drafts: int = 600, log=print) -> Extras:
+def fit_extras(con, set_code: str, fmt: str, n_drafts: int = 600, early_temp: float = 1.0, flow: bool = True,
+               log=print) -> Extras:
     """Stima su un set con game data: wheel su tutti i draft del campione, segnali con verifica
     (prima meta' dei giorni per stimare, seconda per verificare); i segnali si tengono solo se migliorano."""
     from ..config import format_for
@@ -94,5 +95,12 @@ def fit_extras(con, set_code: str, fmt: str, n_drafts: int = 600, log=print) -> 
     if sig.ll_gain < MIN_SIGNAL_GAIN:
         notes.append(f"segnali disattivati: guadagno fuori campione sotto la soglia {MIN_SIGNAL_GAIN}")
         sig = SignalModel(0.0, 0.0, sig.ll_gain, sig.notes)
+    if flow:
+        from .signals import fit_future_shift
+        delta, se, n = fit_future_shift(proj, fit_d + test_d, final_colors(set_code, fmt), base)
+        sig.future_shift, sig.future_shift_se = max(delta, 0.0), se
+        notes.append(f"flusso dei colori: delta {delta:+.3f} +- {se:.3f} su {n} campioni")
+    sig.early_temp = early_temp
+    notes.append(f"impegno nella busta 1: lambda x{early_temp}")
     log("; ".join(notes))
     return Extras(fmt, wheel, sig, set_code, date.today().isoformat(), notes)
