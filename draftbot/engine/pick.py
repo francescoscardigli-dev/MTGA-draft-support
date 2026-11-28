@@ -31,6 +31,7 @@ class Option:
     deck_gain: float = 0.0               # miglioramento atteso del mazzo finale
     secondary: float = 0.0               # contributo se entrasse nel mazzo (spareggio, pesato da tiebreak)
     wheel_bonus: float = 0.0             # valore atteso della carta migliore che tornera' al giro dopo
+    p_strong: float | None = None        # probabilita' che un giocatore forte la scelga (strato di imitazione)
 
     @property
     def names(self) -> tuple[str, ...]:
@@ -45,7 +46,8 @@ class Option:
 
 def recommend(projector: Projector, pool: Sequence[Card], pack: Sequence[Card], k: int = 3,
               picks_per_turn: int | None = None, extra_logits: dict[str, float] | None = None,
-              wheel=None, shift: dict[str, float] | None = None) -> tuple[list[Option], dict[str, float]]:
+              wheel=None, shift: dict[str, float] | None = None, imitation=None
+              ) -> tuple[list[Option], dict[str, float]]:
     """Le k opzioni migliori e le probabilita' degli archetipi dato il pool.
 
     ``shift``: spostamento delle carte future per archetipo dai segnali (signals.future_shift).
@@ -53,11 +55,24 @@ def recommend(projector: Projector, pool: Sequence[Card], pack: Sequence[Card], 
     ``extra_logits``: segnali dei vicini per archetipo (signals.py).
     ``wheel``: funzione (carte rimaste) -> probabilita' di ritorno; se data, al valore di un'opzione
     si aggiunge il valore atteso della carta migliore che tornera' (vedi wheel_bonus).
+    ``imitation``: (ImitationModel, popolarita'); se dato, le opzioni si ordinano per probabilita' di
+    scelta di un giocatore forte, stimata dal valore e dalle altre variabili (imitation.py).
     """
     old_shift = projector.shift
     projector.shift = shift or {}
     try:
-        return _recommend(projector, pool, pack, k, picks_per_turn, extra_logits, wheel)
+        if imitation is None:
+            return _recommend(projector, pool, pack, k, picks_per_turn, extra_logits, wheel)
+        from .imitation import rerank
+        opts, probs = _recommend(projector, pool, pack, 10_000, picks_per_turn, extra_logits, wheel)
+        fmt = projector.fmt
+        n = picks_per_turn or fmt.picks_per_turn
+        progress = min((len(pool) / n) / max(fmt.total_picks - 1, 1), 1.0)
+        out = []
+        for o, pr in rerank(imitation[0], opts, probs, imitation[1], progress)[:k]:
+            o.p_strong = pr
+            out.append(o)
+        return out, probs
     finally:
         projector.shift = old_shift
 
