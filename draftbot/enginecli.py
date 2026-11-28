@@ -57,6 +57,15 @@ def add_parsers(sub: argparse._SubParsersAction) -> None:
                     help="moltiplicatore di lambda nella prima busta (impegno sui colori; da check-extras)")
     fx.add_argument("--no-flow", action="store_true", help="non usare il flusso dei colori")
 
+    fi = sub.add_parser("fit-imitation", help="stima lo strato di imitazione dei giocatori forti")
+    fi.add_argument("sets", nargs="+", help="SET:TAGLIO, es. FRA:2026-10-13 EOE:2025-08-14")
+    fi.add_argument("--format", dest="fmt", default="premier")
+    fi.add_argument("--prior-sets", nargs="+", required=True,
+                    help="set per il prior (non devono comprendere il set in esame)")
+    fi.add_argument("--train", type=int, default=400)
+    fi.add_argument("--test", type=int, default=300)
+    fi.add_argument("--out", type=Path, help="scrive qui il resoconto della verifica")
+
     lv = sub.add_parser("live", help="segue Player.log e suggerisce i pick in tempo reale")
     lv.add_argument("--log", type=Path, help="percorso di Player.log (default: quello standard)")
     lv.add_argument("--set", dest="live_set", help="forza il set (se il nome evento non lo dice)")
@@ -191,6 +200,28 @@ def run(args: argparse.Namespace) -> int:
         if args.out:
             args.out.write_text(text + "\n\n" + ATTRIBUTION + "\n", encoding="utf-8")
         print(ATTRIBUTION)
+        return 0
+
+    if args.command == "fit-imitation":
+        from .engine import imitation, imitationcheck
+        lines, allp = [], []
+        for spec in args.sets:
+            code, cutoff = spec.split(":")
+            code = load_set(code).code
+            prior_sets = [s for s in args.prior_sets if s != code]
+            lines.append(f"## {code} {args.fmt} (taglio {cutoff}, prior {' '.join(prior_sets)})")
+            r = imitationcheck.run(con, code, args.fmt, cutoff, prior_sets, args.train, args.test,
+                                   log=lambda m: (print(m), lines.append(m)))
+            train, test = imitationcheck.cached(f"{code}_{args.fmt}_{cutoff}", lambda: None)
+            allp += list(train) + list(test)
+        m = imitation.fit(allp)
+        m.notes = [f"stimato su {len(allp)} pick di giocatori forti: {', '.join(args.sets)}"]
+        path = imitation.save(m, args.fmt)
+        lines.append("")
+        lines.append("Modello salvato: " + ", ".join(f"{f} {c:+.3f}" for f, c in zip(m.features, m.coef)))
+        print(f"Scritto: {path}")
+        if args.out:
+            args.out.write_text("\n".join(lines) + "\n\n" + ATTRIBUTION + "\n", encoding="utf-8")
         return 0
 
     if args.command == "fit-extras":
@@ -333,7 +364,15 @@ def run(args: argparse.Namespace) -> int:
         fmt_cfg = format_for(args.fmt, code)
         wheel_fn = lambda rem: ex.wheel.survival(rem, fmt_cfg, pop)
         wprobs = dict(zip((c.name for c in pack), ex.wheel.survival(pack, fmt_cfg, pop)))
-    opts, probs = recommend(proj, pool, pack, k=args.k, wheel=wheel_fn)
+    from .engine.imitation import load as load_imitation
+    im = load_imitation(args.fmt)
+    imit = None
+    if im is not None and pack:
+        from .engine.phase7check import popularity
+        imit = (im, popularity(con, code, args.fmt, None))
+    opts, probs = recommend(proj, pool, pack, k=args.k, wheel=wheel_fn, imitation=imit)
+    if imit is not None:
+        print("Ordine: probabilita' di scelta di un giocatore forte (strato di imitazione); il valore e' quello del motore")
     top = sorted(probs.items(), key=lambda kv: kv[1], reverse=True)[:4]
     print(f"Pool: {len(pool)} carte. Archetipi piu' probabili: "
           + ", ".join(f"{a} {p:.0%}" for a, p in top))
@@ -344,7 +383,8 @@ def run(args: argparse.Namespace) -> int:
         print("Sinergie: mostrate come informazione, non nel punteggio (usa --synergy per includerle)")
     for i, o in enumerate(opts, 1):
         wb = f" (di cui wheel {o.wheel_bonus * 100:+.2f})" if o.wheel_bonus else ""
-        print(f"{i}. {' + '.join(o.names)}  ->  {o.value * 100:+.2f} punti di win rate attesa{wb}")
+        ps = f", scelta dei forti {o.p_strong:.0%}" if o.p_strong is not None else ""
+        print(f"{i}. {' + '.join(o.names)}  ->  {o.value * 100:+.2f} punti di win rate attesa{wb}{ps}")
         print(f"   {o.explain()}")
         if info is not None:
             roles = {n: info.roles(n) for n in o.names}

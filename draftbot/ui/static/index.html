@@ -121,10 +121,11 @@ function renderPick(ev) {
     const themes = Object.entries(o.themes || {}).filter(([, t]) => t.length)
       .map(([n, t]) => `${esc(n)}: ${esc(t.join(", "))}`).join("; ");
     const wheel = o.wheel_bonus ? ` · ritorno atteso ${pts(o.wheel_bonus)}` : "";
+    const strong = o.p_strong != null ? ` · scelta dei forti ${Math.round(o.p_strong * 100)}%` : "";
     return `<div class="opt ${i === 0 ? "first" : ""}">
       <span class="val">${pts(o.value)}</span>
       <div class="names">${i + 1}. ${o.cards.map(esc).join(" + ")}</div>
-      <div class="why">mazzo ${pts(o.deck_gain)}${wheel}${i ? ` · ${pts(o.value - best)} dalla prima` : ""}</div>
+      <div class="why">mazzo ${pts(o.deck_gain)}${wheel}${strong}${i ? ` · ${pts(o.value - best)} dalla prima` : ""}</div>
       ${themes ? `<div class="why">temi: ${themes}</div>` : ""}
     </div>`;
   }).join("") || '<div class="empty">Nessuna opzione</div>';

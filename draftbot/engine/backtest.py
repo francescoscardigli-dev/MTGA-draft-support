@@ -166,7 +166,7 @@ def _phase(pick_number: int, picks_per_pack: int) -> str:
 
 
 def pick_agreement(projector: Projector, drafts: list[DraftRec], ata: dict[str, float],
-                   signals=None, wheel=None) -> list[Agreement]:
+                   signals=None, wheel=None, imitation=None) -> list[Agreement]:
     """``signals``: (SignalBaseline, SignalModel) da usare durante il draft; ``wheel``: modello di wheel
     con metodo survival(carte, fmt, pop) e il dizionario pop (tupla (modello, pop))."""
     fmt = projector.fmt
@@ -202,7 +202,8 @@ def pick_agreement(projector: Projector, drafts: list[DraftRec], ata: dict[str, 
                 continue
             human = tuple(sorted(p.picked))
             pool = _cards(book, p.pool)
-            opts, _ = recommend(projector, pool, pack, k=3, extra_logits=xl, wheel=wheel_fn, shift=sh)
+            opts, _ = recommend(projector, pool, pack, k=3, extra_logits=xl, wheel=wheel_fn, shift=sh,
+                                imitation=imitation)
             ranked = {"motore": [tuple(sorted(o.names)) for o in opts],
                       "qualita'": rank_simple(pack, lambda c: c.q)[:3],
                       "ATA": rank_simple(pack, lambda c: -ata.get(c.name, 99.0))[:3]}

@@ -1,0 +1,18 @@
+## FRA premier (taglio 2026-10-13, prior HOB MSH)
+motore: top-1 51.9%, top-3 81.1% (12600 pick)
+valore + qualita' + popolarita': top-1 49.0% (-2.9 [-3.8, -2.1]), top-3 83.6%, log-verosimiglianza media -1.337
++ fit e carte: top-1 55.7% (+3.8 [+2.8, +4.8]), top-3 87.4%, log-verosimiglianza media -1.190
+completo (con fase del draft): top-1 56.1% (+4.3 [+3.3, +5.2]), top-3 87.5%, log-verosimiglianza media -1.173
+coefficienti (completo): value +3.014, q -0.082, pop +4.288, fit +2.490, rare -0.046, gold +1.192, land -1.342, value_early -1.807, q_early +0.168, pop_early +3.376, fit_early -0.249
+per fase (motore -> strato): fine busta 66.8% -> 69.0%; inizio busta 46.8% -> 51.8%; meta' busta 45.0% -> 50.2%
+## EOE premier (taglio 2025-08-14, prior FRA HOB MSH)
+motore: top-1 55.7%, top-3 84.5% (9750 pick)
+valore + qualita' + popolarita': top-1 58.0% (+2.3 [+1.5, +3.3]), top-3 88.0%, log-verosimiglianza media -1.128
++ fit e carte: top-1 63.8% (+8.1 [+7.1, +9.2]), top-3 92.0%, log-verosimiglianza media -0.973
+completo (con fase del draft): top-1 64.2% (+8.5 [+7.5, +9.5]), top-3 92.3%, log-verosimiglianza media -0.961
+coefficienti (completo): value +0.564, q +0.058, pop +5.228, fit +3.495, rare -0.040, gold +0.964, land -1.246, value_early -0.072, q_early +0.091, pop_early +2.011, fit_early -1.286
+per fase (motore -> strato): fine busta 65.8% -> 78.2%; inizio busta 52.2% -> 57.6%; meta' busta 50.0% -> 58.4%
+
+Modello salvato: value +2.364, q -0.040, pop +4.210, fit +2.612, rare +0.099, gold +1.138, land -1.354, value_early -1.375, q_early +0.228, pop_early +2.696, fit_early -0.325
+
+Dati: 17Lands (https://www.17lands.com), licenza CC BY 4.0

@@ -130,3 +130,21 @@ def test_mixture_caps_archetype_confidence():
     probs = p.probs(pool)
     assert max(probs.values()) <= 0.8 + 0.2 * 0.1 + 1e-9
     assert min(probs.values()) >= 0.2 * 0.1 - 1e-9
+
+
+def test_imitation_fit_recovers_preferences_and_reranks():
+    import numpy as np
+    from draftbot.engine.imitation import FEATURES, ImitationModel, PickFeatures, agreement, fit
+    rng = np.random.default_rng(0)
+    true = np.zeros(len(FEATURES))
+    true[FEATURES.index("value")], true[FEATURES.index("pop")] = 2.0, 3.0
+    picks = []
+    for i in range(600):
+        X = rng.normal(size=(10, len(FEATURES)))
+        p = np.exp(X @ true); p /= p.sum()
+        picks.append(PickFeatures(X, int(rng.choice(10, p=p)), i // 20, "x"))
+    m = fit(picks)
+    assert abs(m.coef[FEATURES.index("pop")] - 3.0) < 0.5 and abs(m.coef[FEATURES.index("value")] - 2.0) < 0.5
+    top1 = agreement(picks, lambda p: m.scores(p.X))[0]
+    assert top1 > agreement(picks, lambda p: p.X[:, FEATURES.index("value")])[0]
+    assert ImitationModel.from_dict(m.to_dict()).coef.tolist() == m.coef.tolist()

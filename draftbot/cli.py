@@ -179,7 +179,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.command in ("tag-set", "synergy"):
             from .synergycli import run as run_synergy
             return run_synergy(args)
-        if args.command in ("fit-deck-model", "recommend", "backtest", "build", "build-check", "fit-extras", "live",
+        if args.command in ("fit-deck-model", "recommend", "backtest", "build", "build-check", "fit-extras", "fit-imitation", "live",
                             "check-extras", "ui", "review"):
             from .enginecli import run as run_engine
             return run_engine(args)

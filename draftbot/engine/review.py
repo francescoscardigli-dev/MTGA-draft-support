@@ -29,7 +29,8 @@ def review_draft(eng, draft) -> dict:
             continue
         pool, pack = cards(pool_ids), cards(p.pack_cards)
         taken = sorted(names.get(g, f"#{g}") for g in p.picked)
-        opts, probs = recommend(eng.projector, pool, pack, k=10_000, wheel=wheel_fn)
+        imit = (eng.imitation, eng.pop) if getattr(eng, "imitation", None) is not None else None
+        opts, probs = recommend(eng.projector, pool, pack, k=10_000, wheel=wheel_fn, imitation=imit)
         ranking = [tuple(sorted(o.names)) for o in opts]
         rank = ranking.index(tuple(taken)) + 1 if tuple(taken) in ranking else None
         best = opts[0] if opts else None
@@ -38,7 +39,8 @@ def review_draft(eng, draft) -> dict:
             "pack": p.pack + 1, "pick": p.pick + 1, "taken": taken,
             "best": list(best.names) if best else [], "rank": rank, "n_options": len(opts),
             "value_taken": mine.value if mine else None, "value_best": best.value if best else None,
-            "loss": (best.value - mine.value) if (best and mine) else None,
+            "loss": max(best.value - mine.value, 0.0) if (best and mine) else None,
+            "p_taken": mine.p_strong if mine else None, "p_best": best.p_strong if best else None,
             "top3": [list(o.names) for o in opts[:3]],
             "archetypes": dict(sorted(probs.items(), key=lambda kv: -kv[1])[:3]),
         })

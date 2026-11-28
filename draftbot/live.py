@@ -63,6 +63,7 @@ class Engine:
     pop: dict[str, float] = field(default_factory=dict)
     signal_base: object = None
     signal_model: object = None
+    imitation: object = None
 
 
 def load_engine(con, set_code: str, fmt: str) -> Engine:
@@ -72,6 +73,11 @@ def load_engine(con, set_code: str, fmt: str) -> Engine:
     proj = _projector(con, set_code, fmt)
     eng = Engine(set_code, fmt, proj, Builder(proj.book, proj.model, proj.synergy), db.arena_names(con, set_code))
     ex = load_extras(fmt)
+    from .engine.imitation import load as load_imitation
+    eng.imitation = load_imitation(fmt)
+    if eng.imitation is not None and not eng.pop:
+        from .engine.phase7check import popularity
+        eng.pop = popularity(con, set_code, fmt, None)
     if ex is not None:
         from .engine.phase7check import popularity
         eng.wheel = ex.wheel
@@ -176,7 +182,9 @@ class LiveSession:
             shift = future_shift(st, fmt_cfg, last.pack, last.pick, eng.signal_model.future_shift)
             sig_summary = st.colors_summary()
         wheel_fn = (lambda rem: eng.wheel.survival(rem, fmt_cfg, eng.pop)) if eng.wheel is not None else None
-        opts, probs = recommend(eng.projector, pool, pack, k=self.k, extra_logits=xl, wheel=wheel_fn, shift=shift)
+        imit = (eng.imitation, eng.pop) if eng.imitation is not None else None
+        opts, probs = recommend(eng.projector, pool, pack, k=self.k, extra_logits=xl, wheel=wheel_fn, shift=shift,
+                                imitation=imit)
         wheel_probs = {}
         if eng.wheel is not None and pack:
             for c, w in zip(pack, eng.wheel.survival(pack, fmt_cfg, eng.pop)):
@@ -187,7 +195,7 @@ class LiveSession:
             "pack": last.pack + 1, "pick": last.pick + 1, "pool_size": len(pool),
             "wheel_possible": last.pick + fmt_cfg.pod_size < fmt_cfg.picks_per_pack,
             "options": [{"cards": list(o.names), "value": o.value, "deck_gain": o.deck_gain,
-                         "wheel_bonus": o.wheel_bonus, "explain": o.explain(),
+                         "wheel_bonus": o.wheel_bonus, "explain": o.explain(), "p_strong": o.p_strong,
                          "themes": {n: info.roles(n) for n in o.names} if info else {}} for o in opts],
             "pack_cards": [{"name": c.name, "q": c.q, "colors": c.colors, "mv": c.mv, "rarity": c.rarity,
                             "wheel": wheel_probs.get(c.name)} for c in sorted(pack, key=lambda c: -c.q)],
@@ -238,7 +246,8 @@ def print_event(ev: dict) -> None:
         print(f"\n{ev['set']} {ev['format']} P{ev['pack']}p{ev['pick']} (pool {ev['pool_size']}; {arch})")
         for i, o in enumerate(ev["options"], 1):
             wb = f", wheel {o['wheel_bonus'] * 100:+.2f}" if o["wheel_bonus"] else ""
-            print(f"  {i}. {' + '.join(o['cards'])}  {o['value'] * 100:+.2f} punti{wb}")
+            ps = f", scelta dei forti {o['p_strong']:.0%}" if o.get("p_strong") is not None else ""
+            print(f"  {i}. {' + '.join(o['cards'])}  {o['value'] * 100:+.2f} punti{wb}{ps}")
         wh = [f"{c['name']} {c['wheel']:.0%}" for c in ev["pack_cards"] if c.get("wheel") is not None]
         if ev["wheel_possible"] and wh:
             print("  probabilita' di ritorno: " + ", ".join(wh[:6]))
