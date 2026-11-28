@@ -32,7 +32,12 @@ class Card:
     is_creature: bool
     rarity: str
     pips: str = ""           # simboli colorati del costo, es. "WWU" (per terre e splash)
-    produces: str = ""       # per le terre non base: colori di mana prodotti (dall'identita' di colore)
+    produces: str = ""       # per le terre non base: colori di mana prodotti (identita' di colore; WUBRG per
+                             # le terre "di ogni colore" e per quelle che cercano una base)
+
+    def fixes(self, colors: str) -> bool:
+        """Terra di fixing per un mazzo di questi colori: produce almeno due dei suoi colori."""
+        return self.is_land and not self.is_basic and sum(c in colors for c in set(self.produces)) >= 2
 
     def castable_in(self, pair: str) -> bool:
         return all(c in pair for c in self.colors)
@@ -78,13 +83,24 @@ def _arch_stats(con: sqlite3.Connection, set_code: str, fmt: str, f: Filters, sh
     return delta, share
 
 
+_ANY_COLOR = ("mana of any color", "mana of any one color",
+              "search your library for a basic land", "search your library for up to one basic land")
+
+
+def _produces(m) -> str:
+    text = (m.get("oracle_text") or "").lower()
+    if any(s in text for s in _ANY_COLOR):
+        return COLORS
+    return m["color_identity"] or ""
+
+
 def load_book(con: sqlite3.Connection, set_code: str, fmt: str, *, prior: PriorModel | None,
               as_of: str | None = None, half_life: float | None = None) -> CardBook:
     f = Filters(as_of=as_of, half_life=half_life)
     t = ratings(con, set_code, fmt, f, prior=prior)
     meta = pd.read_sql_query(
         "SELECT name AS card, cost_colors, color_identity, mv, is_land, is_creature, type_line, rarity, "
-        "pip_w, pip_u, pip_b, pip_r, pip_g FROM cards WHERE set_code=?", con, params=[set_code]).set_index("card")
+        "pip_w, pip_u, pip_b, pip_r, pip_g, oracle_text FROM cards WHERE set_code=?", con, params=[set_code]).set_index("card")
     q = (t.cards.set_index("card")["gih_bayes"] - t.baseline_gih).to_dict()
     sd = t.cards.set_index("card")["gih_sd"].to_dict()
     cards = {}
@@ -97,6 +113,6 @@ def load_book(con: sqlite3.Connection, set_code: str, fmt: str, *, prior: PriorM
         cards[name] = Card(name, 0.0 if basic or qq != qq else float(qq),
                            0.0 if basic else float(sd.get(name, 0.0) or 0.0), "" if basic else cols,
                            float(m["mv"] or 0), land, basic, bool(m["is_creature"]), m["rarity"] or "",
-                           pips, (m["color_identity"] or "") if land else "")
+                           pips, _produces(m) if land and not basic else "")
     delta, share = _arch_stats(con, set_code, fmt, f)
     return CardBook(set_code, fmt, cards, t.baseline_gih or 0.0, delta, share, as_of)

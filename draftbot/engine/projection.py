@@ -25,7 +25,7 @@ import numpy as np
 
 from ..config import FormatConfig
 from .book import PAIRS, Card, CardBook
-from .deckmodel import DECK_SLOTS, DeckModel
+from .deckmodel import DECK_SLOTS, FIX_CAP, DeckModel
 
 N_BUCKETS = 10
 
@@ -86,7 +86,27 @@ class Projector:
         return self.c_mean * v.mean() + self.c_top * v[:3].mean() + self.c_arch * self.book.arch_delta.get(pair, 0.0)
 
     def pool_values(self, pool: Sequence[Card], pair: str) -> np.ndarray:
-        return np.array([c.q for c in pool if not c.is_basic and c.castable_in(pair)], dtype=float)
+        # solo magie: le terre non occupano i 23 posti delle magie, valgono per il fixing
+        return np.array([c.q for c in pool if not c.is_land and c.castable_in(pair)], dtype=float)
+
+    def fixing_value(self, cards: Sequence[Card], pair: str) -> float:
+        """Valore delle terre di fixing nell'archetipo ``pair`` (Fase 10).
+
+        Il mazzo finale puo' essere a 2 colori, a 2 colori con splash o a 3 colori (quote dai mazzi del
+        formato). Nel primo caso contano le terre che producono entrambi i colori; negli altri quelle che
+        producono almeno 2 dei 3 colori, con il terzo colore ugualmente probabile tra i 3 rimasti.
+        Coefficienti dal valutatore di mazzo, negativi trattati come 0, fino a FIX_CAP terre.
+        """
+        lands = [c for c in cards if c.is_land and not c.is_basic and c.produces]
+        coef, share = self.model.coef, self.model.type_share or {}
+        c2, cs, c3 = (max(coef.get(k, 0.0), 0.0) for k in ("fix_2c", "fix_splash", "fix_3c"))
+        if not lands or not (c2 or cs or c3):
+            return 0.0
+        n2 = min(sum(c.fixes(pair) for c in lands), FIX_CAP)
+        others = [x for x in "WUBRG" if x not in pair]
+        n3 = float(np.mean([min(sum(c.fixes(pair + x) for c in lands), FIX_CAP) for x in others]))
+        return (share.get("2c", 0.0) * c2 * n2
+                + (share.get("splash", 0.0) * cs + share.get("3c", 0.0) * c3) * n3)
 
     def arch_values(self, pool: Sequence[Card], extra: Sequence[Card] = (), n_cards: int | None = None
                     ) -> dict[str, float]:
@@ -97,7 +117,7 @@ class Projector:
         for a in PAIRS:
             f = fut + self.shift.get(a, 0.0) if self.shift else fut
             vals = np.concatenate([self.pool_values(pool, a), self.pool_values(extra, a), f])
-            out[a] = self.deck_value(vals, a)
+            out[a] = self.deck_value(vals, a) + self.fixing_value(list(pool) + list(extra), a)
             if self.synergy is not None:
                 cs = [c for c in list(pool) + list(extra) if not c.is_basic and c.castable_in(a)]
                 total = len(cs) + len(fut)
@@ -138,7 +158,7 @@ class Projector:
         """
         tot = 0.0
         for a, p in probs.items():
-            tot += p * sum(c.q for c in option if not c.is_basic and c.castable_in(a))
+            tot += p * sum(c.q for c in option if not c.is_land and c.castable_in(a))
         return self.c_mean * tot / DECK_SLOTS
 
 

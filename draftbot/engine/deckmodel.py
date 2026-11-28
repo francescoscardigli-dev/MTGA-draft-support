@@ -1,11 +1,14 @@
 """Valutatore di mazzo: win rate attesa di un mazzo, stimata dai game data 17Lands.
 
 Regressione lineare pesata (pesi = partite) della win rate del mazzo su:
-  mean_q   qualita' media delle carte non base (spell e terre non base)
-  top3     qualita' media delle 3 carte migliori
+  mean_q   qualita' media delle magie (le terre stanno nei posti delle terre: contano con il fixing)
+  top3     qualita' media delle 3 magie migliori
   arch     win rate dell'archetipo (coppia di colori principali) rispetto alla media
   n_le2    carte non terra di costo <= 2;   n_ge5  carte non terra di costo >= 5
   lands    terre - 17;   splash  1 se il mazzo ha uno splash;   extra_colors  colori principali oltre 2
+  fix_2c, fix_splash, fix_3c   terre di fixing (non base, producono almeno 2 colori del mazzo, fino a 4)
+           nei mazzi a 2 colori, con splash, a 3 colori (Fase 10: su 8 set e formati valgono +0,1/+1 punti
+           l'una, soprattutto nei mazzi a 3 colori)
   player   win rate del giocatore (solo variabile di controllo: non entra nel punteggio del mazzo)
 
 Il controllo sul giocatore separa l'effetto del mazzo da quello di chi lo gioca. Il modello e' per
@@ -33,7 +36,9 @@ from ..paths import raw_dir
 from ..stats.prior import PRIORS_DIR
 from .book import CardBook
 
-FEATURES = ["mean_q", "top3", "arch", "n_le2", "n_ge5", "lands", "splash", "extra_colors"]
+FEATURES = ["mean_q", "top3", "arch", "n_le2", "n_ge5", "lands", "splash", "extra_colors",
+            "fix_2c", "fix_splash", "fix_3c"]
+FIX_CAP = 4
 CONTROL = "player"
 DECK_SLOTS = 23
 
@@ -51,6 +56,7 @@ class DeckModel:
     as_of: str | None
     fitted_at: str
     notes: list[str] = field(default_factory=list)
+    type_share: dict[str, float] = field(default_factory=dict)   # quota di mazzi 2c / splash / 3c
     lambdas: list[float] | None = None     # modello degli archetipi (projection.fit_lambda)
     lambda_set: str | None = None
     tiebreak: float = 0.0
@@ -58,7 +64,7 @@ class DeckModel:
 
     def score(self, x: dict[str, float]) -> float:
         """Win rate attesa relativa (senza intercetta): differenze tra mazzi, non valori assoluti."""
-        return sum(self.coef[k] * x.get(k, 0.0) for k in FEATURES)
+        return sum(self.coef.get(k, 0.0) * x.get(k, 0.0) for k in FEATURES)
 
     def save(self, path: Path | None = None) -> Path:
         path = path or PRIORS_DIR / f"{self.format}_deck.yaml"
@@ -98,6 +104,7 @@ class CardArrays:
     nonbasic: np.ndarray
     spell: np.ndarray
     mv: np.ndarray
+    produces: list[str] = field(default_factory=list)
 
     @classmethod
     def from_book(cls, names: list[str], book: CardBook) -> "CardArrays":
@@ -106,7 +113,8 @@ class CardArrays:
                    np.array([c.q if c else 0.0 for c in cs]),
                    np.array([bool(c) and not c.is_basic for c in cs]),
                    np.array([bool(c) and not c.is_land for c in cs]),
-                   np.array([c.mv if c else 0.0 for c in cs]))
+                   np.array([c.mv if c else 0.0 for c in cs]),
+                   [(c.produces if c and c.is_land and not c.is_basic else "") for c in cs])
 
 
 def _topk_mean(D: np.ndarray, q: np.ndarray, mask: np.ndarray, k: int) -> np.ndarray:
@@ -123,16 +131,48 @@ def deck_matrix_features(D: np.ndarray, ca: CardArrays, main_colors: pd.Series, 
     D = D.astype(float)
     nb = D[:, ca.nonbasic]
     f = pd.DataFrame(index=range(len(D)))
-    f["mean_q"] = (nb * ca.q[ca.nonbasic]).sum(1) / np.maximum(nb.sum(1), 1)
-    f["top3"] = _topk_mean(D, ca.q, ca.nonbasic, 3)
+    sp = D[:, ca.spell]
+    f["mean_q"] = (sp * ca.q[ca.spell]).sum(1) / np.maximum(sp.sum(1), 1)
+    f["top3"] = _topk_mean(D, ca.q, ca.spell, 3)
     mc = main_colors.fillna("").astype(str).map(lambda s: "".join(c for c in "WUBRG" if c in s)).to_numpy()
+    spc = splash.fillna("").astype(str).map(lambda s: "".join(c for c in "WUBRG" if c in s)).to_numpy()
     f["arch"] = [book.arch_delta.get(m, 0.0) for m in mc]
     f["n_le2"] = D[:, ca.spell & (ca.mv <= 2)].sum(1)
     f["n_ge5"] = D[:, ca.spell & (ca.mv >= 5)].sum(1)
     f["lands"] = D[:, ~ca.spell].sum(1) - 17
     f["splash"] = splash.fillna("").astype(str).str.len().gt(0).astype(float).to_numpy()
     f["extra_colors"] = np.clip(np.array([len(m) for m in mc]) - 2, 0, None)
+    fix = fixing_counts(D, ca, mc, spc)
+    three = np.array([len(m) >= 3 for m in mc])
+    spl = f["splash"].to_numpy() > 0
+    f["fix_2c"] = np.where(~three & ~spl, fix, 0.0)
+    f["fix_splash"] = np.where(~three & spl, fix, 0.0)
+    f["fix_3c"] = np.where(three, fix, 0.0)
     return f
+
+
+def fixing_counts(D: np.ndarray, ca: CardArrays, main: np.ndarray, splash: np.ndarray) -> np.ndarray:
+    """Terre di fixing per mazzo (copie, fino a FIX_CAP): non base che producono >= 2 colori del mazzo."""
+    land_idx = [j for j, p in enumerate(ca.produces) if p] if ca.produces else []
+    out = np.zeros(len(D))
+    if not land_idx:
+        return out
+    cols = np.array([m + s for m, s in zip(main, splash)], dtype=object)
+    for key in set(cols):
+        rows = np.where(cols == key)[0]
+        js = [j for j in land_idx if sum(c in key for c in set(ca.produces[j])) >= 2]
+        if js:
+            out[rows] = D[np.ix_(rows, js)].sum(1)
+    return np.minimum(out, FIX_CAP)
+
+
+def deck_type_share(main_colors: pd.Series, splash: pd.Series, w: np.ndarray | None = None) -> dict[str, float]:
+    mc = main_colors.fillna("").astype(str).str.len().to_numpy()
+    sp = splash.fillna("").astype(str).str.len().to_numpy() > 0
+    w = np.ones(len(mc)) if w is None else w
+    kinds = {"2c": (mc < 3) & ~sp, "splash": (mc < 3) & sp, "3c": mc >= 3}
+    tot = w.sum()
+    return {k: float(w[m].sum() / tot) for k, m in kinds.items()}
 
 
 def deck_features(counts: dict[str, int], book: CardBook, main_colors: str, splash: str = "") -> dict[str, float]:
@@ -194,7 +234,7 @@ def _wls(X: np.ndarray, y: np.ndarray, w: np.ndarray) -> np.ndarray:
 def fit_deck_model(con: sqlite3.Connection, books: dict[str, CardBook], fmt: str, *,
                    as_of: str | None = None, high_tier: float = 0.58) -> DeckModel:
     """Stima il modello su uno o piu' set. ``books`` porta la qualita' delle carte (con lo stesso as_of)."""
-    feats, ys, ws, ctrl, profiles, nonbasic_counts = [], [], [], [], [], []
+    feats, ys, ws, ctrl, profiles, nonbasic_counts, shares = [], [], [], [], [], [], []
     for code, book in books.items():
         deck, info = load_decks(code, fmt)
         if as_of:
@@ -211,9 +251,10 @@ def fit_deck_model(con: sqlite3.Connection, books: dict[str, CardBook], fmt: str
         # profilo: mazzi a due colori, senza splash, dei giocatori forti
         sel = ((info["colors"].fillna("").str.len() == 2) & (info["splash"].fillna("") == "")
                & (info["player"] >= high_tier)).to_numpy()
-        nonbasic_counts.append(D[:, ca.nonbasic].sum(1) / format_for(fmt, code).pool_size)
+        nonbasic_counts.append(D[:, ca.spell].sum(1) / format_for(fmt, code).pool_size)
+        shares.append(deck_type_share(info["colors"], info["splash"]))
         for row in D[sel][:20000]:
-            vals = np.repeat(ca.q[ca.nonbasic], row[ca.nonbasic].astype(int))
+            vals = np.repeat(ca.q[ca.spell], row[ca.spell].astype(int))
             vals = np.sort(vals)[::-1][:DECK_SLOTS]
             if len(vals) == DECK_SLOTS:
                 profiles.append(vals)
@@ -235,4 +276,5 @@ def fit_deck_model(con: sqlite3.Connection, books: dict[str, CardBook], fmt: str
         format=fmt, intercept=float(beta[0]), coef={k: float(v) for k, v in zip(FEATURES, beta[1:-1])},
         control_coef=float(beta[-1]), profile=[float(v) for v in np.mean(profiles, axis=0)],
         playable_share=min(share, 0.95), train_sets=list(books), n_decks=len(F), as_of=as_of,
-        fitted_at=date.today().isoformat(), notes=notes)
+        fitted_at=date.today().isoformat(), notes=notes,
+        type_share={k: float(np.mean([s[k] for s in shares])) for k in ("2c", "splash", "3c")})
