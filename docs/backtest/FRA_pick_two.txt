@@ -1,0 +1,32 @@
+# Backtest FRA pick_two (taglio 2026-10-13, prior HOB+MSH)
+
+lambda archetipi: 640, 540, 420, 380, 220, 180, 140, 120, 120, 100; miscela: 0.20, 0.15, 0.15, 0.15, 0.05, 0.05, 0.00, 0.00, 0.00, 0.00; spareggio: 0.0
+
+## Accordo con i giocatori forti
+metodo       pick   top-1   top-3  carte in comune
+motore       6300   36.4%   57.4%            61.5%
+qualita'     6300   30.5%   50.5%            56.0%
+ATA          6300   33.8%   56.5%            59.1%
+Differenza di top-1 del motore (intervallo al 95%, bootstrap sui draft): contro qualita': +5.9 punti [+4.7, +7.1]; contro ATA: +2.6 punti [+1.2, +4.0]
+
+Per fase della busta (top-1 / top-3):
+  motore     fine busta: 68% / 88% (n 1800); inizio busta: 23% / 43% (n 2700); meta' busta: 25% / 49% (n 1800)
+  qualita'   fine busta: 59% / 77% (n 1800); inizio busta: 20% / 40% (n 2700); meta' busta: 17% / 40% (n 1800)
+  ATA        fine busta: 71% / 92% (n 1800); inizio busta: 17% / 38% (n 2700); meta' busta: 21% / 49% (n 1800)
+
+## Valutatore di mazzo (mazzi dopo il taglio)
+mazzi: 20468; pendenza win rate reale su punteggio: 0.98 +- 0.03 (atteso 1); correlazione 0.127
+mazzo proposto contro reale (203 draft): +1.84 punti di win rate attesa in media; proposto >= reale nel 82% dei casi; stessa coppia di colori nel 62%
+
+Coefficienti del modello del mazzo (punti di win rate per unita'):
+  mean_q        +193.56
+  top3          +174.28
+  arch          +0.00
+  n_le2         -0.17
+  n_ge5         +0.15
+  lands         -1.03
+  splash        -3.69
+  extra_colors  -4.50
+  (controllo giocatore: +0.95 per punto di win rate del giocatore)
+
+Dati: 17Lands (https://www.17lands.com), licenza CC BY 4.0

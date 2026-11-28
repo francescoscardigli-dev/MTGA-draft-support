@@ -6,7 +6,8 @@ costruire il mazzo finale.
 
 Stato: **Fase 1 completata** (database carte, mappatura ID Arena, `add-set`); **Fase 2 scritta ma
 non ancora verificata su log reali** (parser di `Player.log` e pulizia dei log); **Fase 3 completata**
-(statistiche 17Lands calcolate in proprio, blend bayesiano, prior dai set precedenti). Vedi `docs/plan.md` e i report in `docs/`.
+(statistiche 17Lands calcolate in proprio, blend bayesiano, prior dai set precedenti); **Fase 4 completata**
+(valutatore di mazzo, motore di pick a k carte e coppie in Pick Two, backtest). Vedi `docs/plan.md` e i report in `docs/`.
 
 ## Uso
 
@@ -33,6 +34,12 @@ python -m draftbot stats TRK --format pick_two # senza game data: stima dal solo
 python -m draftbot fit-prior --format premier --sets FRA HOB MSH --half-life 7
 python -m draftbot calibrate FRA --format premier --prior-sets HOB MSH
 
+# Motore di pick
+python -m draftbot fit-deck-model --format premier --sets FRA HOB MSH --lambda-set FRA
+python -m draftbot recommend TRK --format premier --pack "Carta A;Carta B;Carta C" --pool "Carta D"
+python -m draftbot recommend TRK --format pick_two --log      # ultimo pick letto da Player.log
+python -m draftbot backtest FRA --format premier --cutoff 2026-10-13 --prior-sets HOB MSH
+
 # Sul PC con Arena installato, per usare anche il database del client:
 python -m draftbot update-cards TRK --arena-db "C:\Program Files\Wizards of the Coast\MTGA\MTGA_Data\Downloads\Raw"
 ```
@@ -43,6 +50,7 @@ python -m draftbot update-cards TRK --arena-db "C:\Program Files\Wizards of the 
 - `sets/<CODICE>.yaml`: config del set (codici Scryfall, espansione 17Lands, fonti degli ID Arena)
 - `draftbot/arenalog/`: parser di Player.log, pulizia dei dati personali, log sintetici per i test
 - `draftbot/stats/`: aggregazione dei dati 17Lands, metriche, blend bayesiano, prior, calibrazione
+- `draftbot/engine/`: valutatore di mazzo, proiezione del mazzo finale, archetipi, pick, backtest
 - `priors/<formato>.yaml`: coefficienti del prior (generati da `fit-prior`, versionati)
 - `formats/<nome>.yaml`: struttura del formato (tavolo, carte per pick, buste, passaggio)
 - `docs/`: piano e report

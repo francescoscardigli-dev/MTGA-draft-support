@@ -13,7 +13,7 @@ dependencies = ["PyYAML>=6", "numpy>=1.26", "pandas>=2.1"]
 dev = ["pytest>=8"]
 
 [tool.setuptools]
-packages = ["draftbot", "draftbot.sources", "draftbot.arenalog", "draftbot.stats"]
+packages = ["draftbot", "draftbot.sources", "draftbot.arenalog", "draftbot.stats", "draftbot.engine"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
