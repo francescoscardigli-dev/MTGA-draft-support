@@ -1,18 +1,18 @@
 ## FRA premier (taglio 2026-10-13, prior HOB MSH)
-motore: top-1 51.9%, top-3 81.1% (12600 pick)
-valore + qualita' + popolarita': top-1 49.0% (-2.9 [-3.8, -2.1]), top-3 83.6%, log-verosimiglianza media -1.337
-+ fit e carte: top-1 55.7% (+3.8 [+2.8, +4.8]), top-3 87.4%, log-verosimiglianza media -1.190
-completo (con fase del draft): top-1 56.1% (+4.3 [+3.3, +5.2]), top-3 87.5%, log-verosimiglianza media -1.173
-coefficienti (completo): value +3.014, q -0.082, pop +4.288, fit +2.490, rare -0.046, gold +1.192, land -1.342, value_early -1.807, q_early +0.168, pop_early +3.376, fit_early -0.249
-per fase (motore -> strato): fine busta 66.8% -> 69.0%; inizio busta 46.8% -> 51.8%; meta' busta 45.0% -> 50.2%
+motore: top-1 52.7%, top-3 80.9% (12600 pick)
+valore + qualita' + popolarita': top-1 50.5% (-2.2 [-3.1, -1.3]), top-3 84.0%, log-verosimiglianza media -1.299
++ fit e carte: top-1 56.4% (+3.8 [+2.8, +4.7]), top-3 87.6%, log-verosimiglianza media -1.174
+completo (con fase del draft): top-1 56.7% (+4.1 [+3.0, +5.0]), top-3 87.8%, log-verosimiglianza media -1.158
+coefficienti (completo): value +2.603, q -0.081, pop +4.345, fit +2.440, rare -0.035, gold +1.207, land -1.277, value_early -1.128, q_early +0.154, pop_early +3.403, fit_early -0.239
+per fase (motore -> strato): fine busta 68.3% -> 69.4%; inizio busta 47.6% -> 52.0%; meta' busta 45.2% -> 51.4%
 ## EOE premier (taglio 2025-08-14, prior FRA HOB MSH)
-motore: top-1 55.7%, top-3 84.5% (9750 pick)
-valore + qualita' + popolarita': top-1 58.0% (+2.3 [+1.5, +3.3]), top-3 88.0%, log-verosimiglianza media -1.128
-+ fit e carte: top-1 63.8% (+8.1 [+7.1, +9.2]), top-3 92.0%, log-verosimiglianza media -0.973
-completo (con fase del draft): top-1 64.2% (+8.5 [+7.5, +9.5]), top-3 92.3%, log-verosimiglianza media -0.961
-coefficienti (completo): value +0.564, q +0.058, pop +5.228, fit +3.495, rare -0.040, gold +0.964, land -1.246, value_early -0.072, q_early +0.091, pop_early +2.011, fit_early -1.286
-per fase (motore -> strato): fine busta 65.8% -> 78.2%; inizio busta 52.2% -> 57.6%; meta' busta 50.0% -> 58.4%
+motore: top-1 56.2%, top-3 84.5% (9750 pick)
+valore + qualita' + popolarita': top-1 58.1% (+1.9 [+0.9, +2.9]), top-3 87.9%, log-verosimiglianza media -1.122
++ fit e carte: top-1 63.8% (+7.6 [+6.6, +8.7]), top-3 92.0%, log-verosimiglianza media -0.972
+completo (con fase del draft): top-1 64.3% (+8.2 [+7.1, +9.3]), top-3 92.3%, log-verosimiglianza media -0.959
+coefficienti (completo): value +0.415, q +0.068, pop +5.217, fit +3.521, rare -0.019, gold +0.953, land -1.194, value_early +0.102, q_early +0.080, pop_early +2.064, fit_early -1.283
+per fase (motore -> strato): fine busta 67.1% -> 78.4%; inizio busta 52.0% -> 57.8%; meta' busta 50.5% -> 58.5%
 
-Modello salvato: value +2.364, q -0.040, pop +4.210, fit +2.612, rare +0.099, gold +1.138, land -1.354, value_early -1.375, q_early +0.228, pop_early +2.696, fit_early -0.325
+Modello salvato: value +2.131, q -0.037, pop +4.216, fit +2.569, rare +0.133, gold +1.138, land -1.272, value_early -1.093, q_early +0.222, pop_early +2.755, fit_early -0.296
 
 Dati: 17Lands (https://www.17lands.com), licenza CC BY 4.0
