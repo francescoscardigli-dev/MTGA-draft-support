@@ -22,7 +22,7 @@ from dataclasses import dataclass, field
 import numpy as np
 import pandas as pd
 
-from ..config import load_format
+from ..config import format_for, load_format
 
 MIN_N_TAU = 200       # partite minime per stimare tau^2 dai dati del set
 MIN_CARDS_TAU = 15    # carte minime con MIN_N_TAU partite per fidarsi della stima
@@ -99,7 +99,7 @@ def is_basic(type_line: pd.Series) -> pd.Series:
 def raw_table(con: sqlite3.Connection, set_code: str, fmt_name: str, f: Filters = Filters(), *,
               game_snapshot: int | None = None, pick_snapshot: int | None = None) -> Table:
     """Metriche osservate, senza prior. Le terre base sono escluse."""
-    fmt = load_format(fmt_name)
+    fmt = format_for(fmt_name, set_code)
     gs = game_snapshot or latest_snapshot(con, "stat_games", set_code, fmt_name)
     ps = pick_snapshot or latest_snapshot(con, "stat_picks", set_code, fmt_name)
     games = _load(con, "stat_games", gs, f)

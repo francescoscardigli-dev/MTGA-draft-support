@@ -76,3 +76,20 @@ def card_names_from_header(header: list[str], kind: str = "draft") -> list[str]:
 def dataset_meta(ds: Dataset) -> dict[str, Any]:
     return {"expansion": ds.expansion, "event_type": ds.event_type, "kind": ds.kind,
             "url": ds.url, "last_updated": ds.last_updated}
+
+
+def remote_first_pack_size(url: str, max_rows: int = 3000) -> int | None:
+    """Dimensione piu' frequente della busta al primo pick, leggendo solo l'inizio del file remoto."""
+    from collections import Counter
+    with net.request(url, timeout=120) as r, gzip.open(r, "rt", newline="", encoding="utf-8") as g:
+        rd = csv.reader(g)
+        header = next(rd)
+        pick_i = header.index("pick_number")
+        pack_i = [i for i, c in enumerate(header) if c.startswith("pack_card_")]
+        sizes: Counter = Counter()
+        for n, row in enumerate(rd):
+            if n >= max_rows:
+                break
+            if row[pick_i] == "0":
+                sizes[sum(int(row[i] or 0) for i in pack_i)] += 1
+    return sizes.most_common(1)[0][0] if sizes else None

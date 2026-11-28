@@ -9,12 +9,12 @@ suoi limiti (impegno sui colori troppo precoce nei primi pick, sinergie escluse)
 
 from __future__ import annotations
 
-from ..config import load_format
+from ..config import format_for
 from .pick import recommend
 
 
 def review_draft(eng, draft) -> dict:
-    fmt = load_format(eng.format)
+    fmt = format_for(eng.format, eng.set_code)
     book = eng.projector.book
     names = eng.names
 

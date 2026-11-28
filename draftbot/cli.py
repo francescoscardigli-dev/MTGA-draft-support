@@ -9,7 +9,7 @@ from collections import Counter
 from pathlib import Path
 
 from . import __version__, db
-from .config import ConfigError, available_sets, load_format, load_set
+from .config import ConfigError, available_sets, format_for, load_format, load_set
 from .net import NetError
 
 
@@ -24,14 +24,44 @@ def _describe_set(code: str) -> str:
         "  Formati:",
     ]
     for name in cfg.formats:
-        f = load_format(name)
+        f = format_for(name, cfg.code)
         wheels = ", ".join(str(p + 1) for p in f.wheel_picks()) or "nessuna"
         lines.append(
             f"    - {f.display_name}: tavolo {f.pod_size}, {f.picks_per_turn} carta/e per pick, "
             f"{f.picks_per_pack} pick per busta, pool {f.pool_size} carte, wheel al pick {wheels}"
         )
     lines.append(_data_status(cfg.code))
+    lines.append(_models_status(cfg))
     return "\n".join(lines)
+
+
+def _models_status(cfg) -> str:
+    """Cosa e' disponibile per il motore: statistiche, prior, modelli, tag, sinergie."""
+    from .stats.prior import PRIORS_DIR
+    con = db.connect()
+    out = ["  Motore:"]
+    for f in cfg.formats:
+        g = con.execute("SELECT COUNT(*), MIN(day), MAX(day) FROM stat_decks WHERE set_code=? AND format=?",
+                        (cfg.code, f)).fetchone()
+        dr = con.execute("SELECT COUNT(DISTINCT day) FROM stat_picks WHERE set_code=? AND format=?",
+                         (cfg.code, f)).fetchone()[0]
+        files = {k: (PRIORS_DIR / name).is_file() for k, name in (
+            ("prior", f"{f}.yaml"), ("mazzo", f"{f}_deck.yaml"), ("wheel", f"{f}_extras.yaml"),
+            ("sinergie", f"{cfg.code}_{f}_synergy.yaml"))}
+        game = f"game data dal {g[1]} al {g[2]}" if g[0] else "nessun game data (qualita' dal solo prior)"
+        out.append(f"    - {f}: {game}; draft data: {'si' if dr else 'no (esegui update-data)'}; "
+                   + ", ".join(f"{k} {'si' if v else 'no'}" for k, v in files.items()))
+    tags = _tags_status(cfg)
+    out.append(f"    - tag dei temi: {tags}")
+    return "\n".join(out)
+
+
+def _tags_status(cfg) -> str:
+    from .synergy.tags import load_tags
+    t = load_tags(cfg.code)
+    if t is None:
+        return f"assenti (python -m draftbot tag-set {cfg.code})"
+    return f"{len(t.themes)} temi, " + ("rivisti a mano" if t.reviewed else "generati, da rivedere a mano")
 
 
 def _data_status(code: str) -> str:

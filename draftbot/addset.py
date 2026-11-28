@@ -18,7 +18,9 @@ BONUS_SET_TYPES = {"masterpiece"}
 
 
 def propose_config(code: str, *, sets: list[dict[str, Any]], datasets: list[seventeenlands.Dataset],
-                   formats_dir: Path = FORMATS_DIR) -> dict[str, Any]:
+                   formats_dir: Path = FORMATS_DIR, pack_sizes: dict[str, int] | None = None) -> dict[str, Any]:
+    """``pack_sizes``: dimensione della busta osservata nei draft data per formato (es. EOE: 13 in
+    Premier). Se diversa da quella del formato diventa un'eccezione in ``format_overrides``."""
     """Proposta di config dai metadati delle fonti (funzione pura, testabile offline)."""
     code_l = code.lower()
     main = next((s for s in sets if s["code"] == code_l), None)
@@ -36,13 +38,16 @@ def propose_config(code: str, *, sets: list[dict[str, Any]], datasets: list[seve
         "name": main["name"],
         "scryfall_sets": [code_l, *bonus],
         "seventeenlands_expansion": exp,
-        "formats": [name for name, _ in formats],
+        # solo i formati con draft data pubblici; se non ce n'e' nessuno (set appena uscito), tutti
+        "formats": [name for name, ok in formats if ok] or [name for name, _ in formats],
         "release_date": main.get("released_at"),
         "arena_id_sources": ["arena_card_database", "seventeenlands", "scryfall"],
         "name_aliases": {},
         "mechanics": [],
         "archetypes": [],
         "synergy_tags_file": f"{exp}.tags.yaml",
+        "format_overrides": {name: {"pack_size": n} for name, n in (pack_sizes or {}).items()
+                             if n and n != load_format(name, formats_dir).pack_size},
         "_notes": {
             "17lands_draft_data": {name: ok for name, ok in formats},
             "generato_da": "draftbot add-set, da rivedere a mano",
@@ -69,7 +74,17 @@ def ensure_config(code: str, log=print) -> tuple[Path, bool]:
         load_set(code)  # valida
         log(f"Config esistente: {path.relative_to(SETS_DIR.parent)} (non modificata)")
         return path, False
-    cfg = propose_config(code, sets=scryfall.all_sets(), datasets=seventeenlands.list_datasets())
+    datasets = seventeenlands.list_datasets()
+    sizes = {}
+    for p in sorted(FORMATS_DIR.glob("*.yaml")):
+        f = load_format(p.stem)
+        ds = [d for d in datasets if d.expansion.upper() == code.upper() and d.event_type == f.seventeenlands_event_type
+              and d.kind == "draft"]
+        if ds:
+            sizes[f.name] = seventeenlands.remote_first_pack_size(ds[0].url)
+            if sizes[f.name] and sizes[f.name] != f.pack_size:
+                log(f"{f.display_name}: buste da {sizes[f.name]} carte nei dati 17Lands (formato: {f.pack_size})")
+    cfg = propose_config(code, sets=scryfall.all_sets(), datasets=datasets, pack_sizes=sizes)
     write_config(cfg)
     load_set(code)
     log(f"Config creata: {path.relative_to(SETS_DIR.parent)}")

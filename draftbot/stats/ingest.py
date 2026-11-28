@@ -18,7 +18,7 @@ import numpy as np
 import pandas as pd
 
 from .. import db
-from ..config import FormatConfig, SetConfig, load_format
+from ..config import FormatConfig, SetConfig, format_for, load_format
 from ..names import keys
 from ..paths import raw_dir
 from ..sources import seventeenlands
@@ -179,6 +179,15 @@ def aggregate_drafts(path: Path, fmt: FormatConfig, *, chunksize: int = CHUNK) -
     return out.reset_index(), rows, skipped
 
 
+def first_pack_size(path: Path, nrows: int = 5000) -> int | None:
+    """Dimensione piu' frequente della busta al primo pick nei draft data (per verificare la config)."""
+    header = pd.read_csv(path, nrows=0).columns
+    pack_cols = [c for c in header if c.startswith("pack_card_")]
+    df = pd.read_csv(path, usecols=["pick_number"] + pack_cols, nrows=nrows)
+    first = df[df["pick_number"] == 0][pack_cols].sum(axis=1)
+    return int(first.mode().iloc[0]) if len(first) else None
+
+
 def _draft_chunk(ch: pd.DataFrame, cards: list[str], idx: dict[str, int], fmt: FormatConfig
                  ) -> tuple[pd.DataFrame, int]:
     ch = ch.reset_index(drop=True)
@@ -225,7 +234,7 @@ def _store(con: sqlite3.Connection, table: str, df: pd.DataFrame, fixed: dict[st
 
 def ingest(cfg: SetConfig, fmt_name: str, kind: str, *, force: bool = False,
            log: Callable[[str], None] = print) -> IngestResult | None:
-    fmt = load_format(fmt_name)
+    fmt = format_for(fmt_name, cfg.code)
     ds = [d for d in seventeenlands.list_datasets()
           if d.expansion.upper() == cfg.seventeenlands_expansion.upper()
           and d.event_type == fmt.seventeenlands_event_type and d.kind == kind]
@@ -249,6 +258,10 @@ def ingest(cfg: SetConfig, fmt_name: str, kind: str, *, force: bool = False,
         by_card = by_card.groupby(["day", "tier", "card"], as_index=False).sum()
         by_card = by_card[by_card["n_seen"] > 0]
         note = f"righe senza busta di ritorno (escluse dall'ALSA): {skipped}"
+        size = first_pack_size(path)
+        if size is not None and size != fmt.pack_size:
+            note += (f"; ATTENZIONE: nei dati la busta ha {size} carte, la config {fmt.pack_size}: aggiungi in "
+                     f"sets/{cfg.code}.yaml  format_overrides: {{{fmt.name}: {{pack_size: {size}}}}}")
     with con:
         cur = con.execute(
             "INSERT INTO snapshots(set_code, source, kind, url, last_updated, fetched_at, info) VALUES (?,?,?,?,?,?,?)",

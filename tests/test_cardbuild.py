@@ -124,3 +124,15 @@ def test_arena_db_unknown_schema_is_reported(tmp_path):
         assert "non riconosciuto" in str(e)
     else:
         raise AssertionError("schema sconosciuto non segnalato")
+
+
+def test_arena_renamed_cards_match_printed_name():
+    # set solo-Arena (es. OM1): Scryfall ha il nome originale in "name" e quello di Arena in "printed_name"
+    scry = [sf("Spider-Verse", cn="7", printed_name="Arachnomania"),
+            sf("Spider-Verse", set_="old", cn="1")]            # stampa originale in un altro set
+    res = cardbuild.build(CFG, scryfall_cards=scry, universe=["Arachnomania"],
+                          cards_csv=[{"id": "300", "expansion": "TST", "name": "Arachnomania"}], arena_db_cards=None)
+    names = [c["name"] for c in res.cards]
+    assert names == ["Arachnomania"]
+    assert not [i for i in res.issues if i[0] == "card_not_on_scryfall"]
+    assert [(g, n) for g, n, _, _ in res.arena_ids] == [(300, "Arachnomania")]

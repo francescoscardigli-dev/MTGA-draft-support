@@ -28,7 +28,7 @@ import numpy as np
 import pandas as pd
 import yaml
 
-from ..config import load_format, load_set
+from ..config import format_for, load_format, load_set
 from ..paths import raw_dir
 from ..stats.prior import PRIORS_DIR
 from .book import CardBook
@@ -211,7 +211,7 @@ def fit_deck_model(con: sqlite3.Connection, books: dict[str, CardBook], fmt: str
         # profilo: mazzi a due colori, senza splash, dei giocatori forti
         sel = ((info["colors"].fillna("").str.len() == 2) & (info["splash"].fillna("") == "")
                & (info["player"] >= high_tier)).to_numpy()
-        nonbasic_counts.append(D[:, ca.nonbasic].sum(1))
+        nonbasic_counts.append(D[:, ca.nonbasic].sum(1) / format_for(fmt, code).pool_size)
         for row in D[sel][:20000]:
             vals = np.repeat(ca.q[ca.nonbasic], row[ca.nonbasic].astype(int))
             vals = np.sort(vals)[::-1][:DECK_SLOTS]
@@ -230,8 +230,7 @@ def fit_deck_model(con: sqlite3.Connection, books: dict[str, CardBook], fmt: str
         X0 = np.delete(X, arch_i, axis=1)
         b0 = _wls(X0, y, w)
         beta = np.insert(b0, 1 + arch_i, 0.0)
-    fmt_cfg = load_format(fmt)
-    share = float(np.mean(np.concatenate(nonbasic_counts))) / fmt_cfg.pool_size
+    share = float(np.mean(np.concatenate(nonbasic_counts)))   # quota del pool che finisce nel mazzo
     return DeckModel(
         format=fmt, intercept=float(beta[0]), coef={k: float(v) for k, v in zip(FEATURES, beta[1:-1])},
         control_coef=float(beta[-1]), profile=[float(v) for v in np.mean(profiles, axis=0)],

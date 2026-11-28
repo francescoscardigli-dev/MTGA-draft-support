@@ -7,6 +7,7 @@ arriva da ``sets/<codice>.yaml`` e ``formats/<nome>.yaml``.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -85,6 +86,8 @@ class SetConfig:
     mechanics: tuple[str, ...] = ()
     archetypes: tuple[Any, ...] = ()
     synergy_tags_file: str | None = None
+    # eccezioni ai parametri di un formato per questo set (es. buste da 13 carte): {formato: {campo: valore}}
+    format_overrides: dict[str, dict[str, Any]] = field(default_factory=dict)
 
 
 _ARENA_SOURCES = {"arena_card_database", "seventeenlands", "scryfall"}
@@ -153,7 +156,41 @@ def load_set(code: str, sets_dir: Path = SETS_DIR, formats_dir: Path = FORMATS_D
         mechanics=tuple(d.get("mechanics") or ()),
         archetypes=tuple(d.get("archetypes") or ()),
         synergy_tags_file=d.get("synergy_tags_file"),
+        format_overrides=_check_overrides(d.get("format_overrides") or {}, path, formats_dir),
     )
+
+
+_OVERRIDABLE = {"pod_size", "packs", "pack_size", "picks_per_turn", "pass_directions"}
+
+
+def _check_overrides(ov: dict[str, Any], path: Path, formats_dir: Path) -> dict[str, dict[str, Any]]:
+    for f, fields in ov.items():
+        bad = set(fields) - _OVERRIDABLE
+        if bad:
+            raise ConfigError(f"{path.name}: format_overrides.{f}: campi non modificabili {sorted(bad)}")
+        _apply(load_format(f, formats_dir), fields)  # valida i valori
+    return {f: dict(v) for f, v in ov.items()}
+
+
+def _apply(fmt: FormatConfig, fields: dict[str, Any]) -> FormatConfig:
+    from dataclasses import replace
+    vals = {k: (tuple(v) if k == "pass_directions" else int(v)) for k, v in fields.items()}
+    return replace(fmt, **vals)   # __post_init__ ricontrolla la coerenza
+
+
+@lru_cache(maxsize=256)
+def format_for(name: str, set_code: str | None = None, sets_dir: Path = SETS_DIR,
+               formats_dir: Path = FORMATS_DIR) -> FormatConfig:
+    """Config del formato con le eventuali eccezioni del set (es. EOE: buste Premier da 13 carte)."""
+    fmt = load_format(name, formats_dir)
+    if not set_code:
+        return fmt
+    try:
+        cfg = load_set(set_code, sets_dir, formats_dir)
+    except ConfigError:
+        return fmt
+    ov = cfg.format_overrides.get(name)
+    return _apply(fmt, ov) if ov else fmt
 
 
 def available_sets(sets_dir: Path = SETS_DIR) -> list[str]:

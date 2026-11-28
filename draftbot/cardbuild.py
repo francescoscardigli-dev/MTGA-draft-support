@@ -111,12 +111,20 @@ def build(cfg: SetConfig, *, scryfall_cards: list[dict[str, Any]], universe: lis
     aliases = {normalize(k): v for k, v in cfg.name_aliases.items() if v}
 
     # Indice Scryfall per chiave normalizzata (nome completo e faccia frontale).
+    # Le carte rinominate per Arena (es. il set OM1) hanno su Scryfall il nome originale in "name" e il
+    # nome di Arena in "printed_name" (o "flavor_name"): si indicizzano anche questi, ma solo per le
+    # stampe dei set del draft, e la riga usa il nome visto su Arena.
     by_key: dict[str, list[dict[str, Any]]] = {}
     for c in scryfall_cards:
         if c.get("layout") in ("token", "double_faced_token", "art_series", "emblem"):
             continue
         for k in keys(c["name"]):
             by_key.setdefault(k, []).append(c)
+        if c.get("set", "").lower() in cfg.scryfall_sets:
+            for alt in {c.get("printed_name"), c.get("flavor_name")} - {None, "", c["name"]}:
+                renamed = dict(c, name=alt, original_name=c["name"])
+                for k in keys(alt):
+                    by_key.setdefault(k, []).append(renamed)
 
     def lookup(name: str) -> list[dict[str, Any]] | None:
         for k in keys(aliases.get(normalize(name), name)):

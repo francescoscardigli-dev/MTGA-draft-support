@@ -19,7 +19,7 @@ from typing import Callable
 
 from . import db
 from .arenalog import LogParser
-from .config import load_format, load_set
+from .config import format_for, load_format, load_set
 
 
 class LogTailer:
@@ -137,7 +137,7 @@ class LiveSession:
         if eng is None:
             return
         picks = d.picks
-        fmt_cfg = load_format(fmt)
+        fmt_cfg = format_for(fmt, set_code)
         last = next((p for p in reversed(picks) if p.pack_cards is not None and not p.picked), None)
         if last is not None and (d.draft_id, last.pack, last.pick) not in self.done:
             self.done.add((d.draft_id, last.pack, last.pick))

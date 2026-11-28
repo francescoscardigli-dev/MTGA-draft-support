@@ -66,7 +66,7 @@ def signal_baseline(con, set_code: str, fmt: str, book, n_drafts: int = 400) -> 
 def fit_extras(con, set_code: str, fmt: str, n_drafts: int = 600, log=print) -> Extras:
     """Stima su un set con game data: wheel su tutti i draft del campione, segnali con verifica
     (prima meta' dei giorni per stimare, seconda per verificare); i segnali si tengono solo se migliorano."""
-    from ..config import load_format
+    from ..config import format_for
     from ..stats.prior import load_prior
     from .backtest import _cards, archetype_samples, final_colors, read_drafts
     from .book import load_book
@@ -76,7 +76,7 @@ def fit_extras(con, set_code: str, fmt: str, n_drafts: int = 600, log=print) -> 
     from .signals import fit_signal_model
     from .wheel import fit_logit_wheel, wheel_samples
 
-    fmt_cfg = load_format(fmt)
+    fmt_cfg = format_for(fmt, set_code)
     prior = load_prior(fmt)
     book = load_book(con, set_code, fmt, prior=prior, half_life=prior.half_life if prior else None)
     model = load_deck_model(fmt)

@@ -5,7 +5,7 @@ from __future__ import annotations
 import argparse
 
 from . import db
-from .config import load_format, load_set
+from .config import format_for, load_format, load_set
 from .sources.seventeenlands import ATTRIBUTION
 from .stats import calibrate as cal
 from .stats.ingest import ingest
@@ -121,7 +121,7 @@ def run(args: argparse.Namespace) -> int:
     if args.name:
         c = c[c["card"].str.contains(args.name, case=False, regex=False)]
     c = c.sort_values(SORTS[args.sort], ascending=args.asc, na_position="last")
-    fmt = load_format(args.fmt)
+    fmt = format_for(args.fmt, cfg.code)
     print(f"{cfg.code} {fmt.display_name}" + (f", mazzi {f.norm_colors()}" if f.colors else "")
           + (f", fascia {'+'.join(f.tiers)}" if f.tiers else "") + (f", fino al {f.as_of}" if f.as_of else "")
           + (f", emivita {f.half_life:g} giorni (partite pesate)" if f.half_life else ""))

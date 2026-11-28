@@ -14,7 +14,7 @@ from datetime import date, timedelta
 
 import numpy as np
 
-from ..config import load_format
+from ..config import format_for, load_format
 from .backtest import Agreement, _cards, archetype_samples, final_colors, pick_agreement, read_drafts
 from .projection import Projector, fit_lambda
 from .signals import SignalBaseline, SignalModel, fit_signal_model
@@ -45,7 +45,7 @@ def run(con: sqlite3.Connection, set_code: str, fmt: str, cutoff: str, prior_set
     from .book import load_book
     from .deckmodel import fit_deck_model
 
-    fmt_cfg = load_format(fmt)
+    fmt_cfg = format_for(fmt, set_code)
     saved = load_prior(fmt)
     prior = fit(tables_for(con, prior_sets, fmt), fmt)
     prior.half_life = saved.half_life if saved else None

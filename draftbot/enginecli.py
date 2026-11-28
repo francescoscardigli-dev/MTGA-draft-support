@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 from . import db
-from .config import load_format, load_set
+from .config import format_for, load_format, load_set
 from .engine.book import PAIRS, Card, load_book
 from .engine.deckmodel import fit_deck_model, load_deck_model
 from .engine.pick import recommend
@@ -99,7 +99,7 @@ def _projector(con, code: str, fmt: str, synergy: bool = False) -> Projector:
         raise SystemExit(f"Modello del mazzo assente: esegui python -m draftbot fit-deck-model --format {fmt} --sets ...")
     book = load_book(con, code, fmt, prior=prior, half_life=prior.half_life if prior else None)
     arch = ArchetypeModel(model.lambdas, mix=model.arch_mix, tiebreak=model.tiebreak) if model.lambdas else None
-    proj = Projector(book, model, load_format(fmt), arch)
+    proj = Projector(book, model, format_for(fmt, code), arch)
     # sinergie: solo se misurate sui game data di questo set (i temi cambiano da set a set)
     from .synergy.measure import load_synergy
     from .synergy.runtime import SynergyRuntime
@@ -159,7 +159,7 @@ def run(args: argparse.Namespace) -> int:
                  for s in sets}
         model = fit_deck_model(con, books, args.fmt)
         lset = load_set(args.lambda_set).code if args.lambda_set else sets[0]
-        proj = Projector(books[lset], model, load_format(args.fmt))
+        proj = Projector(books[lset], model, format_for(args.fmt, lset))
         drafts = read_drafts(lset, args.fmt, max_drafts=args.drafts, seed=1)
         arch = fit_lambda(proj, archetype_samples(drafts, final_colors(lset, args.fmt), books[lset]))
         model.lambdas, model.lambda_set, model.arch_mix = arch.lambdas, lset, arch.mix
@@ -325,7 +325,7 @@ def run(args: argparse.Namespace) -> int:
     if ex is not None and pack:
         from .engine.phase7check import popularity
         pop = popularity(con, code, args.fmt, None)
-        fmt_cfg = load_format(args.fmt)
+        fmt_cfg = format_for(args.fmt, code)
         wheel_fn = lambda rem: ex.wheel.survival(rem, fmt_cfg, pop)
         wprobs = dict(zip((c.name for c in pack), ex.wheel.survival(pack, fmt_cfg, pop)))
     opts, probs = recommend(proj, pool, pack, k=args.k, wheel=wheel_fn)

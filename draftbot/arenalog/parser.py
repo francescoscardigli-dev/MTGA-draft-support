@@ -27,7 +27,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Iterable, Iterator
 
-from ..config import FormatConfig, available_formats, available_sets, load_format, load_set
+from ..config import FormatConfig, available_formats, available_sets, format_for, load_format, load_set
 
 _MARKER = re.compile(r"(?:==>|<==)\s*([A-Za-z_][\w.]*)|\b(Draft\.Notify)\b")
 _DECODER = json.JSONDecoder()
@@ -96,18 +96,23 @@ class Draft:
     parse_warnings: list[str] = field(default_factory=list)
 
     # -- formato e set ------------------------------------------------------------------------
+    def _with_set(self, f: FormatConfig) -> FormatConfig:
+        """Applica le eccezioni del set (es. buste da 13 carte), se il set e' riconosciuto."""
+        code = self.set_code
+        return format_for(f.name, code) if code else f
+
     def format_from_event(self) -> FormatConfig | None:
         if not self.event_name:
             return None
         for f in self.formats:
             if any(self.event_name.startswith(p) for p in f.arena_event_prefixes):
-                return f
+                return self._with_set(f)
         return None
 
     def guessed_formats(self) -> list[FormatConfig]:
         """Formati compatibili con le dimensioni delle buste e il numero di carte per pick."""
         out = []
-        for f in self.formats:
+        for f in (self._with_set(x) for x in self.formats):
             sizes = {f.pack_size - i * f.picks_per_turn for i in range(f.picks_per_pack)}
             if any(len(o.cards) not in sizes for o in self.pack_obs):
                 continue

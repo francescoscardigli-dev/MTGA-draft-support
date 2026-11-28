@@ -23,7 +23,7 @@ from typing import Iterator
 import numpy as np
 import pandas as pd
 
-from ..config import load_format, load_set
+from ..config import format_for, load_format, load_set
 from ..paths import raw_dir
 from ..stats.ingest import tier_of
 from .book import PAIRS, Card, CardBook
@@ -111,7 +111,7 @@ def read_drafts(set_code: str, fmt: str, *, since: str | None = None, until: str
         if len(drafts) > 4 * max_drafts:  # troppi: si alza la selettivita' dell'hash
             keep_frac /= 2
             drafts = {k: v for k, v in drafts.items() if _h(k, salt) % 10_000 / 10_000 < keep_frac}
-    fmt_cfg = load_format(fmt)
+    fmt_cfg = format_for(fmt, set_code)
     full = [d for d in drafts.values() if len(d.picks) == fmt_cfg.total_picks]
     full.sort(key=lambda d: _h(d.draft_id, salt))
     return full[:max_drafts]
@@ -369,7 +369,7 @@ def run(con: sqlite3.Connection, set_code: str, fmt: str, cutoff: str, prior_set
     from .book import load_book
     from .deckmodel import fit_deck_model
 
-    fmt_cfg = load_format(fmt)
+    fmt_cfg = format_for(fmt, set_code)
     saved = load_prior(fmt)
     prior = fit(tables_for(con, prior_sets, fmt), fmt)
     prior.half_life = saved.half_life if saved else None
