@@ -155,6 +155,8 @@ function renderPick(ev) {
 
 function renderBuilds(ev) {
   $("builds").classList.remove("hidden");
+  $("where").textContent = "draft concluso";
+  $("ctx").textContent = `${ev.set} · ${ev.format === "pick_two" ? "Pick Two" : "Premier"} · draft ${ev.draft_id.slice(0, 8)}`;
   $("buildList").innerHTML = ev.builds.map((b, i) => {
     const curve = Object.entries(b.curve).map(([k, v]) => `${k}${k === "6" ? "+" : ""}: ${v}`).join(" · ");
     const basics = Object.entries(b.basics).map(([n, k]) => `${k} ${esc(n)}`).join(", ");
