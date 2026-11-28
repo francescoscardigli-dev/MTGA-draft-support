@@ -9,7 +9,8 @@ Documenti da leggere prima di lavorare: `docs/plan.md` (piano approvato),
 `docs/phase0_report.md` (verifiche), `docs/phase1_report.md` (database carte),
 `docs/phase2_report.md` (parser del log), `docs/phase3_report.md` (statistiche),
 `docs/phase4_report.md` (motore di pick e backtest), `docs/phase5_report.md` (sinergie),
-`docs/phase6_report.md` (costruzione del mazzo), `docs/phase7_report.md` (wheel, segnali, live), `docs/phase8_report.md` (UI).
+`docs/phase6_report.md` (costruzione del mazzo), `docs/phase7_report.md` (wheel, segnali, live), `docs/phase8_report.md` (UI), `docs/phase9_report.md` (generalità, cose aperte).
+Guida d'uso: `docs/guida.md`.
 
 ## Modalità di lavoro richiesta dall'utente
 
@@ -35,7 +36,7 @@ Documenti da leggere prima di lavorare: `docs/plan.md` (piano approvato),
 - Il suggerimento restituisce k carte (in Pick Two si valutano le coppie).
 - I tag LLM di meccaniche e archetipi si fanno nella fase delle sinergie (Fase 5).
 
-## Stato al 2026-11-27 (aggiornato a fine Fase 8)
+## Stato al 2026-11-28 (tutte le fasi del piano completate)
 
 | Fase | Stato |
 |---|---|
@@ -48,13 +49,16 @@ Documenti da leggere prima di lavorare: `docs/plan.md` (piano approvato),
 | 6 Costruzione del mazzo | completata |
 | 7 Segnali, wheel, live | completata: wheel attivo; segnali provati, peggiorano, disattivati |
 | 8 UI web locale, revisione | completata (verificata su log sintetici) |
-| 9 | da fare (l'utente ha chiesto di procedere in autonomia) |
+| 9 Generalità, rifinitura | completata (test su OM1 ed EOE da zero; 3 problemi di generalità corretti) |
 
 Cose aperte:
 - **Log di Arena:** l'utente li sta recuperando. Quando arrivano: pulirli con
   `python -m draftbot log-clean <log> tests/fixtures/logs/<nome>.log --redact "<nome utente>"`,
   rileggere a mano l'output, poi `log-drafts <fixture> -d`, e aggiungere test di regressione sui
   fixture reali. Vedi la checklist in `docs/phase2_report.md`. Mai committare il log grezzo.
+- **Pick Two:** vantaggio del motore su ATA piccolo (FRA +2,6) o nullo (OM1 -1,4); Premier +5/+9.
+- **Set con buste diverse:** `format_overrides` in `sets/<CODICE>.yaml` (EOE: Premier 13 carte);
+  usare sempre `format_for(formato, set)`, non `load_format`, dove il set e' noto.
 - **Lettore del database del client Arena** (`draftbot/sources/arena_db.py`): non verificato su
   un'installazione reale. Chiedere all'utente di provare
   `python -m draftbot update-cards TRK --arena-db "<cartella Raw>"`.
@@ -71,9 +75,9 @@ Cose aperte:
 
 Opzioni proposte all'utente per proseguire: (a) Fase 2 sulla struttura documentata, marcata come
 non verificata, più lo script di pulizia; (b) Fase 3 (statistiche su FRA) mentre arrivano i log.
-L'utente ha scelto (a): fatta. Poi ha chiesto le Fasi 3 e 4, poi di procedere in autonomia con 5-9,
-fermandosi a fine fase se il limite di utilizzo non basta (ripresa programmata). La verifica della
-Fase 2 sui log reali resta aperta.
+L'utente ha scelto (a): fatta. Poi ha chiesto le Fasi 3 e 4, poi di procedere in autonomia con 5-9:
+fatte. Elenco ordinato delle cose aperte in `docs/phase9_report.md`; la prima è la verifica sui log
+reali di Arena (Fase 2), che sblocca anche la verifica di live e UI.
 
 ## Comandi
 
@@ -88,6 +92,8 @@ python -m draftbot stats FRA --format premier
 python -m draftbot recommend FRA --format premier --pack "..." --pool "..."
 python -m draftbot status TRK
 python -m draftbot cards TRK --mv 2 --color W
+python -m draftbot ui                          # UI web locale (pip install -e .[ui])
+# set nuovi del test di generalita': OM1 (Pick Two), EOE (Premier, buste da 13)
 ```
 
 ## Ambiente cloud

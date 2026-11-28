@@ -1,0 +1,414 @@
+# Tag dei temi di sinergia, generati da 'python -m draftbot tag-set' con regole sul testo.
+# RIVEDERE A MANO: togliere i falsi positivi, aggiungere quelli mancanti, poi reviewed: true.
+# Questo file non viene mai sovrascritto da add-set o tag-set.
+set_code: OM1
+generated: '2026-11-28'
+reviewed: false
+notes:
+- generato con regole sul testo Oracle (tags/themes.yaml) e temi automatici del set
+themes:
+  artifacts:
+    enablers:
+    - Alibou, Ancient Witness
+    - Ancestral Carvings
+    - Angler's Shield
+    - Archangler's Skyrod
+    - Cactarantula Saddle
+    - Carriage of Dreams
+    - City Pigeon
+    - Common Crook
+    - Costume Closet
+    - Data Scrubber
+    - Eerie Gravestone
+    - Error-9, Viral Node
+    - Favored Fighter
+    - Fizik, Etherium Mechanic
+    - Giantcraft Helm
+    - Goro Rel, Scourge to Spiders
+    - Kumonosu, the Watchful
+    - Lazlo, Enthusiastic Accuser
+    - Opulent Valet
+    - Perfected Pastry
+    - Phenomena Recorder
+    - Reality Fulcrum
+    - Robotics Mastery
+    - Ruzic, Booed but Victorious
+    - Scuttling Spidercoach
+    - Steelweb Surveyor
+    - Stitcher's Wings
+    - Tarantusk, Unwisely Awoken
+    - Temple Trap
+    - The Terminus of Return
+    - Treat Trolley
+    - Unexpected Windfall
+    - Vexed Bots
+    - Vinewoven Chariot
+    - Wedding Ring
+    payoffs:
+    - Alibou, Ancient Witness
+    - Error-9, Viral Node
+    - Fizik, Etherium Mechanic
+    - Merata, Neuron Hacker
+  counters:
+    enablers:
+    - A Most Helpful Weaver
+    - Alessos and Pras, Acrobats
+    - Arala, Hedron Scaler
+    - Borys, the Spider Rider
+    - Brako, Heartless Hunter
+    - Cheering Crowd
+    - Costume Closet
+    - Crime-Scene Instructor
+    - Diligent Webkeepers
+    - Druneth, Reviver of the Hive
+    - Eccentric Arachnologist
+    - Fizik, Etherium Mechanic
+    - Galvanized Workforce
+    - Generous Betty Wray
+    - Gloria, the Great Armorer
+    - Kivni, Orb Weaver
+    - Kroble, Envoy of the Bog
+    - Kumonosu, the Watchful
+    - Luis, Pompous Pillager
+    - Lurking Lizards
+    - Perfected Pastry
+    - Perilous Lunge
+    - Principled Referee
+    - Rizna, the Spider-Crowned
+    - Silkguard
+    - Skv'x the Augmenter
+    - Spectacular Tactics
+    - Strength of Will
+    - Tethex, Gift of Malice
+    - Verilax the Havenskin
+    - Vexed Bots
+    - Zora, Spider Fancier
+    payoffs:
+    - Cheering Crowd
+    - Costume Closet
+    - Crime-Scene Instructor
+    - Kroble, Envoy of the Bog
+    - Phenomena Recorder
+    - Prison Break
+    - Strength of Will
+    - Zora, Spider Fancier
+  graveyard:
+    enablers:
+    - A Trail of Teacups
+    - Bane-Marked Leonin
+    - Caldaia Brawlers
+    - Cam and Farrik, Havoc Duo
+    - Clandestine Work
+    - Crash, Reckless Endrider
+    - Eerie Gravestone
+    - Kivni, Orb Weaver
+    - Knife Trick
+    - Kroble, Envoy of the Bog
+    - Lost in Littjara
+    - Nu and Sumi, Career Criminals
+    - Olx, Mouth to Many Eyes
+    - Ominous Asylum
+    - Phantasmal Vision
+    - Quint's Insight
+    - Romantic Rendezvous
+    - Ruzic, Booed but Victorious
+    - Savage Mansion
+    - Scout the City
+    - Sinister Hideout
+    - Skittering Kitten
+    - Skv'x the Augmenter
+    - Suburban Sanctuary
+    - The House Grows Hungry
+    - Thrill of Possibility
+    - Unexpected Windfall
+    - University Campus
+    - Wardens of Silverweb Summit
+    payoffs:
+    - A Trail of Teacups
+    - Aggressive Symbiosis
+    - Arala, Hedron Scaler
+    - Desecrex, Gift of Servitude
+    - Goro Rel, Scourge to Spiders
+    - Hex of Undeath
+    - Nill, Vessel of Valgavoth
+    - Ozor, Chronicler of Collapse
+    - Principled Referee
+    - Prison Break
+    - Selesnya Archivist
+    - Skv'x the Augmenter
+    - Stitcher's Wings
+    - Tearle, Entropic Hunger
+    - Tethex, Gift of Malice
+    - The Scouring Stormsoul
+    - The Terminus of Return
+    - Verilax the Havenskin
+  kw:Connive:
+    enablers:
+    - Carlo, Suave Schemer
+    - Data Scrubber
+    - Mob Lookout
+    - Obscura Alleylurkers
+    - Scorvus Ames, Crimelord
+    - Unstable Experiment
+    payoffs: []
+  kw:Mayhem:
+    enablers:
+    - Deathflame Burst
+    - Desecrex, Gift of Servitude
+    - Exclusive Nightclub
+    - Kivni, Orb Weaver
+    - Lavaborn Goblins
+    - Miasmic Mist
+    - Prison Break
+    - Ruzic, Booed but Victorious
+    - Sadistic String-Puller
+    - Stitcher's Wings
+    - Vazin, Two-Faced Trickster
+    - Wekhdu, Midnight Hunter
+    payoffs: []
+  kw:Web-slinging:
+    enablers:
+    - Alenni, Brood Recruiter
+    - Alessos and Pras, Acrobats
+    - Borys, the Spider Rider
+    - Darval, Whose Web Protects
+    - Detect Intrusion
+    - Sarn of the Silken Throne
+    - The Clutter Cluster
+    - Yera and Oski, Weaver and Guide
+    - Zan, Tunnelweb Explorer
+    payoffs: []
+  sacrifice:
+    enablers:
+    - A Most Helpful Weaver
+    - Alenni, Brood Recruiter
+    - Ancestral Carvings
+    - Arachnogenesis
+    - Arasta of the Endless Web
+    - Beast Within
+    - City Pigeon
+    - Common Crook
+    - Favored Fighter
+    - Goro Rel, Scourge to Spiders
+    - Impostor Syndrome
+    - Janai and Hoppy, Roofskippers
+    - Lazlo, Enthusiastic Accuser
+    - Najeela, the Blade-Blossom
+    - Opulent Valet
+    - Parallel Lives
+    - Qoneus, Horizon Splicer
+    - Remarkable Readings
+    - Rite of Replication
+    - Robotics Mastery
+    - Rouse the Swarm
+    - Ruzic, Booed but Victorious
+    - Saw in Half
+    - Tarantusk, Unwisely Awoken
+    - The Clutter Cluster
+    - The Watcher on the Road
+    - Treat Trolley
+    - Unexpected Windfall
+    - Wedding Ring
+    payoffs:
+    - Goblin Bombardment
+  spells:
+    enablers:
+    - Arachnogenesis
+    - Beast Within
+    - Clandestine Work
+    - Comeuppance
+    - Counterspell
+    - Damning Caress
+    - Deathflame Burst
+    - Detect Intrusion
+    - Drix Interception
+    - Feed the Swarm
+    - Fire-Brained Scheme
+    - Grow Extra Arms
+    - Heroic Intervention
+    - Hex
+    - Hex of Undeath
+    - Hunter's Insight
+    - Infernal Grasp
+    - Knife Trick
+    - Lively Leap
+    - Miasmic Mist
+    - Mindbreak Trap
+    - Mystic Confluence
+    - Outsmart the Amateur
+    - Path to Exile
+    - Perilous Lunge
+    - Ponder
+    - Prison Break
+    - Reanimate
+    - Relentless Assault
+    - Remorseless Coup
+    - Reprieve
+    - Rhino's Rampage
+    - Rite of Replication
+    - Romantic Rendezvous
+    - Savage Beating
+    - Saw in Half
+    - Scorpion's Sting
+    - Scout the City
+    - Secret Identity
+    - Shock
+    - Silkguard
+    - Snatch Back
+    - Spectacular Tactics
+    - Spectral Restitching
+    - Strength of Will
+    - Sudden Strike
+    - Tangle
+    - Terminate
+    - Terrific Team-Up
+    - Thrill of Possibility
+    - Traumatize
+    - Unexpected Windfall
+    - Unstable Experiment
+    - Villainous Wrath
+    - Winds of Change
+    - Wisecrack
+    payoffs:
+    - Arasta of the Endless Web
+    - Bayo, Irritable Instructor
+  tokens:
+    enablers:
+    - A Most Helpful Weaver
+    - Alenni, Brood Recruiter
+    - Ancestral Carvings
+    - Arachnogenesis
+    - Arasta of the Endless Web
+    - Beast Within
+    - City Pigeon
+    - Common Crook
+    - Favored Fighter
+    - Goro Rel, Scourge to Spiders
+    - Impostor Syndrome
+    - Janai and Hoppy, Roofskippers
+    - Lazlo, Enthusiastic Accuser
+    - Najeela, the Blade-Blossom
+    - Opulent Valet
+    - Parallel Lives
+    - Remarkable Readings
+    - Rite of Replication
+    - Robotics Mastery
+    - Rouse the Swarm
+    - Ruzic, Booed but Victorious
+    - Saw in Half
+    - Tarantusk, Unwisely Awoken
+    - The Clutter Cluster
+    - The Watcher on the Road
+    - Treat Trolley
+    - Unexpected Windfall
+    - Wedding Ring
+    payoffs:
+    - Alenni, Brood Recruiter
+    - Remarkable Readings
+    - Rhilex the Accursed
+    - Zora, Spider Fancier
+  type:Spider:
+    enablers:
+    - Ademi of the Silkchutes
+    - Alenni, Brood Recruiter
+    - Alessos and Pras, Acrobats
+    - Arasta of the Endless Web
+    - Argyr, Tidal Spinner
+    - Borys, the Spider Rider
+    - Chizak, Apex Arachnosaur
+    - Cirina Bargainspinner
+    - Darval, Whose Web Protects
+    - Diligent Webkeepers
+    - Egrix the Bile Bulwark
+    - Fateweaver
+    - Fizik, Etherium Mechanic
+    - Gloria, the Great Armorer
+    - Janai and Hoppy, Roofskippers
+    - Kavaero, Mind-Bitten
+    - Kivni, Orb Weaver
+    - Kraza, the Swarm as One
+    - Kroble, Envoy of the Bog
+    - Kumonosu, the Watchful
+    - Leyline Weaver
+    - Makdee and Itla, Skysnarers
+    - Orris, Last of the Web Lords
+    - Rizna, the Spider-Crowned
+    - Sadistic String-Puller
+    - Sarn of the Silken Throne
+    - Scions of the Ur-Spider
+    - Skittering Kitten
+    - Skv'x the Augmenter
+    - Steelweb Surveyor
+    - Tarantusk, Unwisely Awoken
+    - The Clutter Cluster
+    - Uharis, the Stormspinner
+    - Wardens of Silverweb Summit
+    - Wonderweave Aerialist
+    - Yera and Oski, Weaver and Guide
+    - Zan, Tunnelweb Explorer
+    payoffs:
+    - Arachnomania
+    - Demera, Soul of a Spider
+    - Kraza, the Swarm as One
+    - Orris, Last of the Web Lords
+    - Rouse the Swarm
+    - Scions of the Ur-Spider
+    - Scuttling Spidercoach
+  type:Villain:
+    enablers:
+    - Arala, Hedron Scaler
+    - Bane-Marked Leonin
+    - Bayo, Irritable Instructor
+    - Belion, the Parched
+    - Brako, Heartless Hunter
+    - Caldaia Brawlers
+    - Cam and Farrik, Havoc Duo
+    - Carlo, Suave Schemer
+    - Common Crook
+    - Crash, Reckless Endrider
+    - Cruel Caracals
+    - Data Scrubber
+    - Desecrex, Gift of Servitude
+    - Dreadfang, Loathed by Fans
+    - Druneth, Reviver of the Hive
+    - Error-9, Viral Node
+    - Goro Rel, Scourge to Spiders
+    - Kazuo, Ruthless Rival
+    - Kephon, Rage Incubator
+    - King of the Coldblood Curse
+    - Lavaborn Goblins
+    - Luis, Pompous Pillager
+    - Lurking Lizards
+    - Merata, Neuron Hacker
+    - Merciless Enforcers
+    - Mob Lookout
+    - Neach, Pinnacle Pariah
+    - Nill, Vessel of Valgavoth
+    - Nu and Sumi, Career Criminals
+    - Obscura Alleylurkers
+    - Ozor, Chronicler of Collapse
+    - Phantasmal Vision
+    - Qoneus, Horizon Splicer
+    - Restless Razorkin
+    - Rishei, Getaway Accomplice
+    - Ruzic, Booed but Victorious
+    - Scorvus Ames, Crimelord
+    - Tearle, Entropic Hunger
+    - Tethex, Gift of Malice
+    - The Infernus
+    - The Scouring Stormsoul
+    - The Watcher on the Road
+    - Vazin, Two-Faced Trickster
+    - Vexed Bots
+    - Wekhdu, Midnight Hunter
+    - Withar, Cocoon Keeper
+    - Wrench, Speedway Saboteur
+    - Xecau, Predation's Shadow
+    payoffs:
+    - Carlo, Suave Schemer
+    - Damning Caress
+    - Neach, Pinnacle Pariah
+    - Nill, Vessel of Valgavoth
+    - Rishei, Getaway Accomplice
+    - The Watcher on the Road
+    - Vexed Bots

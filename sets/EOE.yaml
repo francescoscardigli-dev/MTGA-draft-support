@@ -1,0 +1,23 @@
+# Config del set EOE generata da 'draftbot add-set'. Rivedila a mano.
+# Draft data 17Lands disponibili per formato: {'pick_two': False, 'premier': True}
+# Meccaniche, archetipi e tag di sinergia vengono aggiunti nella fase delle sinergie.
+code: EOE
+name: Edge of Eternities
+scryfall_sets:
+- eoe
+- eos
+seventeenlands_expansion: EOE
+formats:
+- premier
+release_date: '2025-08-01'
+arena_id_sources:
+- arena_card_database
+- seventeenlands
+- scryfall
+name_aliases: {}
+mechanics: []
+archetypes: []
+synergy_tags_file: EOE.tags.yaml
+format_overrides:
+  premier:
+    pack_size: 13

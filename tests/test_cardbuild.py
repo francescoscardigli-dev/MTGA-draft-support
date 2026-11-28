@@ -130,9 +130,10 @@ def test_arena_renamed_cards_match_printed_name():
     # set solo-Arena (es. OM1): Scryfall ha il nome originale in "name" e quello di Arena in "printed_name"
     scry = [sf("Spider-Verse", cn="7", printed_name="Arachnomania"),
             sf("Spider-Verse", set_="old", cn="1")]            # stampa originale in un altro set
+    # 17Lands elenca l'ID con il nome originale e l'espansione originale
     res = cardbuild.build(CFG, scryfall_cards=scry, universe=["Arachnomania"],
-                          cards_csv=[{"id": "300", "expansion": "TST", "name": "Arachnomania"}], arena_db_cards=None)
+                          cards_csv=[{"id": "300", "expansion": "SPM", "name": "Spider-Verse"}], arena_db_cards=None)
     names = [c["name"] for c in res.cards]
     assert names == ["Arachnomania"]
-    assert not [i for i in res.issues if i[0] == "card_not_on_scryfall"]
+    assert not [i for i in res.issues if i[0] in ("card_not_on_scryfall", "card_without_arena_id")]
     assert [(g, n) for g, n, _, _ in res.arena_ids] == [(300, "Arachnomania")]

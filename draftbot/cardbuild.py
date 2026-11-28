@@ -133,6 +133,7 @@ def build(cfg: SetConfig, *, scryfall_cards: list[dict[str, Any]], universe: lis
         return None
 
     rows: dict[str, dict[str, Any]] = {}  # nome canonico -> riga
+    renamed: dict[str, str] = {}          # nome di Arena -> nome originale (carte rinominate, es. OM1)
     if universe is None:
         universe = sorted({c["name"] for c in scryfall_cards
                            if c.get("set", "").lower() in cfg.scryfall_sets
@@ -144,11 +145,17 @@ def build(cfg: SetConfig, *, scryfall_cards: list[dict[str, Any]], universe: lis
             continue
         best = _preferred(prints, cfg.scryfall_sets)
         rows.setdefault(best["name"], card_row(cfg.code, best))
+        if best.get("original_name"):
+            renamed[best["name"]] = best["original_name"]
 
     canon: dict[str, str] = {}
     for n in rows:
         for k in keys(n):
             canon.setdefault(k, n)
+    # le fonti degli ID possono usare il nome originale (17Lands: "Spider-Verse" SPM = "Arachnomania" OM1)
+    for arena_name, original in renamed.items():
+        for k in keys(original):
+            canon.setdefault(k, arena_name)
     for alias_src, alias_dst in aliases.items():
         for k in keys(alias_dst):
             if k in canon:
@@ -171,7 +178,7 @@ def build(cfg: SetConfig, *, scryfall_cards: list[dict[str, Any]], universe: lis
     home = {s.upper() for s in cfg.scryfall_sets} | {cfg.seventeenlands_expansion.upper()}
     # Le carte dei set del draft si mappano solo con ID di quei set; le carte "ospiti"
     # (es. Special Guests) accettano ID di qualsiasi espansione.
-    guest = {n for n, r in rows.items() if r["printed_set"] not in home}
+    guest = {n for n, r in rows.items() if r["printed_set"] not in home} | set(renamed)
     assigned: dict[int, tuple[str, str, str]] = {}
     for source in cfg.arena_id_sources:
         for grp, name, exp in candidates.get(source, []):
@@ -249,7 +256,8 @@ def import_set(cfg: SetConfig, *, arena_db: Path | None = None, use_arena_db: bo
 
     # 3. Carte nelle buste che non appartengono ai set configurati (es. Special Guests): per nome.
     if universe:
-        known = {k for c in sf_cards for k in keys(c["name"])}
+        known = {k for c in sf_cards for n in (c["name"], c.get("printed_name"), c.get("flavor_name")) if n
+                 for k in keys(n)}
         extra = [n for n in universe if not any(k in known for k in keys(n))]
         if extra:
             found, missing = scryfall.cards_by_name(extra)

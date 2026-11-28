@@ -1,0 +1,91 @@
+# Effetti di sinergia misurati da 'python -m draftbot synergy'. Non modificare a mano.
+set_code: EOE
+format: premier
+effects:
+  artifacts: 0.006763298768568607
+  counters: 0.004297141078483435
+  enchantments: 0.09232426092817492
+details:
+- theme: enchantments
+  kind: interazione
+  coef: 0.09232426092817492
+  se: 0.044367795956338864
+  coef_late: 0.07197066685610186
+  n_decks_with: 86019
+- theme: lifegain
+  kind: interazione
+  coef: 0.024804563703396933
+  se: 0.04544517545464906
+  coef_late: 0.009246388821905467
+  n_decks_with: 104874
+- theme: type:Spacecraft
+  kind: interazione
+  coef: 0.016069931829268053
+  se: 0.009879042530489997
+  coef_late: 0.027484545144729346
+  n_decks_with: 102548
+- theme: artifacts
+  kind: interazione
+  coef: 0.006763298768568607
+  se: 0.0014523872439386363
+  coef_late: 0.0024132883248920447
+  n_decks_with: 129902
+- theme: counters
+  kind: interazione
+  coef: 0.004297141078483435
+  se: 0.0013975577404640367
+  coef_late: 0.006363028562073989
+  n_decks_with: 121660
+- theme: graveyard
+  kind: interazione
+  coef: 0.004064841071795172
+  se: 0.004219322549407629
+  coef_late: 0.007068890242721862
+  n_decks_with: 113638
+- theme: sacrifice
+  kind: interazione
+  coef: 0.001909526344533582
+  se: 0.002156112723004117
+  coef_late: 0.0011466946056211112
+  n_decks_with: 129015
+- theme: tokens
+  kind: interazione
+  coef: 0.001777629570802642
+  se: 0.00405469358532672
+  coef_late: 0.00271785819491504
+  n_decks_with: 128276
+- theme: kw:Warp
+  kind: densita'
+  coef: 0.0007751449035254867
+  se: 0.0025194568721172987
+  coef_late: -0.0032949540974331723
+  n_decks_with: 127533
+- theme: kw:Void
+  kind: densita'
+  coef: -0.001668156040537846
+  se: 0.005002147890482227
+  coef_late: 0.026123564352527058
+  n_decks_with: 61424
+- theme: spells
+  kind: interazione
+  coef: -0.007676841489730467
+  se: 0.004413753065039368
+  coef_late: -0.003466726223638882
+  n_decks_with: 129647
+- theme: kw:Station
+  kind: densita'
+  coef: -0.025251039637561562
+  se: 0.006935039959172949
+  coef_late: -0.011598602783088625
+  n_decks_with: 105060
+cutoff: '2025-08-19'
+oos_gain: -0.0027293996057464742
+oos_gain_se: 0.0005820228467109627
+fitted_at: '2026-11-28'
+oos_slope: 0.03160387196148582
+oos_slope_se: 0.052866362204635975
+oos_effect_sd: 0.012468127812505104
+notes:
+- ridge lambda 50.0
+- 'tenuti: interazione > 2 SE nel periodo di stima e > 0 dopo'
+- 'mazzi: 101447 prima del taglio, 28555 dopo'

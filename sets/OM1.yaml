@@ -1,0 +1,20 @@
+# Config del set OM1 generata da 'draftbot add-set'. Rivedila a mano.
+# Draft data 17Lands disponibili per formato: {'pick_two': True, 'premier': False}
+# Meccaniche, archetipi e tag di sinergia vengono aggiunti nella fase delle sinergie.
+code: OM1
+name: Through the Omenpaths
+scryfall_sets:
+- om1
+seventeenlands_expansion: OM1
+formats:
+- pick_two
+release_date: '2025-09-23'
+arena_id_sources:
+- arena_card_database
+- seventeenlands
+- scryfall
+name_aliases: {}
+mechanics: []
+archetypes: []
+synergy_tags_file: OM1.tags.yaml
+format_overrides: {}

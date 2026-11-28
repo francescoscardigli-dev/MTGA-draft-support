@@ -1,0 +1,600 @@
+# Tag dei temi di sinergia, generati da 'python -m draftbot tag-set' con regole sul testo.
+# RIVEDERE A MANO: togliere i falsi positivi, aggiungere quelli mancanti, poi reviewed: true.
+# Questo file non viene mai sovrascritto da add-set o tag-set.
+set_code: EOE
+generated: '2026-11-28'
+reviewed: false
+notes:
+- generato con regole sul testo Oracle (tags/themes.yaml) e temi automatici del set
+themes:
+  artifacts:
+    enablers:
+    - All-Fates Scroll
+    - Atmospheric Greenhouse
+    - Atomic Microsizer
+    - Auxiliary Boosters
+    - Biomechan Engineer
+    - Bygone Colossus
+    - Chrome Companion
+    - Cryogen Relic
+    - Dauntless Scrapbot
+    - Dawnsire, Sunstar Dreadnought
+    - Debris Field Crusher
+    - Desculpting Blast
+    - Dockworker Drone
+    - Dubious Delicacy
+    - Dyadrine, Synthesis Amalgam
+    - Edge Rover
+    - Elegy Acolyte
+    - Emissary Escort
+    - Entropic Battlecruiser
+    - Eusocial Engineering
+    - Extinguisher Battleship
+    - Fell Gravship
+    - Galvanizing Sawship
+    - Gene Pollinator
+    - Gravpack Monoist
+    - Hullcarver
+    - Hylderblade
+    - Illvoi Light Jammer
+    - Infinite Guideline Station
+    - Interceptor Mechan
+    - Kavaron Harrier
+    - Kavaron Turbodrone
+    - Kavaron, Memorial World
+    - Larval Scoutlander
+    - Lumen-Class Frigate
+    - Mechan Assembler
+    - Mechan Navigator
+    - Mechan Shieldmate
+    - Mechanozoa
+    - Melded Moxite
+    - Meltstrider's Gear
+    - Memorial Vault
+    - Monoist Circuit-Feeder
+    - Monoist Sentry
+    - Nanoform Sentinel
+    - Nutrient Block
+    - Oreplate Pangolin
+    - Pinnacle Emissary
+    - Pinnacle Kill-Ship
+    - Pinnacle Starcage
+    - Power Depot
+    - Red Tiger Mechan
+    - Requiem Monolith
+    - Rescue Skiff
+    - Robe of Stars
+    - Roving Actuator
+    - Rust Harvester
+    - Sami, Ship's Engineer
+    - Secluded Starforge
+    - Selfcraft Mechan
+    - Slagdrill Scrapper
+    - Sledge-Class Seedship
+    - Specimen Freighter
+    - Squire's Lightblade
+    - Starport Security
+    - Station Monitor
+    - Steelswarm Operator
+    - Survey Mechan
+    - Susurian Dirgecraft
+    - Synthesizer Labship
+    - Tapestry Warden
+    - Thaumaton Torpedo
+    - The Dominion Bracelet
+    - The Endstone
+    - The Eternity Elevator
+    - The Seriema
+    - Thrumming Hivepool
+    - Uthros Scanship
+    - Virulent Silencer
+    - Virus Beetle
+    - Voidforged Titan
+    - Warmaker Gunship
+    - Weapons Manufacturing
+    - Wedgelight Rammer
+    - Wurmwall Sweeper
+    - Zookeeper Mechan
+    payoffs:
+    - Cerebral Download
+    - Emissary Escort
+    - Haliya, Guided by Light
+    - Hardlight Containment
+    - Luxknight Breacher
+    - Mechan Assembler
+    - Mm'menon, Uthros Exile
+    - Mm'menon, the Right Hand
+    - Monoist Circuit-Feeder
+    - Oreplate Pangolin
+    - Pinnacle Emissary
+    - Power Depot
+    - Ragost, Deft Gastronaut
+    - Secluded Starforge
+    - Steelswarm Operator
+    - Susurian Voidborn
+    - Synthesizer Labship
+    - Tezzeret, Cruel Captain
+    - Uthros, Titanic Godcore
+    - Warmaker Gunship
+    - Weapons Manufacturing
+    - Weftstalker Ardent
+  counters:
+    enablers:
+    - Archenemy's Charm
+    - Atmospheric Greenhouse
+    - Bioengineered Future
+    - Biosynthic Burst
+    - Blade of the Swarm
+    - Broodguard Elite
+    - Cosmogrand Zenith
+    - Dawnstrike Vanguard
+    - Dockworker Drone
+    - Drix Fatemaker
+    - Dyadrine, Synthesis Amalgam
+    - Frontline War-Rager
+    - Haliya, Ascendant Cadet
+    - Honor
+    - Illvoi Operative
+    - Insatiable Skittermaw
+    - Interceptor Mechan
+    - Intrepid Tenderfoot
+    - Kavaron Skywarden
+    - Lightless Evangel
+    - Luxknight Breacher
+    - Mm'menon, Uthros Exile
+    - Oreplate Pangolin
+    - Ouroboroid
+    - Pulsar Squadron Ace
+    - Raging Ravine
+    - Rayblade Trooper
+    - Rust Harvester
+    - Scout for Survivors
+    - Seedship Agrarian
+    - Selfcraft Mechan
+    - Sothera, the Supervoid
+    - Sunset Saboteur
+    - Sunstar Chaplain
+    - Sunstar Lightsmith
+    - Syr Vondam, Sunstar Exemplar
+    - Terrapact Intimidator
+    - Terrasymbiosis
+    - Tezzeret, Cruel Captain
+    - Weftblade Enhancer
+    payoffs:
+    - Atmospheric Greenhouse
+    - Bioengineered Future
+    - Blast Zone
+    - Broodguard Elite
+    - Cosmogrand Zenith
+    - Dawnstrike Vanguard
+    - Dockworker Drone
+    - Drix Fatemaker
+    - Dual-Sun Technique
+    - Dyadrine, Synthesis Amalgam
+    - Gemstone Caverns
+    - Haliya, Ascendant Cadet
+    - Luxknight Breacher
+    - Mechanozoa
+    - Meltstrider Eulogist
+    - Ouroboroid
+    - Raging Ravine
+    - Rayblade Trooper
+    - Sothera, the Supervoid
+    - Starport Security
+    - Systems Override
+    - Tezzeret, Cruel Captain
+  enchantments:
+    enablers:
+    - Banishing Light
+    - Bioengineered Future
+    - Burgeoning
+    - Chorale of the Void
+    - Cryoshatter
+    - Deafening Silence
+    - Eusocial Engineering
+    - Hardlight Containment
+    - Loading Zone
+    - Meltstrider's Resolve
+    - Moonlit Meditation
+    - Pain for All
+    - Paradox Haze
+    - Seam Rip
+    - Sothera, the Supervoid
+    - Terrasymbiosis
+    - Tractor Beam
+    - Weapons Manufacturing
+    - Weftwalking
+    payoffs:
+    - Adagia, Windswept Bastion
+  graveyard:
+    enablers:
+    - Alpharael, Dreaming Acolyte
+    - Alpharael, Stonechosen
+    - Cerebral Download
+    - Codecracker Hound
+    - Fell Gravship
+    - Hymn of the Faller
+    - Icetill Explorer
+    - Lost in Space
+    - Mechan Navigator
+    - Melded Moxite
+    - Seedship Broodtender
+    - Shattered Wings
+    - Singularity Rupture
+    - Starbreach Whale
+    - Starfighter Pilot
+    - Sunset Saboteur
+    - Thawbringer
+    - Umbral Collar Zealot
+    - Uthros Scanship
+    - Vaultguard Trooper
+    - Wurmwall Sweeper
+    payoffs:
+    - Archenemy's Charm
+    - Astelli Reclaimer
+    - Fell Gravship
+    - Icetill Explorer
+    - Interceptor Mechan
+    - Petrified Field
+    - Pull Through the Weft
+    - Rescue Skiff
+    - Roving Actuator
+    - Rust Harvester
+    - Scour for Scrap
+    - Scout for Survivors
+    - Scrounge for Eternity
+    - Seedship Broodtender
+    - Timeline Culler
+    - Xu-Ifit, Osteoharmonist
+  kw:Station:
+    enablers:
+    - Adagia, Windswept Bastion
+    - Atmospheric Greenhouse
+    - Dawnsire, Sunstar Dreadnought
+    - Debris Field Crusher
+    - Entropic Battlecruiser
+    - Evendo, Waking Haven
+    - Extinguisher Battleship
+    - Fell Gravship
+    - Galvanizing Sawship
+    - Infinite Guideline Station
+    - Kavaron, Memorial World
+    - Larval Scoutlander
+    - Lumen-Class Frigate
+    - Pinnacle Kill-Ship
+    - Rescue Skiff
+    - Sledge-Class Seedship
+    - Specimen Freighter
+    - Susur Secundi, Void Altar
+    - Susurian Dirgecraft
+    - Synthesizer Labship
+    - The Eternity Elevator
+    - The Seriema
+    - Uthros Scanship
+    - Uthros, Titanic Godcore
+    - Warmaker Gunship
+    - Wedgelight Rammer
+    - Wurmwall Sweeper
+    payoffs:
+    - Tapestry Warden
+  kw:Void:
+    enablers:
+    - Alpharael, Stonechosen
+    - Chorale of the Void
+    - Decode Transmissions
+    - Elegy Acolyte
+    - Hylderblade
+    - Hymn of the Faller
+    - Insatiable Skittermaw
+    - Interceptor Mechan
+    - Kavaron Skywarden
+    - Plasma Bolt
+    - Roving Actuator
+    - Temporal Intervention
+    - Tragic Trajectory
+    - Voidforged Titan
+    payoffs: []
+  kw:Warp:
+    enablers:
+    - All-Fates Stalker
+    - Anticausal Vestige
+    - Astelli Reclaimer
+    - Broodguard Elite
+    - Bygone Colossus
+    - Codecracker Hound
+    - Drix Fatemaker
+    - Eusocial Engineering
+    - Exalted Sunborn
+    - Germinating Wurm
+    - Haliya, Guided by Light
+    - Knight Luminary
+    - Loading Zone
+    - Mechanozoa
+    - Memorial Team Leader
+    - Mightform Harmonizer
+    - Nova Hellkite
+    - Perigee Beckoner
+    - Pinnacle Emissary
+    - Possibility Technician
+    - Quantum Riddler
+    - Rayblade Trooper
+    - Red Tiger Mechan
+    - Sinister Cryologist
+    - Starbreach Whale
+    - Starfield Shepherd
+    - Starfield Vocalist
+    - Starwinder
+    - Susurian Voidborn
+    - Timeline Culler
+    - Weftblade Enhancer
+    - Weftstalker Ardent
+    payoffs:
+    - Alpharael, Stonechosen
+    - Blade of the Swarm
+    - Chorale of the Void
+    - Close Encounter
+    - Decode Transmissions
+    - Elegy Acolyte
+    - Full Bore
+    - Hylderblade
+    - Hymn of the Faller
+    - Insatiable Skittermaw
+    - Interceptor Mechan
+    - Kavaron Skywarden
+    - Plasma Bolt
+    - Roving Actuator
+    - Tannuk, Steadfast Second
+    - Temporal Intervention
+    - Tragic Trajectory
+    - Voidforged Titan
+  lifegain:
+    enablers:
+    - Archenemy's Charm
+    - Chrome Companion
+    - Comet Crawler
+    - Dawnstrike Vanguard
+    - Dubious Delicacy
+    - Elegy Acolyte
+    - Eumidian Terrabotanist
+    - Exalted Sunborn
+    - Fell Gravship
+    - Flight-Deck Coordinator
+    - Germinating Wurm
+    - Haliya, Guided by Light
+    - High Market
+    - Inventors' Fair
+    - Lumen-Class Frigate
+    - Nutrient Block
+    - Radiant Strike
+    - Ragost, Deft Gastronaut
+    - Sami's Curiosity
+    - Shambling Vent
+    - Susurian Voidborn
+    - Syr Vondam, Sunstar Exemplar
+    - Syr Vondam, the Lucent
+    payoffs:
+    - Ragost, Deft Gastronaut
+  sacrifice:
+    enablers:
+    - Adagia, Windswept Bastion
+    - Auxiliary Boosters
+    - Beamsaw Prospector
+    - Bioengineered Future
+    - Biomechan Engineer
+    - Biotech Specialist
+    - Cosmogrand Zenith
+    - Dauntless Scrapbot
+    - Desculpting Blast
+    - Devastating Onslaught
+    - Divert Disaster
+    - Dockworker Drone
+    - Dyadrine, Synthesis Amalgam
+    - Edge Rover
+    - Elegy Acolyte
+    - Emergency Eject
+    - Eusocial Engineering
+    - Exalted Sunborn
+    - Galactic Wayfarer
+    - Glacier Godmaw
+    - Gravpack Monoist
+    - Honored Knight-Captain
+    - Infinite Guideline Station
+    - Kav Landseeker
+    - Kavaron Harrier
+    - Kavaron, Memorial World
+    - Knight Luminary
+    - Lithobraking
+    - Mechan Assembler
+    - Melded Moxite
+    - Mirrorpool
+    - Moonlit Meditation
+    - Orbital Plunge
+    - Perigee Beckoner
+    - Pinnacle Emissary
+    - Pinnacle Starcage
+    - Rayblade Trooper
+    - Sami's Curiosity
+    - Sami, Ship's Engineer
+    - Scrounge for Eternity
+    - Secluded Starforge
+    - Seedship Agrarian
+    - Seedship Impact
+    - Station Monitor
+    - Sunstar Expansionist
+    - Syr Vondam, Sunstar Exemplar
+    - Terrapact Intimidator
+    - Thawbringer
+    - Thrumming Hivepool
+    - Warping Wail
+    - Weapons Manufacturing
+    - Wedgelight Rammer
+    payoffs:
+    - Biotech Specialist
+    - Comet Crawler
+    - Embrace Oblivion
+    - High Market
+    - Lightless Evangel
+    - Lithobraking
+    - Memorial Vault
+    - Scrounge for Eternity
+    - Selfcraft Mechan
+    - Slagdrill Scrapper
+    - Sothera, the Supervoid
+    - Susur Secundi, Void Altar
+    - Swarm Culler
+    - Syr Vondam, Sunstar Exemplar
+    - Umbral Collar Zealot
+  spells:
+    enablers:
+    - Annul
+    - Archenemy's Charm
+    - Beyond the Quiet
+    - Biosynthic Burst
+    - Bombard
+    - Cerebral Download
+    - Close Encounter
+    - Consult the Star Charts
+    - Cut Propulsion
+    - Dark Endurance
+    - Darkness
+    - Decode Transmissions
+    - Depressurize
+    - Desculpting Blast
+    - Devastating Onslaught
+    - Diplomatic Relations
+    - Divert Disaster
+    - Drill Too Deep
+    - Dual-Sun Technique
+    - Embrace Oblivion
+    - Emergency Eject
+    - Focus Fire
+    - Full Bore
+    - Gravkill
+    - Green Sun's Zenith
+    - Honor
+    - Hymn of the Faller
+    - Invasive Maneuvers
+    - Lithobraking
+    - Lost in Space
+    - Mental Modulation
+    - Mutinous Massacre
+    - Nexus of Fate
+    - Orbital Plunge
+    - Plasma Bolt
+    - Pull Through the Weft
+    - Radiant Strike
+    - Reroute Systems
+    - Rig for War
+    - Ruinous Rampage
+    - Sami's Curiosity
+    - Scour for Scrap
+    - Scout for Survivors
+    - Scrounge for Eternity
+    - Seedship Impact
+    - Shattered Wings
+    - Singularity Rupture
+    - Space-Time Anomaly
+    - Systems Override
+    - Temporal Intervention
+    - Terminal Velocity
+    - Tragic Trajectory
+    - Unravel
+    - Vote Out
+    - Warping Wail
+    - Zealous Display
+    - Zero Point Ballad
+    payoffs:
+    - Cosmogrand Zenith
+    - Illvoi Operative
+    - Mirrorpool
+    - Roving Actuator
+    - Station Monitor
+    - Sunstar Lightsmith
+  tokens:
+    enablers:
+    - Adagia, Windswept Bastion
+    - Auxiliary Boosters
+    - Beamsaw Prospector
+    - Bioengineered Future
+    - Biomechan Engineer
+    - Biotech Specialist
+    - Cosmogrand Zenith
+    - Dauntless Scrapbot
+    - Desculpting Blast
+    - Devastating Onslaught
+    - Divert Disaster
+    - Dyadrine, Synthesis Amalgam
+    - Edge Rover
+    - Elegy Acolyte
+    - Emergency Eject
+    - Eusocial Engineering
+    - Exalted Sunborn
+    - Galactic Wayfarer
+    - Glacier Godmaw
+    - Gravpack Monoist
+    - Honored Knight-Captain
+    - Infinite Guideline Station
+    - Kav Landseeker
+    - Kavaron Harrier
+    - Kavaron, Memorial World
+    - Knight Luminary
+    - Lithobraking
+    - Mechan Assembler
+    - Melded Moxite
+    - Mirrorpool
+    - Moonlit Meditation
+    - Orbital Plunge
+    - Pinnacle Emissary
+    - Pinnacle Starcage
+    - Rayblade Trooper
+    - Sami's Curiosity
+    - Sami, Ship's Engineer
+    - Scrounge for Eternity
+    - Secluded Starforge
+    - Seedship Agrarian
+    - Seedship Impact
+    - Station Monitor
+    - Sunstar Expansionist
+    - Terrapact Intimidator
+    - Thrumming Hivepool
+    - Warping Wail
+    - Weapons Manufacturing
+    - Wedgelight Rammer
+    payoffs:
+    - Dual-Sun Adepts
+    - Evendo, Waking Haven
+    - Glacier Godmaw
+    - Kavaron, Memorial World
+    - Lumen-Class Frigate
+    - Memorial Team Leader
+    - Sothera, the Supervoid
+    - Syr Vondam, Sunstar Exemplar
+    - Syr Vondam, the Lucent
+    - Zealous Display
+  type:Spacecraft:
+    enablers:
+    - Atmospheric Greenhouse
+    - Dawnsire, Sunstar Dreadnought
+    - Debris Field Crusher
+    - Entropic Battlecruiser
+    - Extinguisher Battleship
+    - Fell Gravship
+    - Galvanizing Sawship
+    - Infinite Guideline Station
+    - Larval Scoutlander
+    - Lumen-Class Frigate
+    - Pinnacle Kill-Ship
+    - Rescue Skiff
+    - Sledge-Class Seedship
+    - Specimen Freighter
+    - Susurian Dirgecraft
+    - Synthesizer Labship
+    - The Eternity Elevator
+    - The Seriema
+    - Uthros Scanship
+    - Warmaker Gunship
+    - Wedgelight Rammer
+    - Wurmwall Sweeper
+    payoffs:
+    - Focus Fire
+    - Invasive Maneuvers

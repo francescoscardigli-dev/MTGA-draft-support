@@ -1,0 +1,202 @@
+===== OM1 pick_two
+--- add-set
+Config creata: sets/OM1.yaml
+Scryfall OM1: 188 stampe
+17Lands PickTwoDraft draft data (2025-10-30): 232 carte
+Scryfall: 44 carte extra risolte per nome, 5 non trovate
+Database del client Arena non trovato: mappatura da 17Lands e Scryfall
+Importate 227 carte e 1501 ID Arena per OM1.
+Problemi: card_not_on_scryfall 5, card_without_arena_id 35  (dettagli: python -m draftbot issues OM1)
+format_overrides: {}
+formats:
+- pick_two
+release_date: '2025-09-23'
+arena_id_sources:
+--- update-data
+  cache: draft_data_public.OM1.PickTwoDraft.csv.gz (aggiornato da 17Lands il 2025-10-30)
+OM1 pick_two draft: 1251327 righe, dal 2025-09-23 al 2025-10-25 (snapshot 89); righe senza busta di ritorno (escluse dall'ALSA): 0
+  carte senza corrispondenza nel database: Cren, Undercity Dreamer, Goben, Gene-Splice Savant, Nia, Skysail Storyteller, Surris, Spidersilk Innovator, Viggo, Enforcer of Ig's Crossing
+Dati: 17Lands (https://www.17lands.com), licenza CC BY 4.0
+--- status
+  Dati locali: 227 carte (OM1 183, TRC 6, MDD 5, CMM 4, DSC 3, SOC 3, CMR 2, ME1 1, TLE 1, MH2 1, LTR 1, BIG 1, VMA 1, BBD 1, M21 1, UNF 1, TDC 1, C19 1, MKC 1, ZEN 1, ISD 1, AFR 1, VOC 1, EOC 1, 2XM 1, M14 1, OTC 1, DMU 1), 1501 ID Arena
+  Ultimi download: 17lands/cards_csv 2026-11-28; 17lands/draft_header 2026-11-28; 17lands/draft_stats 2026-11-28; 17lands/game_stats 2026-11-28; scryfall/cards 2026-11-28
+  Problemi: card_not_on_scryfall 5, card_without_arena_id 35, 17lands_game_unmapped 5, 17lands_draft_unmapped 5
+  Motore:
+    - pick_two: game data dal 2025-09-23 al 2025-10-25; draft data: si; prior si, mazzo si, wheel si, sinergie no
+    - tag dei temi: assenti (python -m draftbot tag-set OM1)
+--- stats
+OM1 Pick Two Draft, emivita 14 giorni (partite pesate)
+Dati dal 2025-09-23 al 2025-10-25; partite: 76745; GIH WR media:  56.8%; prior: modello FRA+HOB+MSH; tau: 1.73 punti (dati del set (179 carte con >= 200 partite))
+carta                               stima    +-    GIH   n GIH     OH    GNS    IWD   ATA  ALSA  prior
+Luis, Pompous Pillager              64.5%   1.3  65.9%    2073  61.4%  52.6%  13.3%  1.39  1.36  60.9%
+Remarkable Readings                 63.8%   1.2  63.9%    2357  62.2%  56.3%   7.6%  1.39  1.38  63.5%
+Alenni, Brood Recruiter             63.8%   1.3  64.4%    2095  62.6%  54.1%  10.3%  1.35  1.34  62.1%
+Qoneus, Horizon Splicer             63.5%   1.3  64.2%    2267  63.1%  53.9%  10.3%  1.77  1.75  61.5%
+King of the Coldblood Curse         63.4%   1.3  64.2%    2090  64.8%  55.0%   9.2%  1.41  1.40  61.3%
+Dati: 17Lands (https://www.17lands.com), licenza CC BY 4.0
+--- tag-set
+Creato /home/user/MTGA-draft-support/sets/OM1.tags.yaml
+  artifacts                enabler  35  payoff   4
+  counters                 enabler  32  payoff   8
+  graveyard                enabler  29  payoff  18
+  kw:Connive               enabler   6  payoff   0
+  kw:Mayhem                enabler  12  payoff   0
+  kw:Web-slinging          enabler   9  payoff   0
+  sacrifice                enabler  29  payoff   1
+  spells                   enabler  56  payoff   2
+  tokens                   enabler  28  payoff   4
+  type:Spider              enabler  37  payoff   7
+  type:Villain             enabler  48  payoff   7
+Rivedi il file a mano e imposta reviewed: true.
+--- synergy
+kw:Mayhem                densita'        +0.94   0.50    +2.24   32253
+counters                 interazione     +0.44   0.41    +0.63   65246
+graveyard                interazione     -0.37   0.30    +0.39   60737
+(* = tenuti) pendenza fuori campione: 0.29 +- 0.06 (gli effetti si usano moltiplicati per questa calibrazione)
+Scritto: /home/user/MTGA-draft-support/priors/OM1_pick_two_synergy.yaml
+Dati: 17Lands (https://www.17lands.com), licenza CC BY 4.0
+--- calibrate
+## Divisione temporale su OM1 (prior stimato su FRA, HOB, MSH)
+
+primi 7 giorni (fino al 2025-09-29, 74830 partite pesate, emivita 14 giorni)
+stimatore                          RMSE pp    corr  cop80  carte
+dato grezzo                          0.81   0.943      -    178
+media del set                        2.93     nan      -    178
+blend verso la media                 0.81   0.940    89%    178
+solo prior (modello)                 1.67   0.836    80%    178
+blend verso il prior (modello)       0.79   0.941    89%    178
+
+--- backtest
+lambda archetipi: 800, 700, 640, 160, 120, 120, 120, 120, 120, 120; miscela: 0.30, 0.30, 0.30, 0.10, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05; spareggio: 0.0
+
+## Accordo con i giocatori forti
+metodo       pick   top-1   top-3  carte in comune
+motore       2071   35.2%   54.9%            60.4%
+qualita'     2071   28.5%   49.0%            53.4%
+ATA          2071   36.6%   59.2%            61.2%
+Sinergie (Fase 5): temi tenuti: kw:Mayhem +1.22, tokens +2.54, type:Spider +1.50, type:Villain +1.32; pendenza fuori campione 0.39 +- 0.05
+motore + sinergie: top-1 33.8%, top-3 52.8%, carte in comune 58.9%
+Differenza di top-1 del motore (intervallo al 95%, bootstrap sui draft): contro qualita': +6.7 punti [+5.1, +8.4]; contro ATA: -1.4 punti [-3.8, +0.8]
+
+Per fase della busta (top-1 / top-3):
+  motore     fine busta: 70% / 88% (n 600); inizio busta: 19% / 36% (n 872); meta' busta: 25% / 49% (n 599)
+  qualita'   fine busta: 59% / 79% (n 600); inizio busta: 18% / 37% (n 872); meta' busta: 13% / 36% (n 599)
+  ATA        fine busta: 72% / 92% (n 600); inizio busta: 22% / 45% (n 872); meta' busta: 22% / 47% (n 599)
+
+## Valutatore di mazzo (mazzi dopo il taglio)
+mazzi: 16686; pendenza win rate reale su punteggio: 1.04 +- 0.03 (atteso 1); correlazione 0.129
+
+Coefficienti del modello del mazzo (punti di win rate per unita'):
+  mean_q        +186.18
+  top3          +141.85
+  arch          +0.00
+  n_le2         -0.15
+  n_ge5         +0.12
+  lands         -0.07
+  splash        -1.96
+  extra_colors  -3.37
+  (controllo giocatore: +0.95 per punto di win rate del giocatore)
+Dati: 17Lands (https://www.17lands.com), licenza CC BY 4.0
+===== EOE premier
+--- add-set
+Premier Draft: buste da 13 carte nei dati 17Lands (formato: 14)
+Config creata: sets/EOE.yaml
+Scryfall EOE: 399 stampe
+Scryfall EOS: 180 stampe
+17Lands PremierDraft draft data (2025-09-02): 321 carte
+Scryfall: 10 carte extra risolte per nome, 0 non trovate
+Database del client Arena non trovato: mappatura da 17Lands e Scryfall
+Importate 321 carte e 431 ID Arena per EOE.
+format_overrides:
+  premier:
+    pack_size: 13
+formats:
+- premier
+release_date: '2025-08-01'
+arena_id_sources:
+--- update-data
+EOE premier game: 563418 righe, dal 2025-07-29 al 2025-09-01 (snapshot 94)
+  cache: draft_data_public.EOE.PremierDraft.csv.gz (aggiornato da 17Lands il 2025-09-02)
+EOE premier draft: 4070703 righe, dal 2025-07-29 al 2025-09-01 (snapshot 95); righe senza busta di ritorno (escluse dall'ALSA): 0
+Dati: 17Lands (https://www.17lands.com), licenza CC BY 4.0
+--- status
+  Dati locali: 321 carte (EOE 266, EOS 45, TSB 1, ELD 1, 2X2 1, C16 1, AFC 1, CMM 1, TSP 1, TSR 1, SCG 1, PLST 1), 431 ID Arena
+  Ultimi download: 17lands/cards_csv 2026-11-28; 17lands/draft_header 2026-11-28; 17lands/draft_stats 2026-11-28; 17lands/game_stats 2026-11-28; scryfall/cards 2026-11-28
+  Problemi: nessuno
+  Motore:
+    - premier: game data dal 2025-07-29 al 2025-09-01; draft data: si; prior si, mazzo si, wheel si, sinergie no
+    - tag dei temi: assenti (python -m draftbot tag-set EOE)
+--- stats
+EOE Premier Draft, emivita 7 giorni (partite pesate)
+Dati dal 2025-07-29 al 2025-09-01; partite: 114808; GIH WR media:  56.4%; prior: modello FRA+HOB+MSH; tau: 1.65 punti (dati del set (272 carte con >= 200 partite))
+carta                               stima    +-    GIH   n GIH     OH    GNS    IWD   ATA  ALSA  prior
+Ouroboroid                          66.5%   1.4  67.7%    1308  66.8%  53.2%  14.5%  1.31  1.32  64.7%
+Quantum Riddler                     66.4%   1.4  67.1%    1471  65.2%  51.2%  16.0%  1.40  1.41  65.2%
+Elegy Acolyte                       65.1%   1.3  65.1%    2863  64.5%  52.6%  12.5%  1.48  1.51  65.1%
+Cosmogrand Zenith                   63.8%   1.4  63.5%    1297  63.2%  52.7%  10.8%  1.28  1.28  64.4%
+Sunset Saboteur                     62.8%   1.3  63.2%    3006  65.7%  54.2%   9.0%  2.45  2.42  61.4%
+Dati: 17Lands (https://www.17lands.com), licenza CC BY 4.0
+--- tag-set
+Creato /home/user/MTGA-draft-support/sets/EOE.tags.yaml
+  artifacts                enabler  86  payoff  22
+  counters                 enabler  40  payoff  22
+  enchantments             enabler  19  payoff   1
+  graveyard                enabler  21  payoff  16
+  kw:Station               enabler  27  payoff   1
+  kw:Void                  enabler  14  payoff   0
+  kw:Warp                  enabler  32  payoff  18
+  lifegain                 enabler  23  payoff   1
+  sacrifice                enabler  52  payoff  15
+  spells                   enabler  57  payoff   6
+  tokens                   enabler  48  payoff  10
+  type:Spacecraft          enabler  22  payoff   2
+Rivedi il file a mano e imposta reviewed: true.
+--- synergy
+kw:Void                  densita'        -0.17   0.50    +2.61   61424
+spells                   interazione     -0.77   0.44    -0.35  129647
+kw:Station               densita'        -2.53   0.69    -1.16  105060
+(* = tenuti) pendenza fuori campione: 0.03 +- 0.05 (gli effetti si usano moltiplicati per questa calibrazione)
+Scritto: /home/user/MTGA-draft-support/priors/EOE_premier_synergy.yaml
+Dati: 17Lands (https://www.17lands.com), licenza CC BY 4.0
+--- calibrate
+## Divisione temporale su EOE (prior stimato su FRA, HOB, MSH)
+
+primi 7 giorni (fino al 2025-08-04, 157400 partite pesate, emivita 7 giorni)
+stimatore                          RMSE pp    corr  cop80  carte
+dato grezzo                          0.85   0.873      -    287
+media del set                        2.35     nan      -    287
+blend verso la media                 0.81   0.890    90%    287
+solo prior (modello)                 1.76   0.706    77%    287
+blend verso il prior (modello)       0.84   0.888    85%    287
+
+--- backtest
+
+## Accordo con i giocatori forti
+metodo       pick   top-1   top-3  carte in comune
+motore       3900   55.5%   84.4%                 
+qualita'     3900   45.8%   81.0%                 
+ATA          3900   46.5%   81.7%                 
+Sinergie (Fase 5): temi tenuti: artifacts +0.83, counters +0.40, sacrifice +0.47, type:Spacecraft +2.21; pendenza fuori campione 0.23 +- 0.04
+motore + sinergie: top-1 55.3%, top-3 83.6%
+Differenza di top-1 del motore (intervallo al 95%, bootstrap sui draft): contro qualita': +9.7 punti [+7.9, +11.5]; contro ATA: +9.0 punti [+6.8, +11.2]
+
+Per fase della busta (top-1 / top-3):
+  motore     fine busta: 67% / 98% (n 1200); inizio busta: 51% / 77% (n 1500); meta' busta: 50% / 80% (n 1200)
+  qualita'   fine busta: 62% / 97% (n 1200); inizio busta: 39% / 72% (n 1500); meta' busta: 38% / 76% (n 1200)
+  ATA        fine busta: 65% / 98% (n 1200); inizio busta: 37% / 73% (n 1500); meta' busta: 40% / 77% (n 1200)
+
+## Valutatore di mazzo (mazzi dopo il taglio)
+mazzi: 38803; pendenza win rate reale su punteggio: 0.97 +- 0.02 (atteso 1); correlazione 0.128
+mazzo proposto contro reale (89 draft): +2.01 punti di win rate attesa in media; proposto >= reale nel 92% dei casi; stessa coppia di colori nel 83%
+
+Coefficienti del modello del mazzo (punti di win rate per unita'):
+  mean_q        +373.86
+  top3          +120.06
+  arch          +0.00
+  n_le2         -0.12
+  n_ge5         -0.22
+  lands         -1.29
+  splash        -2.66
+  extra_colors  -3.71
+  (controllo giocatore: +0.91 per punto di win rate del giocatore)
+Dati: 17Lands (https://www.17lands.com), licenza CC BY 4.0
