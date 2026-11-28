@@ -112,7 +112,7 @@ def now() -> str:
 
 
 def connect(path: Path | None = None) -> sqlite3.Connection:
-    con = sqlite3.connect(path or db_path())
+    con = sqlite3.connect(path or db_path(), timeout=60)   # piu' processi (UI, verifiche) sullo stesso file
     con.row_factory = sqlite3.Row
     con.executescript(SCHEMA)
     with con:  # commit subito: una transazione aperta bloccherebbe le altre connessioni

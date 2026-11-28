@@ -1,20 +1,22 @@
 # Modello del mazzo generato da 'python -m draftbot fit-deck-model'. Non modificare a mano.
 # Contiene solo coefficienti e il profilo di qualita' di un mazzo tipico.
 format: pick_two
-intercept: -0.0134486348245955
+intercept: -0.013926731812325786
 coef:
-  mean_q: 2.0800798859117324
-  top3: 1.576777260248297
+  mean_q: 2.0798768071608293
+  top3: 1.580891363281831
   arch: 0.0
-  n_le2: -8.729473009622525e-05
-  n_ge5: 0.0028169187313850236
-  lands: -0.008889811780557729
-  splash: -0.02537091235633723
-  extra_colors: -0.040697796485865585
-  fix_2c: 0.003648341676579209
-  fix_splash: 0.0007901370837591268
-  fix_3c: 0.004850794389371526
-control_coef: 0.9398473835824982
+  n_le2: -8.056857425181544e-05
+  n_ge5: 0.002922257267289741
+  lands: -0.008870304778756033
+  splash: -0.024336658912536013
+  extra_colors: -0.0407707024996576
+  fix_2c: 0.0036526970518716236
+  fix_splash: 0.0006635095818438139
+  fix_3c: 0.004862182772688634
+  splash_cards: 9.547459407708208e-05
+  splash_two_pips: -0.0066737129659585285
+control_coef: 0.9397311071627844
 profile:
 - 0.05032885757552444
 - 0.03845248024378442
@@ -50,7 +52,7 @@ fitted_at: '2026-11-28'
 notes:
 - win rate per partita, pesi = partite
 - 'profilo: mazzi a 2 colori dei giocatori >= 0.58'
-- 'arch: coefficiente stimato -0.580 < 0, fissato a 0 (gia'' nella qualita'')'
+- 'arch: coefficiente stimato -0.586 < 0, fissato a 0 (gia'' nella qualita'')'
 type_share:
   2c: 0.44706406567891027
   splash: 0.33223336451820235
