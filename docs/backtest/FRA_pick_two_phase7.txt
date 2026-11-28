@@ -1,0 +1,26 @@
+# Verifica Fase 7 FRA pick_two (taglio 2026-10-13)
+
+draft di verifica: 150 (giocatori fascia high)
+
+## Segnali
+pesi: stessa direzione 0, altra direzione -10
+log-verosimiglianza media dei colori finali, con segnali - senza: -0.0074 (positivo = i segnali migliorano la previsione)
+
+## Wheel
+coefficienti: -1.94, +0.79, -0.35, -1.61, +3.31 (intercetta, posizione relativa, posizione^2, popolarita', dimensione busta)
+Brier 0.2015 contro 0.2400 di una probabilita' costante (40% delle carte torna; 13500 carte)
+prevista -> frequenza reale:
+  0.0-0.1: 0.09 -> 0.05 (n 273)
+  0.1-0.3: 0.21 -> 0.22 (n 4665)
+  0.3-0.5: 0.40 -> 0.38 (n 4528)
+  0.5-0.7: 0.59 -> 0.63 (n 3353)
+  0.7-0.9: 0.73 -> 0.81 (n 681)
+
+## Accordo con i giocatori forti
+variante           top-1   top-3  carte in comune
+base               36.4%   57.0%            61.3%
+segnali            36.2%   56.7%            61.2%
+wheel              37.0%   57.5%            61.8%
+segnali + wheel    36.9%   57.2%            61.8%
+
+Dati: 17Lands (https://www.17lands.com), licenza CC BY 4.0

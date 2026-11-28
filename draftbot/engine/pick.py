@@ -13,6 +13,8 @@ contando anche quelle attese dai pick futuri.
 from __future__ import annotations
 
 import itertools
+
+import numpy as np
 from dataclasses import dataclass, field
 from typing import Sequence
 
@@ -28,6 +30,7 @@ class Option:
     probs: dict[str, float] = field(default_factory=dict)
     deck_gain: float = 0.0               # miglioramento atteso del mazzo finale
     secondary: float = 0.0               # contributo se entrasse nel mazzo (spareggio, pesato da tiebreak)
+    wheel_bonus: float = 0.0             # valore atteso della carta migliore che tornera' al giro dopo
 
     @property
     def names(self) -> tuple[str, ...]:
@@ -41,10 +44,16 @@ class Option:
 
 
 def recommend(projector: Projector, pool: Sequence[Card], pack: Sequence[Card], k: int = 3,
-              picks_per_turn: int | None = None) -> tuple[list[Option], dict[str, float]]:
-    """Le k opzioni migliori e le probabilita' degli archetipi dato il pool."""
+              picks_per_turn: int | None = None, extra_logits: dict[str, float] | None = None,
+              wheel=None) -> tuple[list[Option], dict[str, float]]:
+    """Le k opzioni migliori e le probabilita' degli archetipi dato il pool.
+
+    ``extra_logits``: segnali dei vicini per archetipo (signals.py).
+    ``wheel``: funzione (carte rimaste) -> probabilita' di ritorno; se data, al valore di un'opzione
+    si aggiunge il valore atteso della carta migliore che tornera' (vedi wheel_bonus).
+    """
     n = picks_per_turn or projector.fmt.picks_per_turn
-    probs = projector.probs(pool)
+    probs = projector.probs(pool, extra_logits=extra_logits)
     # base con gli stessi pick futuri del dopo-pick: il valore e' il guadagno rispetto a una carta
     # che non entra nel mazzo (consumare un pick costa uguale per tutte le opzioni)
     base = projector.arch_values(pool, n_cards=len(pool) + n)
@@ -53,6 +62,10 @@ def recommend(projector: Projector, pool: Sequence[Card], pack: Sequence[Card], 
         options = [(c,) for c in pack]
     else:
         options = list(itertools.combinations(pack, n))
+    single: dict[int, float] = {}
+    if wheel is not None:
+        for i, c in enumerate(pack):
+            single[i], _ = projector.option_value(pool, (c,), base, probs)
     seen: dict[tuple[str, ...], Option] = {}
     for opt in options:
         key = tuple(sorted(c.name for c in opt))
@@ -60,6 +73,36 @@ def recommend(projector: Projector, pool: Sequence[Card], pack: Sequence[Card], 
             continue
         v, gains = projector.option_value(pool, opt, base, probs)
         sec = projector.secondary(opt, probs)
-        seen[key] = Option(tuple(opt), v + projector.arch.tiebreak * sec, gains, probs, v, sec)
+        o = Option(tuple(opt), v + projector.arch.tiebreak * sec, gains, probs, v, sec)
+        if wheel is not None:
+            o.wheel_bonus = wheel_bonus(projector, pack, opt, single, wheel)
+            o.value += o.wheel_bonus
+        seen[key] = o
     ranked = sorted(seen.values(), key=lambda o: o.value, reverse=True)
     return ranked[:k], probs
+
+
+def wheel_bonus(projector: Projector, pack: Sequence[Card], opt: Sequence[Card], single: dict[int, float],
+                wheel) -> float:
+    """Valore atteso di cio' che tornera' dalla busta dopo un giro del tavolo, se si prende ``opt``.
+
+    ``single``: valore di ogni carta della busta (per posizione) calcolato una volta con il pool attuale.
+    Le carte rimaste si ordinano per valore; la migliore che torna vale v_i con probabilita'
+    w_i * prod_{j<i} (1 - w_j). Si conta una carta sola anche in Pick Two (approssimazione). Vale 0 se
+    la busta non tornera' (fine busta).
+    """
+    fmt = projector.fmt
+    taken = fmt.pack_size - len(pack)
+    if taken // fmt.picks_per_turn + fmt.pod_size >= fmt.picks_per_pack:
+        return 0.0
+    ids = {id(c) for c in opt}
+    rem_idx = [i for i, c in enumerate(pack) if id(c) not in ids]
+    if not rem_idx:
+        return 0.0
+    w = wheel([pack[i] for i in rem_idx])
+    vals = np.array([max(single[i], 0.0) for i in rem_idx])
+    tot, miss = 0.0, 1.0
+    for j in np.argsort(vals)[::-1]:
+        tot += vals[j] * w[j] * miss
+        miss *= 1 - w[j]
+    return float(tot)

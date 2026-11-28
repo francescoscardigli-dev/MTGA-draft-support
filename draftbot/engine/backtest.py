@@ -164,7 +164,10 @@ def _phase(pick_number: int, picks_per_pack: int) -> str:
     return "inizio busta" if pick_number < third else ("meta' busta" if pick_number < 2 * third else "fine busta")
 
 
-def pick_agreement(projector: Projector, drafts: list[DraftRec], ata: dict[str, float]) -> list[Agreement]:
+def pick_agreement(projector: Projector, drafts: list[DraftRec], ata: dict[str, float],
+                   signals=None, wheel=None) -> list[Agreement]:
+    """``signals``: (SignalBaseline, SignalModel) da usare durante il draft; ``wheel``: modello di wheel
+    con metodo survival(carte, fmt, pop) e il dizionario pop (tupla (modello, pop))."""
     fmt = projector.fmt
     n_turn = fmt.picks_per_turn
     book = projector.book
@@ -178,16 +181,26 @@ def pick_agreement(projector: Projector, drafts: list[DraftRec], ata: dict[str, 
                 for o in (itertools.combinations(pack, n_turn) if n_turn > 1 else ((c,) for c in pack))}
         return [k for k, _ in sorted(opts.items(), key=lambda kv: kv[1], reverse=True)]
 
+    from .signals import SignalState, extra_logits
+    wheel_fn = None
+    if wheel is not None:
+        wm, pop = wheel
+        wheel_fn = lambda rem: wm.survival(rem, fmt, pop)
     for d in drafts:
         for k in per_draft:
             per_draft[k].append([0, 0])
-        for p in d.picks:
+        st = SignalState()
+        for p in sorted(d.picks, key=lambda p: (p.pack_number, p.pick_number)):
             pack = _cards(book, p.pack)
+            xl = None
+            if signals is not None:
+                st.observe(p.pack_number, p.pick_number, pack, fmt, signals[0])
+                xl = extra_logits(signals[1], st, fmt.pass_directions[p.pack_number])
             if len(pack) < len(p.pack) or len(p.picked) != n_turn or len(pack) < n_turn:
                 continue
             human = tuple(sorted(p.picked))
             pool = _cards(book, p.pool)
-            opts, _ = recommend(projector, pool, pack, k=3)
+            opts, _ = recommend(projector, pool, pack, k=3, extra_logits=xl, wheel=wheel_fn)
             ranked = {"motore": [tuple(sorted(o.names)) for o in opts],
                       "qualita'": rank_simple(pack, lambda c: c.q)[:3],
                       "ATA": rank_simple(pack, lambda c: -ata.get(c.name, 99.0))[:3]}

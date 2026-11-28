@@ -8,7 +8,8 @@ Stato: **Fase 1 completata** (database carte, mappatura ID Arena, `add-set`); **
 non ancora verificata su log reali** (parser di `Player.log` e pulizia dei log); **Fase 3 completata**
 (statistiche 17Lands calcolate in proprio, blend bayesiano, prior dai set precedenti); **Fase 4 completata**
 (valutatore di mazzo, motore di pick a k carte e coppie in Pick Two, backtest); **Fasi 5 e 6 completate**
-(sinergie misurate, costruzione del mazzo con 2-3 build). Vedi `docs/plan.md` e i report in `docs/`.
+(sinergie misurate, costruzione del mazzo con 2-3 build); **Fase 7 completata** (wheel, segnali
+provati e disattivati, lettura live di Player.log). Vedi `docs/plan.md` e i report in `docs/`.
 
 ## Uso
 
@@ -47,6 +48,11 @@ python -m draftbot synergy FRA --format premier
 python -m draftbot build FRA --format premier --pool "carta;carta;..."
 python -m draftbot build TRK --format pick_two --log  # pool dell'ultimo draft di Player.log
 python -m draftbot build-check FRA --format premier --cutoff 2026-10-13 --prior-sets HOB MSH
+
+# Wheel, segnali e lettura live
+python -m draftbot fit-extras FRA --format premier   # modello di wheel (e segnali, se aiutano)
+python -m draftbot live                              # segue Player.log e suggerisce i pick
+python -m draftbot check-extras FRA --format premier --cutoff 2026-10-13 --prior-sets HOB MSH
 
 # Sul PC con Arena installato, per usare anche il database del client:
 python -m draftbot update-cards TRK --arena-db "C:\Program Files\Wizards of the Coast\MTGA\MTGA_Data\Downloads\Raw"

@@ -1,0 +1,23 @@
+# Modelli di wheel e segnali generati da 'python -m draftbot fit-extras'. Non modificare a mano.
+format: pick_two
+wheel:
+  coef:
+  - -1.9325072176124822
+  - 0.888487299047466
+  - -0.22827632407564746
+  - -1.4807271789685417
+  - 3.2239147638369317
+  log_likelihood: -32208.96047318731
+  n_samples: 54000
+signal:
+  g_same: 0.0
+  g_other: 0.0
+  ll_gain: 0.0003262956580860621
+  notes:
+  - stimato su 2761 pool, verificato su 2268
+  - 'll_gain: log-verosimiglianza media dei colori finali, con segnali - senza'
+fitted_on: FRA
+fitted_at: '2026-11-28'
+notes:
+- 'segnali verificati dopo il 2026-10-16: guadagno di log-verosimiglianza +0.0003'
+- 'segnali disattivati: guadagno fuori campione sotto la soglia 0.005'

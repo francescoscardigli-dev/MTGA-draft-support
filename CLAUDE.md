@@ -9,7 +9,7 @@ Documenti da leggere prima di lavorare: `docs/plan.md` (piano approvato),
 `docs/phase0_report.md` (verifiche), `docs/phase1_report.md` (database carte),
 `docs/phase2_report.md` (parser del log), `docs/phase3_report.md` (statistiche),
 `docs/phase4_report.md` (motore di pick e backtest), `docs/phase5_report.md` (sinergie),
-`docs/phase6_report.md` (costruzione del mazzo).
+`docs/phase6_report.md` (costruzione del mazzo), `docs/phase7_report.md` (wheel, segnali, live).
 
 ## Modalità di lavoro richiesta dall'utente
 
@@ -35,7 +35,7 @@ Documenti da leggere prima di lavorare: `docs/plan.md` (piano approvato),
 - Il suggerimento restituisce k carte (in Pick Two si valutano le coppie).
 - I tag LLM di meccaniche e archetipi si fanno nella fase delle sinergie (Fase 5).
 
-## Stato al 2026-11-27 (aggiornato a fine Fase 6)
+## Stato al 2026-11-27 (aggiornato a fine Fase 7)
 
 | Fase | Stato |
 |---|---|
@@ -46,7 +46,8 @@ Documenti da leggere prima di lavorare: `docs/plan.md` (piano approvato),
 | 4 Valutatore di mazzo, pick, backtest | completata |
 | 5 Sinergie | completata: misurate, ma fuori dal punteggio di default (peggiorano il backtest) |
 | 6 Costruzione del mazzo | completata |
-| 7-9 | da fare (l'utente ha chiesto di procedere in autonomia) |
+| 7 Segnali, wheel, live | completata: wheel attivo; segnali provati, peggiorano, disattivati |
+| 8-9 | da fare (l'utente ha chiesto di procedere in autonomia) |
 
 Cose aperte:
 - **Log di Arena:** l'utente li sta recuperando. Quando arrivano: pulirli con
@@ -63,6 +64,8 @@ Cose aperte:
 - **Tag dei temi** (`sets/*.tags.yaml`): generati con regole, `reviewed: false`. Da rivedere a mano.
 - **Splash:** il costruttore lo fa nel 7-11% dei mazzi, i giocatori forti nel 44-47%; il valutatore
   stima -3 punti per lo splash a parità di qualità, forse in parte effetto di selezione.
+- **Segnali** (Fase 7): la definizione "qualità disponibile per colore" non aiuta; da provare segnali
+  dalle carte mancanti nella busta di ritorno.
 - **TRK:** quando 17Lands pubblica i game data, `update-data TRK` e ricontrollare la calibrazione.
 
 Opzioni proposte all'utente per proseguire: (a) Fase 2 sulla struttura documentata, marcata come

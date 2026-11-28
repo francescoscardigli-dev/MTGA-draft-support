@@ -49,6 +49,26 @@ def add_parsers(sub: argparse._SubParsersAction) -> None:
     bc.add_argument("--drafts", type=int, default=300)
     bc.add_argument("--out", type=Path)
 
+    fx = sub.add_parser("fit-extras", help="stima wheel e segnali (Fase 7) su un set con game data")
+    fx.add_argument("code")
+    fx.add_argument("--format", dest="fmt", default="premier")
+    fx.add_argument("--drafts", type=int, default=600)
+
+    lv = sub.add_parser("live", help="segue Player.log e suggerisce i pick in tempo reale")
+    lv.add_argument("--log", type=Path, help="percorso di Player.log (default: quello standard)")
+    lv.add_argument("--set", dest="live_set", help="forza il set (se il nome evento non lo dice)")
+    lv.add_argument("--format", dest="fmt", help="forza il formato")
+    lv.add_argument("--once", action="store_true", help="legge il file una volta ed esce (prove)")
+    lv.add_argument("--from-start", action="store_true", help="rilegge il file dall'inizio")
+
+    p7 = sub.add_parser("check-extras", help="verifica wheel e segnali (Fase 7) su draft reali")
+    p7.add_argument("code")
+    p7.add_argument("--format", dest="fmt", default="premier")
+    p7.add_argument("--cutoff", required=True)
+    p7.add_argument("--prior-sets", nargs="+", required=True)
+    p7.add_argument("--drafts", type=int, default=150)
+    p7.add_argument("--out", type=Path)
+
     bt = sub.add_parser("backtest", help="accordo con i giocatori forti e verifica del valutatore di mazzo")
     bt.add_argument("code")
     bt.add_argument("--format", dest="fmt", default="premier")
@@ -157,6 +177,33 @@ def run(args: argparse.Namespace) -> int:
         print(ATTRIBUTION)
         return 0
 
+    if args.command == "fit-extras":
+        from .engine.extras import fit_extras
+        ex = fit_extras(con, load_set(args.code).code, args.fmt, args.drafts)
+        path = ex.save()
+        print(f"Wheel: coefficienti {', '.join(f'{x:+.2f}' for x in ex.wheel.coef)}")
+        print(f"Segnali: g_same {ex.signal.g_same:.0f}, g_other {ex.signal.g_other:.0f}")
+        print(f"Scritto: {path}")
+        return 0
+
+    if args.command == "live":
+        from .live import default_log, run_console
+        path = args.log or default_log()
+        if path is None:
+            print("Percorso di Player.log sconosciuto su questo sistema: usa --log")
+            return 1
+        return run_console(path, args.live_set, args.fmt, once=args.once, from_start=args.from_start)
+
+    if args.command == "check-extras":
+        from .engine import phase7check as p7
+        code = load_set(args.code).code
+        r = p7.run(con, code, args.fmt, args.cutoff, [load_set(x).code for x in args.prior_sets], n_test=args.drafts)
+        text = p7.format_result(r)
+        print(text)
+        if args.out:
+            args.out.write_text(text + "\n\n" + ATTRIBUTION + "\n", encoding="utf-8")
+        return 0
+
     if args.command == "build-check":
         from .engine import buildcheck as bc
         code = load_set(args.code).code
@@ -218,7 +265,18 @@ def run(args: argparse.Namespace) -> int:
             return 1
         pack = _resolve(proj.book, [x.strip() for x in args.pack.split(";") if x.strip()])
         pool = _resolve(proj.book, [x.strip() for x in args.pool.split(";") if x.strip()])
-    opts, probs = recommend(proj, pool, pack, k=args.k)
+    # wheel (Fase 7): se c'e' il modello, conta la probabilita' che le carte tornino al giro dopo.
+    # Da elenco di carte la posizione nel draft si deduce dalla dimensione della busta.
+    from .engine.extras import load_extras
+    ex = load_extras(args.fmt)
+    wheel_fn, wprobs = None, {}
+    if ex is not None and pack:
+        from .engine.phase7check import popularity
+        pop = popularity(con, code, args.fmt, None)
+        fmt_cfg = load_format(args.fmt)
+        wheel_fn = lambda rem: ex.wheel.survival(rem, fmt_cfg, pop)
+        wprobs = dict(zip((c.name for c in pack), ex.wheel.survival(pack, fmt_cfg, pop)))
+    opts, probs = recommend(proj, pool, pack, k=args.k, wheel=wheel_fn)
     top = sorted(probs.items(), key=lambda kv: kv[1], reverse=True)[:4]
     print(f"Pool: {len(pool)} carte. Archetipi piu' probabili: "
           + ", ".join(f"{a} {p:.0%}" for a, p in top))
@@ -228,12 +286,16 @@ def run(args: argparse.Namespace) -> int:
     elif proj.synergy is None:
         print("Sinergie: mostrate come informazione, non nel punteggio (usa --synergy per includerle)")
     for i, o in enumerate(opts, 1):
-        print(f"{i}. {' + '.join(o.names)}  ->  {o.value * 100:+.2f} punti di win rate attesa")
+        wb = f" (di cui wheel {o.wheel_bonus * 100:+.2f})" if o.wheel_bonus else ""
+        print(f"{i}. {' + '.join(o.names)}  ->  {o.value * 100:+.2f} punti di win rate attesa{wb}")
         print(f"   {o.explain()}")
         if info is not None:
             roles = {n: info.roles(n) for n in o.names}
             roles = {n: r for n, r in roles.items() if r}
             if roles:
                 print("   temi: " + "; ".join(f"{n}: {', '.join(r)}" for n, r in roles.items()))
+    if wprobs and any(o.wheel_bonus for o in opts):
+        top = sorted(wprobs.items(), key=lambda kv: -kv[1])[:6]
+        print("Probabilita' di ritorno al giro dopo: " + ", ".join(f"{n} {w:.0%}" for n, w in top))
     print(ATTRIBUTION)
     return 0

@@ -101,13 +101,17 @@ class Projector:
         return out
 
     # -- archetipi -----------------------------------------------------------------------------
-    def probs(self, pool: Sequence[Card], values: dict[str, float] | None = None) -> dict[str, float]:
+    def probs(self, pool: Sequence[Card], values: dict[str, float] | None = None,
+              extra_logits: dict[str, float] | None = None) -> dict[str, float]:
+        """``extra_logits``: termini aggiuntivi per archetipo (segnali dei vicini, signals.py)."""
         values = values or self.arch_values(pool)
         t = len(pool) / self.fmt.pool_size
         lam, eps = self.arch.lam(t), self.arch.eps(t)
         share = np.array([self.book.arch_share.get(a, 1 / len(PAIRS)) for a in PAIRS])
         share = share / share.sum()
         logits = np.log(share) + lam * np.array([values[a] for a in PAIRS])
+        if extra_logits:
+            logits = logits + np.array([extra_logits.get(a, 0.0) for a in PAIRS])
         p = np.exp(logits - logits.max())
         p = (1 - eps) * p / p.sum() + eps * share
         return dict(zip(PAIRS, p))
