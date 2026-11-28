@@ -1,0 +1,40 @@
+# Regole generiche (non di un set) per i temi di sinergia. Ogni tema ha:
+#   enabler: carte che "forniscono" il tema (regex sul testo o tipi nella type line)
+#   payoff:  carte che rendono di piu' quando il tema e' presente nel mazzo
+# Le regex si applicano al testo Oracle in minuscolo, senza il testo di richiamo tra parentesi.
+# I temi automatici (keyword del set, tipi citati nei testi) si aggiungono a questi: vedi tags.py.
+themes:
+  tokens:
+    enabler: ['create[^.]*\btokens?\b']
+    payoff: ['creatures you control get \+', 'for each creature you control', 'whenever (a|another|one or more) (nontoken )?creatures? (token )?you control (enters|dies)', 'whenever one or more [^.]*tokens', 'tokens? you control']
+  counters:
+    enabler: ['put (a|one|two|three|x|that many) [^.]*\+1/\+1 counters?', 'enters with [^.]*\+1/\+1 counters?']
+    payoff: ['with (a|one or more) \+1/\+1 counters?', 'for each \+1/\+1 counter', 'whenever (one or more )?\+1/\+1 counters? (are|is) put', 'counters? on (it|them|each creature|creatures you control)', 'double the number of']
+  spells:
+    enabler_types: [Instant, Sorcery]
+    payoff: ['whenever you cast (an|a) (instant|sorcery|noncreature)', 'instant (and|or) sorcery (cards?|spells?)', '\bprowess\b', 'whenever you cast your second spell']
+  graveyard:
+    enabler: ['\bmill\b', '\bsurveil\b', 'discard (a|two|that|your)', 'put [^.]* into your graveyard']
+    payoff: ['from your graveyard', 'cards? in your graveyard', '\bthreshold\b', '\bflashback\b', '\bdelirium\b', '\bescape\b']
+  lifegain:
+    enabler: ['you gain \d+ life', 'gain \d+ life', '\blifelink\b']
+    payoff: ['whenever you gain life', 'if you gained life', 'life you gained']
+  sacrifice:
+    enabler: ['create[^.]*\btokens?\b', 'when [^.]* dies']
+    payoff: ['sacrifice (an?|another) (other )?(creature|artifact|permanent|token)', 'whenever (a|another) creature (you control )?dies']
+  lands:
+    enabler: ['search your library for [^.]*\bland', 'put (a|up to one) land card', 'landcycling', 'play an additional land']
+    payoff: ['\blandfall\b', 'whenever a land (you control )?enters', 'for each land you control']
+  artifacts:
+    enabler_types: [Artifact]
+    enabler: ['create[^.]*\b(treasure|clue|food|map|artifact)\b[^.]*tokens?']
+    payoff: ['artifacts? you control', 'whenever (an|another) artifact', 'for each artifact', 'artifact spells?']
+  enchantments:
+    enabler_types: [Enchantment]
+    payoff: ['enchantments? you control', 'whenever (an|another) enchantment', 'for each enchantment']
+# Keyword sempreverdi: non diventano temi automatici (non creano sinergie di set).
+evergreen: [Flying, Trample, Vigilance, Menace, Haste, Reach, Deathtouch, Lifelink, Ward, Flash, First strike,
+            Double strike, Hexproof, Indestructible, Defender, Equip, Enchant, Fight, Scry, Mill, Surveil,
+            Cycling, Landcycling, Basic landcycling, Typecycling, Treasure, Investigate, Food, Transform, Kicker,
+            Prowess, Flashback, Threshold, Landfall, Protection, Shroud, Fear, Intimidate, Changeling]
+min_theme_cards: 6
